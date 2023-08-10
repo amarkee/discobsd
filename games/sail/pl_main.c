@@ -13,7 +13,7 @@ initialize()
 	register struct File *fp;
 	register struct ship *sp;
 	char captain[80];
-	char message[60];
+	char message[105];
 	int load;
 	register int n;
 	char *nameptr;
