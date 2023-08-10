@@ -35,7 +35,7 @@ asctime(timeptr)
 		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 	};
-	static char	result[26];
+	static char	result[68];
 
 	(void) sprintf(result, "%.3s %.3s%3d %02d:%02d:%02d %d\n",
 		wday_name[timeptr->tm_wday],
