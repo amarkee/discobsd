@@ -1,3 +1,0 @@
-Retro does not have floating point numbers. For others, it provides isNumber?:
-
-"123" isNumber?

@@ -42,7 +42,7 @@ TOPSRC!=	pwd
 DESTDIR?=	${TOPSRC}/distrib/obj/destdir.${MACHINE}
 KCONFIG=	${TOPSRC}/tools/kconfig/kconfig
 
-SUBDIR=		share lib bin sbin libexec usr.bin usr.sbin games
+SUBDIR=		share lib bin sbin libexec usr.bin usr.sbin
 
 all:		symlinks
 		$(MAKE) -C tools MACHINE=${MACHINE}

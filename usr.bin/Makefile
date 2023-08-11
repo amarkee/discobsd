@@ -9,36 +9,93 @@ include $(TOPSRC)/target.mk
 MDSUBDIR!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 		echo "" ; \
 	elif [ x"${MACHINE_ARCH}" = x"mips" ] ; then \
-		echo "adb adc-demo smlrc" ; \
+		echo "aout adb as" ; \
 	else \
 		echo "" ; \
 	fi
 
-SUBDIR		= aout ar arch as awk basic calendar cc chflags \
-                  chpass cpp dc diff emg env find fold forth \
-                  fstat glcdtest id la lcc lcpp ld login make \
-                  man med more nm passwd pdc picoc portio printf pwm \
-                  ranlib re renice retroforth scm sed setty sl smallc \
-                  smux uname wiznet xargs \
-                  zmodem gtest msec compress tip tclsh \
-                  uucp virus whereis yacc ${MDSUBDIR} \
-                  basename cal cb cmp col comm \
-                  diskspeed du fgrep file grep head hostid join \
-                  last mesg nice od pagesize pr printenv \
-                  rev size sort split sum \
-                  tail tee time touch tr tsort tty uniq w wc who \
-                  bc egrep mail su vmstat wall write \
-                  strip false nohup true
+SUBDIR = \
+    ar \
+    arch \
+    as \
+    awk \
+    chflags \
+    chpass \
+    dc \
+    diff \
+    env \
+    find \
+    fold \
+    fstat \
+    id \
+    la \
+    login \
+    make \
+    man \
+    more \
+    nm \
+    passwd \
+    printf \
+    renice \
+    sed \
+    setty \
+    uname \
+    xargs \
+    zmodem \
+    msec \
+    compress \
+    whereis \
+    ${MDSUBDIR} \
+    basename \
+    cmp \
+    comm \
+    diskspeed \
+    du \
+    fgrep \
+    file \
+    grep \
+    head \
+    hostid \
+    join \
+    last \
+    mesg \
+    nice \
+    od \
+    pagesize \
+    pr \
+    printenv \
+    rev \
+    size \
+    sort \
+    sum \
+    tail \
+    tee \
+    time \
+    touch \
+    tr \
+    tsort \
+    tty \
+    uniq \
+    w \
+    wc \
+    who \
+    bc \
+    egrep \
+    mail \
+    su \
+    vmstat \
+    wall \
+    write \
+    false \
+    nohup \
+    true
 
-# TODO: ccom lccom lex m4 pforth sre unixbench
-#       lorder mkdep
 
 all:		$(SUBDIR)
 
-$(SUBDIR):	FRC
+$(SUBDIR):
 		$(MAKE) -C $@ $(MFLAGS)
 
-FRC:
 
 install:
 		-for i in $(SUBDIR); do \

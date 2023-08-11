@@ -1,3 +1,0 @@
-This is from the math extensions library.
-
-: gcd ( ab-n ) [ tuck mod dup ] while drop ;

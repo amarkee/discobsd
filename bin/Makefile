@@ -6,18 +6,40 @@
 TOPSRC!=cd ..; pwd
 include ${TOPSRC}/target.mk
 
-SUBDIR=		date2 hostname ls md5 sh stty test \
-		cat chgrp chmod cp dd df echo ed expr kill ln mkdir mv ps \
-		pwd rm rmail rmdir sleep sync tar
+SUBDIR=	\
+	cat \
+	chgrp \
+	chmod \
+	cp \
+	date \
+	dd \
+	df \
+	echo \
+	ed \
+	expr \
+	hostname \
+	kill \
+	ln \
+	ls \
+	md5 \
+	mkdir \
+	mv \
+	ps \
+	pwd \
+	rm \
+	rmdir \
+	sh \
+	stty \
+	sleep \
+	sync \
+	test \
+	tar
 
-# TODO: csh
 
 all:		${SUBDIR}
 
-${SUBDIR}:	FRC
+${SUBDIR}:
 		${MAKE} -C $@ ${MFLAGS}
-
-FRC:
 
 install:
 		-for i in ${SUBDIR}; do \

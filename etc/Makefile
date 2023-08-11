@@ -18,7 +18,7 @@ GRP=	wheel
 TZDIR=		/usr/share/zoneinfo
 LOCALTIME=	US/Pacific
 
-FILES=	fstab gettytab group etc.${MACHINE}/motd passwd rc rc.local shells ttys
+FILES=	fstab gettytab group motd passwd rc rc.local shells ttys
 
 all install depend lint tags:
 
@@ -74,7 +74,7 @@ distribution-etc-root-var: distrib-dirs
 #	    ${DESTDIR}/usr/adm/aculog
 
 DIRS_DISTRIB=	bin sbin etc var/log root usr usr/bin usr/sbin \
-		usr/include usr/lib usr/libexec usr/share usr/games/lib
+		usr/include usr/lib usr/libexec usr/share
 MDIRS_DISTRIB=	cat1 cat2 cat3 cat4 cat5 cat6 cat7 cat8
 
 # Creates an empty DiscoBSD directory tree in DESTDIR.
