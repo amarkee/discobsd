@@ -11,10 +11,7 @@ OBJS            = $(BIN).o
 all:            $(BIN)
 
 $(BIN):    ${OBJS}
-		${CC} ${CFLAGS} ${LDFLAGS} -o $@.elf ${OBJS} ${LIBS}
-		${OBJDUMP} -S $@.elf > $@.dis
-		${SIZE} $@.elf
-		${ELF2AOUT} $@.elf $@
+		${CC} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS} ${LIBS}
 
 .SUFFIXES:      .0 .1
 

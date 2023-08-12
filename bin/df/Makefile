@@ -13,10 +13,7 @@ OBJS=		${PROG}.o
 all:		${PROG}
 
 ${PROG}:	${OBJS}
-		${CC} ${CFLAGS} ${LDFLAGS} -o $@.elf ${OBJS} ${LIBS}
-		${OBJDUMP} -S $@.elf > $@.dis
-		${SIZE} $@.elf
-		${ELF2AOUT} $@.elf $@ && rm $@.elf
+		${CC} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS} ${LIBS}
 
 clean:
 		rm -f *.o *.elf ${PROG} *.dis tags *~

@@ -93,4 +93,4 @@ TAGSFILE=	tags
 #MANROFF=	nroff -man -h -Tascii
 MANROFF=	mandoc -Tascii
 
-ELF2AOUT=	${TOPSRC}/tools/elf2aout/elf2aout
+ELF2AOUT=	cp
