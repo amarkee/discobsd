@@ -47,7 +47,7 @@ CC!=	if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 
 # Enable mips16e instruction set by default
 COPTS!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
-		echo "-Os -fcommon" ; \
+		echo "-Os" ; \
 	elif [ x"${MACHINE_ARCH}" = x"mips" ] ; then \
 		echo "-Os -G0 -fcommon -mips16" ; \
 	else \

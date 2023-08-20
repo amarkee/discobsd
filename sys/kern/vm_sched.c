@@ -17,6 +17,25 @@ int     maxslp = MAXSLP;
 char    runin;                  /* scheduling flag */
 char    runout;                 /* scheduling flag */
 
+#if defined(UCB_METER)
+size_t  freemem;        /* remaining clicks of free memory */
+
+u_short avefree;        /* moving average of remaining free clicks */
+u_short avefree30;      /* 30 sec (avefree is 5 sec) moving average */
+
+/*
+ * writable copies of tunables
+ */
+int     maxslp;         /* max sleep time before very swappable */
+
+struct  forkstat forkstat;
+
+struct vmrate   cnt, rate;
+struct vmsum    sum;
+#endif
+
+struct  vmtotal total;
+
 /*
  * The main loop of the scheduling (swapping) process.
  * The basic idea is:

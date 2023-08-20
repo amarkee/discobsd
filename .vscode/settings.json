@@ -4,6 +4,14 @@
         "param.h": "c",
         "limits.h": "c",
         "types.h": "c",
-        "features.h": "c"
+        "features.h": "c",
+        "dk.h": "c",
+        "conf.h": "c",
+        "file.h": "c",
+        "proc.h": "c",
+        "tty.h": "c",
+        "ttydev.h": "c",
+        "ioctl.h": "c",
+        "user.h": "c"
     }
 }

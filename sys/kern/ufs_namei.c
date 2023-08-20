@@ -16,6 +16,9 @@
 
 int dirchk = 0;
 
+struct inode *rootdir;          /* pointer to inode of root directory */
+struct  nchstats nchstats;      /* cache effectiveness statistics */
+
 /*
  * Structures associated with name cacheing.
  */

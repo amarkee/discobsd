@@ -9,6 +9,11 @@
 #include <sys/kernel.h>
 #include <sys/systm.h>
 
+struct  timeval boottime;
+struct  timeval time;
+int     adjdelta;
+int     lbolt;              /* awoken once a second */
+
 static void
 setthetime (tv)
     register struct timeval *tv;

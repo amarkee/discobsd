@@ -93,9 +93,9 @@ struct  proc {
 #define X_FREECORE      1       /* free core space after swap */
 
 #ifdef KERNEL
-struct  proc *pidhash [PIDHSZ];
-extern struct   proc proc[];    /* the proc table itself */
-struct  proc *freeproc, *zombproc, *allproc, *qs;
+extern struct  proc *pidhash [PIDHSZ];
+extern struct  proc proc[];    /* the proc table itself */
+extern struct  proc *freeproc, *zombproc, *allproc, *qs;
                                 /* lists of procs in various states */
 extern int nproc;
 

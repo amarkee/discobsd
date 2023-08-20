@@ -144,10 +144,10 @@ void cinvalall (void);
     if (nextinodeid == 0) \
         cinvalall();
 
-u_int nextinodeid;              /* unique id generator */
+extern u_int nextinodeid;              /* unique id generator */
 
 extern struct inode inode[];    /* the inode table itself */
-struct inode *rootdir;          /* pointer to inode of root directory */
+extern struct inode *rootdir;          /* pointer to inode of root directory */
 
 /*
  * Initialize hash links for inodes and build inode free list.

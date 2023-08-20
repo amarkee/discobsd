@@ -53,6 +53,8 @@
 #define sdpart(dev)     ((minor(dev) & 7))
 #define RAWPART         0               /* 'x' partition */
 
+struct disk sddrives[NSD];      /* Table of units */
+
 /*
  * Detect a card.
  */

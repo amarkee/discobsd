@@ -12,6 +12,8 @@
 #include <sys/ptrace.h>
 #include <machine/frame.h>
 
+struct ipc ipc;
+
 /*
  * sys-trace system call.
  */

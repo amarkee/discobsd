@@ -8,6 +8,9 @@
 #include <sys/proc.h>
 #include <sys/systm.h>
 
+struct  proc *pidhash [PIDHSZ];
+struct  proc *freeproc, *zombproc, *allproc, *qs;
+
 /*
  * Is p an inferior of the current process?
  */

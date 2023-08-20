@@ -24,6 +24,8 @@ union ihead {                       /* inode LRU cache, stolen */
 
 struct inode *ifreeh, **ifreet;
 
+u_int nextinodeid;              /* unique id generator */
+
 /*
  * Initialize hash links for inodes
  * and build inode free list.

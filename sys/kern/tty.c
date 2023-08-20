@@ -19,6 +19,11 @@
 
 static  int rts = TIOCM_RTS;
 
+#if defined(UCB_METER)
+long    tk_nin;                 /* number of tty characters input */
+long    tk_nout;                /* number of tty characters output */
+#endif
+
 /*
  * These were moved here from tty.h so that they could be easily modified
  * and/or patched instead of recompiling the kernel.  There is only 1 other

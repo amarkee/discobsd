@@ -27,7 +27,7 @@ struct disk {
     int     ma;                 /* power consumption */
 };
 
-struct disk sddrives[NSD];      /* Table of units */
+extern struct disk sddrives[NSD];      /* Table of units */
 
 #ifdef KERNEL
 extern int      sdopen(dev_t dev, int flag, int mode);

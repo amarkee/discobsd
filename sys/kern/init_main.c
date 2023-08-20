@@ -27,6 +27,9 @@ u_int   swapstart, nswap;   /* start and size of swap space */
 size_t  physmem;            /* total amount of physical memory */
 int     boothowto;          /* reboot flags, from boot */
 
+struct  cblock *cfreelist;
+int cfreecount;
+
 /*
  * Initialize hash links for buffers.
  */

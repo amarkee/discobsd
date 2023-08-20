@@ -50,6 +50,13 @@ disksort (dp, bp)
 }
 
 #ifdef UCB_METER
+
+int     dk_busy;                /* bit array of drive busy flags */
+long    dk_xfer[DK_NDRIVE];     /* number of transfers */
+long    dk_bytes[DK_NDRIVE];    /* number of bytes transfered */
+char    *dk_name[DK_NDRIVE];    /* names of monitored drives */
+int     dk_unit[DK_NDRIVE];     /* unit numbers of monitored drives */
+int     dk_n;                   /* number of dk numbers assigned so far */
 /*
  * Allocate iostat disk monitoring slots for a driver.  If slots already
  * allocated (*dkn >= 0) or not enough slots left to satisfy request simply

@@ -72,6 +72,14 @@ struct sysctl_args {
     size_t  newlen;
 };
 
+long hostid;
+char hostname[MAXHOSTNAMELEN];
+int  hostnamelen;
+
+short avenrun[3];
+
+struct sysctl_lock memlock;;
+
 static int sysctl_clockrate (char *where, size_t *sizep);
 static int sysctl_inode (char *where, size_t *sizep);
 static int sysctl_file (char *where, size_t *sizep);

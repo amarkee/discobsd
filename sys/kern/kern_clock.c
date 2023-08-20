@@ -18,6 +18,8 @@ struct  callout *callfree, calltodo;
 #ifdef UCB_METER
 int dk_ndrive = DK_NDRIVE;
 
+long cp_time[CPUSTATES];     /* number of ticks spent in each cpu state */
+
 /*
  * Gather statistics on resource utilization.
  *
