@@ -23,7 +23,7 @@
 #define M 7
 #define N 9
 
-int errno;
+extern int errno;
 static double torp = 1.1283791670955125738961589031;
 static double p1[] = {
 	0.804373630960840172832162e5,

@@ -5,7 +5,7 @@
 #include <errno.h>
 #include <math.h>
 
-int errno;
+extern int errno;
 
 double
 pow(arg1,arg2)
