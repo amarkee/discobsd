@@ -6,6 +6,8 @@
 #include "defs.h"
 #include "sym.h"
 
+char    cj;
+
 static char     quote;  /* used locally */
 static char     quoted; /* used locally */
 
