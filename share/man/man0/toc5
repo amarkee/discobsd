@@ -22,7 +22,6 @@
 .xx "mtab" "mounted file system table"
 .xx "networks" "network name data base"
 .xx "passwd" "password file"
-.xx "phones" "remote host phone number data base"
 .xx "plot" "graphics interface"
 .xx "printcap" "printer capability data base"
 .xx "protocols" "protocol name data base"

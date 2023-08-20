@@ -36,9 +36,6 @@ LINKS=	errno.h signal.h syslog.h
 
 SUBDIRS=arpa
 
-# XXX This is temporary
-SUBDIRS+=smallc smallc/sys
-
 MACHDEP=${MACHINE}
 NETDIRS=netinet
 SYSDIRS=${NETDIRS} ${MACHDEP}

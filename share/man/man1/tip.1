@@ -53,7 +53,7 @@ The
 .I cu
 interface is included for those people attached to the
 ``call UNIX'' command of version 7.  This manual page
-describes only 
+describes only
 .IR tip .
 .PP
 Typed characters are normally transmitted directly to the remote
@@ -94,9 +94,9 @@ file.  If the ``to'' file isn't specified the ``from'' file name is used.
 This command is actually a UNIX specific version of the ``~>'' command.
 .TP 10
 \fB~t\fP \fIfrom\fP [ \fIto\fP ]
-Take a file from a remote UNIX host. 
+Take a file from a remote UNIX host.
 As in the put command the ``to'' file
-defaults to the ``from'' file name if it isn't specified. 
+defaults to the ``from'' file name if it isn't specified.
 The remote host
 executes the command string ``cat 'from';echo ^A'' to send the file to
 .IR tip .
@@ -110,7 +110,7 @@ Pipe the output from a local UNIX process to the remote host.
 The command string sent to the local UNIX system is processed by the shell.
 .TP 10
 .B ~#
-Send a BREAK to the remote system. 
+Send a BREAK to the remote system.
 For systems which don't support the
 necessary
 .I ioctl
@@ -168,7 +168,7 @@ by opening modems and terminal lines with exclusive access,
 and by honoring the locking protocol used by
 .IR uucp (1C).
 .PP
-During file transfers 
+During file transfers
 .I tip
 provides a running count of the number of lines transferred.
 When using the ~> and ~< commands, the ``eofread'' and ``eofwrite''
@@ -224,14 +224,14 @@ in one's home directory).  The
 option causes
 .I tip
 to display the sets as they are made.
-Certain common variables have abbreviations. 
+Certain common variables have abbreviations.
 The following is a list of common variables,
 their abbreviations, and their default values.
 .TP
 .B beautify
 .br
 (bool) Discard unprintable characters when a session is being scripted;
-abbreviated 
+abbreviated
 .IR be .
 .TP
 .B baudrate
@@ -312,9 +312,9 @@ command is based on recipt of this character.
 .TP
 .B raise
 .br
-(bool) Upper case mapping mode; abbreviated 
+(bool) Upper case mapping mode; abbreviated
 .IR ra ;
-default value is 
+default value is
 .IR off .
 When this mode is enabled, all lower case letters will be mapped to
 upper case by
@@ -339,11 +339,11 @@ default value is ``tip.record''.
 .br
 (bool) Session scripting mode; abbreviated
 .IR sc ;
-default is 
+default is
 .IR off .
 When
 .I script
-is 
+is
 .IR true ,
 .I tip
 will record everything transmitted by the remote machine in
@@ -370,9 +370,9 @@ Each tab is expanded to 8 spaces.
 .br
 (bool) Verbose mode; abbreviated
 .IR verb ;
-default is 
+default is
 .IR true .
-When verbose mode is enabled, 
+When verbose mode is enabled,
 .I tip
 prints messages while dialing, shows the current number
 of lines transferred during a file transfer operations,
@@ -392,7 +392,6 @@ value is taken from the environment.
 .ta \w'/usr/spool/uucp/LCK..*   'u
 .nf
 /etc/remote	global system descriptions
-/etc/phones	global phone number data base
 ${REMOTE}	private system descriptions
 ${PHONES}	private phone numbers
 ~/.tiprc	initialization file.
@@ -401,8 +400,6 @@ ${PHONES}	private phone numbers
 .SH DIAGNOSTICS
 Diagnostics are, hopefully, self explanatory.
 .SH "SEE ALSO"
-remote(5),
-phones(5)
 .SH BUGS
 The full set of variables is undocumented and should, probably, be
 paired down.

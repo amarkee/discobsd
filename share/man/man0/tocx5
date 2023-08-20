@@ -22,7 +22,6 @@ map3270(5) map3270: database for mapping ascii keystrokes into IBM 3270 keys.
 mtab(5) mtab: mounted file system table.
 networks(5) networks: network name data base.
 passwd(5) passwd: password file.
-phones(5) phones: remote host phone number data base.
 plot(5) plot: graphics interface.
 printcap(5) printcap: printer capability data base.
 protocols(5) protocols: protocol name data base.

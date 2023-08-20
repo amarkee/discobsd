@@ -414,7 +414,6 @@ file /etc/MAKEDEV
 mode 0775
 file /etc/motd
 file /etc/passwd
-file /etc/phones
 file /etc/rc
 mode 0775
 file /etc/rc.local
@@ -441,8 +440,6 @@ file /usr/bin/awk
 file /usr/bin/basename
 file /usr/bin/basic
 file /usr/bin/bc
-file /usr/bin/cal
-file /usr/bin/calendar
 file /bin/cat
 file /usr/bin/cb
 file /usr/bin/chat-server
@@ -456,7 +453,6 @@ file /usr/bin/col
 file /usr/bin/comm
 file /usr/bin/compress
 file /bin/cp
-file /usr/bin/cpp
 file /usr/bin/crontab
 file /bin/date
 file /usr/bin/dc
@@ -480,7 +476,6 @@ file /usr/bin/fold
 file /usr/bin/forth
 file /usr/bin/fstat
 mode 02755
-file /usr/bin/glcdtest
 file /usr/bin/globdump
 file /usr/bin/globread
 file /usr/bin/globwrite
@@ -533,7 +528,6 @@ file /bin/pwd
 file /usr/bin/pwm
 file /usr/bin/ranlib
 file /usr/bin/re
-file /usr/bin/renice
 file /usr/bin/renumber
 file /usr/bin/retroforth
 file /usr/bin/rev
@@ -596,8 +590,6 @@ file /usr/bin/w
 file /usr/bin/wall
 mode 02755
 file /usr/bin/wc
-file /usr/bin/web-client
-file /usr/bin/web-server
 file /usr/bin/whereis
 file /usr/bin/who
 file /usr/bin/whoami
@@ -807,10 +799,8 @@ file /usr/lib/crt0.o
 file /usr/lib/libc.a
 file /usr/lib/libm.a
 file /usr/lib/libcurses.a
-file /usr/lib/libgpanel.a
 file /usr/lib/libreadline.a
 file /usr/lib/libtermlib.a
-file /usr/lib/libwiznet.a
 file /usr/lib/retroImage
 
 #
@@ -831,7 +821,6 @@ file /usr/libexec/smallc
 default
 filemode 0444
 dir /usr/share
-dir /usr/share/calendar
 dir /usr/share/dict
 dir /usr/share/misc
 dir /usr/share/zoneinfo
@@ -839,14 +828,6 @@ dir /usr/share/zoneinfo/Australia
 dir /usr/share/zoneinfo/Canada
 dir /usr/share/zoneinfo/SystemV
 dir /usr/share/zoneinfo/US
-file /usr/share/calendar/calendar.birthday
-file /usr/share/calendar/calendar.christian
-file /usr/share/calendar/calendar.computer
-file /usr/share/calendar/calendar.history
-file /usr/share/calendar/calendar.holiday
-file /usr/share/calendar/calendar.judaic
-file /usr/share/calendar/calendar.music
-file /usr/share/calendar/calendar.usholiday
 file /usr/share/emg.keys
 file /usr/share/re.help
 file /usr/share/dict/words
@@ -936,174 +917,6 @@ file /usr/share/zoneinfo/UTC
 file /usr/share/zoneinfo/WET
 file /usr/share/zoneinfo/W-SU
 
-#
-# Files: /usr/share/examples/asm
-#
-default
-filemode 0664
-dir /usr/share/examples
-dir /usr/share/examples/asm
-file /usr/share/examples/asm/Makefile
-file /usr/share/examples/asm/ashello.S
-file /usr/share/examples/asm/echo.S
-
-#
-# Files: /usr/share/examples/basic
-#
-dir /usr/share/examples/basic
-file /usr/share/examples/basic/blkjack.bas
-file /usr/share/examples/basic/hilow.bas
-file /usr/share/examples/basic/stars.bas
-
-#
-# Files: /usr/share/examples/forth
-#
-dir /usr/share/examples/forth
-file /usr/share/examples/forth/fact.fth
-
-#
-# Files: /usr/share/examples/scheme
-#
-dir /usr/share/examples/scheme
-file /usr/share/examples/scheme/prime.scm
-
-#
-# Files: /usr/share/examples/c
-#
-dir /usr/share/examples/c
-file /usr/share/examples/c/Makefile
-file /usr/share/examples/c/adc.c
-file /usr/share/examples/c/gpio.c
-file /usr/share/examples/c/hello.c
-file /usr/share/examples/c/lcd6.c
-file /usr/share/examples/c/primelist.c
-file /usr/share/examples/c/primesum.c
-file /usr/share/examples/c/q8.c
-file /usr/share/examples/c/rain.c
-file /usr/share/examples/c/skeleton.c
-file /usr/share/examples/c/stdarg.c
-file /usr/share/examples/c/test1.c
-file /usr/share/examples/c/test2.c
-file /usr/share/examples/c/test3.c
-file /usr/share/examples/c/tetris.c
-
-#
-# Files: /usr/share/examples/gpanel
-#
-dir /usr/share/examples/gpanel
-dir /usr/share/examples/gpanel/fonts
-file /usr/share/examples/gpanel/Makefile
-file /usr/share/examples/gpanel/circle.c
-file /usr/share/examples/gpanel/color.c
-file /usr/share/examples/gpanel/fill.c
-file /usr/share/examples/gpanel/flappy.c
-file /usr/share/examples/gpanel/font.c
-file /usr/share/examples/gpanel/line.c
-file /usr/share/examples/gpanel/pixel.c
-file /usr/share/examples/gpanel/rect.c
-file /usr/share/examples/gpanel/speed.c
-file /usr/share/examples/gpanel/tft.c
-file /usr/share/examples/gpanel/tftetris.c
-file /usr/share/examples/gpanel/fonts/5x7.c
-file /usr/share/examples/gpanel/fonts/6x9.c
-file /usr/share/examples/gpanel/fonts/digits20.c
-file /usr/share/examples/gpanel/fonts/digits32.c
-file /usr/share/examples/gpanel/fonts/lucidasans11.c
-file /usr/share/examples/gpanel/fonts/lucidasans15.c
-file /usr/share/examples/gpanel/fonts/lucidasans28.c
-file /usr/share/examples/gpanel/fonts/lucidasans7.c
-file /usr/share/examples/gpanel/fonts/lucidasans9.c
-file /usr/share/examples/gpanel/fonts/verdana7.c
-
-#
-# Files: /usr/share/examples/smallc
-#
-dir /usr/share/examples/smallc
-file /usr/share/examples/smallc/Makefile
-file /usr/share/examples/smallc/adc.c
-file /usr/share/examples/smallc/gpio.c
-file /usr/share/examples/smallc/hello.c
-file /usr/share/examples/smallc/primelist.c
-file /usr/share/examples/smallc/primesum.c
-file /usr/share/examples/smallc/q8.c
-file /usr/share/examples/smallc/rain.c
-file /usr/share/examples/smallc/test1.c
-file /usr/share/examples/smallc/test2.c
-file /usr/share/examples/smallc/test3.c
-file /usr/share/examples/smallc/webserver.c
-
-#
-# Files: /usr/share/examples/sensors
-#
-dir /usr/share/examples/sensors
-file /usr/share/examples/sensors/Makefile
-file /usr/share/examples/sensors/README.txt
-file /usr/share/examples/sensors/buzzer.c
-file /usr/share/examples/sensors/buzzer.sh
-file /usr/share/examples/sensors/irled.c
-file /usr/share/examples/sensors/joystick.c
-file /usr/share/examples/sensors/laser.c
-file /usr/share/examples/sensors/laser.sh
-file /usr/share/examples/sensors/led2.c
-file /usr/share/examples/sensors/led2-portio.sh
-file /usr/share/examples/sensors/led2.sh
-file /usr/share/examples/sensors/led3.c
-file /usr/share/examples/sensors/led3-portio.sh
-file /usr/share/examples/sensors/led3.sh
-file /usr/share/examples/sensors/led7.c
-file /usr/share/examples/sensors/pbuzz.c
-file /usr/share/examples/sensors/relay.c
-file /usr/share/examples/sensors/relay.sh
-
-#
-# Files: /usr/share/examples/cube
-#
-dir /usr/share/examples/cube
-file /usr/share/examples/cube/Makefile
-file /usr/share/examples/cube/README.txt
-file /usr/share/examples/cube/all.c
-file /usr/share/examples/cube/backlight.c
-file /usr/share/examples/cube/cube.c
-file /usr/share/examples/cube/cube.h
-file /usr/share/examples/cube/demo.c
-file /usr/share/examples/cube/fubarino.c
-file /usr/share/examples/cube/duinomite.c
-
-#
-# Files: /usr/share/examples/curses
-#
-dir /usr/share/examples/curses
-file /usr/share/examples/curses/Makefile
-file /usr/share/examples/curses/flip.c
-file /usr/share/examples/curses/jump.c
-file /usr/share/examples/curses/timer.c
-file /usr/share/examples/curses/typetext.c
-
-#
-# Files: /usr/share/examples/dhrystone
-#
-dir /usr/share/examples/dhrystone
-file /usr/share/examples/dhrystone/dhry_2.c
-file /usr/share/examples/dhrystone/VARIATIONS
-file /usr/share/examples/dhrystone/README
-file /usr/share/examples/dhrystone/dhry.h
-file /usr/share/examples/dhrystone/README_C
-file /usr/share/examples/dhrystone/Makefile
-file /usr/share/examples/dhrystone/dhry_1.c
-file /usr/share/examples/dhrystone/RATIONALE
-
-#
-# Files: /usr/share/examples/yacc
-#
-dir /usr/share/examples/yacc
-file /usr/share/examples/yacc/Makefile
-file /usr/share/examples/yacc/config.y
-file /usr/share/examples/yacc/cpy.y
-file /usr/share/examples/yacc/egrep.y
-file /usr/share/examples/yacc/expr.y
-file /usr/share/examples/yacc/gram.y
-file /usr/share/examples/yacc/grammar.y
-file /usr/share/examples/yacc/parser.y
 
 #
 # Files: /var
@@ -1172,7 +985,6 @@ file /usr/share/man/cat1/colcrt.0
 file /usr/share/man/cat1/colrm.0
 file /usr/share/man/cat1/comm.0
 file /usr/share/man/cat1/cp.0
-file /usr/share/man/cat1/cpp.0
 file /usr/share/man/cat1/crontab.0
 file /usr/share/man/cat1/csh.0
 file /usr/share/man/cat1/ctags.0
@@ -1186,7 +998,6 @@ file /usr/share/man/cat1/du.0
 file /usr/share/man/cat1/echo.0
 file /usr/share/man/cat1/ed.0
 file /usr/share/man/cat1/efl.0
-file /usr/share/man/cat1/emg.0
 file /usr/share/man/cat1/error.0
 file /usr/share/man/cat1/expr.0
 file /usr/share/man/cat1/f77.0
@@ -1213,7 +1024,6 @@ file /usr/share/man/cat1/kill.0
 file /usr/share/man/cat1/la.0
 file /usr/share/man/cat1/last.0
 file /usr/share/man/cat1/lastcomm.0
-file /usr/share/man/cat1/lcc.0
 file /usr/share/man/cat1/ld.0
 file /usr/share/man/cat1/learn.0
 file /usr/share/man/cat1/leave.0
@@ -1561,12 +1371,10 @@ file /usr/share/man/cat5/L.sys.0
 file /usr/share/man/cat5/map3270.0
 file /usr/share/man/cat5/networks.0
 file /usr/share/man/cat5/passwd.0
-file /usr/share/man/cat5/phones.0
 file /usr/share/man/cat5/plot.0
 file /usr/share/man/cat5/printcap.0
 file /usr/share/man/cat5/protocols.0
 file /usr/share/man/cat5/ranlib.0
-file /usr/share/man/cat5/remote.0
 file /usr/share/man/cat5/resolver.0
 file /usr/share/man/cat5/services.0
 file /usr/share/man/cat5/shells.0
@@ -1581,33 +1389,6 @@ file /usr/share/man/cat5/tzfile.0
 file /usr/share/man/cat5/USERFILE.0
 file /usr/share/man/cat5/vfont.0
 file /usr/share/man/cat5/vgrindefs.0
-file /usr/share/man/cat6/adventure.0
-file /usr/share/man/cat6/arithmetic.0
-file /usr/share/man/cat6/atc.0
-file /usr/share/man/cat6/backgammon.0
-file /usr/share/man/cat6/banner.0
-file /usr/share/man/cat6/battlestar.0
-file /usr/share/man/cat6/bcd.0
-file /usr/share/man/cat6/boggle.0
-file /usr/share/man/cat6/caesar.0
-file /usr/share/man/cat6/cribbage.0
-file /usr/share/man/cat6/fish.0
-file /usr/share/man/cat6/fortune.0
-file /usr/share/man/cat6/hangman.0
-file /usr/share/man/cat6/mille.0
-file /usr/share/man/cat6/monop.0
-file /usr/share/man/cat6/number.0
-file /usr/share/man/cat6/pig.0
-file /usr/share/man/cat6/pom.0
-file /usr/share/man/cat6/quiz.0
-file /usr/share/man/cat6/rain.0
-file /usr/share/man/cat6/robots.0
-file /usr/share/man/cat6/rogue.0
-file /usr/share/man/cat6/sail.0
-file /usr/share/man/cat6/trek.0
-file /usr/share/man/cat6/worm.0
-file /usr/share/man/cat6/worms.0
-file /usr/share/man/cat6/wump.0
 file /usr/share/man/cat7/ascii.0
 file /usr/share/man/cat7/environ.0
 file /usr/share/man/cat7/eqnchar.0
@@ -1650,7 +1431,6 @@ file /usr/share/man/cat8/pac.0
 file /usr/share/man/cat8/pstat.0
 file /usr/share/man/cat8/rc.0
 file /usr/share/man/cat8/rdump.0
-file /usr/share/man/cat8/renice.0
 file /usr/share/man/cat8/routed.0
 file /usr/share/man/cat8/rrestore.0
 file /usr/share/man/cat8/sendmail.0
@@ -2229,10 +2009,6 @@ target /usr/share/man/cat2/chown.0
 file /usr/share/man/cat1/indxbib.0
 link /usr/share/man/cat1/lookbib.0
 target /usr/share/man/cat1/indxbib.0
-
-file /usr/share/man/cat6/snake.0
-link /usr/share/man/cat6/snscore.0
-target /usr/share/man/cat6/snake.0
 
 file /usr/share/man/cat3/fdopen.0
 link /usr/share/man/cat3/fopen.0
