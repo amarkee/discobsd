@@ -42,7 +42,7 @@ struct  stat    statb;
 int follow;
 int piped;
 char bin[LBIN];
-int errno;
+extern int errno;
 
 int
 main(argc,argv)
