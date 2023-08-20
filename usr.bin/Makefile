@@ -17,7 +17,6 @@ MDSUBDIR!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 SUBDIR = \
     ar \
     arch \
-    as \
     awk \
     chflags \
     chpass \

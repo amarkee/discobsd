@@ -49,7 +49,7 @@ CC!=	if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 COPTS!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 		echo "-Os" ; \
 	elif [ x"${MACHINE_ARCH}" = x"mips" ] ; then \
-		echo "-Os -G0 -fcommon -mips16" ; \
+		echo "-Os -G0 -mips16" ; \
 	else \
 		echo "" ; \
 	fi
@@ -90,7 +90,7 @@ INSTALL=	install -m 644
 INSTALLDIR=	install -m 755 -d
 TAGSFILE=	tags
 
-MANROFF=	nroff -man -h -Tascii
-# MANROFF=	mandoc -Tascii
+# MANROFF=	nroff -man -h -Tascii
+MANROFF=	mandoc -Tascii
 
 ELF2AOUT=	cp

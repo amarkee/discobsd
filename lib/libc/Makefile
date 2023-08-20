@@ -36,7 +36,6 @@ all:            ../libc.a
 		mkdir tmp
 		cd tmp; for i in ${ALL}; do $(AR) x ../$$i/$$i.a; done; \
 			$(AR) cr ../$@ *.o
-#			$(AR) cr ../$@ `sh ../../cmd/lorder.sh *.o | tsort`
 		rm -rf tmp
 
 ${ALL}:		FRC
@@ -45,9 +44,9 @@ ${ALL}:		FRC
 FRC:
 
 install:	../libc.a
-#		${INSTALLDIR} ${DESTDIR}/usr/lib
-#		${INSTALL} ../libc.a ${DESTDIR}/usr/lib/libc.a
-#		$(RANLIB) ${DESTDIR}/usr/lib/libc.a
+		${INSTALLDIR} ${DESTDIR}/usr/lib
+		${INSTALL} ../libc.a ${DESTDIR}/usr/lib/libc.a
+		$(RANLIB) ${DESTDIR}/usr/lib/libc.a
 
 clean:
 		for i in ${ALL}; \

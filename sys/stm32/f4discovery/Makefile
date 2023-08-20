@@ -37,7 +37,7 @@ S=		../..
 INCLUDES=	-nostdlib -I.
 DEPFLAGS=	-MT $@ -MP -MD -MF .deps/$*.dep
 DEFS=		${INCLUDES} ${PARAM} -DKERNEL ${DEPFLAGS}
-CWARNFLAGS=	-Wall -Wextra -Werror
+CWARNFLAGS=	-Wall
 
 CMACHCPU=	-mcpu=cortex-m4
 CMACHFLAGS=	-ffreestanding -fno-builtin

@@ -8,9 +8,16 @@ include $(TOPSRC)/target.mk
 
 # Programs that live in subdirectories, and have makefiles of their own.
 #
-SUBDIR		= startup-$(MACHINE_ARCH) libc libm libutil libtermlib \
-		  libcurses libvmf libtcl libwiznet libreadline libgpanel \
-		  libc_aout
+SUBDIR = \
+	startup-$(MACHINE_ARCH) \
+	libc \
+	libm \
+	libutil \
+	libtermlib \
+	libcurses \
+	libvmf \
+	libtcl \
+	libreadline
 
 all:		$(SUBDIR)
 
