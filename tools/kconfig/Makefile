@@ -12,8 +12,8 @@ YACC!=		if [ x"${_HOST_OSNAME}" = x"Linux" ] ; then \
 
 YFLAGS=		-d
 
-#MANROFF=	nroff -man -h -Tascii
-MANROFF=	mandoc -Tascii
+MANROFF=	nroff -man -h -Tascii
+# MANROFF=	mandoc -Tascii
 
 DESTDIR		= /usr/local
 OBJS            = config.o main.o lang.o mkioconf.o mkmakefile.o mkswapconf.o
