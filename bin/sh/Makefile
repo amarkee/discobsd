@@ -1,7 +1,7 @@
 TOPSRC!=cd ../..; pwd
 include $(TOPSRC)/target.mk
 
-CFLAGS         += -ansi
+CFLAGS         += -ansi -Wall
 
 OBJS            = setbrk.o blok.o stak.o cmd.o fault.o main.o word.o \
                   string.o name.o args.o xec.o service.o error.o io.o \
@@ -11,16 +11,13 @@ OBJS            = setbrk.o blok.o stak.o cmd.o fault.o main.o word.o \
 all:		sh
 
 sh:		${OBJS}
-		${CC} ${CFLAGS} ${LDFLAGS} -o sh.elf ${OBJS} ${LIBS}
-		${OBJDUMP} -S sh.elf > sh.dis
-		${SIZE} sh.elf
-		${ELF2AOUT} sh.elf $@ && rm sh.elf
+		${CC} ${CFLAGS} ${LDFLAGS} -o sh ${OBJS} ${LIBS}
 
 install:	all
 		install sh $(DESTDIR)/bin/
 
 clean:
-		rm -f sh *.o *~ *.elf *.dis
+		rm -f sh *.o *~
 
 args.o: args.c defs.h mac.h mode.h name.h stak.h brkincr.h ctype.h
 blok.o: blok.c defs.h mac.h mode.h name.h stak.h brkincr.h ctype.h

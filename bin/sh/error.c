@@ -3,17 +3,18 @@
  *
  * Bell Telephone Laboratories
  */
+#include <unistd.h>
+
 #include "defs.h"
 
 /* ========     error handling  ======== */
 
-failed(s1, s2)
-char    *s1, *s2;
+void
+failed(char *s1, char *s2)
 {
 	prp();
 	prs_cntl(s1);
-	if (s2)
-	{
+	if (s2) {
 		prs(colon);
 		prs(s2);
 	}
@@ -21,14 +22,14 @@ char    *s1, *s2;
 	exitsh(ERROR);
 }
 
-error(s)
-char    *s;
+void
+error(char *s)
 {
 	failed(s, NIL);
 }
 
-exitsh(xno)
-int     xno;
+void
+exitsh(int xno)
 {
 	/*
 	 * Arrive here from `FATAL' errors
@@ -42,8 +43,7 @@ int     xno;
 	flags |= eflag;
 	if ((flags & (forked | errflg | ttyflg)) != ttyflg)
 		done();
-	else
-	{
+	else {
 		clearup();
 		restore(0);
 		clear_buff();
@@ -55,15 +55,13 @@ int     xno;
 void
 done()
 {
-	register char   *t;
+	register char *t;
 
-	if (t = trapcom[0])
-	{
+	if (t = trapcom[0]) {
 		trapcom[0] = NIL;
 		execexp(t, 0);
-		free(t);
-	}
-	else
+		sh_free(t);
+	} else
 		chktrap();
 
 	rmtemp(NIL);
@@ -75,21 +73,18 @@ done()
 	exit(exitval);
 }
 
-rmtemp(base)
-struct ionod    *base;
+rmtemp(base) struct ionod *base;
 {
-	while (iotemp > base)
-	{
+	while (iotemp > base) {
 		unlink(iotemp->ioname);
-		free(iotemp->iolink);
+		sh_free(iotemp->iolink);
 		iotemp = iotemp->iolst;
 	}
 }
 
 rmfunctmp()
 {
-	while (fiotemp)
-	{
+	while (fiotemp) {
 		unlink(fiotemp->ioname);
 		fiotemp = fiotemp->iolst;
 	}

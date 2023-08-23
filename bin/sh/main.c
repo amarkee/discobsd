@@ -402,7 +402,7 @@ setmail(mailpath)
 
 	long    *ptr;
 
-	free(mod_time);
+	sh_free(mod_time);
 	if (mailp = mailpath)
 	{
 		while (*s)

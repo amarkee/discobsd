@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "wait.h": "c",
+        "*.tcc": "c",
+        "iomanip": "c",
+        "chrono": "c",
+        "typeindex": "c",
+        "typeinfo": "c"
+    }
+}

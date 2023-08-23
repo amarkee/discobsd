@@ -3,71 +3,71 @@
  *
  * Bell Telephone Laboratories
  */
-#include "defs.h"
 #include <sys/param.h>
+
+#include <string.h>
+
+#include "defs.h"
+#include "print.h"
 
 extern char *getenv();
 
-#define BUFLEN  256
+#define BUFLEN 256
 
 int hz = (-1);
 
-static char     buffer[BUFLEN];
-static int      index = 0;
-char            numbuf[12];
-
-extern void     prc_buff();
-extern void     prs_buff();
-extern void     prn_buff();
-extern void     prs_cntl();
-extern void     prn_buff();
+static char buffer[BUFLEN];
+static int index = 0;
+char numbuf[12];
 
 /*
  * printing and io conversion
  */
-prp()
+void
+prp(void)
 {
-	if ((flags & prompt) == 0 && cmdadr)
-	{
+	if ((flags & prompt) == 0 && cmdadr) {
 		prs_cntl(cmdadr);
 		prs(colon);
 	}
 }
 
-prs(as)
-char    *as;
+void
+prs(char *as)
 {
-	register char   *s;
+	register char *s;
 
 	if (s = as)
-		write(output, s, length(s) - 1);
+		write(output, s, strlen(s) - 1);
 }
 
 /* print a prompt */
 /* it's a subject for future expansion @@@ */
-prprompt(as)
-char *as;
+void
+prprompt(char *as)
 {
 	prs(as);
 }
 
-prc(c)
-char    c;
+void
+prc(char c)
 {
 	if (c)
 		write(output, &c, 1);
 }
 
-prt(t)
-long    t;
+void
+prt(long t)
 {
 	register int hr, min, sec;
 	char *s;
 
-	if( hz < 0 ){
-		s = getenv( "HZ" );
-		if( s ) hz = atoi( s );
-		else    hz = HZ;
+	if (hz < 0) {
+		s = getenv("HZ");
+		if (s)
+			hz = atoi(s);
+		else
+			hz = HZ;
 	}
 
 	t += hz / 2;
@@ -76,8 +76,7 @@ long    t;
 	t /= HZ;
 	min = t % hz;
 
-	if (hr = t / hz)
-	{
+	if (hr = t / hz) {
 		prn_buff(hr);
 		prc_buff('h');
 	}
@@ -88,15 +87,16 @@ long    t;
 	prc_buff('s');
 }
 
-prn(n)
-	int     n;
+void
+prn(int n)
 {
 	itos(n);
 
 	prs(numbuf);
 }
 
-itos(n)
+void
+itos(unsigned int n)
 {
 	register char *abuf;
 	register unsigned a, i;
@@ -106,8 +106,7 @@ itos(n)
 
 	pr = FALSE;
 	a = n;
-	for (i = 10000; i != 1; i /= 10)
-	{
+	for (i = 10000; i != 1; i /= 10) {
 		if ((pr |= (d = a / i)))
 			*abuf++ = d + '0';
 		a %= i;
@@ -116,32 +115,29 @@ itos(n)
 	*abuf++ = 0;
 }
 
-stoi(icp)
-char    *icp;
+int
+stoi(char *icp)
 {
-	register char   *cp = icp;
-	register int    r = 0;
-	register char   c;
+	register char *cp = icp;
+	register int r = 0;
+	register char c;
 
-	while ((c = *cp, digit(c)) && c && r >= 0)
-	{
+	while ((c = *cp, digit(c)) && c && r >= 0) {
 		r = r * 10 + c - '0';
 		cp++;
 	}
 	if (r < 0 || cp == icp)
 		failed(icp, badnum);
-	else
-		return(r);
+	return r;
 }
 
-prl(n)
-long n;
+void
+prl(long n)
 {
 	int i;
 
 	i = 11;
-	while (n > 0 && --i >= 0)
-	{
+	while (n > 0 && --i >= 0) {
 		numbuf[i] = n % 10 + '0';
 		n /= 10;
 	}
@@ -150,85 +146,71 @@ long n;
 }
 
 void
-flushb()
+flushb(void)
 {
-	if (index)
-	{
+	if (index) {
 		buffer[index] = '\0';
-		write(1, buffer, length(buffer) - 1);
+		write(1, buffer, strlen(buffer) - 1);
 		index = 0;
 	}
 }
 
 void
-prc_buff(c)
-	char c;
+prc_buff(char c)
 {
-	if (c)
-	{
+	if (c) {
 		if (index + 1 >= BUFLEN)
 			flushb();
 
 		buffer[index++] = c;
-	}
-	else
-	{
+	} else {
 		flushb();
 		write(1, &c, 1);
 	}
 }
 
 void
-prs_buff(s)
-	char *s;
+prs_buff(char *s)
 {
-	register int len = length(s) - 1;
+	register int len = strlen(s) - 1;
 
 	if (index + len >= BUFLEN)
 		flushb();
 
 	if (len >= BUFLEN)
 		write(1, s, len);
-	else
-	{
+	else {
 		movstr(s, &buffer[index]);
 		index += len;
 	}
 }
 
-
-clear_buff()
+void
+clear_buff(void)
 {
 	index = 0;
 }
 
-
 void
-prs_cntl(s)
-	char *s;
+prs_cntl(char *s)
 {
 	register char *ptr = buffer;
 	int c;
 
-	while (*s != '\0')
-	{
+	while (*s != '\0') {
 		c = *s;
 		c &= 0377;
 
 		/* translate a control character into a printable sequence */
 
-		if (c < ' ')
-		{       /* assumes ASCII char */
+		if (c < ' ') { /* assumes ASCII char */
 			*ptr++ = '^';
-			*ptr++ = (c + '@');    /* assumes ASCII char */
-		}
-		else if (c == 0177 || (c>=0200 && c<0300 ))
-		{       /* '\0177' does not work */
+			*ptr++ = (c + '@'); /* assumes ASCII char */
+		} else if (c == 0177 ||
+		    (c >= 0200 && c < 0300)) { /* '\0177' does not work */
 			*ptr++ = '^';
 			*ptr++ = '?';
-		}
-		else
-		{       /* printable character */
+		} else { /* printable character */
 			*ptr++ = c;
 		}
 
@@ -239,10 +221,8 @@ prs_cntl(s)
 	prs(buffer);
 }
 
-
 void
-prn_buff(n)
-	int     n;
+prn_buff(int n)
 {
 	itos(n);
 

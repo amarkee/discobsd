@@ -3,93 +3,92 @@
  *
  * Bell Telephone Laboratories
  */
-#include "hash.h"
-#include "defs.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+
 #include <errno.h>
+#include <unistd.h>
 
-#define	EXECUTE		01
+#include "defs.h"
+#include "func.h"
+#include "hash.h"
+#include "print.h"
 
-static char	cost;
-static int	dotpath;
-static int	multrel;
-static struct entry     *relcmd = NIL;
+#define EXECUTE 01
+
+static char cost;
+static int dotpath;
+static int multrel;
+static struct entry *relcmd = NIL;
+
+static void pr_path(char *name, int count);
+static int chk_access(char *name);
+static int findpath(char *name, int oldpath);
 
 static int
 argpath(arg)
-	register struct argnod	*arg;
+register struct argnod *arg;
 {
-	register char 	*s;
-	register char	*start;
+	register char *s;
+	register char *start;
 
-	while (arg)
-	{
+	while (arg) {
 		s = arg->argval;
 		start = s;
 
-		if (letter(*s))
-		{
+		if (letter(*s)) {
 			while (alphanum(*s))
 				s++;
 
-			if (*s == '=')
-			{
+			if (*s == '=') {
 				*s = 0;
 
-				if (eq(start, pathname))
-				{
+				if (eq(start, pathname)) {
 					*s = '=';
-					return(1);
-				}
-				else
+					return (1);
+				} else
 					*s = '=';
 			}
 		}
 		arg = arg->argnxt;
 	}
 
-	return(0);
+	return (0);
 }
 
 short
 pathlook(com, flg, arg)
-	char	*com;
-	int		flg;
-	register struct argnod	*arg;
+char *com;
+int flg;
+register struct argnod *arg;
 {
-	register char	*name = com;
-	register ENTRY	*h;
+	register char *name = com;
+	register ENTRY *h;
 
-	ENTRY		hentry;
-	int		count = 0;
-	int		i;
-	int		pathset = 0;
-	int		oldpath = 0;
-	struct namnod	*n;
-
+	ENTRY hentry;
+	int count = 0;
+	int i;
+	int pathset = 0;
+	int oldpath = 0;
 
 	hentry.data = 0;
 
 	if (any('/', name))
-		return(COMMAND);
+		return (COMMAND);
 
 	h = hfind(name);
 
-	if (h)
-	{
-		if (h->data & (BUILTIN | FUNCTION))
-		{
+	if (h) {
+		if (h->data & (BUILTIN | FUNCTION)) {
 			if (flg)
 				h->hits++;
-			return(h->data);
+			return (h->data);
 		}
 
 		if (arg && (pathset = argpath(arg)))
-			return(PATH_COMMAND);
+			return (PATH_COMMAND);
 
-		if ((h->data & DOT_COMMAND) == DOT_COMMAND)
-		{
+		if ((h->data & DOT_COMMAND) == DOT_COMMAND) {
 			if (multrel == 0 && hashdata(h->data) > dotpath)
 				oldpath = hashdata(h->data);
 			else
@@ -99,66 +98,52 @@ pathlook(com, flg, arg)
 			goto pathsrch;
 		}
 
-		if (h->data & (COMMAND | REL_COMMAND))
-		{
+		if (h->data & (COMMAND | REL_COMMAND)) {
 			if (flg)
 				h->hits++;
-			return(h->data);
+			return (h->data);
 		}
 
 		h->data = 0;
 		h->cost = 0;
 	}
 
-	if (i = syslook(name, commands, no_commands))
-	{
+	if ((i = syslook(name, commands, no_commands))) {
 		hentry.data = (BUILTIN | i);
 		count = 1;
-	}
-	else
-	{
+	} else {
 		if (arg && (pathset = argpath(arg)))
-			return(PATH_COMMAND);
-pathsrch:
-			count = findpath(name, oldpath);
+			return (PATH_COMMAND);
+	pathsrch:
+		count = findpath(name, oldpath);
 	}
 
-	if (count > 0)
-	{
-		if (h == NIL)
-		{
+	if (count > 0) {
+		if (h == NIL) {
 			hentry.cost = 0;
 			hentry.key = make(name);
 			h = henter(hentry);
 		}
 
-		if (h->data == 0)
-		{
+		if (h->data == 0) {
 			if (count < dotpath)
 				h->data = COMMAND | count;
-			else
-			{
+			else {
 				h->data = REL_COMMAND | count;
 				h->next = relcmd;
 				relcmd = h;
 			}
 		}
 
-
 		h->hits = flg;
 		h->cost += cost;
-		return(h->data);
-	}
-	else
-	{
-		return(-count);
+		return (h->data);
+	} else {
+		return (-count);
 	}
 }
 
-
-static void
-zapentry(h)
-	ENTRY *h;
+static void zapentry(h) ENTRY *h;
 {
 	h->data &= HASHZAP;
 }
@@ -173,17 +158,14 @@ zaphash()
 void
 zapcd()
 {
-	while (relcmd)
-	{
+	while (relcmd) {
 		relcmd->data |= CDMARK;
 		relcmd = relcmd->next;
 	}
 }
 
-
 static void
-hashout(h)
-	ENTRY *h;
+hashout(ENTRY *h)
 {
 	sigchk();
 
@@ -197,7 +179,6 @@ hashout(h)
 
 	if (h->data & REL_COMMAND)
 		prc_buff('*');
-
 
 	prc_buff(TAB);
 	prn_buff(h->cost);
@@ -214,25 +195,22 @@ hashpr()
 	hscan(hashout);
 }
 
-
-set_dotpath()
+void
+set_dotpath(void)
 {
-	register char	*path;
-	register int	cnt = 1;
+	register char *path;
+	register int cnt = 1;
 
 	dotpath = 10000;
 	path = getpath("");
 
-	while (path && *path)
-	{
+	while (path && *path) {
 		if (*path == '/')
 			cnt++;
-		else
-		{
+		else {
 			if (dotpath == 10000)
 				dotpath = cnt;
-			else
-			{
+			else {
 				multrel = 1;
 				return;
 			}
@@ -244,28 +222,24 @@ set_dotpath()
 	multrel = 0;
 }
 
-
-hash_func(name)
-	char *name;
+void
+hash_func(char *name)
 {
-	ENTRY	*h;
-	ENTRY	hentry;
+	ENTRY *h;
+	ENTRY hentry;
 
 	h = hfind(name);
 
-	if (h)
-	{
+	if (h) {
 
 		if (h->data & (BUILTIN | FUNCTION))
 			return;
 		else
 			h->data = FUNCTION;
-	}
-	else
-	{
+	} else {
 		int i;
 
-		if (i = syslook(name, commands, no_commands))
+		if ((i = syslook(name, commands, no_commands)))
 			hentry.data = (BUILTIN | i);
 		else
 			hentry.data = FUNCTION;
@@ -278,10 +252,10 @@ hash_func(name)
 	}
 }
 
-func_unhash(name)
-	char *name;
+void
+func_unhash(char *name)
 {
-	ENTRY 	*h;
+	ENTRY *h;
 
 	h = hfind(name);
 
@@ -289,141 +263,123 @@ func_unhash(name)
 		h->data = NOTFOUND;
 }
 
-
 short
 hash_cmd(name)
-	char *name;
+char *name;
 {
-	ENTRY	*h;
+	ENTRY *h;
 
 	if (any('/', name))
-		return(COMMAND);
+		return (COMMAND);
 
 	h = hfind(name);
 
-	if (h)
-	{
+	if (h) {
 		if (h->data & (BUILTIN | FUNCTION))
-			return(h->data);
+			return (h->data);
 		else
 			zapentry(h);
 	}
 
-	return(pathlook(name, 0, NIL));
+	return (pathlook(name, 0, NIL));
 }
 
-
-what_is_path(name)
-	register char *name;
+void
+what_is_path(char *name)
 {
-	register ENTRY	*h;
-	int		cnt;
-	short	hashval;
+	register ENTRY *h;
+	int cnt;
+	short hashval;
 
 	h = hfind(name);
 
 	prs_buff(name);
-	if (h)
-	{
+	if (h) {
 		hashval = hashdata(h->data);
 
-		switch (hashtype(h->data))
-		{
-			case BUILTIN:
-				prs_buff(" is a shell builtin\n");
-				return;
+		switch (hashtype(h->data)) {
+		case BUILTIN:
+			prs_buff(" is a shell builtin\n");
+			return;
 
-			case FUNCTION:
-			{
-				struct namnod *n = lookup(name);
+		case FUNCTION: {
+			struct namnod *n = lookup(name);
 
-				prs_buff(" is a function\n");
-				prs_buff(name);
-				prs_buff("(){\n");
-				prf(n->namenv);
-				prs_buff("\n}\n");
-				return;
+			prs_buff(" is a function\n");
+			prs_buff(name);
+			prs_buff("(){\n");
+			prf((struct trenod *)n->namenv);
+			prs_buff("\n}\n");
+			return;
+		}
+
+		case REL_COMMAND: {
+			short hash;
+
+			if ((h->data & DOT_COMMAND) == DOT_COMMAND) {
+				hash = pathlook(name, 0, NIL);
+				if (hashtype(hash) == NOTFOUND) {
+					prs_buff(" not found\n");
+					return;
+				} else
+					hashval = hashdata(hash);
 			}
+		}
 
-			case REL_COMMAND:
-			{
-				short hash;
-
-				if ((h->data & DOT_COMMAND) == DOT_COMMAND)
-				{
-					hash = pathlook(name, 0, NIL);
-					if (hashtype(hash) == NOTFOUND)
-					{
-						prs_buff(" not found\n");
-						return;
-					}
-					else
-						hashval = hashdata(hash);
-				}
-			}
-
-			case COMMAND:
-				prs_buff(" is hashed (");
-				pr_path(name, hashval);
-				prs_buff(")\n");
-				return;
+		case COMMAND:
+			prs_buff(" is hashed (");
+			pr_path(name, hashval);
+			prs_buff(")\n");
+			return;
 		}
 	}
 
-	if (syslook(name, commands, no_commands))
-	{
+	if (syslook(name, commands, no_commands)) {
 		prs_buff(" is a shell builtin\n");
 		return;
 	}
 
-	if ((cnt = findpath(name, 0)) > 0)
-	{
+	if ((cnt = findpath(name, 0)) > 0) {
 		prs_buff(" is ");
 		pr_path(name, cnt);
 		prc_buff(NL);
-	}
-	else
+	} else {
 		prs_buff(" not found\n");
+	}
 }
 
-
-findpath(name, oldpath)
-	register char *name;
-	int oldpath;
+static int
+findpath(char *name, int oldpath)
 {
-	register char 	*path;
-	register int	count = 1;
+	register char *path;
+	register int count = 1;
 
-	char	*p;
-	int	ok = 1;
-	int 	e_code = 1;
+	char *p;
+	int ok = 1;
+	int e_code = 1;
 
 	cost = 0;
 	path = getpath(name);
 
-	if (oldpath)
-	{
+	if (oldpath) {
 		count = dotpath;
 		while (--count)
 			path = nextpath(path);
 
-		if (oldpath > dotpath)
-		{
+		if (oldpath > dotpath) {
 			catpath(path, name);
 			p = curstak();
 			cost = 1;
 
 			if ((ok = chk_access(p)) == 0)
-				return(dotpath);
+				return (dotpath);
 			else
-				return(oldpath);
-		}
-		else
+				return (oldpath);
+		} else
 			count = dotpath;
 	}
 
-	while (path)
-	{
+	while (path) {
 		path = catpath(path, name);
 		cost++;
 		p = curstak();
@@ -436,26 +392,23 @@ findpath(name, oldpath)
 		count++;
 	}
 
-	return(ok ? -e_code : count);
+	return (ok ? -e_code : count);
 }
 
-
-chk_access(name)
-	register char	*name;
+static int
+chk_access(char *name)
 {
 
 	if (access(name, EXECUTE) == 0)
-		return(0);
+		return (0);
 
-	return(errno == EACCES ? 3 : 1);
+	return (errno == EACCES ? 3 : 1);
 }
 
-
-pr_path(name, count)
-	register char	*name;
-	int count;
+static void
+pr_path(char *name, int count)
 {
-	register char	*path;
+	register char *path;
 
 	path = getpath(name);
 
