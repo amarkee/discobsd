@@ -9,6 +9,9 @@ RELEASE=	0.0
 BUILD!=		git rev-list HEAD --count
 VERSION=	${RELEASE}-${BUILD}
 
+TOOLDIR?=	${TOPSRC}/tools
+TOOLBINDIR?=	${TOOLDIR}/bin
+
 HOST_CC?=	cc
 
 _HOST_OSNAME!=	uname -s
@@ -90,7 +93,15 @@ INSTALL=	install -m 644
 INSTALLDIR=	install -m 755 -d
 TAGSFILE=	tags
 
-# MANROFF=	nroff -man -h -Tascii
+#MANROFF=	nroff -man -h -Tascii
 MANROFF=	mandoc -Tascii
 
 ELF2AOUT=	cp
+AOUT_AOUT=	${TOOLBINDIR}/aout
+AOUT_AR=	${TOOLBINDIR}/ar
+AOUT_AS=	${TOOLBINDIR}/as
+AOUT_LD=	${TOOLBINDIR}/ld
+AOUT_NM=	${TOOLBINDIR}/nm
+AOUT_RANLIB=	${TOOLBINDIR}/ranlib
+AOUT_SIZE=	${TOOLBINDIR}/size
+AOUT_STRIP=	${TOOLBINDIR}/strip

@@ -1,12 +1,12 @@
 SUBDIR!=if [ x"${MACHINE}" = x"pic32" ] ; then \
-		echo "elf2aout fsutil kconfig icache mkrd virtualmips" ; \
+		echo "aoututils elf2aout fsutil kconfig icache mkrd virtualmips" ; \
 	else \
-		echo "elf2aout fsutil kconfig" ; \
+		echo "aoututils elf2aout fsutil kconfig" ; \
 	fi
 
 all install depend: ${SUBDIR}
-		-for i in ${SUBDIR}; do ${MAKE} -C $$i ${MFLAGS} DESTDIR=${DESTDIR} $@; done
+		-for i in ${SUBDIR}; do ${MAKE} -C $$i ${MFLAGS} $@; done
 
 clean:
-		rm -f *~
+		rm -f *~ bin/*
 		for i in ${SUBDIR}; do ${MAKE} -C $$i ${MFLAGS} clean; done

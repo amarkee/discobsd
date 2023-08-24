@@ -18,7 +18,7 @@ CFLAGS		= -DSIM_PIC32 -DPIC32MX7 -DMAX32
 #CFLAGS		= -DSIM_PIC32 -DPIC32MX7 -DUBW32
 
 #CFLAGS		+= -Wall -MT $@ -MD -MP -MF .deps/$*.dep -I/opt/local/include -I/opt/local/include/libelf
-CFLAGS		+= -Wall -Wno-format-truncation -MT $@ -MD -MP -MF .deps/$*.dep -I/usr/local/include -I/usr/local/include/elftoolchain
+CFLAGS		+= -Wall -MT $@ -MD -MP -MF .deps/$*.dep -I/usr/local/include -I/usr/local/include/elftoolchain
 LIBS		= -lpthread -lelf
 
 LIBS		+= -L/usr/local/lib/elftoolchain
@@ -85,6 +85,8 @@ $(PROG):	$(OBJS)
 
 .deps:
 			@mkdir .deps
+
+install:	all
 
 clean:
 			rm -rf *.o *~ *_log.txt .deps pavo m4k pic32 pic32-log.txt
