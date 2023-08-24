@@ -190,8 +190,7 @@ gpio_parse (dev, buf)
 }
 
 int
-gpioopen (dev, flag, mode)
-    dev_t dev;
+gpioopen (dev_t dev, int flag, int mode)
 {
     register u_int unit = minor(dev) & MINOR_UNIT;
 
@@ -203,8 +202,7 @@ gpioopen (dev, flag, mode)
 }
 
 int
-gpioclose (dev, flag, mode)
-    dev_t dev;
+gpioclose (dev_t dev, int flag, int mode)
 {
     return 0;
 }
@@ -391,10 +389,7 @@ gpio_lol (msec, data)
  * Use GPIO_PORT(n) to set port number.
  */
 int
-gpioioctl (dev, cmd, addr, flag)
-    dev_t dev;
-    register u_int cmd;
-    caddr_t addr;
+gpioioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
     register u_int unit, mask, value;
     register struct gpioreg *reg;

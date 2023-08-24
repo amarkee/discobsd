@@ -53,7 +53,7 @@ OBJS = exec_aout.o exec_conf.o exec_elf.o exec_script.o exec_subr.o \
 	ufs_namei.o ufs_subr.o ufs_syscalls.o ufs_syscalls2.o \
 	vfs_vnops.o vm_sched.o vm_swap.o vm_swp.o clock.o cons.o devsw.o \
 	exception.o machdep.o mem.o signal.o swap.o sysctl.o sd.o spi.o \
-	spi_bus.o uart.o
+	spi_bus.o uart.o 
 
 CFILES = $S/kern/exec_aout.c $S/kern/exec_conf.c $S/kern/exec_elf.c \
 	$S/kern/exec_script.c $S/kern/exec_subr.c $S/kern/init_main.c \
@@ -75,7 +75,7 @@ CFILES = $S/kern/exec_aout.c $S/kern/exec_conf.c $S/kern/exec_elf.c \
 	$S/pic32/cons.c $S/pic32/devsw.c $S/pic32/exception.c \
 	$S/pic32/machdep.c $S/pic32/mem.c $S/pic32/signal.c \
 	$S/pic32/swap.c $S/pic32/sysctl.c $S/pic32/sd.c $S/pic32/spi.c \
-	$S/pic32/spi_bus.c $S/pic32/uart.c swapunix.c
+	$S/pic32/spi_bus.c $S/pic32/uart.c swapunix.c 
 
 DEVCFG!=if [ -f devcfg.c ] ; then \
 		echo "devcfg.o" ; \

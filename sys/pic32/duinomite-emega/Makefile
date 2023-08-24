@@ -63,7 +63,7 @@ OBJS = exec_aout.o exec_conf.o exec_elf.o exec_script.o exec_subr.o \
 	vfs_vnops.o vm_sched.o vm_swap.o vm_swp.o clock.o cons.o devsw.o \
 	exception.o machdep.o mem.o signal.o swap.o sysctl.o adc.o \
 	gpio.o pwm.o sd.o spi.o spi_bus.o usb_device.o \
-	usb_function_cdc.o usb_uart.o
+	usb_function_cdc.o usb_uart.o 
 
 CFILES = $S/kern/exec_aout.c $S/kern/exec_conf.c $S/kern/exec_elf.c \
 	$S/kern/exec_script.c $S/kern/exec_subr.c $S/kern/init_main.c \
@@ -87,7 +87,7 @@ CFILES = $S/kern/exec_aout.c $S/kern/exec_conf.c $S/kern/exec_elf.c \
 	$S/pic32/swap.c $S/pic32/sysctl.c $S/pic32/adc.c $S/pic32/gpio.c \
 	$S/pic32/pwm.c $S/pic32/sd.c $S/pic32/spi.c $S/pic32/spi_bus.c \
 	$S/pic32/usb_device.c $S/pic32/usb_function_cdc.c \
-	$S/pic32/usb_uart.c swapunix.c
+	$S/pic32/usb_uart.c swapunix.c 
 
 DEVCFG!=if [ -f devcfg.c ] ; then \
 		echo "devcfg.o" ; \

@@ -137,8 +137,7 @@ int pwm_duty(int unit, unsigned int duty)
 }
 
 int
-pwm_open (dev, flag, mode)
-    dev_t dev;
+pwm_open (dev_t dev, int flag, int mode)
 {
     int unit = minor(dev);
 
@@ -151,8 +150,7 @@ pwm_open (dev, flag, mode)
 }
 
 int
-pwm_close (dev, flag, mode)
-    dev_t dev;
+pwm_close (dev_t dev, int flag, int mode)
 {
     return 0;
 }
@@ -173,10 +171,7 @@ int pwm_write (dev_t dev, struct uio *uio, int flag)
 }
 
 int
-pwm_ioctl (dev, cmd, addr, flag)
-    dev_t dev;
-    register u_int cmd;
-    caddr_t addr;
+pwm_ioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
     int unit;
     int *val;

@@ -92,8 +92,7 @@ int usbopen (dev_t dev, int flag, int mode)
     return ttyopen (dev, tp);
 }
 
-int usbclose (dev, flag, mode)
-    dev_t dev;
+int usbclose (dev_t dev, int flag, int mode)
 {
     register struct tty *tp = &usbttys[0];
 
@@ -122,10 +121,7 @@ int usbwrite (dev, uio, flag)
     return ttwrite (tp, uio, flag);
 }
 
-int usbioctl (dev, cmd, addr, flag)
-    dev_t dev;
-    register u_int cmd;
-    caddr_t addr;
+int usbioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
     register struct tty *tp = &usbttys[0];
     register int error;
