@@ -1,8 +1,8 @@
 # Override the default port with:
 # $ gmake MACHINE=pic32 MACHINE_ARCH=mips
 #
-MACHINE=	stm32
-MACHINE_ARCH=	arm
+MACHINE=	pic32
+MACHINE_ARCH=	mips
 
 DESTDIR?=	${TOPSRC}/distrib/obj/destdir.${MACHINE}
 RELEASE=	0.0
@@ -52,7 +52,7 @@ CC!=	if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 COPTS!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 		echo "-Os" ; \
 	elif [ x"${MACHINE_ARCH}" = x"mips" ] ; then \
-		echo "-Os -G0 -mips16" ; \
+		echo "-Os -G0 -mips16 -ffunction-sections" ; \
 	else \
 		echo "" ; \
 	fi
@@ -61,7 +61,7 @@ CFLAGS+=${COPTS}
 
 AFLAGS=	${ASFLAGS}
 
-LDFLAGS=-N -nostartfiles -fno-dwarf2-cfi-asm -T${TOPSRC}/lib/elf32-${MACHINE_ARCH}.ld ${TOPSRC}/lib/crt0.o -L${TOPSRC}/lib
+LDFLAGS=-Wl,--gc-sections -N -nostartfiles -fno-dwarf2-cfi-asm -T${TOPSRC}/lib/elf32-${MACHINE_ARCH}.ld ${TOPSRC}/lib/crt0.o -L${TOPSRC}/lib
 
 LIBS=	-lc
 LDLIBS=	${LIBS}

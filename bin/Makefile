@@ -38,6 +38,10 @@ SUBDIR=	\
 
 all:		${SUBDIR}
 
+.PHONY: ${SUBDIR}
+.PHONY: install
+.PHONY: clean
+
 ${SUBDIR}:
 		${MAKE} -C $@ ${MFLAGS}
 

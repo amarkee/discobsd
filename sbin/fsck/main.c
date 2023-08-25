@@ -277,6 +277,7 @@ main(argc, argv)
     int argc;
     char    *argv[];
 {
+    return 0;
     struct fstab *fsp;
     int pid, passno, anygtr, sumstatus;
     char *name, inbuf[64], outbuf[64], errbuf[64];

@@ -35,7 +35,6 @@ SUBDIR = \
     nm \
     passwd \
     printf \
-    renice \
     sed \
     setty \
     uname \

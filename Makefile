@@ -11,8 +11,8 @@
 # Override the default port with:
 # $ gmake MACHINE=pic32 MACHINE_ARCH=mips
 #
-MACHINE=	stm32
-MACHINE_ARCH=	arm
+MACHINE=	pic32
+MACHINE_ARCH=	mips
 
 # Filesystem and swap sizes.
 FS_MBYTES       = 100
