@@ -13,37 +13,38 @@
 #define BUSY 01
 #define busy(x) (Rcheat((x)->word) & BUSY)
 
-unsigned int brkincr = BRKINCR;
-struct blk *blokp;   /*current search pointer*/
-struct blk *bloktop; /* top of arena (last blok) */
+unsigned int    brkincr = BRKINCR;
+struct blk *blokp;                      /*current search pointer*/
+struct blk *bloktop;            /* top of arena (last blok) */
 
-char *brkbegin;
-char *setbrk();
+char            *brkbegin;
+char            *setbrk();
 
-void *
+char *
 alloc(nbytes)
-unsigned int nbytes;
+	unsigned int nbytes;
 {
-	register unsigned int rbytes = round(nbytes + BYTESPERWORD,
-	    BYTESPERWORD);
+	register unsigned int rbytes = round(nbytes+BYTESPERWORD, BYTESPERWORD);
 
-	for (;;) {
-		int c = 0;
+	for (;;)
+	{
+		int     c = 0;
 		register struct blk *p = blokp;
 		register struct blk *q;
 
-		do {
-			if (!busy(p)) {
+		do
+		{
+			if (!busy(p))
+			{
 				while (!busy(q = p->word))
 					p->word = q->word;
-				if ((char *)q - (char *)p >= rbytes) {
-					blokp = (struct blk *)((char *)p +
-					    rbytes);
+				if ((char *)q - (char *)p >= rbytes)
+				{
+					blokp = (struct blk *)((char *)p + rbytes);
 					if (q > blokp)
 						blokp->word = p->word;
-					p->word = (struct blk *)(Rcheat(blokp) |
-					    BUSY);
-					return ((char *)(p + 1));
+					p->word = (struct blk *)(Rcheat(blokp) | BUSY);
+					return((char *)(p + 1));
 				}
 			}
 			q = p;
@@ -53,21 +54,25 @@ unsigned int nbytes;
 	}
 }
 
-void addblok(reqd) unsigned int reqd;
+void
+addblok(reqd)
+	unsigned int reqd;
 {
-	if (stakbot == NIL) {
-		extern int end;
+	if (stakbot == NIL)
+	{
+                extern int end;
 		brkbegin = setbrk(BRKINCR * 5);
-		bloktop = (struct blk *)&end;
+		bloktop = (struct blk *) &end;
 	}
 
-	if (stakbas != staktop) {
+	if (stakbas != staktop)
+	{
 		register char *rndstak;
 		register struct blk *blokstak;
 
 		pushstak(0);
 		rndstak = (char *)round(staktop, BYTESPERWORD);
-		blokstak = (struct blk *)(stakbas)-1;
+		blokstak = (struct blk *)(stakbas) - 1;
 		blokstak->word = stakbsy;
 		stakbsy = blokstak;
 		bloktop->word = (struct blk *)(Rcheat(rndstak) | BUSY);
@@ -91,12 +96,13 @@ void addblok(reqd) unsigned int reqd;
 }
 
 void
-sh_free(void *arg_ap)
+free(ap)
+	struct blk *ap;
 {
-	struct blk *ap = (struct blk *)arg_ap;
 	register struct blk *p;
 
-	if ((p = ap) && p < bloktop) {
+	if ((p = ap) && p < bloktop)
+	{
 #ifdef DEBUG
 		chkbptr(p);
 #endif
@@ -105,19 +111,23 @@ sh_free(void *arg_ap)
 	}
 }
 
+
 #ifdef DEBUG
 
-void chkbptr(ptr) struct blk *ptr;
+void
+chkbptr(ptr)
+	struct blk *ptr;
 {
-	int exf = 0;
+	int	exf = 0;
 	register struct blk *p = (struct blk *)brkbegin;
 	register struct blk *q;
-	int us = 0, un = 0;
+	int	us = 0, un = 0;
 
-	for (;;) {
+	for (;;)
+	{
 		q = (struct blk *)(Rcheat(p->word) & ~BUSY);
 
-		if (p + 1 == ptr)
+		if (p+1 == ptr)
 			exf++;
 
 		if (q < (struct blk *)brkbegin || q > bloktop)
@@ -145,9 +155,10 @@ chkmem()
 {
 	register struct blk *p = (struct blk *)brkbegin;
 	register struct blk *q;
-	int us = 0, un = 0;
+	int	us = 0, un = 0;
 
-	for (;;) {
+	for (;;)
+	{
 		q = (struct blk *)(Rcheat(p->word) & ~BUSY);
 
 		if (q < (struct blk *)brkbegin || q > bloktop)
@@ -174,5 +185,6 @@ chkmem()
 	blank();
 	prn((char *)bloktop - brkbegin - (un + us));
 	newline();
+
 }
 #endif

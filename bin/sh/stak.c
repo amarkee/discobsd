@@ -61,7 +61,7 @@ register char	*x;
 {
 	while ((char *)(stakbsy) > (char *)(x))
 	{
-		sh_free(stakbsy);
+		free(stakbsy);
 		stakbsy = stakbsy->word;
 	}
 	staktop = stakbot = max((char *)(x), (char *)(stakbas));

@@ -167,7 +167,7 @@ oldsigs()
 clrsig(i)
 int     i;
 {
-	sh_free(trapcom[i]);
+	free(trapcom[i]);
 	trapcom[i] = NIL;
 	if (trapflg[i] & SIGMOD)
 	{

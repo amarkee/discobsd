@@ -10,7 +10,7 @@
 
 char *
 getstor(asize)
-int asize;
+	int asize;
 {
 	if (fndef)
 		return alloc(asize);
@@ -22,30 +22,33 @@ int asize;
 
 struct trenod *
 makefork(flgs, i)
-int flgs;
-struct trenod *i;
+	int	flgs;
+	struct trenod *i;
 {
 	register struct forknod *t;
 
 	t = (struct forknod *)getstor(sizeof(struct forknod));
-	t->forktyp = flgs | TFORK;
+	t->forktyp = flgs|TFORK;
 	t->forktre = i;
 	t->forkio = NIL;
-	return ((struct trenod *)t);
+	return((struct trenod *)t);
 }
 
 static int
 prsym(sym)
 {
-	if (sym & SYMFLG) {
+	if (sym & SYMFLG)
+	{
 		register struct sysnod *sp = reserved;
 
 		while (sp->sysval && sp->sysval != sym)
 			sp++;
 		prs(sp->sysnam);
-	} else if (sym == EOFSYM)
+	}
+	else if (sym == EOFSYM)
 		prs(endoffile);
-	else {
+	else
+	{
 		if (sym & SYMREP)
 			prc(sym);
 		if (sym == NL)
@@ -60,7 +63,8 @@ synbad()
 {
 	prp();
 	prs(synmsg);
-	if ((flags & ttyflg) == 0) {
+	if ((flags & ttyflg) == 0)
+	{
 		prs(atline);
 		prn(standin->flin);
 	}
@@ -78,20 +82,21 @@ synbad()
 
 static struct trenod *
 makelist(type, i, r)
-int type;
-struct trenod *i, *r;
+	int	type;
+	struct trenod *i, *r;
 {
 	register struct lstnod *t;
 
 	if (i == NIL || r == NIL)
 		synbad();
-	else {
+	else
+	{
 		t = (struct lstnod *)getstor(sizeof(struct lstnod));
 		t->lsttyp = type;
 		t->lstlef = i;
 		t->lstrit = r;
 	}
-	return ((struct trenod *)t);
+	return((struct trenod *)t);
 }
 
 static int
@@ -99,35 +104,37 @@ skipnl()
 {
 	while ((reserv++, word() == NL))
 		chkpr();
-	return (wdval);
+	return(wdval);
 }
 
 static int
 chksym(sym)
 {
-	register int x = sym & wdval;
+	register int	x = sym & wdval;
 
 	if (((x & SYMFLG) ? x : sym) != wdval)
 		synbad();
 }
 
 static struct regnod *
-syncase(int esym)
+syncase(esym)
+register int	esym;
 {
 	skipnl();
 	if (wdval == esym)
-		return (NIL);
-	else {
-		register struct regnod *r = (struct regnod *)getstor(
-		    sizeof(struct regnod));
+		return(NIL);
+	else
+	{
+		register struct regnod *r = (struct regnod *)getstor(sizeof(struct regnod));
 		register struct argnod *argp;
 
 		r->regptr = NIL;
-		for (;;) {
-			if (fndef) {
-				argp = wdarg;
-				wdarg = (struct argnod *)alloc(
-				    strlen(argp->argval) + BYTESPERWORD);
+		for (;;)
+		{
+			if (fndef)
+			{
+				argp= wdarg;
+				wdarg = (struct argnod *)alloc(length(argp->argval) + BYTESPERWORD);
 				movstr(argp->argval, wdarg->argval);
 			}
 
@@ -143,11 +150,12 @@ syncase(int esym)
 		r->regcom = cmd(0, NLFLG | MTFLG);
 		if (wdval == ECSYM)
 			r->regnxt = syncase(esym);
-		else {
+		else
+		{
 			chksym(esym);
 			r->regnxt = NIL;
 		}
-		return (r);
+		return(r);
 	}
 }
 
@@ -160,24 +168,26 @@ chkword()
 
 static struct ionod *
 inout(lastio)
-struct ionod *lastio;
+	struct ionod *lastio;
 {
-	register int iof;
+	register int	iof;
 	register struct ionod *iop;
-	register char c;
+	register char	c;
 
 	iof = wdnum;
-	switch (wdval) {
-	case DOCSYM: /*	<<	*/
+	switch (wdval)
+	{
+	case DOCSYM:	/*	<<	*/
 		iof |= IODOC;
 		break;
 
-	case APPSYM: /*	>>	*/
+	case APPSYM:	/*	>>	*/
 	case '>':
 		if (wdnum == 0)
 			iof |= 1;
 		iof |= IOPUT;
-		if (wdval == APPSYM) {
+		if (wdval == APPSYM)
+		{
 			iof |= IOAPP;
 			break;
 		}
@@ -192,7 +202,7 @@ struct ionod *lastio;
 		break;
 
 	default:
-		return (lastio);
+		return(lastio);
 	}
 
 	chkword();
@@ -205,13 +215,14 @@ struct ionod *lastio;
 
 	iop->iolink = NIL;
 	iop->iofile = iof;
-	if (iof & IODOC) {
+	if (iof & IODOC)
+	{
 		iop->iolst = iopend;
 		iopend = iop;
 	}
 	word();
 	iop->ionxt = inout(lastio);
-	return (iop);
+	return(iop);
 }
 
 /*
@@ -226,7 +237,7 @@ struct ionod *lastio;
  */
 static struct trenod *
 item(flag)
-BOOL flag;
+	BOOL	flag;
 {
 	register struct trenod *r;
 	register struct ionod *io;
@@ -235,200 +246,219 @@ BOOL flag;
 		io = inout((struct ionod *)NIL);
 	else
 		io = NIL;
-	switch (wdval) {
-	case CASYM: {
-		register struct swnod *t;
+	switch (wdval)
+	{
+	case CASYM:
+		{
+			register struct swnod *t;
 
-		t = (struct swnod *)getstor(sizeof(struct swnod));
-		r = (struct trenod *)t;
+			t = (struct swnod *)getstor(sizeof(struct swnod));
+			r = (struct trenod *)t;
 
-		chkword();
-		if (fndef)
-			t->swarg = make(wdarg->argval);
-		else
-			t->swarg = wdarg->argval;
-		skipnl();
-		chksym(INSYM | BRSYM);
-		t->swlst = syncase(wdval == INSYM ? ESSYM : KTSYM);
-		t->swtyp = TSW;
-		break;
-	}
-
-	case IFSYM: {
-		register int w;
-		register struct ifnod *t;
-
-		t = (struct ifnod *)getstor(sizeof(struct ifnod));
-		r = (struct trenod *)t;
-
-		t->iftyp = TIF;
-		t->iftre = cmd(THSYM, NLFLG);
-		t->thtre = cmd(ELSYM | FISYM | EFSYM, NLFLG);
-		t->eltre = ((w = wdval) == ELSYM) ? cmd(FISYM, NLFLG) :
-		    (w == EFSYM)		  ? (wdval = IFSYM, item(0)) :
-						    (struct trenod *)NIL;
-		if (w == EFSYM)
-			return (r);
-		break;
-	}
-
-	case FORSYM: {
-		register struct fornod *t;
-
-		t = (struct fornod *)getstor(sizeof(struct fornod));
-		r = (struct trenod *)t;
-
-		t->fortyp = TFOR;
-		t->forlst = NIL;
-		chkword();
-		if (fndef)
-			t->fornam = make(wdarg->argval);
-		else
-			t->fornam = wdarg->argval;
-		if (skipnl() == INSYM) {
 			chkword();
-
-			nohash++;
-			t->forlst = (struct comnod *)item(0);
-			nohash--;
-
-			if (wdval != NL && wdval != ';')
-				synbad();
-			if (wdval == NL)
-				chkpr();
+			if (fndef)
+				t->swarg = make(wdarg->argval);
+			else
+				t->swarg = wdarg->argval;
 			skipnl();
+			chksym(INSYM | BRSYM);
+			t->swlst = syncase(wdval == INSYM ? ESSYM : KTSYM);
+			t->swtyp = TSW;
+			break;
 		}
-		chksym(DOSYM | BRSYM);
-		t->fortre = cmd(wdval == DOSYM ? ODSYM : KTSYM, NLFLG);
-		break;
-	}
+
+	case IFSYM:
+		{
+			register int	w;
+			register struct ifnod *t;
+
+			t = (struct ifnod *)getstor(sizeof(struct ifnod));
+			r = (struct trenod *)t;
+
+			t->iftyp = TIF;
+			t->iftre = cmd(THSYM, NLFLG);
+			t->thtre = cmd(ELSYM | FISYM | EFSYM, NLFLG);
+			t->eltre = ((w = wdval) == ELSYM) ? cmd(FISYM, NLFLG)        :
+				    (w          == EFSYM) ? (wdval = IFSYM, item(0)) :
+				    (struct trenod *)NIL;
+			if (w == EFSYM)
+				return(r);
+			break;
+		}
+
+	case FORSYM:
+		{
+			register struct fornod *t;
+
+			t = (struct fornod *)getstor(sizeof(struct fornod));
+			r = (struct trenod *)t;
+
+			t->fortyp = TFOR;
+			t->forlst = NIL;
+			chkword();
+			if (fndef)
+				t->fornam = make(wdarg->argval);
+			else
+				t->fornam = wdarg->argval;
+			if (skipnl() == INSYM)
+			{
+				chkword();
+
+				nohash++;
+				t->forlst = (struct comnod *)item(0);
+				nohash--;
+
+				if (wdval != NL && wdval != ';')
+					synbad();
+				if (wdval == NL)
+					chkpr();
+				skipnl();
+			}
+			chksym(DOSYM | BRSYM);
+			t->fortre = cmd(wdval == DOSYM ? ODSYM : KTSYM, NLFLG);
+			break;
+		}
 
 	case WHSYM:
-	case UNSYM: {
-		register struct whnod *t;
+	case UNSYM:
+		{
+			register struct whnod *t;
 
-		t = (struct whnod *)getstor(sizeof(struct whnod));
-		r = (struct trenod *)t;
+			t = (struct whnod *)getstor(sizeof(struct whnod));
+			r = (struct trenod *)t;
 
-		t->whtyp = (wdval == WHSYM ? TWH : TUN);
-		t->whtre = cmd(DOSYM, NLFLG);
-		t->dotre = cmd(ODSYM, NLFLG);
-		break;
-	}
+			t->whtyp = (wdval == WHSYM ? TWH : TUN);
+			t->whtre = cmd(DOSYM, NLFLG);
+			t->dotre = cmd(ODSYM, NLFLG);
+			break;
+		}
 
 	case BRSYM:
 		r = cmd(KTSYM, NLFLG);
 		break;
 
-	case '(': {
-		register struct parnod *p;
+	case '(':
+		{
+			register struct parnod *p;
 
-		p = (struct parnod *)getstor(sizeof(struct parnod));
-		p->partre = cmd(')', NLFLG);
-		p->partyp = TPAR;
-		r = makefork(0, p);
-		break;
-	}
+			p = (struct parnod *)getstor(sizeof(struct parnod));
+			p->partre = cmd(')', NLFLG);
+			p->partyp = TPAR;
+			r = makefork(0, p);
+			break;
+		}
 
 	default:
 		if (io == NIL)
-			return (NIL);
+			return(NIL);
 
-	case 0: {
-		register struct comnod *t;
-		register struct argnod *argp;
-		register struct argnod **argtail;
-		register struct argnod **argset = (struct argnod **)NIL;
-		int keywd = 1;
-		char *com;
+	case 0:
+		{
+			register struct comnod *t;
+			register struct argnod *argp;
+			register struct argnod **argtail;
+			register struct argnod **argset = (struct argnod **)NIL;
+			int	keywd = 1;
+			char	*com;
 
-		if ((wdval != NL) && ((peekn = skipc()) == '(')) {
-			struct fndnod *f;
-			struct ionod *saveio;
+			if ((wdval != NL) && ((peekn = skipc()) == '('))
+			{
+				struct fndnod *f;
+				struct ionod  *saveio;
 
-			saveio = iotemp;
-			peekn = 0;
-			if (skipc() != ')')
-				synbad();
+				saveio = iotemp;
+				peekn = 0;
+				if (skipc() != ')')
+					synbad();
 
-			f = (struct fndnod *)getstor(sizeof(struct fndnod));
-			r = (struct trenod *)f;
+				f = (struct fndnod *)getstor(sizeof(struct fndnod));
+				r = (struct trenod *)f;
 
-			f->fndtyp = TFND;
-			if (fndef)
-				f->fndnam = make(wdarg->argval);
+				f->fndtyp = TFND;
+				if (fndef)
+					f->fndnam = make(wdarg->argval);
+				else
+					f->fndnam = wdarg->argval;
+				reserv++;
+				fndef++;
+				skipnl();
+				f->fndval = (struct trenod *)item(0);
+				fndef--;
+
+				if (iotemp != saveio)
+				{
+					struct ionod 	*ioptr = iotemp;
+
+					while (ioptr->iolst != saveio)
+						ioptr = ioptr->iolst;
+
+					ioptr->iolst = fiotemp;
+					fiotemp = iotemp;
+					iotemp = saveio;
+				}
+				return(r);
+			}
 			else
-				f->fndnam = wdarg->argval;
-			reserv++;
-			fndef++;
-			skipnl();
-			f->fndval = (struct trenod *)item(0);
-			fndef--;
+			{
+				t = (struct comnod *)getstor(sizeof(struct comnod));
+				r = (struct trenod *)t;
 
-			if (iotemp != saveio) {
-				struct ionod *ioptr = iotemp;
+				t->comio = io; /*initial io chain*/
+				argtail = &(t->comarg);
 
-				while (ioptr->iolst != saveio)
-					ioptr = ioptr->iolst;
+				while (wdval == 0)
+				{
+					if (fndef)
+					{
+						argp = wdarg;
+						wdarg = (struct argnod *)alloc(length(argp->argval) + BYTESPERWORD);
+						movstr(argp->argval, wdarg->argval);
+					}
 
-				ioptr->iolst = fiotemp;
-				fiotemp = iotemp;
-				iotemp = saveio;
-			}
-			return (r);
-		} else {
-			t = (struct comnod *)getstor(sizeof(struct comnod));
-			r = (struct trenod *)t;
-
-			t->comio = io; /*initial io chain*/
-			argtail = &(t->comarg);
-
-			while (wdval == 0) {
-				if (fndef) {
 					argp = wdarg;
-					wdarg = (struct argnod *)alloc(
-					    strlen(argp->argval) +
-					    BYTESPERWORD);
-					movstr(argp->argval, wdarg->argval);
+					if (wdset && keywd)
+					{
+						argp->argnxt = (struct argnod *)argset;
+						argset = (struct argnod **)argp;
+					}
+					else
+					{
+						*argtail = argp;
+						argtail = &(argp->argnxt);
+						keywd = flags & keyflg;
+					}
+					word();
+					if (flag)
+						t->comio = inout(t->comio);
 				}
 
-				argp = wdarg;
-				if (wdset && keywd) {
-					argp->argnxt = (struct argnod *)argset;
-					argset = (struct argnod **)argp;
-				} else {
-					*argtail = argp;
-					argtail = &(argp->argnxt);
-					keywd = flags & keyflg;
+				t->comtyp = TCOM;
+				t->comset = (struct argnod *)argset;
+				*argtail = NIL;
+
+				if (nohash == 0 && (fndef == 0 || (flags & hashflg)))
+				{
+					if (t->comarg)
+					{
+						com = t->comarg->argval;
+						if (*com && *com != DOLLAR)
+							pathlook(com, 0, t->comset);
+					}
 				}
-				word();
-				if (flag)
-					t->comio = inout(t->comio);
+
+				return(r);
 			}
-
-			t->comtyp = TCOM;
-			t->comset = (struct argnod *)argset;
-			*argtail = NIL;
-
-			if (nohash == 0 && (fndef == 0 || (flags & hashflg))) {
-				if (t->comarg) {
-					com = t->comarg->argval;
-					if (*com && *com != DOLLAR)
-						pathlook(com, 0, t->comset);
-				}
-			}
-
-			return (r);
 		}
-	}
+
 	}
 	reserv++;
 	word();
-	if (io = inout(io)) {
-		r = makefork(0, r);
+	if (io = inout(io))
+	{
+		r = makefork(0,r);
 		r->treio = io;
 	}
-	return (r);
+	return(r);
 }
 
 /*
@@ -446,15 +476,17 @@ term(flg)
 		skipnl();
 	else
 		word();
-	if ((t = item(TRUE)) && (wdval == '^' || wdval == '|')) {
-		struct trenod *left;
-		struct trenod *right;
+	if ((t = item(TRUE)) && (wdval == '^' || wdval == '|'))
+	{
+		struct trenod	*left;
+		struct trenod	*right;
 
 		left = makefork(FPOU, t);
 		right = makefork(FPIN | FPCL, term(NLFLG));
-		return (makefork(0, makelist(TFIL, left, right)));
-	} else
-		return (t);
+		return(makefork(0, makelist(TFIL, left, right)));
+	}
+	else
+		return(t);
 }
 
 /*
@@ -467,12 +499,12 @@ static struct trenod *
 list(flg)
 {
 	register struct trenod *r;
-	register int b;
+	register int		b;
 
 	r = term(flg);
 	while (r && ((b = (wdval == ANDFSYM)) || wdval == ORFSYM))
 		r = makelist((b ? TAND : TORF), r, term(NLFLG));
-	return (r);
+	return(r);
 }
 
 /*
@@ -484,21 +516,25 @@ list(flg)
  */
 struct trenod *
 cmd(sym, flg)
-register int sym;
-int flg;
+	register int	sym;
+	int		flg;
 {
 	register struct trenod *i, *e;
 
 	i = list(flg);
-	if (wdval == NL) {
-		if (flg & NLFLG) {
+	if (wdval == NL)
+	{
+		if (flg & NLFLG)
+		{
 			wdval = ';';
 			chkpr();
 		}
-	} else if (i == NIL && (flg & MTFLG) == 0)
+	}
+	else if (i == NIL && (flg & MTFLG) == 0)
 		synbad();
 
-	switch (wdval) {
+	switch (wdval)
+	{
 	case '&':
 		if (i)
 			i = makefork(FINT | FPRS | FAMP, i);
@@ -520,5 +556,5 @@ int flg;
 		if (sym)
 			chksym(sym);
 	}
-	return (i);
+	return(i);
 }

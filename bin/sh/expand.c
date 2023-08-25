@@ -3,34 +3,32 @@
  *
  * Bell Telephone Laboratories
  */
-#include <sys/types.h>
-#include <sys/dir.h>
-#include <sys/stat.h>
-
-#include <fcntl.h>
-#include <unistd.h>
-
 #include "defs.h"
-#include "expand.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/dir.h>
 
-struct direct *getdir();
+struct direct           *getdir();
 
-static char entry[MAXNAMLEN + 1];
+static char             entry[MAXNAMLEN+1];
 
 static DIR dirbuf;
 
 #define XXX 0200
 
-static void
-addg(char *as1, char *as2, char *as3)
+static int
+addg(as1, as2, as3)
+char    *as1, *as2, *as3;
 {
-	register char *s1, *s2;
-	register int c;
+	register char   *s1, *s2;
+	register int    c;
 
 	s2 = locstak() + BYTESPERWORD;
 	s1 = as1;
-	while (c = /* @@@ *s1++ */ cii(*s1++)) {
-		if (/* @@@ (c &= STRIP)*/ (c = smask(c)) == 0) {
+	while (c = /* @@@ *s1++ */ cii(*s1++))
+	{
+		if (/* @@@ (c &= STRIP)*/ (c=smask(c)) == 0)
+		{
 			*s2++ = '/';
 			break;
 		}
@@ -39,10 +37,10 @@ addg(char *as1, char *as2, char *as3)
 	s1 = as2;
 	while (*s2 = *s1++)
 		s2++;
-	if (s1 = as3) {
+	if (s1 = as3)
+	{
 		*s2++ = '/';
-		while (*s2++ = *++s1)
-			;
+		while (*s2++ = *++s1);
 	}
 	makearg(endstak(s2));
 }
@@ -56,19 +54,19 @@ addg(char *as1, char *as2, char *as3)
  * "[...a-z...]" in params matches a through z.
  *
  */
-int
-expand(char *as, int rcnt)
+expand(as, rcnt)
+	char    *as;
 {
-	int count, dirf;
-	BOOL dir = 0;
-	char *rescan = NIL;
-	register char *s, *cs;
-	struct argnod *schain = gchain;
+	int     count, dirf;
+	BOOL    dir = 0;
+	char    *rescan = NIL;
+	register char   *s, *cs;
+	struct argnod   *schain = gchain;
 	struct stat statb;
-	BOOL slash;
+	BOOL    slash;
 
 	if (trapnote & SIGSET)
-		return (0);
+		return(0);
 	s = cs = as;
 
 	/*
@@ -79,13 +77,15 @@ expand(char *as, int rcnt)
 
 		slash = 0;
 		open = 0;
-		do {
-			switch (*cs++) {
+		do
+		{
+			switch (*cs++)
+			{
 			case 0:
 				if (rcnt && slash)
 					break;
 				else
-					return (0);
+					return(0);
 
 			case '/':
 				slash++;
@@ -108,6 +108,7 @@ expand(char *as, int rcnt)
 					cs--;
 				break;
 
+
 			default:
 				continue;
 			}
@@ -115,11 +116,15 @@ expand(char *as, int rcnt)
 		} while (TRUE);
 	}
 
-	for (;;) {
-		if (cs == s) {
+	for (;;)
+	{
+		if (cs == s)
+		{
 			s = nullstr;
 			break;
-		} else if (*--cs == '/') {
+		}
+		else if (*--cs == '/')
+		{
 			*cs = 0;
 			if (s == cs)
 				s = "/";
@@ -127,7 +132,8 @@ expand(char *as, int rcnt)
 		}
 	}
 
-	if ((dirf = open(*s ? s : ".", 0)) > 0) {
+	if ((dirf = open(*s ? s : ".", 0)) > 0)
+	{
 		if (fstat(dirf, &statb) != -1 &&
 		    (statb.st_mode & S_IFMT) == S_IFDIR)
 			dir++;
@@ -138,21 +144,24 @@ expand(char *as, int rcnt)
 	count = 0;
 	if (*cs == 0)
 		*cs++ = XXX;
-	if (dir) /* check for rescan */
+	if (dir)                /* check for rescan */
 	{
 		register char *rs;
 		struct direct *e;
 
 		rs = cs;
-		do {
-			if (*rs == '/') {
+		do
+		{
+			if (*rs == '/')
+			{
 				rescan = rs;
 				*rs = 0;
 				gchain = NIL;
 			}
 		} while (*rs++);
 
-		while ((e = getdir(dirf)) && (trapnote & SIGSET) == 0) {
+		while ((e = getdir(dirf)) && (trapnote & SIGSET) == 0)
+		{
 			*(movstrn(e->d_name, entry, MAXNAMLEN)) = 0;
 
 			if (entry[0] == '.' && *cs != '.')
@@ -167,7 +176,8 @@ expand(char *as, int rcnt)
 			}
 #endif
 
-			if (gmatch(entry, cs)) {
+			if (gmatch(entry, cs))
+			{
 				addg(s, entry, rescan);
 				count++;
 			}
@@ -175,16 +185,18 @@ expand(char *as, int rcnt)
 		close(dirf);
 		reset_dir();
 
-		if (rescan) {
-			register struct argnod *rchain;
+		if (rescan)
+		{
+			register struct argnod  *rchain;
 
 			rchain = gchain;
 			gchain = schain;
-			if (count) {
+			if (count)
+			{
 				count = 0;
-				while (rchain) {
-					count += expand(rchain->argval,
-					    slash + 1);
+				while (rchain)
+				{
+					count += expand(rchain->argval, slash + 1);
 					rchain = rchain->argnxt;
 				}
 			}
@@ -193,21 +205,22 @@ expand(char *as, int rcnt)
 	}
 
 	{
-		register char c;
+		register char   c;
 
 		s = as;
-		while ((c = *s))
+		while (c = *s)
 			/* @@@ *s++ = (c & STRIP ? c : '/'); */
-			*s++ = smask(c) ? c : '/';
+			*s++ = smask(c) ? c: '/';
 	}
-	return (count);
+	return(count);
 }
 
-void
-reset_dir(void)
+
+reset_dir()
 {
 	dirbuf.dd_loc = 0;
 }
+
 
 /*
  * read next directory entry
@@ -221,7 +234,8 @@ getdir(dirf)
 	struct direct *dp;
 	for (;;) {
 		if (dirbuf.dd_loc == 0) {
-			dirbuf.dd_size = read(dirf, dirbuf.dd_buf, DIRBLKSIZ);
+			dirbuf.dd_size = read(dirf, dirbuf.dd_buf,
+			    DIRBLKSIZ);
 			if (dirbuf.dd_size <= 0)
 				return NULL;
 		}
@@ -240,86 +254,102 @@ getdir(dirf)
 	}
 }
 
-int
-gmatch(char *s, char *p)
+
+gmatch(s, p)
+register char   *s, *p;
 {
-	register int scc;
-	char c;
+	register int    scc;
+	char            c;
 
-	if ((scc = /* @@@ *s++ */ cii(*s++))) {
-		if (/* @@@ (scc &= STRIP) */ smask(scc) == 0)
-			scc = XXX;
+	if (scc = /* @@@ *s++ */ cii( *s++))
+	{
+		if ( /* @@@ (scc &= STRIP) */  smask(scc) == 0)
+			scc=XXX;
 	}
-	switch (c = /* @@@ *p++ */ cii(*p++)) {
-	case '[': {
-		BOOL ok;
-		int lc;
-		int notflag = 0;
+	switch (c = /* @@@ *p++ */ cii( *p++) )
+	{
+	case '[':
+		{
+			BOOL ok;
+			int lc;
+			int notflag = 0;
 
-		ok = 0;
-		lc = 077777;
-		if (*p == '!') {
-			notflag = 1;
-			p++;
-		}
-		while ((c = /* @@@ *p++ */ cii(*p++))) {
-			if (c == ']')
-				return (ok ? gmatch(s, p) : 0);
-			else if (c == MINUS) {
-				if (notflag) {
-					if (scc < lc || scc > *p++)
-						ok++;
+			ok = 0;
+			lc = 077777;
+			if (*p == '!')
+			{
+				notflag = 1;
+				p++;
+			}
+			while (c = /* @@@ *p++ */ cii(*p++))
+			{
+				if (c == ']')
+					return(ok ? gmatch(s, p) : 0);
+				else if (c == MINUS)
+				{
+					if (notflag)
+					{
+						if (scc < lc || scc > *p++)
+							ok++;
+						else
+							return(0);
+					}
 					else
-						return (0);
-				} else {
-					if (lc <= scc && scc <= *p++)
-						ok++;
+					{
+						if (lc <= scc && scc <= *p++)
+							ok++;
+					}
 				}
-			} else {
-				/* @@@ lc = c & STRIP; */
-				lc = ismask(c);
+				else
+				{
+					/* @@@ lc = c & STRIP; */
+					lc = ismask(c);
 
-				if (notflag) {
-					if (scc && scc != lc)
-						ok++;
+					if (notflag)
+					{
+						if (scc && scc != lc)
+							ok++;
+						else
+							return(0);
+					}
 					else
-						return (0);
-				} else {
-					if (scc == lc)
-						ok++;
+					{
+						if (scc == lc)
+							ok++;
+					}
 				}
 			}
+			return(0);
 		}
-		return (0);
-	}
 
 	default:
 		if (/* @@@ (c & STRIP)*/ ismask(c) != scc)
-			return (0);
+			return(0);
 
 	case '?':
-		return (scc ? gmatch(s, p) : 0);
+		return(scc ? gmatch(s, p) : 0);
 
 	case '*':
 		while (*p == '*')
 			p++;
 
 		if (*p == 0)
-			return (1);
+			return(1);
 		--s;
-		while (*s) {
+		while (*s)
+		{
 			if (gmatch(s++, p))
-				return (1);
+				return(1);
 		}
-		return (0);
+		return(0);
 
 	case 0:
-		return (scc == 0);
+		return(scc == 0);
 	}
 }
 
-void
-makearg(struct argnod *args)
+makearg(args)
+	register struct argnod *args;
 {
 	args->argnxt = gchain;
 	gchain = args;

@@ -7,7 +7,6 @@
 #include <errno.h>
 #include "sym.h"
 #include "hash.h"
-#include "print.h"
 
 static int      parent;
 
@@ -58,8 +57,8 @@ int     *pf1, *pf2;
 					freefunc(n);
 				else
 				{
-					sh_free(n->namval);
-					sh_free(n->namenv);
+					free(n->namval);
+					free(n->namenv);
 
 					n->namval = NIL;
 					n->namflg &= ~(N_EXPORT | N_ENVCHG);

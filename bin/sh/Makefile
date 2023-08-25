@@ -11,13 +11,16 @@ OBJS            = setbrk.o blok.o stak.o cmd.o fault.o main.o word.o \
 all:		sh
 
 sh:		${OBJS}
-		${CC} ${CFLAGS} ${LDFLAGS} -o sh ${OBJS} ${LIBS}
+		${CC} ${CFLAGS} ${LDFLAGS} -o sh.elf ${OBJS} ${LIBS}
+		${OBJDUMP} -S sh.elf > sh.dis
+		${SIZE} sh.elf
+		${ELF2AOUT} sh.elf $@ && rm sh.elf
 
 install:	all
 		install sh $(DESTDIR)/bin/
 
 clean:
-		rm -f sh *.o *~
+		rm -f sh *.o *~ *.elf *.dis
 
 args.o: args.c defs.h mac.h mode.h name.h stak.h brkincr.h ctype.h
 blok.o: blok.c defs.h mac.h mode.h name.h stak.h brkincr.h ctype.h
