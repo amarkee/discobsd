@@ -29,7 +29,8 @@ ASOPTS!=if [ x"${MACHINE_ARCH}" = x"mips" ] ; then \
 		echo "" ; \
 	fi
 
-CFLAGS		= -Os ${DEFS} -Wall ${COPTS}
+DEFS		= -Wall -ffreestanding
+CFLAGS		= ${DEFS} -Os -Wno-attributes -Wno-attribute-alias ${COPTS}
 ASFLAGS		= ${DEFS} -I${LIBCDIR}/${MACHINE_ARCH}/sys ${ASOPTS}
 
 # modules which can not use SYSCALL and must be assembled from sources.  The
@@ -132,6 +133,9 @@ FRC:
 $(SYSOBJS):	$(LIBCDIR)/$(MACHINE_ARCH)/sys/SYS.h
 #		@echo creating $*.o
 		@printf '#include "SYS.h"\nSYS($*)\n' | $(AS) $(ASFLAGS) - -c -o $*.o
+
+# Build objects here instead of ${LIBCDIR} with BSD make.
+.OBJDIR:	${.CURDIR}
 
 install:	../libc.a
 		${INSTALLDIR} ${DESTDIR}/usr/lib

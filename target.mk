@@ -1,11 +1,11 @@
 # Override the default port with:
-# $ gmake MACHINE=pic32 MACHINE_ARCH=mips
+# $ make MACHINE=pic32 MACHINE_ARCH=mips
 #
 MACHINE=	pic32
 MACHINE_ARCH=	mips
 
 DESTDIR?=	${TOPSRC}/distrib/obj/destdir.${MACHINE}
-RELEASE=	0.0
+RELEASE=	2.1
 BUILD!=		git rev-list HEAD --count
 VERSION=	${RELEASE}-${BUILD}
 
@@ -57,7 +57,7 @@ COPTS!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 		echo "" ; \
 	fi
 
-CFLAGS+=${COPTS}
+CFLAGS=	${COPTS}
 
 AFLAGS=	${ASFLAGS}
 
