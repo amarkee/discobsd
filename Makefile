@@ -36,8 +36,6 @@ DEFS		=
 
 FSUTIL		= tools/fsutil/fsutil
 
--include Makefile.user
-
 TOPSRC!=	pwd
 DESTDIR?=	${TOPSRC}/distrib/obj/destdir.${MACHINE}
 KCONFIG=	${TOPSRC}/tools/kconfig/kconfig
