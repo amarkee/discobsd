@@ -29,14 +29,14 @@ LDSCRIPT = "32mxsdram/bootloader.ld"
 #
 include ../gcc-config.mk
 
-AS              = ${MIPS_GCC_PREFIX}as ${DEBUG} -mips32r2 -EL
-CC              = ${MIPS_GCC_PREFIX}gcc ${DEBUG} -mips32r2 -EL -nostdinc -fno-builtin -Wall
-CPP             = ${MIPS_GCC_PREFIX}cpp
-LD              = ${MIPS_GCC_PREFIX}gcc -mips32r2 -EL
+AS              = ${GCCPREFIX}as ${DEBUG} -mips32r2 -EL
+CC              = ${GCCPREFIX}gcc ${DEBUG} -mips32r2 -EL -nostdinc -fno-builtin -Wall
+CPP             = ${GCCPREFIX}cpp
+LD              = ${GCCPREFIX}gcc -mips32r2 -EL
 LDFLAGS         = -nostdlib -T ../${LDSCRIPT} -Wl,-Map=$@.map
-SIZE            = ${MIPS_GCC_PREFIX}size
-OBJCOPY         = ${MIPS_GCC_PREFIX}objcopy
-OBJDUMP         = ${MIPS_GCC_PREFIX}objdump
+SIZE            = ${GCCPREFIX}size
+OBJCOPY         = ${GCCPREFIX}objcopy
+OBJDUMP         = ${GCCPREFIX}objdump
 
 # sources are located via $S relative to the compilation directory
 S               = ../..
@@ -62,7 +62,7 @@ OBJS = exec_aout.o exec_conf.o exec_elf.o exec_script.o exec_subr.o \
 	ufs_namei.o ufs_subr.o ufs_syscalls.o ufs_syscalls2.o \
 	vfs_vnops.o vm_sched.o vm_swap.o vm_swp.o clock.o cons.o devsw.o \
 	exception.o machdep.o mem.o signal.o swap.o sysctl.o adc.o pwm.o \
-	sd.o sdramp.o sdram.o spi.o spi_bus.o uart.o 
+	sd.o sdramp.o sdram.o spi.o spi_bus.o uart.o
 
 CFILES = $S/kern/exec_aout.c $S/kern/exec_conf.c $S/kern/exec_elf.c \
 	$S/kern/exec_script.c $S/kern/exec_subr.c $S/kern/init_main.c \
@@ -85,7 +85,7 @@ CFILES = $S/kern/exec_aout.c $S/kern/exec_conf.c $S/kern/exec_elf.c \
 	$S/pic32/machdep.c $S/pic32/mem.c $S/pic32/signal.c \
 	$S/pic32/swap.c $S/pic32/sysctl.c $S/pic32/adc.c $S/pic32/pwm.c \
 	$S/pic32/sd.c $S/pic32/sdramp.c $S/pic32/spi.c \
-	$S/pic32/spi_bus.c $S/pic32/uart.c swapunix.c 
+	$S/pic32/spi_bus.c $S/pic32/uart.c swapunix.c
 
 DEVCFG!=if [ -f devcfg.c ] ; then \
 		echo "devcfg.o" ; \

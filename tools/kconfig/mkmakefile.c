@@ -378,7 +378,7 @@ do_rules(FILE *f)
             fprintf(f, "%so:\n\t-cp $S/%so .\n\n", tail(np), np);
             continue;
         }
-        fprintf(f, "%so: $S/%s%c\n", tail(np), np, och);
+        fprintf(f, "%so: $S/%s%c machine .deps sys\n", tail(np), np, och);
         special = ftp->f_special;
         if (special == 0) {
             static char cmd[128];

@@ -6,14 +6,4 @@
 # Build the toolchain from sources for FreeBSD and Linux,
 # as described on page: http://retrobsd.org/wiki/doku.php/doc/toolchain-mips
 
-_HOST_OSNAME!=	uname -s
-
-MIPS_GCC_PREFIX!= if [ x"${_HOST_OSNAME}" = x"OpenBSD" ] ; then \
-			echo "/usr/local/bin/mips-elf-" ; \
-		elif [ x"${_HOST_OSNAME}" = x"FreeBSD" ] ; then \
-			echo "/usr/local/mips-elf/bin/mips-elf-" ; \
-		elif [ x"${_HOST_OSNAME}" = x"Linux" ] ; then \
-			echo "~/x-tools/mipsel-none-elf/bin/mipsel-none-elf-" ; \
-		else \
-			echo "/does/not/exist-" ; \
-		fi
+include ../../../target.mk

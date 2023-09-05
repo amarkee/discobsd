@@ -5,21 +5,21 @@
 #
 include ../gcc-config.mk
 
-AS              = ${MIPS_GCC_PREFIX}as ${DEBUG} -mips32r2 -EL
-CC              = ${MIPS_GCC_PREFIX}gcc ${DEBUG} -mips32r2 -EL -nostdinc -fno-builtin -Wall
-CPP             = ${MIPS_GCC_PREFIX}cpp
-LD              = ${MIPS_GCC_PREFIX}gcc -mips32r2 -EL
-LDFLAGS         = -nostdlib -T ../${LDSCRIPT} -Wl,-Map=$@.map
-SIZE            = ${MIPS_GCC_PREFIX}size
-OBJCOPY         = ${MIPS_GCC_PREFIX}objcopy
-OBJDUMP         = ${MIPS_GCC_PREFIX}objdump
+AS              = ${GCCPREFIX}-as ${DEBUG} -mips32r2 -EL
+CC              = ${GCCPREFIX}-gcc
+CPP             = ${GCCPREFIX}-cpp
+LD              = ${GCCPREFIX}-gcc -mips32r2 -EL
+LDFLAGS         = -nostdlib -T ../${LDSCRIPT} -Wl,-Map=$@.map -Wl,--gc-sections
+SIZE            = ${GCCPREFIX}-size
+OBJCOPY         = ${GCCPREFIX}-objcopy
+OBJDUMP         = ${GCCPREFIX}-objdump
 
 # sources are located via $S relative to the compilation directory
 S               = ../..
 
 DEPFLAGS	= -MT $@ -MP -MD -MF .deps/$*.dep
 DEFS            = -I. ${PARAM} -DKERNEL $(DEPFLAGS)
-CFLAGS          = -O ${DEFS}
+CFLAGS          = ${DEBUG} -mips32r2 -EL -nostdinc -fno-builtin -Os ${DEFS} -Wall -ffunction-sections
 
 # compile rules: rules are named COMPILE_${SUFFIX}
 # SUFFIX is the file suffix, capitalized (e.g. C for a .c file).

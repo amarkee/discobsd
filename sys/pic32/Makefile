@@ -1,17 +1,33 @@
 
 # Programs that live in subdirectories, and have makefiles of their own.
 #
-SUBDIR		= baremetal duinomite duinomite-emega explorer16 \
-                  fubarino max32 maximite maximite-color mmb-mx7 \
-                  picadillo pinguino-micro sdxl snadpic starter-kit \
-                  ubw32 wf32
+SUBDIR = \
+	baremetal \
+	duinomite \
+	duinomite-emega \
+	explorer16 \
+	fubarino \
+	max32 \
+	maximite \
+	maximite-color \
+	mmb-mx7 \
+	picadillo \
+	pinguino-micro \
+	sdxl \
+	snadpic \
+	starter-kit \
+	ubw32 \
+	wf32
 
-default:
 
-all:
-		-for i in $(SUBDIR); do ${MAKE} -C $$i all; done
+all: subdirs
 
-install:
+.PHONY: subdirs $(SUBDIR)
+
+subdirs: $(SUBDIR)
+
+$(SUBDIR):
+	$(MAKE) -C $@
 
 clean:
 		-for i in $(SUBDIR); do ${MAKE} -C $$i clean; done
