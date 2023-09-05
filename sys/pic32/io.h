@@ -94,7 +94,7 @@ unsigned ucall (int priority, void *address, int arg1, int arg2);
 /*
  * Set value of stack pointer register.
  */
-static void inline __attribute__ ((always_inline))
+static inline void __attribute__ ((always_inline))
 mips_set_stack_pointer (void *x)
 {
     asm volatile (
@@ -141,7 +141,7 @@ void *mips_get_stack_pointer ()
  * Disable the hardware interrupts,
  * saving the interrupt state into the supplied variable.
  */
-static int inline __attribute__ ((always_inline))
+static inline int __attribute__ ((always_inline))
 mips_intr_disable ()
 {
     int status;
@@ -152,7 +152,7 @@ mips_intr_disable ()
 /*
  * Restore the hardware interrupt mode using the saved interrupt state.
  */
-static void inline __attribute__ ((always_inline))
+static inline void __attribute__ ((always_inline))
 mips_intr_restore (int x)
 {
     /* C0_STATUS */
@@ -162,7 +162,7 @@ mips_intr_restore (int x)
 /*
  * Explicit hazard barrier.
  */
-static void inline __attribute__ ((always_inline))
+static inline void __attribute__ ((always_inline))
 mips_ehb()
 {
     asm volatile ("ehb");
@@ -171,7 +171,7 @@ mips_ehb()
 /*
  * Enable hardware interrupts.
  */
-static int inline __attribute__ ((always_inline))
+static inline int __attribute__ ((always_inline))
 mips_intr_enable ()
 {
     int status;
@@ -182,7 +182,7 @@ mips_intr_enable ()
 /*
  * Count a number of leading (most significant) zero bits in a word.
  */
-static int inline __attribute__ ((always_inline))
+static inline int __attribute__ ((always_inline))
 mips_clz (unsigned x)
 {
     int n;
@@ -195,7 +195,7 @@ mips_clz (unsigned x)
 /*
  * Swap bytes in a word: ABCD to DCBA.
  */
-static unsigned inline __attribute__ ((always_inline))
+static inline unsigned __attribute__ ((always_inline))
 mips_bswap (unsigned x)
 {
     int n;
