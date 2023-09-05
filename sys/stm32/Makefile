@@ -3,12 +3,14 @@
 #
 SUBDIR		= f411renucleo f412gdisco f469idisco f4discovery
 
-default:
+all: subdirs
 
-all:
-		-for i in $(SUBDIR); do ${MAKE} -C $$i all; done
+.PHONY: subdirs $(SUBDIR)
 
-install:
+subdirs: $(SUBDIR)
+
+$(SUBDIR):
+		$(MAKE) -C $@
 
 clean:
 		-for i in $(SUBDIR); do ${MAKE} -C $$i clean; done
