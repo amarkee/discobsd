@@ -156,7 +156,7 @@ main(argc, argv)
 	reboot(howto);
 	perror(myname);
 	kill(1, SIGHUP);
-	exit(EX_OSERR);
+	return EX_OSERR;
 }
 
 

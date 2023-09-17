@@ -252,5 +252,5 @@ main(argc, argv)
 	}
         if (! fcall)
                 exit(1);
-	exit((*fcall)(argv));
+	return(*fcall)(argv);
 }

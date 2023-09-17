@@ -418,7 +418,6 @@ file /etc/rc
 mode 0775
 file /etc/rc.local
 mode 0775
-file /etc/remote
 file /etc/shadow
 file /etc/shells
 file /etc/termcap
@@ -438,18 +437,14 @@ file /usr/bin/arch
 file /usr/bin/as
 file /usr/bin/awk
 file /usr/bin/basename
-file /usr/bin/basic
 file /usr/bin/bc
 file /bin/cat
-file /usr/bin/cb
-file /usr/bin/chat-server
 file /usr/bin/chflags
 file /bin/chgrp
 file /bin/chmod
 file /usr/bin/chpass
 mode 04755
 file /usr/bin/cmp
-file /usr/bin/col
 file /usr/bin/comm
 file /usr/bin/compress
 file /bin/cp
@@ -465,7 +460,6 @@ file /usr/bin/du
 file /bin/echo
 file /bin/ed
 file /usr/bin/egrep
-file /usr/bin/emg
 file /usr/bin/env
 file /bin/expr
 file /usr/bin/false
@@ -473,12 +467,8 @@ file /usr/bin/fgrep
 file /usr/bin/file
 file /usr/bin/find
 file /usr/bin/fold
-file /usr/bin/forth
 file /usr/bin/fstat
 mode 02755
-file /usr/bin/globdump
-file /usr/bin/globread
-file /usr/bin/globwrite
 file /usr/bin/grep
 file /usr/bin/groups
 file /usr/bin/head
@@ -491,18 +481,15 @@ file /usr/bin/join
 file /bin/kill
 file /usr/bin/la
 file /usr/bin/last
-file /usr/bin/ld
 file /bin/ln
 file /usr/bin/login
 mode 04755
-file /usr/bin/lol
 file /bin/ls
 file /usr/bin/mail
 mode 04755
 file /usr/bin/make
 file /usr/bin/man
 file /bin/md5
-file /usr/bin/med
 file /usr/bin/mesg
 file /bin/mkdir
 file /usr/bin/more
@@ -511,42 +498,26 @@ file /bin/mv
 file /usr/bin/nice
 file /usr/bin/nm
 file /usr/bin/nohup
-file /usr/bin/ntpdate
 file /usr/bin/od
 file /usr/bin/pagesize
 file /usr/bin/passwd
 mode 04755
-file /usr/bin/pdc
-file /usr/bin/picoc
-file /usr/bin/portio
 file /usr/bin/pr
 file /usr/bin/printenv
 file /usr/bin/printf
 file /bin/ps
 mode 02755
 file /bin/pwd
-file /usr/bin/pwm
-file /usr/bin/ranlib
-file /usr/bin/re
-file /usr/bin/renumber
-file /usr/bin/retroforth
 file /usr/bin/rev
 file /bin/rm
-file /bin/rmail
 file /bin/rmdir
 file /usr/bin/rz
-file /usr/bin/scc
-file /usr/bin/scm
 file /usr/bin/sed
 file /usr/bin/setty
 file /bin/sh
 file /usr/bin/size
-file /usr/bin/sl
 file /bin/sleep
-file /usr/bin/smux
 file /usr/bin/sort
-file /usr/bin/split
-file /usr/bin/strip
 file /bin/stty
 file /usr/bin/su
 mode 04755
@@ -556,12 +527,9 @@ file /sbin/sysctl
 file /usr/bin/sz
 file /usr/bin/tail
 file /bin/tar
-file /usr/bin/tclsh
 file /usr/bin/tee
-file /usr/bin/telnet
 file /bin/test
 file /usr/bin/time
-file /usr/bin/tip
 file /usr/bin/touch
 file /usr/bin/tr
 file /usr/bin/true
@@ -570,20 +538,6 @@ file /usr/bin/tty
 file /usr/bin/uname
 file /usr/bin/uncompress
 file /usr/bin/uniq
-file /usr/bin/uucico
-file /usr/bin/uuclean
-file /usr/bin/uucp
-file /usr/bin/uudecode
-file /usr/bin/uuencode
-file /usr/bin/uulog
-file /usr/bin/uuname
-file /usr/bin/uupoll
-file /usr/bin/uuq
-file /usr/bin/uusend
-file /usr/bin/uusnap
-file /usr/bin/uux
-file /usr/bin/uuxqt
-file /usr/bin/vi
 file /usr/bin/vmstat
 mode 02755
 file /usr/bin/w
@@ -596,7 +550,6 @@ file /usr/bin/whoami
 file /usr/bin/write
 mode 02755
 file /usr/bin/xargs
-file /usr/bin/yacc
 file /usr/bin/zcat
 
 link /bin/[
@@ -668,8 +621,6 @@ dir /usr/include
 dir /usr/include/arpa
 dir /usr/include/machine
 dir /usr/include/readline
-dir /usr/include/smallc
-dir /usr/include/smallc/sys
 dir /usr/include/sys
 file /usr/include/alloca.h
 file /usr/include/a.out.h
@@ -692,19 +643,11 @@ file /usr/include/nlist.h
 file /usr/include/paths.h
 file /usr/include/psout.h
 file /usr/include/pwd.h
-file /usr/include/ranlib.h
 file /usr/include/readline/history.h
 file /usr/include/readline/readline.h
 file /usr/include/regexp.h
 file /usr/include/setjmp.h
 file /usr/include/sgtty.h
-file /usr/include/smallc/curses.h
-file /usr/include/smallc/fcntl.h
-file /usr/include/smallc/signal.h
-file /usr/include/smallc/stdio.h
-file /usr/include/smallc/sys/gpio.h
-file /usr/include/smallc/sys/spi.h
-file /usr/include/smallc/wiznet.h
 file /usr/include/stdarg.h
 file /usr/include/stddef.h
 file /usr/include/stdint.h
@@ -795,13 +738,7 @@ target sys/syslog.h
 # Files: /usr/lib
 #
 dir /usr/lib
-file /usr/lib/crt0.o
 file /usr/lib/libc.a
-file /usr/lib/libm.a
-file /usr/lib/libcurses.a
-file /usr/lib/libreadline.a
-file /usr/lib/libtermlib.a
-file /usr/lib/retroImage
 
 #
 # Files: /usr/libexec
@@ -813,7 +750,6 @@ file /usr/libexec/bigram
 file /usr/libexec/code
 file /usr/libexec/diffh
 file /usr/libexec/getty
-file /usr/libexec/smallc
 
 #
 # Files: /usr/share
@@ -828,13 +764,10 @@ dir /usr/share/zoneinfo/Australia
 dir /usr/share/zoneinfo/Canada
 dir /usr/share/zoneinfo/SystemV
 dir /usr/share/zoneinfo/US
-file /usr/share/emg.keys
-file /usr/share/re.help
 file /usr/share/dict/words
 file /usr/share/misc/more.help
 file /usr/share/misc/termcap
 mode 0444
-file /usr/share/misc/yaccpar
 file /usr/share/zoneinfo/Australia/North
 file /usr/share/zoneinfo/Australia/NSW
 file /usr/share/zoneinfo/Australia/Queensland
@@ -1024,7 +957,6 @@ file /usr/share/man/cat1/kill.0
 file /usr/share/man/cat1/la.0
 file /usr/share/man/cat1/last.0
 file /usr/share/man/cat1/lastcomm.0
-file /usr/share/man/cat1/ld.0
 file /usr/share/man/cat1/learn.0
 file /usr/share/man/cat1/leave.0
 file /usr/share/man/cat1/lex.0
@@ -1078,7 +1010,6 @@ file /usr/share/man/cat1/px.0
 file /usr/share/man/cat1/pxp.0
 file /usr/share/man/cat1/pxref.0
 file /usr/share/man/cat1/quota.0
-file /usr/share/man/cat1/ranlib.0
 file /usr/share/man/cat1/ratfor.0
 file /usr/share/man/cat1/rcp.0
 file /usr/share/man/cat1/rdist.0
@@ -1141,14 +1072,8 @@ file /usr/share/man/cat1/uptime.0
 file /usr/share/man/cat1/users.0
 file /usr/share/man/cat1/uucp.0
 file /usr/share/man/cat1/uudecode.0
-file /usr/share/man/cat1/uulog.0
-file /usr/share/man/cat1/uuname.0
-file /usr/share/man/cat1/uuq.0
-file /usr/share/man/cat1/uusend.0
-file /usr/share/man/cat1/uux.0
 file /usr/share/man/cat1/vacation.0
 file /usr/share/man/cat1/vgrind.0
-file /usr/share/man/cat1/vi.0
 file /usr/share/man/cat1/vmstat.0
 file /usr/share/man/cat1/vwidth.0
 file /usr/share/man/cat1/w.0
@@ -1259,7 +1184,6 @@ file /usr/share/man/cat3/getopt.0
 file /usr/share/man/cat3/getpass.0
 file /usr/share/man/cat3/getsubopt.0
 file /usr/share/man/cat3/getwd.0
-file /usr/share/man/cat3/gpanel.0
 file /usr/share/man/cat3/infnan.0
 file /usr/share/man/cat3/initgroups.0
 file /usr/share/man/cat3/intro.0
@@ -1374,7 +1298,6 @@ file /usr/share/man/cat5/passwd.0
 file /usr/share/man/cat5/plot.0
 file /usr/share/man/cat5/printcap.0
 file /usr/share/man/cat5/protocols.0
-file /usr/share/man/cat5/ranlib.0
 file /usr/share/man/cat5/resolver.0
 file /usr/share/man/cat5/services.0
 file /usr/share/man/cat5/shells.0
@@ -2033,10 +1956,6 @@ link /usr/share/man/cat3/seekdir.0
 target /usr/share/man/cat3/closedir.0
 link /usr/share/man/cat3/telldir.0
 target /usr/share/man/cat3/closedir.0
-
-file /usr/share/man/cat6/canfield.0
-link /usr/share/man/cat6/cfscores.0
-target /usr/share/man/cat6/canfield.0
 
 file /usr/share/man/cat3/copysign.0
 link /usr/share/man/cat3/drem.0

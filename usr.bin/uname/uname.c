@@ -155,7 +155,7 @@ main(argc, argv)
 		prefix = " ";
 	}
 	(void)printf("\n");
-	exit (0);
+	return (0);
 }
 
 void

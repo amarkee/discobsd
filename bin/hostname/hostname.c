@@ -70,5 +70,5 @@ main(argc,argv)
 			*p = '\0';
 		(void)printf("%s\n", hostname);
 	}
-	exit(0);
+	return 0;
 }

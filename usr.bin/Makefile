@@ -9,7 +9,7 @@ include $(TOPSRC)/target.mk
 MDSUBDIR!=if [ x"${MACHINE_ARCH}" = x"arm" ] ; then \
 		echo "" ; \
 	elif [ x"${MACHINE_ARCH}" = x"mips" ] ; then \
-		echo "aout adb as" ; \
+		echo "aout as" ; \
 	else \
 		echo "" ; \
 	fi

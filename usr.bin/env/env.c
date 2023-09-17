@@ -73,5 +73,5 @@ main(int argc, char **argv)
 	for (ep = environ; *ep; ep++)
 		(void)printf("%s\n", *ep);
 
-	exit(0);
+	return (0);
 }

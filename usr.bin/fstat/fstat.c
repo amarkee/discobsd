@@ -537,5 +537,5 @@ main(argc, argv)
 			continue;
 		readf();
 	}
-	exit(0);
+	return (0);
 }

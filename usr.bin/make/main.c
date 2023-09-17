@@ -391,5 +391,5 @@ int main(argc, argv)
                 printdesc(YES);
         }
     }
-    exit(0);
+    return (0);
 }

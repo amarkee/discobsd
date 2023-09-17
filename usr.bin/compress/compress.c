@@ -1299,7 +1299,7 @@ int main (argc, argv)
 #endif /* DEBUG */
 	}
     }
-    exit(perm_stat ? perm_stat : exit_stat);
+    return (perm_stat ? perm_stat : exit_stat);
 }
 
 /*****************************************************************

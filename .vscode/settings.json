@@ -12,6 +12,10 @@
         "tty.h": "c",
         "ttydev.h": "c",
         "ioctl.h": "c",
-        "user.h": "c"
+        "user.h": "c",
+        "namei.h": "c",
+        "unistd.h": "c",
+        "systm.h": "c",
+        "dir.h": "c"
     }
 }

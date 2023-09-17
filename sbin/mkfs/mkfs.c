@@ -495,5 +495,5 @@ main (argc,argv)
                 mkswap();
 
 	wtfs (SUPERB, (char*) &filsys.fs);
-	exit(0);
+	return 0;
 }

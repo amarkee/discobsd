@@ -187,5 +187,5 @@ main(argc, argv)
 	}
 	if (fcurdir >= 0)
                 close(fcurdir);
-	exit(status);
+	return status;
 }
