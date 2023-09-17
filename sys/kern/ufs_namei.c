@@ -1075,13 +1075,11 @@ dirrewrite(dp, ip, ndp)
  * NB: does not handle corrupted directories.
  */
 int
-dirempty (ip, parentino)
-    register struct inode *ip;
-    ino_t parentino;
+dirempty (struct inode *ip, ino_t parentino)
 {
-    register off_t off;
-    struct dirtemplate dbuf;
-    register struct direct *dp = (struct direct *)&dbuf;
+    off_t off;
+    struct direct dbuf;
+    struct direct *dp = (struct direct *)&dbuf;
     int error, count;
 #define MINDIRSIZ (sizeof (struct dirtemplate) / 2)
 
