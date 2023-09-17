@@ -123,10 +123,10 @@ swapunix.o: swapunix.c
 all: unix
 
 clean:
-	rm -rf .deps unix *.elf *.o *.map *.dis *.bin machine sys
+	rm -rf unix *.elf *.o *.map *.dis *.bin
 
 clean-all: clean
-	rm -f *.h *.hex ioconf.c swap*.c vers.c
+	rm -f *.h *.hex ioconf.c swap*.c vers.c .deps machine sys
 
 reconfig ioconf.c: Config ../../../tools/kconfig/kconfig
 	../../../tools/kconfig/kconfig -g Config
@@ -150,214 +150,214 @@ startup_stm32f407xx.o: ../startup_stm32f407xx.s
 ioconf.o: ioconf.c
 	${COMPILE_C}
 
-exec_aout.o: $S/kern/exec_aout.c machine .deps sys
+exec_aout.o: $S/kern/exec_aout.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-exec_conf.o: $S/kern/exec_conf.c machine .deps sys
+exec_conf.o: $S/kern/exec_conf.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-exec_elf.o: $S/kern/exec_elf.c machine .deps sys
+exec_elf.o: $S/kern/exec_elf.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-exec_script.o: $S/kern/exec_script.c machine .deps sys
+exec_script.o: $S/kern/exec_script.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-exec_subr.o: $S/kern/exec_subr.c machine .deps sys
+exec_subr.o: $S/kern/exec_subr.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-init_main.o: $S/kern/init_main.c machine .deps sys
+init_main.o: $S/kern/init_main.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-init_sysent.o: $S/kern/init_sysent.c machine .deps sys
+init_sysent.o: $S/kern/init_sysent.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_clock.o: $S/kern/kern_clock.c machine .deps sys
+kern_clock.o: $S/kern/kern_clock.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_descrip.o: $S/kern/kern_descrip.c machine .deps sys
+kern_descrip.o: $S/kern/kern_descrip.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_exec.o: $S/kern/kern_exec.c machine .deps sys
+kern_exec.o: $S/kern/kern_exec.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_exit.o: $S/kern/kern_exit.c machine .deps sys
+kern_exit.o: $S/kern/kern_exit.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_fork.o: $S/kern/kern_fork.c machine .deps sys
+kern_fork.o: $S/kern/kern_fork.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_mman.o: $S/kern/kern_mman.c machine .deps sys
+kern_mman.o: $S/kern/kern_mman.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_proc.o: $S/kern/kern_proc.c machine .deps sys
+kern_proc.o: $S/kern/kern_proc.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_prot.o: $S/kern/kern_prot.c machine .deps sys
+kern_prot.o: $S/kern/kern_prot.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_prot2.o: $S/kern/kern_prot2.c machine .deps sys
+kern_prot2.o: $S/kern/kern_prot2.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_resource.o: $S/kern/kern_resource.c machine .deps sys
+kern_resource.o: $S/kern/kern_resource.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_sig.o: $S/kern/kern_sig.c machine .deps sys
+kern_sig.o: $S/kern/kern_sig.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_sig2.o: $S/kern/kern_sig2.c machine .deps sys
+kern_sig2.o: $S/kern/kern_sig2.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_subr.o: $S/kern/kern_subr.c machine .deps sys
+kern_subr.o: $S/kern/kern_subr.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_synch.o: $S/kern/kern_synch.c machine .deps sys
+kern_synch.o: $S/kern/kern_synch.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_sysctl.o: $S/kern/kern_sysctl.c machine .deps sys
+kern_sysctl.o: $S/kern/kern_sysctl.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-kern_time.o: $S/kern/kern_time.c machine .deps sys
+kern_time.o: $S/kern/kern_time.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-subr_prf.o: $S/kern/subr_prf.c machine .deps sys
+subr_prf.o: $S/kern/subr_prf.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-subr_rmap.o: $S/kern/subr_rmap.c machine .deps sys
+subr_rmap.o: $S/kern/subr_rmap.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sys_generic.o: $S/kern/sys_generic.c machine .deps sys
+sys_generic.o: $S/kern/sys_generic.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sys_inode.o: $S/kern/sys_inode.c machine .deps sys
+sys_inode.o: $S/kern/sys_inode.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sys_pipe.o: $S/kern/sys_pipe.c machine .deps sys
+sys_pipe.o: $S/kern/sys_pipe.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sys_process.o: $S/kern/sys_process.c machine .deps sys
+sys_process.o: $S/kern/sys_process.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-syscalls.o: $S/kern/syscalls.c machine .deps sys
+syscalls.o: $S/kern/syscalls.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-tty.o: $S/kern/tty.c machine .deps sys
+tty.o: $S/kern/tty.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-tty_subr.o: $S/kern/tty_subr.c machine .deps sys
+tty_subr.o: $S/kern/tty_subr.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-tty_tty.o: $S/kern/tty_tty.c machine .deps sys
+tty_tty.o: $S/kern/tty_tty.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_alloc.o: $S/kern/ufs_alloc.c machine .deps sys
+ufs_alloc.o: $S/kern/ufs_alloc.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_bio.o: $S/kern/ufs_bio.c machine .deps sys
+ufs_bio.o: $S/kern/ufs_bio.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_bmap.o: $S/kern/ufs_bmap.c machine .deps sys
+ufs_bmap.o: $S/kern/ufs_bmap.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_dsort.o: $S/kern/ufs_dsort.c machine .deps sys
+ufs_dsort.o: $S/kern/ufs_dsort.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_fio.o: $S/kern/ufs_fio.c machine .deps sys
+ufs_fio.o: $S/kern/ufs_fio.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_inode.o: $S/kern/ufs_inode.c machine .deps sys
+ufs_inode.o: $S/kern/ufs_inode.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_mount.o: $S/kern/ufs_mount.c machine .deps sys
+ufs_mount.o: $S/kern/ufs_mount.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_namei.o: $S/kern/ufs_namei.c machine .deps sys
+ufs_namei.o: $S/kern/ufs_namei.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_subr.o: $S/kern/ufs_subr.c machine .deps sys
+ufs_subr.o: $S/kern/ufs_subr.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_syscalls.o: $S/kern/ufs_syscalls.c machine .deps sys
+ufs_syscalls.o: $S/kern/ufs_syscalls.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-ufs_syscalls2.o: $S/kern/ufs_syscalls2.c machine .deps sys
+ufs_syscalls2.o: $S/kern/ufs_syscalls2.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-vfs_vnops.o: $S/kern/vfs_vnops.c machine .deps sys
+vfs_vnops.o: $S/kern/vfs_vnops.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-vm_sched.o: $S/kern/vm_sched.c machine .deps sys
+vm_sched.o: $S/kern/vm_sched.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-vm_swap.o: $S/kern/vm_swap.c machine .deps sys
+vm_swap.o: $S/kern/vm_swap.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-vm_swp.o: $S/kern/vm_swp.c machine .deps sys
+vm_swp.o: $S/kern/vm_swp.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-clock.o: $S/stm32/clock.c machine .deps sys
+clock.o: $S/stm32/clock.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-cons.o: $S/stm32/cons.c machine .deps sys
+cons.o: $S/stm32/cons.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-devsw.o: $S/stm32/devsw.c machine .deps sys
+devsw.o: $S/stm32/devsw.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-fault.o: $S/stm32/fault.c machine .deps sys
+fault.o: $S/stm32/fault.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-machdep.o: $S/stm32/machdep.c machine .deps sys
+machdep.o: $S/stm32/machdep.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-mem.o: $S/stm32/mem.c machine .deps sys
+mem.o: $S/stm32/mem.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-signal.o: $S/stm32/signal.c machine .deps sys
+signal.o: $S/stm32/signal.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-swap.o: $S/stm32/swap.c machine .deps sys
+swap.o: $S/stm32/swap.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-syscall.o: $S/stm32/syscall.c machine .deps sys
+syscall.o: $S/stm32/syscall.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sysctl.o: $S/stm32/sysctl.c machine .deps sys
+sysctl.o: $S/stm32/sysctl.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-system_stm32f4xx.o: $S/stm32/system_stm32f4xx.c machine .deps sys
+system_stm32f4xx.o: $S/stm32/system_stm32f4xx.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-systick.o: $S/stm32/systick.c machine .deps sys
+systick.o: $S/stm32/systick.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-stm32f4xx_hal.o: $S/stm32/stm32f4xx_hal.c machine .deps sys
+stm32f4xx_hal.o: $S/stm32/stm32f4xx_hal.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-stm32f4xx_ll_utils.o: $S/stm32/stm32f4xx_ll_utils.c machine .deps sys
+stm32f4xx_ll_utils.o: $S/stm32/stm32f4xx_ll_utils.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sd.o: $S/stm32/sd.c machine .deps sys
+sd.o: $S/stm32/sd.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sdio_card.o: $S/stm32/sdio_card.c machine .deps sys
+sdio_card.o: $S/stm32/sdio_card.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-stm32f4xx_hal_sd.o: $S/stm32/stm32f4xx_hal_sd.c machine .deps sys
+stm32f4xx_hal_sd.o: $S/stm32/stm32f4xx_hal_sd.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-stm32f4xx_ll_sdmmc.o: $S/stm32/stm32f4xx_ll_sdmmc.c machine .deps sys
+stm32f4xx_ll_sdmmc.o: $S/stm32/stm32f4xx_ll_sdmmc.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-sdio.o: $S/stm32/sdio.c machine .deps sys
+sdio.o: $S/stm32/sdio.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-uart.o: $S/stm32/uart.c machine .deps sys
+uart.o: $S/stm32/uart.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-stm32_bsp.o: $S/stm32/stm32_bsp.c machine .deps sys
+stm32_bsp.o: $S/stm32/stm32_bsp.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
-stm32469i_discovery_sd.o: $S/stm32/stm32469i_discovery_sd.c machine .deps sys
+stm32469i_discovery_sd.o: $S/stm32/stm32469i_discovery_sd.c ioconf.o machine .deps sys
 	${COMPILE_C}
 
 

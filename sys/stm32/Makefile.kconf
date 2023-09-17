@@ -51,10 +51,10 @@ SYSTEM_LD_TAIL=	${SIZE} $@; \
 %LOAD
 
 clean:
-	rm -rf .deps unix *.elf *.o *.map *.dis *.bin machine sys
+	rm -rf unix *.elf *.o *.map *.dis *.bin
 
 clean-all: clean
-	rm -f *.h *.hex ioconf.c swap*.c vers.c
+	rm -f *.h *.hex ioconf.c swap*.c vers.c .deps machine sys
 
 reconfig ioconf.c: Config ../../../tools/kconfig/kconfig
 	../../../tools/kconfig/kconfig -g Config
