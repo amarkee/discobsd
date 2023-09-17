@@ -11,8 +11,8 @@
 # Override the default port with:
 # $ gmake MACHINE=pic32 MACHINE_ARCH=mips
 #
-MACHINE=	pic32
-MACHINE_ARCH=	mips
+MACHINE=	stm32
+MACHINE_ARCH=	arm
 
 # Filesystem and swap sizes.
 FS_MBYTES       = 200
@@ -42,8 +42,7 @@ KCONFIG=	${TOPSRC}/tools/kconfig/kconfig
 
 SUBDIR=		share lib bin sbin libexec usr.bin usr.sbin
 
-all:		symlinks
-		$(MAKE) -C tools MACHINE=${MACHINE} install
+all:		symlinks tools
 		$(MAKE) kernel
 		$(MAKE) -C etc DESTDIR=${DESTDIR} distrib-dirs
 		$(MAKE) -C include includes
@@ -56,6 +55,11 @@ all:		symlinks
 
 kernel:         $(KCONFIG)
 		$(MAKE) -C sys/$(MACHINE) all
+
+.PHONY:		tools
+
+tools:
+		$(MAKE) -C tools MACHINE=${MACHINE} install
 
 fs:		$(FSIMG)
 
