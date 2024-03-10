@@ -61,7 +61,7 @@ static long
 tzdecode(codep)
 char *	codep;
 {
-	register int	i;
+	int	i;
 	register long	result;
 
 	result = 0;
@@ -76,10 +76,10 @@ int	argc;
 char *	argv[];
 {
 	register FILE *	fp;
-	register int	i, j, c;
-	register int	vflag;
-	register char *	cutoff;
-	register int	cutyear = 0;
+	int	i, j, c;
+	int	vflag;
+	char *	cutoff;
+	int	cutyear = 0;
 	register long	cuttime;
 	time_t		now;
 	time_t		t;
@@ -111,7 +111,7 @@ char *	argv[];
 		if (strlen(argv[i]) > longest)
 			longest = strlen(argv[i]);
 	for (i = optind; i < argc; ++i) {
-		register char **	saveenv;
+		char **	saveenv;
 		char *			tzequals;
 		char *			fakeenv[2];
 

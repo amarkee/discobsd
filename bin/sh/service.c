@@ -20,8 +20,8 @@ initio(iop, save)
 	struct ionod    *iop;
 	int             save;
 {
-	register char   *ion;
-	register int    iof, fd;
+	char   *ion;
+	int    iof, fd;
 	int             ioufd;
 	short   lastfd;
 
@@ -104,7 +104,7 @@ char *
 getpath(s)
 	char    *s;
 {
-	register char   *path;
+	char   *path;
 
 	if (any('/', s) || any(('/' | QUOTE), s))
 	{
@@ -120,9 +120,9 @@ getpath(s)
 }
 
 pathopen(path, name)
-register char *path, *name;
+char *path, *name;
 {
-	register int    f;
+	int    f;
 
 	do
 	{
@@ -133,14 +133,14 @@ register char *path, *name;
 
 char *
 catpath(path, name)
-register char   *path;
+char   *path;
 char    *name;
 {
 	/*
 	 * leaves result on top of stack
 	 */
-	register char   *scanp = path;
-	register char   *argp = locstak();
+	char   *scanp = path;
+	char   *argp = locstak();
 
 	while (*scanp && *scanp != COLON)
 		*argp++ = *scanp++;
@@ -157,9 +157,9 @@ char    *name;
 
 char *
 nextpath(path)
-	register char   *path;
+	char   *path;
 {
-	register char   *scanp = path;
+	char   *scanp = path;
 
 	while (*scanp && *scanp != COLON)
 		scanp++;
@@ -176,9 +176,9 @@ static char     **xecenv;
 static char *
 execs(ap, t)
 char    *ap;
-register char   *t[];
+char   *t[];
 {
-	register char *p, *prefix;
+	char *p, *prefix;
 
 	prefix = catpath(ap, t[0]);
 	trim(p = curstak());
@@ -244,8 +244,8 @@ int     execa(at, pos)
 	char    *at[];
 	short pos;
 {
-	register char   *path;
-	register char   **t = at;
+	char   *path;
+	char   **t = at;
 	int             cnt;
 
 	if ((flags & noexec) == 0)
@@ -272,11 +272,11 @@ int     execa(at, pos)
 }
 
 gocsh( t, cp, xecenv )
-	register char **t, *cp, **xecenv;
+	char **t, *cp, **xecenv;
 {
 	char *newt[ 1000 ];
-	register char **p;
-	register int i;
+	char **p;
+	int i;
 
 	for( i=0; t[i] ; i++ )
 		newt[ i+1 ] = t[ i ];
@@ -296,7 +296,7 @@ static int      pwc;
 
 postclr()
 {
-	register int    *pw = pwlist;
+	int    *pw = pwlist;
 
 	while (pw <= &pwlist[pwc])
 		*pw++ = 0;
@@ -306,7 +306,7 @@ postclr()
 post(pcsid)
 int     pcsid;
 {
-	register int    *pw = pwlist;
+	int    *pw = pwlist;
 
 	if (pcsid)
 	{
@@ -330,13 +330,13 @@ int     i, bckg;
 	post(i);
 	while (pwc)
 	{
-		register int    p;
-		register int    sig;
+		int    p;
+		int    sig;
 		int             w_hi;
 		int     found = 0;
 
 		{
-			register int    *pw = pwlist;
+			int    *pw = pwlist;
 
 			p = wait(&w.w_status);
 			if (wasintr)
@@ -363,7 +363,7 @@ int     i, bckg;
 		{
 			if (bckg)
 			{
-				register int *pw = pwlist;
+				int *pw = pwlist;
 
 				while (pw <= &pwlist[ipwc] && i != *pw)
 					pw++;
@@ -417,10 +417,10 @@ BOOL            nosubst;
 trim(at)
 char    *at;
 {
-	register char   *p;
-	register char   *ptr;
-	register char   c;
-	register char   q = 0;
+	char   *p;
+	char   *ptr;
+	char   c;
+	char   q = 0;
 
 	if (p = at)
 	{
@@ -443,7 +443,7 @@ char *
 mactrim(s)
 char    *s;
 {
-	register char   *t = macro(s);
+	char   *t = macro(s);
 
 	trim(t);
 	return(t);
@@ -454,7 +454,7 @@ gsort(from, to)
 char    *from[], *to[];
 {
 	int     k, m, n;
-	register int    i, j;
+	int    i, j;
 
 	if ((n = to - from) <= 1)
 		return;
@@ -467,7 +467,7 @@ char    *from[], *to[];
 		{
 			for (i = j; i >= 0; i -= m)
 			{
-				register char **fromi;
+				char **fromi;
 
 				fromi = &from[i];
 				if (cf(fromi[m], fromi[0]) > 0)
@@ -491,8 +491,8 @@ char **
 scan(argn)
 int     argn;
 {
-	register struct argnod *argp = (struct argnod *)(Rcheat(gchain) & ~ARGMK);
-	register char **comargn, **comargm;
+	struct argnod *argp = (struct argnod *)(Rcheat(gchain) & ~ARGMK);
+	char **comargn, **comargm;
 
 	comargn = (char **)getstak(BYTESPERWORD * argn + BYTESPERWORD);
 	comargm = comargn += argn;
@@ -517,10 +517,10 @@ int     argn;
 
 static int
 split(s)                /* blank interpretation routine */
-register char   *s;
+char   *s;
 {
-	register char   *argp;
-	register int    c;
+	char   *argp;
+	int    c;
 	int             count = 0;
 
 	for (;;)
@@ -566,9 +566,9 @@ register char   *s;
 getarg(ac)
 struct comnod   *ac;
 {
-	register struct argnod  *argp;
-	register int            count = 0;
-	register struct comnod  *c;
+	struct argnod  *argp;
+	int            count = 0;
+	struct comnod  *c;
 
 	if (c = ac)
 	{
@@ -650,10 +650,10 @@ doacct()
  */
 
 compress(t)
-	register time_t t;
+	time_t t;
 {
-	register exp = 0;
-	register rund = 0;
+	int exp = 0;
+	int rund = 0;
 
 	while (t >= 8192)
 	{

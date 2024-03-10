@@ -443,11 +443,11 @@ void cl_hash(hsize)		/* reset code table */
 	register count_int *htab_p = htab+hsize;
 #else
 	register j;
-	register long k = hsize;
+	long k = hsize;
 	register count_int *htab_p;
 #endif
-	register long i;
-	register long m1 = -1;
+	long i;
+	long m1 = -1;
 
 #ifdef XENIX_16
     for(j=0; j<=8 && k>=0; j++,k-=8192) {
@@ -527,8 +527,8 @@ void output(code)
      * On the VAX, it is important to have the register declarations
      * in exactly the order given, or the asm will break.
      */
-    register int r_off = offset, bits= n_bits;
-    register char * bp = buf;
+    int r_off = offset, bits= n_bits;
+    char * bp = buf;
 
 #ifdef DEBUG
 	if (verbose)
@@ -639,7 +639,7 @@ void prratio(stream, num, den)
     FILE *stream;
     long int num, den;
 {
-    register int q;			/* Doesn't need to be long */
+    int q;			/* Doesn't need to be long */
 
     if (num > 214748L) {		/* 2147483647/10000 */
         q = num / (den / 10000L);
@@ -655,7 +655,7 @@ void prratio(stream, num, den)
 
 void cl_block ()		/* table clear for block compress */
 {
-    register long int rat;
+    long int rat;
 
     checkpoint = in_count + CHECK_GAP;
 #ifdef DEBUG
@@ -712,17 +712,17 @@ void cl_block ()		/* table clear for block compress */
  */
 void compress()
 {
-    register long fcode;
+    long fcode;
     register code_int i = 0;
-    register int c;
+    int c;
     register code_int ent;
 #ifdef XENIX_16
     register code_int disp;
 #else	/* Normal machine */
-    register int disp;
+    int disp;
 #endif
     register code_int hsize_reg;
-    register int hshift;
+    int hshift;
 
 #ifndef COMPATIBLE
     if (nomagic == 0) {
@@ -835,7 +835,7 @@ nomatch:
 void decompress()
 {
     register char_type *stackp;
-    register int finchar;
+    int finchar;
     register code_int code, oldcode, incode;
 
     /*
@@ -1001,7 +1001,7 @@ void copystat(ifname, ofname)
  * procedure needs no input table, but tracks the way the table was built.
  */
 int main (argc, argv)
-    register int argc;
+    int argc;
     char **argv;
 {
     int overwrite = 0;	/* Do not overwrite unless given -f flag */
@@ -1321,7 +1321,7 @@ getcode() {
     register code_int code;
     static int offset = 0, size = 0;
     static char_type buf[BITS];
-    register int r_off, bits;
+    int r_off, bits;
     register char_type *bp = buf;
 
     if (clear_flg > 0 || offset >= size || free_ent > maxcode) {
@@ -1386,7 +1386,7 @@ getcode() {
 #if 0
 char *
 rindex(s, c)		/* For those who don't have it in libc.a */
-register char *s, c;
+char *s, c;
 {
 	char *p;
 	for (p = NULL; *s; s++)
@@ -1430,14 +1430,14 @@ code_int sorttab[1<<BITS];	/* sorted pointers into htab */
 
 dump_tab()	/* dump string table */
 {
-    register int i, first;
+    int i, first;
     register ent;
 #define STACK_SIZE	15000
     int stack_top = STACK_SIZE;
     register c;
 
     if (do_decomp == 0) {	/* compressing */
-	register int flag = 1;
+	int flag = 1;
 
 	for(i=0; i<hsize; i++) {	/* build sort pointers */
 		if ((long)htabof(i) >= 0) {

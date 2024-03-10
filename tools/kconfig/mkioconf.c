@@ -47,7 +47,7 @@ static char    *wnum(int num);
 static void
 ctlr_ioconf(FILE *fp)
 {
-    register struct device *dp;
+    struct device *dp;
 
     for (dp = dtab; dp != 0; dp = dp->d_next) {
         if (dp->d_type == SERVICE)
@@ -80,7 +80,7 @@ ctlr_ioconf(FILE *fp)
 static void
 service_ioconf(FILE *fp)
 {
-    register struct device *dp;
+    struct device *dp;
 
     for (dp = dtab; dp != NULL; dp = dp->d_next) {
         if (dp->d_type == SERVICE)
@@ -108,7 +108,7 @@ wnum(int num)
 void
 pic32_ioconf(void)
 {
-    register struct device *dp, *mp;
+    struct device *dp, *mp;
     FILE *fp;
     int i;
 
@@ -170,7 +170,7 @@ pic32_ioconf(void)
 void
 stm32_ioconf(void)
 {
-    register struct device *dp, *mp;
+    struct device *dp, *mp;
     FILE *fp;
     int i;
 

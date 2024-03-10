@@ -27,9 +27,9 @@ typedef struct utmp UTMP;
 
 int
 logout(line)
-	register char *line;
+	char *line;
 {
-	register int fd;
+	int fd;
 	UTMP ut;
 	int rval;
 	off_t lseek();

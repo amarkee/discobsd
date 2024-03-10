@@ -21,10 +21,10 @@ int updlock;        /* lock for sync */
  * blocks and the superblock to disc.
  */
 void
-sync()
+sync(void)
 {
-    register struct mount *mp;
-    register struct fs *fs;
+    struct mount *mp;
+    struct fs *fs;
     int async;
 
     if (updlock)
@@ -60,13 +60,12 @@ sync()
  *  date with recent mods to the cooked device.
  */
 void
-syncip(ip)
-    struct inode *ip;
+syncip(struct inode *ip)
 {
-    register struct buf *bp;
-    register struct buf *lastbufp;
+    struct buf *bp;
+    struct buf *lastbufp;
     long lbn, lastlbn;
-    register int s;
+    int s;
     daddr_t blkno;
 
     lastlbn = howmany(ip->i_size, DEV_BSIZE);
@@ -102,9 +101,8 @@ syncip(ip)
  * Check that a specified block number is in range.
  */
 int
-badblock (fp, bn)
-    register struct fs *fp;
-    daddr_t bn;
+badblock (struct fs *fp,
+    daddr_t bn)
 {
     if (bn < fp->fs_isize || bn >= fp->fs_fsize) {
         printf("bad block %D, ",bn);
@@ -124,11 +122,10 @@ badblock (fp, bn)
  *  this "cannot happen"
  */
 struct fs *
-getfs(dev)
-    dev_t dev;
+getfs(dev_t dev)
 {
-    register struct mount *mp;
-    register struct fs *fs;
+    struct mount *mp;
+    struct fs *fs;
 
     for (mp = &mount[0]; mp < &mount[NMOUNT]; mp++) {
         if (mp->m_inodp == NULL || mp->m_dev != dev)

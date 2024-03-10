@@ -39,7 +39,7 @@
  */
 int
 getmntinfo(mntbufp, flags)
-	register struct statfs **mntbufp;
+	struct statfs **mntbufp;
 	int flags;
 {
 	static struct statfs *mntbuf;

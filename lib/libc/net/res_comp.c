@@ -31,7 +31,7 @@ dn_expand(msg, eomorig, comp_dn, exp_dn, length)
 	int length;
 {
 	register u_char *cp, *dn;
-	register int n, c;
+	int n, c;
 	u_char *eom;
 	int len = -1, checked = 0;
 
@@ -111,7 +111,7 @@ dn_comp(exp_dn, comp_dn, length, dnptrs, lastdnptr)
 	u_char **dnptrs, **lastdnptr;
 {
 	register u_char *cp, *dn;
-	register int c, l;
+	int c, l;
 	u_char **cpp, **lpp, *sp, *eob;
 	u_char *msg;
 
@@ -178,7 +178,7 @@ dn_skipname(comp_dn, eom)
 	u_char *comp_dn, *eom;
 {
 	register u_char *cp;
-	register int n;
+	int n;
 
 	cp = comp_dn;
 	while (cp < eom && (n = *cp++)) {
@@ -211,7 +211,7 @@ dn_find(exp_dn, msg, dnptrs, lastdnptr)
 	u_char **dnptrs, **lastdnptr;
 {
 	register u_char *dn, *cp, **cpp;
-	register int n;
+	int n;
 	u_char *sp;
 
 	for (cpp = dnptrs; cpp < lastdnptr; cpp++) {

@@ -41,7 +41,7 @@
 #include <sys/systm.h>
 
 void
-setuid()
+setuid(void)
 {
     struct a {
         uid_t uid;
@@ -62,7 +62,7 @@ setuid()
 }
 
 void
-seteuid()
+seteuid(void)
 {
     struct a {
         uid_t euid;
@@ -80,7 +80,7 @@ seteuid()
 }
 
 void
-setgid()
+setgid(void)
 {
     struct a {
         gid_t gid;
@@ -98,7 +98,7 @@ setgid()
 }
 
 void
-setegid()
+setegid(void)
 {
     struct a {
         gid_t egid;

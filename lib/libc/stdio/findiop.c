@@ -100,7 +100,7 @@ f_prealloc()
 
 void
 _fwalk(function)
-	register int (*function)();
+	int (*function)();
 {
 	register FILE **iov;
 	register FILE *fp;

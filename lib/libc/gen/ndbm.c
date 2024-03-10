@@ -52,10 +52,10 @@ static long
 dcalchash(item)
 	datum item;
 {
-	register int s, c, j;
-	register char *cp;
-	register long hashl;
-	register int hashi;
+	int s, c, j;
+	char *cp;
+	long hashl;
+	int hashi;
 
 	hashl = 0;
 	hashi = 0;
@@ -76,7 +76,7 @@ makdatum(buf, n)
 	int n;
 {
 	register short *sp;
-	register int t;
+	int t;
 	datum item;
 
 	sp = (short *)buf;
@@ -144,7 +144,7 @@ getbit(db)
 	register DBM *db;
 {
 	long bn, b;
-	register int i, n;
+	int i, n;
 
 	if (db->dbm_bitno > db->dbm_maxbno)
 		return (0);
@@ -208,7 +208,7 @@ finddatum(buf, item)
 	datum item;
 {
 	register short *sp;
-	register int i, n, j;
+	int i, n, j;
 
 	sp = (short *)buf;
 	n = PBLKSIZ;
@@ -227,7 +227,7 @@ dbm_fetch(db, key)
 	register DBM *db;
 	datum key;
 {
-	register int i;
+	int i;
 	datum item;
 
 	if (dbm_error(db))
@@ -253,7 +253,7 @@ delitem(buf, n)
 	int n;
 {
 	register short *sp, *sp1;
-	register int i1, i2;
+	int i1, i2;
 
 	sp = (short *)buf;
 	i2 = sp[0];
@@ -282,7 +282,7 @@ dbm_delete(db, key)
 	register DBM *db;
 	datum key;
 {
-	register int i;
+	int i;
 
 	if (dbm_error(db))
 		return (-1);
@@ -310,7 +310,7 @@ setbit(db)
 	register DBM *db;
 {
 	long bn, b;
-	register int i, n;
+	int i, n;
 
 	if (db->dbm_bitno > db->dbm_maxbno)
 		db->dbm_maxbno = db->dbm_bitno;
@@ -340,7 +340,7 @@ additem(buf, item, item1)
 	datum item, item1;
 {
 	register short *sp;
-	register int i1, i2;
+	int i1, i2;
 
 	sp = (short *)buf;
 	i1 = PBLKSIZ;
@@ -364,7 +364,7 @@ dbm_store(db, key, dat, replace)
 	datum key, dat;
 	int replace;
 {
-	register int i;
+	int i;
 	datum item, item1;
 	char ovfbuf[PBLKSIZ];
 

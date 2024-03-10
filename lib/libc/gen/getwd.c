@@ -23,10 +23,10 @@ static int pathsize;			/* pathname length */
  */
 static char *
 prepend(dirname, pathname)
-	register char *dirname;
-	register char *pathname;
+	char *dirname;
+	char *pathname;
 {
-	register int i;			/* directory name size counter */
+	int i;			/* directory name size counter */
 
 	for (i = 0; *dirname != '\0'; i++, dirname++)
 		continue;

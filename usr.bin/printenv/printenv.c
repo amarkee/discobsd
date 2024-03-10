@@ -26,7 +26,7 @@ int main(argc, argv)
     int argc;
     char *argv[];
 {
-    register char **ep;
+    char **ep;
     int found = 0;
 
     if (! environ)
@@ -35,7 +35,7 @@ int main(argc, argv)
     argc--, argv++;
     for (ep = environ; *ep; ep++) {
         if (argc == 0 || prefix(argv[0], *ep)) {
-            register char *cp = *ep;
+            char *cp = *ep;
 
             found++;
             if (argc) {

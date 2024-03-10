@@ -942,8 +942,7 @@ int sdioctl(dev_t dev, u_int cmd, caddr_t addr, int flag)
  * Return true if found and initialized ok.
  */
 static int
-sd_probe(config)
-    struct conf_device *config;
+sd_probe(struct conf_device *config)
 {
     int unit = config->dev_unit;
     int cs = config->dev_pins[0];

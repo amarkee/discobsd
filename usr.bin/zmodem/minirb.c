@@ -88,7 +88,7 @@ et_tu:
 }
 
 wcrx() {
- register int sectnum, sectcurr, sendchar, cblklen;
+ int sectnum, sectcurr, sendchar, cblklen;
 
  sectnum=0; sendchar=NAK;
  for (;;) {
@@ -111,7 +111,7 @@ wcrx() {
 }
 
 wcgetsec(rxbuf, maxtime) char *rxbuf; int maxtime; {
- register checksum, wcj, firstch; register char *p; int sectcurr, errors;
+ register checksum, wcj, firstch; char *p; int sectcurr, errors;
  for (errors=0; errors<RETRYMAX; errors++) {
   if ((firstch=readline(maxtime))==STX) { Blklen=1024; goto get2; }
   if (firstch==SOH) {
@@ -154,7 +154,7 @@ purgeline() { Lleft = 0; lseek(0, 0L, 2); }
 
 
 procheader(name) char *name; {
- register char *p;
+ char *p;
 
  Bytesleft = 2000000000L; p = name + 1 + strlen(name);
  if (*p) sscanf(p, "%ld", &Bytesleft);

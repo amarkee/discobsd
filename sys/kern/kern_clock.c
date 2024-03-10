@@ -30,11 +30,10 @@ long cp_time[CPUSTATES];     /* number of ticks spent in each cpu state */
  */
 /*ARGSUSED*/
 void
-gatherstats(pc, ps)
-    caddr_t pc;
-    int ps;
+gatherstats(caddr_t pc,
+    int ps)
 {
-    register int cpstate;
+    int cpstate;
 
     /*
      * Determine what state the cpu is in.
@@ -77,15 +76,14 @@ gatherstats(pc, ps)
  * Run periodic events from timeout queue.
  */
 void
-softclock(pc, ps)
-    caddr_t pc;
-    int ps;
+softclock(caddr_t pc,
+    int ps)
 {
     for (;;) {
-        register struct callout *p1;
-        register caddr_t arg;
+        struct callout *p1;
+        caddr_t arg;
         register void (*func) (caddr_t);
-        register int s;
+        int s;
 
         s = splhigh();
         if ((p1 = calltodo.c_next) == 0 || p1->c_time > 0) {
@@ -105,7 +103,7 @@ softclock(pc, ps)
      * a profiling tick.
      */
     if (USERMODE(ps)) {
-        register struct proc *p = u.u_procp;
+        struct proc *p = u.u_procp;
 
         if (u.u_prof.pr_scale)
             addupc(pc, &u.u_prof, 1);
@@ -135,13 +133,12 @@ softclock(pc, ps)
  *  profile
  */
 void
-hardclock(pc, ps)
-    caddr_t pc;
-    int ps;
+hardclock(caddr_t pc,
+    int ps)
 {
-    register struct callout *p1;
-    register struct proc *p;
-    register int needsoft = 0;
+    struct callout *p1;
+    struct proc *p;
+    int needsoft = 0;
 
     /*
      * Update real-time timeout queue.
@@ -252,13 +249,12 @@ hardclock(pc, ps)
  * Arrange that (*fun)(arg) is called in t/hz seconds.
  */
 void
-timeout (fun, arg, t)
-    void (*fun) (caddr_t);
-    caddr_t arg;
-    register int t;
+timeout (void (*fun) (caddr_t),
+    caddr_t arg,
+    int t)
 {
-    register struct callout *p1, *p2, *pnew;
-    register int s = splclock();
+    struct callout *p1, *p2, *pnew;
+    int s = splclock();
 
     if (t <= 0)
         t = 1;
@@ -284,12 +280,11 @@ timeout (fun, arg, t)
  * from the callout structure.
  */
 void
-untimeout (fun, arg)
-    void (*fun) (caddr_t);
-    caddr_t arg;
+untimeout ( void (*fun) (caddr_t),
+    caddr_t arg)
 {
-    register struct callout *p1, *p2;
-    register int s;
+    struct callout *p1, *p2;
+    int s;
 
     s = splclock();
     for (p1 = &calltodo; (p2 = p1->c_next) != 0; p1 = p2) {
@@ -306,15 +301,15 @@ untimeout (fun, arg)
 }
 
 void
-profil()
+profil(void)
 {
-    register struct a {
+    struct a {
         unsigned *bufbase;
         unsigned bufsize;
         unsigned pcoffset;
         unsigned pcscale;
     } *uap = (struct a*) u.u_arg;
-    register struct uprof *upp = &u.u_prof;
+    struct uprof *upp = &u.u_prof;
 
     upp->pr_base = uap->bufbase;
     upp->pr_size = uap->bufsize;
@@ -328,12 +323,11 @@ profil()
  * absolute time.
  */
 int
-hzto(tv)
-    register struct timeval *tv;
+hzto(struct timeval *tv)
 {
-    register long ticks;
-    register long sec;
-    register int s = splhigh();
+    long ticks;
+    long sec;
+    int s = splhigh();
 
     /*
      * If number of milliseconds will fit in 32 bit arithmetic,
@@ -365,7 +359,7 @@ hzto(tv)
  * Initialize callouts.
  */
 void
-coutinit()
+coutinit(void)
 {
     int i;
 

@@ -11,7 +11,7 @@ fputs(s, iop)
 	register const char *s;
 	register FILE *iop;
 {
-	register int r = 0, c;
+	int r = 0, c;
 	int unbuffered;
 
 	unbuffered = iop->_flag & _IONBF;

@@ -200,7 +200,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-    register int a;
+    int a;
     extern char end[1];
     char *ep;
     char *arg;
@@ -322,9 +322,9 @@ char **argv;
 void
 sort()
 {
-    register char *cp;
-    register char **lp;
-    register int lines, text, len;
+    char *cp;
+    char **lp;
+    int lines, text, len;
     int done = 0;
     int i = 0;
     char *f;
@@ -404,8 +404,8 @@ merge(a,b)
 int a, b;
 {
     struct  merg    *p;
-    register char   *cp, *dp;
-    register int     i;
+    char   *cp, *dp;
+    int     i;
     struct merg **ip, *jp;
     char    *f;
     int j;
@@ -503,7 +503,7 @@ void
 disorder(s,t)
 char *s, *t;
 {
-    register char *u;
+    char *u;
     for(u=t; *u!='\n';u++) ;
     *u = 0;
     diag(s,t);
@@ -513,7 +513,7 @@ char *s, *t;
 void
 newfile()
 {
-    register char *f;
+    char *f;
 
     f = setfil(nfiles);
     if((os=fopen(f, "w")) == NULL) {
@@ -553,7 +553,7 @@ oldfile()
 void
 safeoutfil()
 {
-    register int i;
+    int i;
     struct stat obuf,ibuf;
 
     if(!mflg||outfil==0)
@@ -591,7 +591,7 @@ void
 term(sig)
 int sig;
 {
-    register int i;
+    int i;
 
     signal(SIGINT, SIG_IGN);
     signal(SIGHUP, SIG_IGN);
@@ -608,13 +608,13 @@ int
 cmp(i, j)
 char *i, *j;
 {
-    register char *pa, *pb;
+    char *pa, *pb;
     char *skip();
     char *code, *ignore;
     int a, b;
     int k;
     char *la, *lb;
-    register int sa;
+    int sa;
     int sb;
     char *ipa, *ipb, *jpa, *jpb;
     struct field *fp;
@@ -709,7 +709,7 @@ loop:
 
 int
 cmpa(pa, pb)
-register char *pa, *pb;
+char *pa, *pb;
 {
     while(*pa == *pb) {
         if(*pa++ == '\n')
@@ -730,8 +730,8 @@ struct field *fp;
 char *pp;
 int j;
 {
-    register int i;
-    register char *p;
+    int i;
+    char *p;
 
     p = pp;
     if( (i=fp->m[j]) < 0)
@@ -768,7 +768,7 @@ ret:
 
 char *
 eol(p)
-register char *p;
+char *p;
 {
     while(*p != '\n') p++;
     return(p);
@@ -777,8 +777,8 @@ register char *p;
 void
 copyproto()
 {
-    register int i;
-    register int *p, *q;
+    int i;
+    int *p, *q;
 
     p = (int *)&proto;
     q = (int *)&fields[nfields];
@@ -791,8 +791,8 @@ field(s,k)
 char *s;
 int k;
 {
-    register struct field *p;
-    register int d;
+    struct field *p;
+    int d;
     p = &fields[nfields];
     d = 0;
     for(; *s!=0; s++) {
@@ -855,7 +855,7 @@ number(ppa)
 char **ppa;
 {
     int n;
-    register char *pa;
+    char *pa;
     pa = *ppa;
     n = 0;
     while(isdigit(*pa)) {
@@ -872,7 +872,7 @@ void
 qusort(a,l)
 char **a, **l;
 {
-    register char **i, **j;
+    char **i, **j;
     char **k;
     char **lp, **hp;
     int c;

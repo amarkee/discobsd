@@ -18,10 +18,10 @@
 static int
 _gettemp(as, doopen)
 	char	*as;
-	register int	*doopen;
+	int	*doopen;
 {
 	extern int	errno;
-	register char	*start, *trv;
+	char	*start, *trv;
 	struct stat	sbuf;
 	u_int	pid;
 

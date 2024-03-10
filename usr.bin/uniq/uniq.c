@@ -72,9 +72,9 @@ char *argv[];
 
 int
 gline(buf)
-register char buf[];
+char buf[];
 {
-    register int c;
+    int c;
 
     while((c = getchar()) != '\n') {
         if(c == EOF)
@@ -87,7 +87,7 @@ register char buf[];
 
 void
 pline(buf)
-register char buf[];
+char buf[];
 {
     switch(mode) {
 
@@ -112,9 +112,9 @@ register char buf[];
 
 int
 equal(b1, b2)
-register char b1[], b2[];
+char b1[], b2[];
 {
-    register char c;
+    char c;
 
     b1 = skip(b1);
     b2 = skip(b2);
@@ -128,9 +128,9 @@ register char b1[], b2[];
 
 char *
 skip(s)
-register char *s;
+char *s;
 {
-    register int nf, nl;
+    int nf, nl;
 
     nf = nl = 0;
     while(nf++ < fields) {

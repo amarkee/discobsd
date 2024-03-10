@@ -79,7 +79,7 @@ void cnputc(char c)
 /*
  * Receive a symbol from console terminal.
  */
-int cngetc()
+int cngetc(void)
 {
     if (cdevsw[CONS_MAJOR].r_read) {
         dev_t dev = makedev(CONS_MAJOR, CONS_MINOR);

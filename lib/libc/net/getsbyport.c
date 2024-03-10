@@ -17,7 +17,7 @@ getservbyport(port, proto)
 	int port;
 	char *proto;
 {
-	register struct servent *p;
+	struct servent *p;
 
 	setservent(_serv_stayopen);
 	while (p = getservent()) {

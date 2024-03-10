@@ -8,7 +8,7 @@
 
 int
 putchar(c)
-        register int c;
+        int c;
 {
 	return putc(c, stdout);
 }

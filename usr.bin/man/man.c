@@ -69,7 +69,7 @@ static void
 cat(fname)
 	char *fname;
 {
-	register int fd, n;
+	int fd, n;
 	char buf[BUFSIZ];
 
 	if (!(fd = open(fname, O_RDONLY, 0))) {
@@ -134,9 +134,9 @@ manual(section, name)
 	MANDIR *section;
 	char *name;
 {
-	register char *beg, *end;
+	char *beg, *end;
 	register MANDIR *dp;
-	register int res;
+	int res;
 	char fname[MAXPATHLEN + 1], *index();
 
 	if (strlen(name) > MAXNAMLEN-2)	/* leave room for the ".0" */
@@ -236,7 +236,7 @@ static void
 man(argv)
 	char **argv;
 {
-	register char *p;
+	char *p;
 	MANDIR *section;
 	int res;
 
@@ -320,9 +320,9 @@ man(argv)
 static void
 jump(argv, flag, name)
 	char **argv, *name;
-	register char *flag;
+	char *flag;
 {
-	register char **arg;
+	char **arg;
 
 	argv[0] = name;
 	for (arg = argv + 1; *arg; ++arg)
@@ -363,7 +363,7 @@ usage()
 int
 main(argc, argv)
 	int argc;
-	register char **argv;
+	char **argv;
 {
 	extern char *optarg;
 	extern int optind;
@@ -411,7 +411,7 @@ main(argc, argv)
 		if (!isatty(1))
 			how |= CAT;
 		else if (pager = getenv("PAGER")) {
-			register char *p;
+			char *p;
 
 			/*
 			 * if the user uses "more", we make it "more -s"

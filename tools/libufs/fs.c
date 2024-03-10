@@ -306,7 +306,7 @@ void fsclose(struct filesystem *f)
 
 void bfree(struct filesystem *f, int64_t bno)
 {
-    register int i;
+    int i;
     struct fblk *fb = malloc(DEV_BSIZE);
 
     if (bno != 0)

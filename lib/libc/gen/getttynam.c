@@ -10,7 +10,7 @@ struct ttyent *
 getttynam(tty)
 	const char *tty;
 {
-	register struct ttyent *t;
+	struct ttyent *t;
 
 	setttyent();
 	while ((t = getttyent())) {

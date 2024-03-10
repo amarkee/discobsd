@@ -41,7 +41,7 @@ system(command)
 	char *command;
 {
 	union wait pstat;
-	register int pid;
+	int pid;
 	sigset_t omask, nmask;
 	sig_t intsave, quitsave;
 

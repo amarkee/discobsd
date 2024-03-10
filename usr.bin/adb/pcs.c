@@ -7,7 +7,7 @@ void
 subpcs(modif)
     int modif;
 {
-    register int check;
+    int check;
     int execsig, runmode;
     register BKPTR  bkptr;
     char *comptr;

@@ -41,11 +41,11 @@ endttyent()
  */
 static char *
 skip(p)
-	register char *p;
+	char *p;
 {
-	register char *t = p;
-	register int c;
-	register int q = 0;
+	char *t = p;
+	int c;
+	int q = 0;
 
 	for (; (c = *p) != '\0'; p++) {
 		if (c == '"') {
@@ -76,7 +76,7 @@ skip(p)
 
 static char *
 value(p)
-	register char *p;
+	char *p;
 {
 	if ((p = index(p,'=')) == 0)
 		return(NULL);
@@ -87,8 +87,8 @@ value(p)
 struct ttyent *
 getttyent()
 {
-	register char *p;
-	register int c;
+	char *p;
+	int c;
 
 	if (tf == NULL) {
 		if ((tf = fopen(TTYFILE, "r")) == NULL)

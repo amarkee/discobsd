@@ -159,9 +159,9 @@ common:			if (set->cmd2 & CMD2_CLR) {
 
 void *
 setmode(p)
-	register char *p;
+	char *p;
 {
-	register int perm, who;
+	int perm, who;
 	char op;
 	BITCMD *set, *saveset, *endset;
 #ifdef	notnow
@@ -336,8 +336,8 @@ apply:		if (!*p)
 static BITCMD *
 addcmd(set, op, who, oparg, mask)
 	BITCMD *set;
-	register int oparg, who;
-	register int op;
+	int oparg, who;
+	int op;
 	u_int mask;
 {
 	switch (op) {
@@ -407,7 +407,7 @@ compress_mode(set)
 	register BITCMD *set;
 {
 	register BITCMD *nset;
-	register int setbits, clrbits, Xbits, op;
+	int setbits, clrbits, Xbits, op;
 
 	for (nset = set;;) {
 		/* Copy over any 'u', 'g' and 'o' commands. */

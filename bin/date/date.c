@@ -40,11 +40,10 @@ static struct utmp wtmp[2] = { { "|", "", "", 0 }, { "{", "", "", 0 } };
  *	convert user's time into number of seconds
  */
 static int
-gtime(ap)
-register char *ap; /* user argument */
+gtime(char *ap)/* user argument */
 {
-	register int year, month;
-	register char *C; /* pointer into time argument */
+	int year, month;
+	char *C; /* pointer into time argument */
 	struct tm *L;
 	int day, hour, mins, secs;
 

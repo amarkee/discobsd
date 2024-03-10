@@ -69,7 +69,7 @@ main(argc, argv)
 	int argc;
 	char **argv;
 {
-	register char *argp;
+	char *argp;
 
 	ifdef1 = "FILE1"; ifdef2 = "FILE2";
 	status = 2;
@@ -204,9 +204,9 @@ main(argc, argv)
 
 char *
 savestr(cp)
-	register char *cp;
+	char *cp;
 {
-	register char *dp = malloc(strlen(cp)+1);
+	char *dp = malloc(strlen(cp)+1);
 
 	if (dp == 0) {
 		fprintf(stderr, "diff: ran out of memory\n");
@@ -244,7 +244,7 @@ char *
 talloc(n)
 	int n;
 {
-	register char *p;
+	char *p;
 
 	if ((p = malloc((unsigned)n)) != NULL)
 		return(p);
@@ -256,7 +256,7 @@ ralloc(p,n)
 	char *p;
 	int n;
 {
-	register char *q;
+	char *q;
 
 	if ((q = realloc(p, (unsigned)n)) == NULL)
 		noroom();

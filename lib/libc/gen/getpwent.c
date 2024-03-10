@@ -49,9 +49,9 @@ start_pw()
 static int
 scanpw()
 {
-	register char *cp;
+	char *cp;
 	char	*bp;
-	register int ch;
+	int ch;
 
 	for (;;) {
 		if (!(fgets(line, sizeof(line), _pw_fp)))
@@ -92,7 +92,7 @@ getpw()
 	off_t lseek();
 	long pos;
 	int fd, n;
-	register char *p;
+	char *p;
 
 	if (geteuid())
 		return;
@@ -121,7 +121,7 @@ bad:	(void)close(fd);
 struct passwd *
 getpwent()
 {
-	register int rval;
+	int rval;
 
 	if (!_pw_fp && !start_pw())
 		return((struct passwd *)NULL);
@@ -136,7 +136,7 @@ struct passwd *
 getpwnam(nam)
 	char *nam;
 {
-	register int rval;
+	int rval;
 
 	if (!start_pw())
 		return((struct passwd *)NULL);
@@ -158,7 +158,7 @@ struct passwd *
 getpwuid(uid)
 	int uid;
 {
-	register int rval;
+	int rval;
 
 	if (!start_pw())
 		return((struct passwd *)NULL);

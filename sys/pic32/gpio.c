@@ -95,14 +95,14 @@ u_int gpio_confmask [NGPIO];
 //#define PRINTDBG printf
 
 static void
-gpio_print (dev, buf)
-    dev_t dev;
-    char *buf;
+gpio_print (dev_t dev,
+    char *buf)
+    
 {
     u_int unit = minor(dev) & MINOR_UNIT;
-    register struct gpioreg *reg = unit + (struct gpioreg*) &TRISA;
-    register u_int mask, conf, tris;
-    register char c;
+    struct gpioreg *reg = unit + (struct gpioreg*) &TRISA;
+    u_int mask, conf, tris;
+    char c;
 
     conf = gpio_confmask[unit];
     tris = reg->tris;
@@ -137,14 +137,13 @@ gpio_print (dev, buf)
 }
 
 static void
-gpio_parse (dev, buf)
-    dev_t dev;
-    char *buf;
+gpio_parse (dev_t dev,
+    char *buf)
 {
     u_int unit = minor(dev) & MINOR_UNIT;
-    register struct gpioreg *reg = unit + (struct gpioreg*) &TRISA;
-    register u_int mask;
-    register char c;
+    struct gpioreg *reg = unit + (struct gpioreg*) &TRISA;
+    u_int mask;
+    char c;
 
     if (minor(dev) & MINOR_CONF) {
         /* /dev/confX device: port configuration mask */
@@ -192,7 +191,7 @@ gpio_parse (dev, buf)
 int
 gpioopen (dev_t dev, int flag, int mode)
 {
-    register u_int unit = minor(dev) & MINOR_UNIT;
+    u_int unit = minor(dev) & MINOR_UNIT;
 
     if (unit >= NGPIO)
         return ENXIO;
@@ -208,13 +207,12 @@ gpioclose (dev_t dev, int flag, int mode)
 }
 
 int
-gpioread (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+gpioread (dev_t dev,
+    struct uio *uio,
+    int flag)
 {
-    register struct iovec *iov;
-    register u_int cnt = NPINS + 1;
+    struct iovec *iov;
+    u_int cnt = NPINS + 1;
     char buf [20];
 
     /* I/o size should be large enough. */
@@ -240,13 +238,12 @@ gpioread (dev, uio, flag)
 }
 
 int
-gpiowrite (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+gpiowrite (dev_t dev,
+    struct uio *uio,
+    int flag)
 {
-    register struct iovec *iov = uio->uio_iov;
-    register u_int cnt = NPINS;
+    struct iovec *iov = uio->uio_iov;
+    u_int cnt = NPINS;
     char buf [20];
 
     /* I/o size should be large enough. */
@@ -269,9 +266,8 @@ gpiowrite (dev, uio, flag)
  * Duration in milliseconds is specified.
  */
 static void
-gpio_lol (msec, data)
-    u_int msec;
-    const short *data;
+gpio_lol (u_int msec,
+    const short *data)
 {
     /* Number of control pins for LoL Shield. */
     #define LOL_NPINS   12
@@ -391,8 +387,8 @@ gpio_lol (msec, data)
 int
 gpioioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
-    register u_int unit, mask, value;
-    register struct gpioreg *reg;
+    u_int unit, mask, value;
+    struct gpioreg *reg;
 
     PRINTDBG ("gpioioctl (cmd=%08x, addr=%08x, flag=%d)\n", cmd, addr, flag);
     unit = cmd & 0xff;
@@ -486,8 +482,7 @@ gpioioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
  * Return true if found and initialized ok.
  */
 static int
-gpioprobe(config)
-    struct conf_device *config;
+gpioprobe(struct conf_device *config)
 {
     int unit = config->dev_unit;
     int flags = config->dev_flags;

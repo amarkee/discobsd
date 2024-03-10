@@ -35,10 +35,10 @@
 
 char *
 strtok(s, delim)
-	register char *s;
+	char *s;
 	register const char *delim;
 {
-	register char *spanp;
+	char *spanp;
 	int c, sc;
 	char *tok;
 	static char *last;

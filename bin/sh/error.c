@@ -55,7 +55,7 @@ int     xno;
 void
 done()
 {
-	register char   *t;
+	char   *t;
 
 	if (t = trapcom[0])
 	{

@@ -51,7 +51,7 @@ res_send(buf, buflen, answer, anslen)
 	char *answer;
 	int anslen;
 {
-	register int n;
+	int n;
 	int retry, v_circuit, resplen, ns;
 	int gotsomewhere = 0, connected = 0;
 	u_short id, len;

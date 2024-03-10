@@ -149,7 +149,7 @@ char    tfname [] = "/tmp/ldaXXXXXX";
 unsigned int fgetword (f)
         register FILE *f;
 {
-        register unsigned int h;
+        unsigned int h;
 
         h = getc (f);
         h |= getc (f) << 8;
@@ -159,7 +159,7 @@ unsigned int fgetword (f)
 }
 
 void fputword (h, f)
-        register unsigned int h;
+        unsigned int h;
         register FILE *f;
 {
         putc (h, f);
@@ -170,7 +170,7 @@ void fputword (h, f)
 
 int fgethdr (text, h)
         register FILE *text;
-        register struct exec *h;
+        struct exec *h;
 {
         h->a_midmag   = fgetword (text);
         h->a_text    = fgetword (text);
@@ -184,7 +184,7 @@ int fgethdr (text, h)
 }
 
 void fputhdr (hdr, coutb)
-        register struct exec *hdr;
+        struct exec *hdr;
         register FILE *coutb;
 {
         fputword (hdr->a_magic, coutb);
@@ -202,7 +202,7 @@ void fputhdr (hdr, coutb)
  */
 void fgetrel (f, r)
         register FILE *f;
-        register struct reloc *r;
+        struct reloc *r;
 {
         r->flags = getc (f);
         if ((r->flags & RSMASK) == REXT) {
@@ -222,10 +222,10 @@ void fgetrel (f, r)
  * Return a written length.
  */
 unsigned fputrel (r, f)
-        register struct reloc *r;
+        struct reloc *r;
         register FILE *f;
 {
-        register unsigned nbytes = 1;
+        unsigned nbytes = 1;
 
         putc (r->flags, f);
         if ((r->flags & RSMASK) == REXT) {
@@ -270,9 +270,9 @@ void error (int n, const char *s, ...)
 
 int fgetsym (text, sym)
         register FILE *text;
-        register struct nlist *sym;
+        struct nlist *sym;
 {
-	register int c;
+	int c;
 
 	c = getc (text);
 	if (c <= 0)
@@ -290,10 +290,10 @@ int fgetsym (text, sym)
 }
 
 void fputsym (s, file)
-        register struct nlist *s;
+        struct nlist *s;
         register FILE *file;
 {
-	register int i;
+	int i;
 
 	putc (s->n_len, file);
 	putc (s->n_type, file);
@@ -307,11 +307,11 @@ void fputsym (s, file)
  */
 int fgetarhdr (fd, h)
         register FILE *fd;
-        register struct archdr *h;
+        struct archdr *h;
 {
 	struct ar_hdr hdr;
-	register int len, nr;
-	register char *p;
+	int len, nr;
+	char *p;
 	char buf[20];
 
 	/* Read arhive name.  Spaces should never happen. */
@@ -399,7 +399,7 @@ failed:                 free (h->ar_name);
 
 void freerantab ()
 {
-	register struct ranlib *p;
+	struct ranlib *p;
 
 	for (p=rantab; p<rantab+rancount; ++p)
 		free (p->ran_name);
@@ -407,9 +407,9 @@ void freerantab ()
 
 int fgetran (text, sym)
         register FILE *text;
-        register struct ranlib *sym;
+        struct ranlib *sym;
 {
-	register int c;
+	int c;
 
 	/* read struct ranlib from file */
 	/* 1 byte - length of name */
@@ -433,7 +433,7 @@ int fgetran (text, sym)
 
 void getrantab ()
 {
-	register struct ranlib *p;
+	struct ranlib *p;
 
 	for (p=rantab; p<rantab+RANTABSZ; ++p) {
 		if (! fgetran (text, p)) {
@@ -445,7 +445,7 @@ void getrantab ()
 }
 
 void ldrsym (sp, val, type)
-        register struct nlist *sp;
+        struct nlist *sp;
         unsigned val;
         int type;
 {
@@ -462,7 +462,7 @@ void ldrsym (sp, val, type)
 
 void tcreat (buf, tempflg)
         register FILE **buf;
-        register int tempflg;
+        int tempflg;
 {
 	*buf = fopen (tempflg ? tfname : ofilename, "w+");
 	if (! *buf)
@@ -490,10 +490,10 @@ int reltype (stype)
 }
 
 struct nlist *lookloc (lp, sn)
-        register struct local *lp;
-        register int sn;
+        struct local *lp;
+        int sn;
 {
-	register struct local *clp;
+	struct local *clp;
 
 	for (clp=local; clp<lp; clp++)
 		if (clp->locindex == sn)
@@ -509,8 +509,8 @@ struct nlist *lookloc (lp, sn)
 }
 
 void printrel (word, rel)
-        register unsigned word;
-        register struct reloc *rel;
+        unsigned word;
+        struct reloc *rel;
 {
 	printf ("%08x %02x ", word, rel->flags);
 
@@ -532,12 +532,12 @@ void printrel (word, rel)
  */
 unsigned relword (lp, word, rel, offset)
         struct local *lp;
-        register unsigned word;
-        register struct reloc *rel;
+        unsigned word;
+        struct reloc *rel;
         unsigned offset;
 {
-	register unsigned addr, delta;
-	register struct nlist *sp = 0;
+	unsigned addr, delta;
+	struct nlist *sp = 0;
 
 	if (trace > 2)
                 printrel (word, rel);
@@ -677,7 +677,7 @@ void relocate (lp, b1, b2, len, origin)
 unsigned copy_and_close (buf)
         register FILE *buf;
 {
-	register int c;
+	int c;
 	unsigned nbytes;
 
 	rewind (buf);
@@ -691,10 +691,10 @@ unsigned copy_and_close (buf)
 }
 
 int mkfsym (s, wflag)
-        register char *s;
+        char *s;
         int wflag;
 {
-	register char *p;
+	char *p;
 
 	if (sflag || xflag)
                 return (0);
@@ -717,7 +717,7 @@ int mkfsym (s, wflag)
 }
 
 int getfile (cp)
-        register char *cp;
+        char *cp;
 {
 	int c;
 	struct stat x;
@@ -762,9 +762,9 @@ int getfile (cp)
 }
 
 int enter (hp)
-        register struct nlist **hp;
+        struct nlist **hp;
 {
-	register struct nlist *sp;
+	struct nlist *sp;
 
 	if (*hp) {
 		lastsym = *hp;
@@ -812,7 +812,7 @@ void symreloc()
 unsigned hash_rot13 (s)
     register const char *s;
 {
-    register unsigned hash, c;
+    unsigned hash, c;
 
     hash = 0;
     while ((c = (unsigned char) *s++) != 0) {
@@ -825,8 +825,8 @@ unsigned hash_rot13 (s)
 struct nlist **lookup()
 {
 	int clash;
-	register char *cp, *cp1;
-	register struct nlist **hp;
+	char *cp, *cp1;
+	struct nlist **hp;
 
         hp = &hshtab[hash_rot13 (cursym.n_name) % NSYM + 2];
 	while (*hp != 0) {
@@ -878,7 +878,7 @@ int load1 (loc, libflg, nloc)
         unsigned int loc;
         int libflg, nloc;
 {
-	register struct nlist *sp;
+	struct nlist *sp;
 	int savindex, ndef, type, symlen, nsymbol;
 
 	readhdr (loc);
@@ -966,7 +966,7 @@ int load1 (loc, libflg, nloc)
 	 * Rip out the hash table entries and reset the symbol table.
 	 */
 	while (symindex > savindex) {
-		register struct nlist **p;
+		struct nlist **p;
 
 		p = symhash[--symindex];
 		free ((*p)->n_name);
@@ -976,7 +976,7 @@ int load1 (loc, libflg, nloc)
 }
 
 void addlibp (nloc)
-        register unsigned nloc;
+        unsigned nloc;
 {
         *libp++ = nloc;
 	if (libp >= &liblist[NLIBS])
@@ -984,7 +984,7 @@ void addlibp (nloc)
 }
 
 int step (nloc)
-        register unsigned nloc;
+        unsigned nloc;
 {
 	fseek (text, nloc, 0);
 	if (! fgetarhdr (text, &archdr)) {
@@ -1001,7 +1001,7 @@ int step (nloc)
 
 int ldrand ()
 {
-	register struct ranlib *p;
+	struct ranlib *p;
 	struct nlist **pp;
 	unsigned *oldp = libp;
 
@@ -1021,8 +1021,8 @@ int ldrand ()
 void load1lib (off0)
         unsigned off0;
 {
-        register unsigned offset;
-        register unsigned *oldp;
+        unsigned offset;
+        unsigned *oldp;
 
         /* repeat while any symbols found */
         do {
@@ -1038,7 +1038,7 @@ void load1lib (off0)
  * scan file to find defined symbols
  */
 void load1arg (cp)
-        register char *cp;
+        char *cp;
 {
 	switch (getfile (cp)) {
 	case 0:                 /* regular file */
@@ -1067,8 +1067,8 @@ void pass1 (argc, argv)
         int argc;
         char **argv;
 {
-	register int c, i;
-	register char *ap, **p;
+	int c, i;
+	char *ap, **p;
 	char save;
 
 	/* scan files once to find symdefs */
@@ -1174,8 +1174,8 @@ void pass1 (argc, argv)
 
 void middle()
 {
-	register struct nlist *sp, *symp;
-	register unsigned t, cmsize;
+	struct nlist *sp, *symp;
+	unsigned t, cmsize;
 	int nund;
 	unsigned cmorigin;
 
@@ -1312,9 +1312,9 @@ void setupout ()
 void load2 (loc)
         unsigned loc;
 {
-	register struct nlist *sp;
-	register struct local *lp;
-	register int symno;
+	struct nlist *sp;
+	struct local *lp;
+	int symno;
 	int type;
 	unsigned count;
 
@@ -1400,9 +1400,9 @@ void load2 (loc)
 }
 
 void load2arg (arname)
-        register char *arname;
+        char *arname;
 {
-	register unsigned *lp;
+	unsigned *lp;
 
 	if (getfile (arname) == 0) {
 		if (trace || verbose)
@@ -1430,8 +1430,8 @@ void pass2 (argc, argv)
         int argc;
         char **argv;
 {
-	register int c, i;
-	register char *ap, **p;
+	int c, i;
+	char *ap, **p;
 
 	p = argv + 1;
 	libp = liblist;
@@ -1466,9 +1466,9 @@ void pass2 (argc, argv)
 
 void finishout ()
 {
-	register struct nlist *p;
+	struct nlist *p;
         unsigned rtsize = 0, rdsize = 0;
-        register unsigned n;
+        unsigned n;
 
 	n = copy_and_close (toutb);
         while (n++ < tsize) {

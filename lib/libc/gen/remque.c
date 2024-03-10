@@ -16,7 +16,7 @@ struct vaxque {		/* queue format expected by VAX queue instructions */
 };
 
 remque(e)
-	register struct vaxque *e;
+	struct vaxque *e;
 {
 	e->vq_prev->vq_next = e->vq_next;
 	e->vq_next->vq_prev = e->vq_prev;

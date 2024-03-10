@@ -6,12 +6,12 @@
 
 char *
 strncpy(s1, s2, n)
-	register char *s1;
+	char *s1;
 	register const char *s2;
 	size_t n;
 {
 	size_t i;
-	register char *os1;
+	char *os1;
 
 	os1 = s1;
 	for (i = 0; i < n; i++)

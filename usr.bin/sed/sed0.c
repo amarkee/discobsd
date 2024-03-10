@@ -195,7 +195,7 @@ char	*argv[];
 void
 fcomp()
 {
-	register char	*p, *op, *tp;
+	char	*p, *op, *tp;
 	char	*address();
 	union reptr	*pt, *pt1;
 	int	i;
@@ -649,7 +649,7 @@ char *
 compsub(rhsbuf)
 char	*rhsbuf;
 {
-	register char	*p, *q;
+	char	*p, *q;
 
 	p = rhsbuf;
 	q = cp;
@@ -677,8 +677,8 @@ char *
 compile(expbuf)
 char	*expbuf;
 {
-	register int c;
-	register char *ep, *sp;
+	int c;
+	char *ep, *sp;
 	char	neg;
 	char *lastep, *cstart;
 	int cclcnt;
@@ -840,8 +840,8 @@ int
 rline(lbuf)
 char	*lbuf;
 {
-	register char	*p, *q;
-	register int	t;
+	char	*p, *q;
+	int	t;
 	static char	*saveq;
 
 	p = lbuf - 1;
@@ -908,7 +908,7 @@ char *
 address(expbuf)
 char	*expbuf;
 {
-	register char	*rcp;
+	char	*rcp;
 	long	lno;
 
 	if(*cp == '$') {
@@ -949,7 +949,7 @@ int
 cmp(a, b)
 char	*a,*b;
 {
-	register char	*ra, *rb;
+	char	*ra, *rb;
 
 	ra = a - 1;
 	rb = b - 1;
@@ -963,7 +963,7 @@ char *
 text(textbuf)
 char	*textbuf;
 {
-	register char	*p, *q;
+	char	*p, *q;
 
 	p = textbuf;
 	q = cp;
@@ -1028,7 +1028,7 @@ char *
 ycomp(expbuf)
 char	*expbuf;
 {
-	register char	c, *ep, *tsp;
+	char	c, *ep, *tsp;
 	char	*sp;
 
 	ep = expbuf;

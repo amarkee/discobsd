@@ -17,11 +17,11 @@
  */
 u_long
 inet_addr(cp)
-	register char *cp;
+	char *cp;
 {
 	register u_long val, base;
-	register u_int n; /* can't switch on longs - should be an int anyway */
-	register char c;
+	u_int n; /* can't switch on longs - should be an int anyway */
+	char c;
 	u_long parts[4], *pp = parts;
 
 again:

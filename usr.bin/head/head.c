@@ -22,9 +22,9 @@ main(Argc, argv)
     int Argc;
     char *argv[];
 {
-    register int argc;
+    int argc;
     char *name;
-    register char *argp;
+    char *argp;
     static int around;
 
     Argc--, argv++;
@@ -58,9 +58,9 @@ main(Argc, argv)
 
 void
 copyout(cnt)
-    register int cnt;
+    int cnt;
 {
-    register int c;
+    int c;
     char lbuf[BUFSIZ];
 
     while (cnt > 0 && fgets(lbuf, sizeof lbuf, stdin) != 0) {
@@ -72,9 +72,9 @@ copyout(cnt)
 
 int
 getnum(cp)
-    register char *cp;
+    char *cp;
 {
-    register int i;
+    int i;
 
     for (i = 0; *cp >= '0' && *cp <= '9'; cp++)
         i *= 10, i += *cp - '0';

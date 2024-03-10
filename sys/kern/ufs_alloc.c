@@ -25,12 +25,11 @@ typedef struct fblk *FBLKP;
  * obtain NICFREE more...
  */
 struct buf *
-balloc(ip, flags)
-    struct inode *ip;
-    int flags;
+balloc(struct inode *ip,
+    int flags)
 {
-    register struct fs *fs;
-    register struct buf *bp;
+    struct fs *fs;
+    struct buf *bp;
     int async;
     daddr_t bno;
 
@@ -54,7 +53,7 @@ balloc(ip, flags)
         fs->fs_flock++;
         bp = bread(ip->i_dev, bno);
         if (((bp->b_flags&B_ERROR) == 0) && (bp->b_resid==0)) {
-            register struct fblk *fbp;
+            struct fblk *fbp;
 
             fbp = (FBLKP) bp->b_addr;
             *((FBLKP)&fs->fs_nfree) = *fbp;
@@ -71,7 +70,7 @@ balloc(ip, flags)
         fs->fs_fmod = 0;
         fs->fs_time = time.tv_sec;
         {
-            register struct fs *fps;
+            struct fs *fps;
 
             fps = (struct fs*) bp->b_addr;
             *fps = *fs;
@@ -104,7 +103,7 @@ nospace:
      */
     uprintf("\n%s: write failed, file system full\n", fs->fs_fsmnt);
     {
-        register int i;
+        int i;
 
         for (i = 0; i < 5; i++)
             sleep((caddr_t)&lbolt, PRIBIO);
@@ -122,19 +121,17 @@ nospace:
  * is instituted to pick up NICINOD more.
  */
 struct inode *
-ialloc (pip)
-    struct inode *pip;
+ialloc (struct inode *pip)
 {
-    register struct fs *fs;
-    register struct buf *bp;
-    register struct inode *ip;
+    struct fs *fs;
+    struct buf *bp;
+    struct inode *ip;
     int i;
     struct dinode *dp;
     ino_t ino;
     daddr_t adr;
     ino_t inobas;
     int first;
-    struct inode *ifind();
     char    *emsg = "no inodes free";
 
     fs = pip->i_fs;
@@ -224,12 +221,11 @@ fromtop:
  * specified device.
  */
 void
-free (ip, bno)
-    struct inode *ip;
-    daddr_t bno;
+free (struct inode *ip,
+    daddr_t bno)
 {
-    register struct fs *fs;
-    register struct buf *bp;
+    struct fs *fs;
+    struct buf *bp;
     struct fblk *fbp;
 
     fs = ip->i_fs;
@@ -268,11 +264,10 @@ free (ip, bno)
  * stores up to NICINOD I nodes in the super block and throws away any more.
  */
 void
-ifree (ip, ino)
-    struct inode *ip;
-    ino_t ino;
+ifree (struct inode *ip,
+    ino_t ino)
 {
-    register struct fs *fs;
+    struct fs *fs;
 
     fs = ip->i_fs;
     fs->fs_tinode++;
@@ -294,9 +289,8 @@ ifree (ip, ino)
  *  fs: error message
  */
 void
-fserr (fp, cp)
-    struct fs *fp;
-    char *cp;
+fserr (struct fs *fp,
+    char *cp)
 {
     printf ("%s: %s\n", fp->fs_fsmnt, cp);
 }

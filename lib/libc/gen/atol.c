@@ -1,9 +1,9 @@
 long
 atol(p)
-	register char *p;
+	char *p;
 {
 	long n;
-	register int f;
+	int f;
 
 	n = 0;
 	f = 0;

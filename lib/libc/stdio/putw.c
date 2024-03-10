@@ -5,8 +5,8 @@ putw(w, iop)
 	int w;
         register FILE *iop;
 {
-	register char *p;
-	register int i;
+	char *p;
+	int i;
 
 	p = (char *)&w;
 	for (i=sizeof(int); --i>=0;)
@@ -20,8 +20,8 @@ putlw(w, iop)
         long w;
         register FILE *iop;
 {
-	register char *p;
-	register int i;
+	char *p;
+	int i;
 
 	p = (char *)&w;
 	for (i=sizeof(long); --i>=0;)

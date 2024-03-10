@@ -23,10 +23,10 @@ void
 gettable(name, buf, area)
 	char *name, *buf, *area;
 {
-	register struct gettystrs *sp;
-	register struct gettynums *np;
-	register struct gettyflags *fp;
-	register int n;
+	struct gettystrs *sp;
+	struct gettynums *np;
+	struct gettyflags *fp;
+	int n;
 
 	hopcount = 0;		/* new lookup, start fresh */
 	if (getent(buf, name) != 1)
@@ -57,9 +57,9 @@ gettable(name, buf, area)
 void
 gendefaults()
 {
-	register struct gettystrs *sp;
-	register struct gettynums *np;
-	register struct gettyflags *fp;
+	struct gettystrs *sp;
+	struct gettynums *np;
+	struct gettyflags *fp;
 
 	for (sp = gettystrs; sp->field; sp++)
 		if (sp->value)
@@ -77,9 +77,9 @@ gendefaults()
 void
 setdefaults()
 {
-	register struct gettystrs *sp;
-	register struct gettynums *np;
-	register struct gettyflags *fp;
+	struct gettystrs *sp;
+	struct gettynums *np;
+	struct gettyflags *fp;
 
 	for (sp = gettystrs; sp->field; sp++)
 		if (!sp->value)
@@ -110,8 +110,8 @@ charvars[] = {
 void
 setchars()
 {
-	register int i;
-	register char *p;
+	int i;
+	char *p;
 
 	for (i = 0; charnames[i]; i++) {
 		p = *charnames[i];
@@ -126,7 +126,7 @@ long
 setflags(n)
 	int n;
 {
-	register long f;
+	long f;
 
 	switch (n) {
 	case 0:
@@ -189,10 +189,10 @@ char	editedhost[32];
 
 void
 edithost(pat)
-	register char *pat;
+	char *pat;
 {
-	register char *host = HN;
-	register char *res = editedhost;
+	char *host = HN;
+	char *res = editedhost;
 
 	if (!pat)
 		pat = "";
@@ -266,7 +266,7 @@ long
 speed(val)
 	long val;
 {
-	register struct speedtab *sp;
+	struct speedtab *sp;
 
 	if (val <= 15)
 		return (val);
@@ -283,8 +283,8 @@ makeenv(env)
 	char *env[];
 {
 	static char termbuf[128] = "TERM=";
-	register char *p, *q;
-	register char **ep;
+	char *p, *q;
+	char **ep;
 	char *index();
 
 	ep = env;
@@ -332,7 +332,7 @@ char *
 portselector()
 {
 	char c, baud[20], *type = "default";
-	register struct portselect *ps;
+	struct portselect *ps;
 	int len;
 
 	alarm(5*60);

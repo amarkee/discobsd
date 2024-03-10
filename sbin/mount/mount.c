@@ -77,10 +77,10 @@ static struct opt {
 int
 main(argc, argv)
 	int argc;
-	register char *argv[];
+	char *argv[];
 {
 	char *mntonname, **vfslist, *vfstype;
-	register struct fstab *fs;
+	struct fstab *fs;
 	struct statfs *mntbuf;
 	int all, ch, i, init_flags, mntsize, rval;
 	char *options, *na;
@@ -335,8 +335,8 @@ prmount(spec, name, flags)
 	char *spec, *name;
 	int flags;
 {
-	register struct opt *o;
-	register int f;
+	struct opt *o;
+	int f;
 
 	(void)printf("%s on %s", spec, name);
 
@@ -354,7 +354,7 @@ getmntpt(name)
 	char *name;
 {
 	struct statfs *mntbuf;
-	register int i, mntsize;
+	int i, mntsize;
 
 	mntsize = getmntinfo(&mntbuf, MNT_NOWAIT);
 	for (i = 0; i < mntsize; i++)
@@ -367,7 +367,7 @@ getmntpt(name)
 int
 badvfsname(vfsname, vfslist)
 	char *vfsname;
-	register char **vfslist;
+	char **vfslist;
 {
 
 	if (vfslist == NULL)
@@ -383,7 +383,7 @@ badvfsname(vfsname, vfslist)
 int
 badvfstype(vfstype, vfslist)
 	int vfstype;
-	register char **vfslist;
+	char **vfslist;
 {
 static char *vfsnames[] = INITMOUNTNAMES;
 
@@ -397,9 +397,9 @@ char **
 makevfslist(fslist)
 	char *fslist;
 {
-	register char **av;
+	char **av;
 	int i;
-	register char *nextcp;
+	char *nextcp;
 
 	if (fslist == NULL)
 		return (NULL);
@@ -450,11 +450,11 @@ void
 mangle(options, argcp, argv)
 	char *options;
 	int *argcp;
-	register char **argv;
+	char **argv;
 {
-	register char *p;
+	char *p;
 	char *s;
-	register int argc;
+	int argc;
 
 	argc = *argcp;
 	for (s = options; (p = strsep(&s, ",")) != NULL;)

@@ -50,11 +50,11 @@ struct  vmtotal total;
  * second.
  */
 void
-sched()
+sched(void)
 {
-    register struct proc *rp;
+    struct proc *rp;
     struct proc *swapped_out = 0, *in_core = 0;
-    register int out_time, rptime;
+    int out_time, rptime;
 
     for (;;) {
         /* Perform swap-out/swap-in action. */
@@ -140,11 +140,11 @@ sched()
  * Count up various things once a second
  */
 void
-vmmeter()
+vmmeter(void)
 {
 #ifdef UCB_METER
     register u_short *cp, *rp;
-    register long *sp;
+    long *sp;
 
     ave(avefree, freemem, 5);
     ave(avefree30, freemem, 30);
@@ -183,11 +183,10 @@ vmmeter()
  * the right.
  */
 static void
-loadav (avg, n)
-    register short  *avg;
-    register int    n;
+loadav (register short  *avg,
+    int    n)
 {
-    register int    i;
+    int    i;
     static const long cexp[3] = {
         0353,   /* 256 * exp(-1/12)  */
         0373,   /* 256 * exp(-1/60)  */
@@ -199,10 +198,10 @@ loadav (avg, n)
 }
 
 void
-vmtotal()
+vmtotal(void)
 {
-    register struct proc *p;
-    register int nrun = 0;
+    struct proc *p;
+    int nrun = 0;
 #ifdef UCB_METER
     total.t_vmtxt = 0;
     total.t_avmtxt = 0;

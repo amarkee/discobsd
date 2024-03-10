@@ -75,7 +75,7 @@ main(argc, argv)
 {
 	extern int errno, optind;
 	extern char *optarg;
-	register char *p;
+	char *p;
 	struct passwd lpw, *pw;
 	struct rlimit rlim;
 	FILE *temp_fp;
@@ -286,8 +286,8 @@ check(fp, pw)
 	FILE *fp;
 	struct passwd *pw;
 {
-	register struct entry *ep;
-	register char *p;
+	struct entry *ep;
+	char *p;
 	static char buf[256];
 
 	while (fgets(buf, sizeof(buf), fp)) {
@@ -350,8 +350,8 @@ copy(pw, fp)
 	struct passwd *pw;
 	FILE *fp;
 {
-	register int done;
-	register char *p;
+	int done;
+	char *p;
 	char buf[256];
 
 	for (done = 0; fgets(buf, sizeof(buf), stdin);) {
@@ -428,9 +428,9 @@ edit(file)
 void
 loadpw(arg, pw)
 	char *arg;
-	register struct passwd *pw;
+	struct passwd *pw;
 {
-	register char *cp;
+	char *cp;
 	char	*bp = arg;
 
 	pw->pw_name = strsep(&bp, ":");
@@ -453,7 +453,7 @@ bad:		(void)fprintf(stderr, "chpass: bad password list.\n");
 int
 prompt()
 {
-	register int c;
+	int c;
 
 	for (;;) {
 		(void)printf("re-edit the password file? [y]: ");

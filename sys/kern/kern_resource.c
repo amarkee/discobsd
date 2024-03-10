@@ -14,14 +14,14 @@
  * Resource controls and accounting.
  */
 void
-getpriority()
+getpriority(void)
 {
-    register struct a {
+    struct a {
         int which;
         int who;
     } *uap = (struct a *)u.u_arg;
-    register struct proc *p;
-    register int low = PRIO_MAX + 1;
+    struct proc *p;
+    int low = PRIO_MAX + 1;
 
     switch (uap->which) {
     case PRIO_PROCESS:
@@ -63,9 +63,8 @@ getpriority()
 }
 
 static void
-donice(p, n)
-    register struct proc *p;
-    register int n;
+donice(struct proc *p,
+    int n)
 {
     if (u.u_uid && u.u_ruid &&
         u.u_uid != p->p_uid && u.u_ruid != p->p_uid) {
@@ -84,15 +83,15 @@ donice(p, n)
 }
 
 void
-setpriority()
+setpriority(void)
 {
-    register struct a {
+    struct a {
         int which;
         int who;
         int prio;
     } *uap = (struct a *)u.u_arg;
-    register struct proc *p;
-    register int found = 0;
+    struct proc *p;
+    int found = 0;
 
     switch (uap->which) {
     case PRIO_PROCESS:
@@ -132,14 +131,14 @@ setpriority()
 }
 
 void
-setrlimit()
+setrlimit(void)
 {
-    register struct a {
+    struct a {
         u_int   which;
         struct  rlimit *lim;
     } *uap = (struct a *)u.u_arg;
     struct rlimit alim;
-    register struct rlimit *alimp;
+    struct rlimit *alimp;
 
     if (uap->which >= RLIM_NLIMITS) {
         u.u_error = EINVAL;
@@ -171,9 +170,9 @@ setrlimit()
 }
 
 void
-getrlimit()
+getrlimit(void)
 {
-    register struct a {
+    struct a {
         u_int   which;
         struct  rlimit *rlp;
     } *uap = (struct a *)u.u_arg;
@@ -198,13 +197,13 @@ getrlimit()
 }
 
 void
-getrusage()
+getrusage(void)
 {
-    register struct a {
+    struct a {
         int who;
         struct  rusage *rusage;
     } *uap = (struct a *)u.u_arg;
-    register struct k_rusage *rup;
+    struct k_rusage *rup;
     struct rusage ru;
 
     switch (uap->who) {
@@ -230,11 +229,10 @@ getrusage()
  * Add resource usage data.
  */
 void
-ruadd(ru, ru2)
-    struct k_rusage *ru, *ru2;
+ruadd(struct k_rusage *ru, struct k_rusage *ru2)
 {
-    register long *ip, *ip2;
-    register int i;
+    long *ip, *ip2;
+    int i;
 
     /*
      * since the kernel timeval structures are single longs,
@@ -250,9 +248,8 @@ ruadd(ru, ru2)
  * Convert an internal kernel rusage structure into a `real' rusage structure.
  */
 void
-rucvt (rup, krup)
-    register struct rusage      *rup;
-    register struct k_rusage    *krup;
+rucvt (struct rusage      *rup,
+    struct k_rusage    *krup)
 {
     bzero((caddr_t)rup, sizeof(*rup));
     rup->ru_utime.tv_sec   = krup->ru_utime / hz;

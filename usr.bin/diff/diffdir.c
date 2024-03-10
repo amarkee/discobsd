@@ -34,9 +34,9 @@ void
 diffdir(argv)
 	char **argv;
 {
-	register struct dir *d1, *d2;
+	struct dir *d1, *d2;
 	struct dir *dir1, *dir2;
-	register int i;
+	int i;
 	int cmp;
 
 	if (opt == D_IFDEF) {
@@ -124,7 +124,7 @@ setfile(fpp, epp, file)
 	char **fpp, **epp;
 	char *file;
 {
-	register char *cp;
+	char *cp;
 
 	*fpp = malloc(BUFSIZ);
 	if (*fpp == 0) {
@@ -140,7 +140,7 @@ setfile(fpp, epp, file)
 
 void
 scanpr(dp, test, title, file1, efile1, file2, efile2)
-	register struct dir *dp;
+	struct dir *dp;
 	int test;
 	char *title, *file1, *efile1, *file2, *efile2;
 {
@@ -179,9 +179,9 @@ struct dir *
 setupdir(cp)
 	char *cp;
 {
-	register struct dir *dp = 0, *ep;
-	register struct direct *rp;
-	register int nitems, n;
+	struct dir *dp = 0, *ep;
+	struct direct *rp;
+	int nitems, n;
 	DIR *dirp;
 
 	dirp = opendir(cp);
@@ -242,9 +242,9 @@ entcmp(d1, d2)
 
 void
 compare(dp)
-	register struct dir *dp;
+	struct dir *dp;
 {
-	register int i, j;
+	int i, j;
 	int f1, f2, fmt1, fmt2;
 	struct stat stb1, stb2;
 	int flag = 0;
@@ -398,8 +398,8 @@ ascii(f)
 	int f;
 {
 	char buf[BUFSIZ];
-	register int cnt;
-	register char *cp;
+	int cnt;
+	char *cp;
 
 	lseek(f, (long)0, 0);
 	cnt = read(f, buf, BUFSIZ);
@@ -421,7 +421,7 @@ ascii(f)
  */
 int
 useless(cp)
-register char *cp;
+char *cp;
 {
 
 	if (cp[0] == '.') {

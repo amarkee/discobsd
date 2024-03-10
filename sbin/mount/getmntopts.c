@@ -48,9 +48,9 @@ getmntopts(options, m0, flagp)
 	struct mntopt *m0;
 	int *flagp;
 {
-	register struct mntopt *m;
+	struct mntopt *m;
 	int negative;
-	register char *opt;
+	char *opt;
 	char *optbuf;
 
 	/* Copy option string, since it is about to be torn asunder... */

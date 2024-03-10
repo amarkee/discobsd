@@ -76,14 +76,14 @@ struct namnod *namep = &mchknod;
 /* ========	variable and string handling	======== */
 
 syslook(w, syswds, n)
-	register char *w;
-	register struct sysnod syswds[];
+	char *w;
+	struct sysnod syswds[];
 	int n;
 {
 	int	low;
 	int	high;
 	int	mid;
-	register int cond;
+	int cond;
 
 	if (w == NIL || *w == 0)
 		return(0);
@@ -106,7 +106,7 @@ syslook(w, syswds, n)
 }
 
 setlist(arg, xp)
-register struct argnod *arg;
+struct argnod *arg;
 int	xp;
 {
 	if (flags & exportflg)
@@ -114,7 +114,7 @@ int	xp;
 
 	while (arg)
 	{
-		register char *s = mactrim(arg->argval);
+		char *s = mactrim(arg->argval);
 		setname(s, xp);
 		arg = arg->argnxt;
 		if (flags & execpr)
@@ -133,8 +133,8 @@ setname(argi, xp)	/* does parameter assignments */
 char	*argi;
 int	xp;
 {
-	register char *argscan = argi;
-	register struct namnod *n;
+	char *argscan = argi;
+	struct namnod *n;
 
 	if (letter(*argscan))
 	{
@@ -159,7 +159,7 @@ int	xp;
 }
 
 replace(a, v)
-register char	**a;
+char	**a;
 char	*v;
 {
 	free(*a);
@@ -226,9 +226,9 @@ readvar(names)
 char	**names;
 {
 	struct fileblk	fb;
-	register struct fileblk *f = &fb;
-	register char	c;
-	register int	rc = 0;
+	struct fileblk *f = &fb;
+	char	c;
+	int	rc = 0;
 	struct namnod *n = lookup(*names++);	/* done now to avoid storage mess */
 	char	*rel = (char *)relstak();
 
@@ -310,7 +310,7 @@ char *
 make(v)
 char	*v;
 {
-	register char	*p;
+	char	*p;
 
 	if (v)
 	{
@@ -324,10 +324,10 @@ char	*v;
 
 struct namnod *
 lookup(nam)
-	register char	*nam;
+	char	*nam;
 {
-	register struct namnod *nscan = namep;
-	register struct namnod **prev;
+	struct namnod *nscan = namep;
+	struct namnod **prev;
 	int		LR;
 
 	if (!chkid(nam))
@@ -360,7 +360,7 @@ BOOL
 chkid(nam)
 char	*nam;
 {
-	register char *cp = nam;
+	char *cp = nam;
 
 	if (!letter(*cp))
 		return(FALSE);
@@ -379,7 +379,7 @@ static int (*namfn)();
 
 static int
 namwalk(np)
-register struct namnod *np;
+struct namnod *np;
 {
 	if (np)
 	{
@@ -399,7 +399,7 @@ namscan(fn)
 printnam(n)
 struct namnod *n;
 {
-	register char	*s;
+	char	*s;
 
 	sigchk();
 
@@ -421,9 +421,9 @@ struct namnod *n;
 
 static char *
 staknam(n)
-register struct namnod *n;
+struct namnod *n;
 {
-	register char	*p;
+	char	*p;
 
 	p = movstr(n->namid, staktop);
 	p = movstr("=", p);
@@ -434,9 +434,9 @@ register struct namnod *n;
 static int namec;
 
 exname(n)
-	register struct namnod *n;
+	struct namnod *n;
 {
-	register int 	flg = n->namflg;
+	int 	flg = n->namflg;
 
 	if (flg & N_ENVCHG)
 	{
@@ -463,7 +463,7 @@ exname(n)
 }
 
 printro(n)
-register struct namnod *n;
+struct namnod *n;
 {
 	if (n->namflg & N_RDONLY)
 	{
@@ -475,7 +475,7 @@ register struct namnod *n;
 }
 
 printexp(n)
-register struct namnod *n;
+struct namnod *n;
 {
 	if (n->namflg & N_EXPORT)
 	{
@@ -488,7 +488,7 @@ register struct namnod *n;
 
 setup_env()
 {
-	register char **e = environ;
+	char **e = environ;
 
 	while (*e)
 		setname(*e++, N_ENVNAM);
@@ -507,7 +507,7 @@ struct namnod *n;
 char **
 setenvv()
 {
-	register char	**er;
+	char	**er;
 
 	namec = 0;
 	namscan(exname);
@@ -520,9 +520,9 @@ setenvv()
 
 struct namnod *
 findnam(nam)
-	register char	*nam;
+	char	*nam;
 {
-	register struct namnod *nscan = namep;
+	struct namnod *nscan = namep;
 	int		LR;
 
 	if (!chkid(nam))
@@ -541,9 +541,9 @@ findnam(nam)
 
 
 unset_name(name)
-	register char 	*name;
+	char 	*name;
 {
-	register struct namnod	*n;
+	struct namnod	*n;
 
 	if (n = findnam(name))
 	{

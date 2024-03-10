@@ -96,7 +96,7 @@
      int  fcnt,gcnt,hcnt;
      h(x,y)
      {
-          int hi; register int hr;
+          int hi; int hr;
           hi = x+1;
           hr = x-y+1;
           hcnt++ ;
@@ -106,7 +106,7 @@
 
      g(p,q)
      {
-          int gi; register int gr;
+          int gi; int gr;
           gi = q-p;
           gr = q-p+1;
           gcnt++ ;
@@ -116,7 +116,7 @@
 
      f(a,b)
      {
-          int fi; register int fr;
+          int fi; int fr;
           fi = a+2*b;
           fr = a+b;
           fcnt++ ;

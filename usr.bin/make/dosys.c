@@ -9,7 +9,7 @@
 int await()
 {
     int status;
-    register int pid;
+    int pid;
 
     enbint(SIG_IGN);
     while ((pid = wait(&status)) != wpid)
@@ -25,7 +25,7 @@ int await()
  */
 void doclose()
 {
-    register struct dirhdr *od;
+    struct dirhdr *od;
 
     for (od = firstod; od; od = od->nxtopendir) {
         if (od->dirfc != NULL) {
@@ -40,11 +40,11 @@ void doclose()
 }
 
 int doexec(str)
-    register char *str;
+    char *str;
 {
-    register char *t;
+    char *t;
     static char *argv[MAXARGV]; /* docom() ate most of the stack already */
-    register char **p;
+    char **p;
 
     while (*str==' ' || *str=='\t')
         ++str;
@@ -105,9 +105,9 @@ int doshell(comstring, nohalt)
  * Are there are any Shell meta-characters?
  */
 int metas(s)
-    register char *s;
+    char *s;
 {
-    register int c;
+    int c;
 
     for (;;) {
         c = *s++;
@@ -120,10 +120,10 @@ int metas(s)
 }
 
 int dosys(comstring, nohalt)
-    register char *comstring;
+    char *comstring;
     int nohalt;
 {
-    register int status;
+    int status;
 
     if (metas(comstring))
         status = doshell(comstring, nohalt);

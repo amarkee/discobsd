@@ -13,13 +13,14 @@
 
 extern int swopen(dev_t dev, int mode, int flag);
 extern int swclose(dev_t dev, int mode, int flag);
-extern void swstrategy(register struct buf *bp);
+extern void swstrategy(struct buf *bp);
 extern daddr_t swsize(dev_t dev);
-extern int swcread(dev_t dev, register struct uio *uio, int flag);
-extern int swcwrite(dev_t dev, register struct uio *uio, int flag);
-extern int swcioctl (dev_t dev, register u_int cmd, caddr_t addr, int flag);
+extern int swcread(dev_t dev, struct uio *uio, int flag);
+extern int swcwrite(dev_t dev, struct uio *uio, int flag);
+extern int swcioctl (dev_t dev, u_int cmd, caddr_t addr, int flag);
 extern int swcopen(dev_t dev, int mode, int flag);
 extern int swcclose(dev_t dev, int mode, int flag);
+struct buf * getnewbuf(void);
 
 #endif
 

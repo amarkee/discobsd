@@ -11,10 +11,10 @@
 void *
 memset (vs, c, n)
 	void *vs;
-	register int c;
+	int c;
 	register size_t n;
 {
-	register char *s = vs;
+	char *s = vs;
 
 	while (n-- > 0)
 		*s++ = c;

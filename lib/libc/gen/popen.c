@@ -106,10 +106,10 @@ int
 pclose(iop)
 	FILE *iop;
 {
-	register int fdes;
+	int fdes;
 	sigset_t omask, nmask;
 	union wait pstat;
-	register int pid;
+	int pid;
 
 	/*
 	 * pclose returns -1 if stream is not associated with a

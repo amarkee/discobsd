@@ -36,7 +36,7 @@
 int
 sigvec(signo, sv, osv)
 	int signo;
-	register struct sigvec *sv, *osv;
+	struct sigvec *sv, *osv;
 {
 	int ret;
 

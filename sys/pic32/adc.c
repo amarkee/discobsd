@@ -129,7 +129,7 @@ int adc_write(dev_t dev, struct uio *uio, int flag)
     return EINVAL;
 }
 
-int adc_ioctl(dev_t dev, register u_int cmd, caddr_t addr, int flag)
+int adc_ioctl(dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
     switch (cmd) {
     default:
@@ -143,8 +143,7 @@ int adc_ioctl(dev_t dev, register u_int cmd, caddr_t addr, int flag)
  * Return true if found and initialized ok.
  */
 static int
-adcprobe(config)
-    struct conf_device *config;
+adcprobe(struct conf_device *config)
 {
     printf("adc: %u channels\n", ADCMAX);
     return 1;

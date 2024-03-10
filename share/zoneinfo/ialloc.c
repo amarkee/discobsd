@@ -19,7 +19,7 @@ char *
 imalloc(int n)
 {
 #ifdef MAL
-	register char *	result;
+	char *	result;
 
 	if (n == 0)
 		n = 1;
@@ -55,8 +55,8 @@ icatalloc(old, new)
 char *	old;
 char *	new;
 {
-	register char *	result;
-	register int	oldsize, newsize;
+	char *	result;
+	int	oldsize, newsize;
 
 	oldsize = NULLMAL(old) ? 0 : strlen(old);
 	newsize = NULLMAL(new) ? 0 : strlen(new);

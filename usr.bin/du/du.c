@@ -30,7 +30,7 @@ main(argc, argv)
     char **argv;
 {
     long blocks = 0;
-    register char *np;
+    char *np;
     int pid;
 
     argc--, argv++;
@@ -92,7 +92,7 @@ descend(base, name)
     int i;
     long blocks = 0;
     long curoff = NULL;
-    register struct direct *dp;
+    struct direct *dp;
 
     ebase0 = ebase = index(base, 0);
     if (ebase > base && ebase[-1] == '/')

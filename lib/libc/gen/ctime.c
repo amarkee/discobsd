@@ -91,7 +91,7 @@ detzcode(codep)
 char *	codep;
 {
 	register long	result;
-	register int	i;
+	int	i;
 
 	result = 0;
 	for (i = 0; i < 4; ++i)
@@ -101,16 +101,16 @@ char *	codep;
 
 static int
 tzload(name)
-register char *	name;
+char *	name;
 {
-	register int	i;
-	register int	fid;
+	int	i;
+	int	fid;
 
 	if (name == 0 && (name = _PATH_LOCALTIME) == 0)
 		return -1;
 	{
-		register char *	p;
-		register int	doaccess;
+		char *	p;
+		int	doaccess;
                 char          * fullname;
 
 		doaccess = name[0] == '/';
@@ -137,8 +137,8 @@ register char *	name;
 			return -1;
 	}
 	{
-		register char *			p;
-		register struct tzhead *	tzhp;
+		char *			p;
+		struct tzhead *	tzhp;
 		char *				buf;
 
 		buf = alloca(sizeof s);
@@ -167,7 +167,7 @@ register char *	name;
 		for (i = 0; i < s.timecnt; ++i)
 			s.types[i] = (unsigned char) *p++;
 		for (i = 0; i < s.typecnt; ++i) {
-			register struct ttinfo *	ttisp;
+			struct ttinfo *	ttisp;
 
 			ttisp = &s.ttis[i];
 			ttisp->tt_gmtoff = detzcode(p);
@@ -200,7 +200,7 @@ register char *	name;
 	daylight = 0;
 #endif /* USG_COMPAT */
 	for (i = 1; i < s.typecnt; ++i) {
-		register struct ttinfo *	ttisp;
+		struct ttinfo *	ttisp;
 
 		ttisp = &s.ttis[i];
 		if (ttisp->tt_isdst) {
@@ -255,7 +255,7 @@ tzsetgmt()
 void
 tzset()
 {
-	register char *	name;
+	char *	name;
 
 	tz_is_set = TRUE;
 	name = getenv("TZ");
@@ -274,9 +274,9 @@ struct tm *
 localtime(timep)
         const time_t *timep;
 {
-	register struct ttinfo *	ttisp;
-	register struct tm *		tmp;
-	register int			i;
+	struct ttinfo *	ttisp;
+	struct tm *		tmp;
+	int			i;
 	time_t				t;
 
 	if (!tz_is_set)
@@ -312,7 +312,7 @@ struct tm *
 gmtime(clock)
         const time_t *clock;
 {
-	register struct tm *	tmp;
+	struct tm *	tmp;
 
 	tmp = offtime(clock, 0L);
 	tzname[0] = "GMT";
@@ -334,12 +334,12 @@ offtime(clock, offset)
 time_t *	clock;
 long		offset;
 {
-	register struct tm *	tmp;
+	struct tm *	tmp;
 	register long		days;
 	register long		rem;
-	register int		y;
-	register int		yleap;
-	register int *		ip;
+	int		y;
+	int		yleap;
+	int *		ip;
 	static struct tm	tm;
 
 	tmp = &tm;

@@ -13,7 +13,7 @@ main(argc,argv)
 int argc;
 char **argv;
 {
-    register int i,c;
+    int i,c;
     input = stdin;
     do {
         if(argc>1) {

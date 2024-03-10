@@ -26,7 +26,7 @@ sinh(arg)
         double arg;
 {
 	double temp, argsq;
-	register int sign;
+	int sign;
 
 	sign = 1;
 	if(arg < 0) {

@@ -22,7 +22,7 @@ char **argv;
 {
     int i, token;
     register FILE *fp;
-    register int c;
+    int c;
     char *p;
 
     while (argc > 1 && *argv[1] == '-') {
@@ -89,7 +89,7 @@ char **argv;
 
 void
 wcp(wd, charct, wordct, linect)
-register char *wd;
+char *wd;
 long charct; long wordct; long linect;
 {
     while (*wd) switch (*wd++) {

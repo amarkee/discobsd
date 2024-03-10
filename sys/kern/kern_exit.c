@@ -20,9 +20,9 @@
  * must be locked in core so it will be in core when the parent runs.
  */
 void
-endvfork()
+endvfork(void)
 {
-    register struct proc *rip, *rpp;
+    struct proc *rip, *rpp;
 
     rpp = u.u_procp;
     rip = rpp->p_pptr;
@@ -46,11 +46,10 @@ endvfork()
  * Check for child processes and orphan them.
  */
 void
-exit (rv)
-    int rv;
+exit (int rv)
 {
-    register int i;
-    register struct proc *p;
+    int i;
+    struct proc *p;
     struct  proc **pp;
 
     p = u.u_procp;
@@ -62,7 +61,7 @@ exit (rv)
      * p->p_realtimer.it_value = 0;
      */
     for (i = 0; i <= u.u_lastfile; i++) {
-        register struct file *f;
+        struct file *f;
 
         f = u.u_ofile[i];
         u.u_ofile[i] = NULL;
@@ -107,7 +106,7 @@ done:
     p->p_ru = u.u_ru;
     ruadd(&p->p_ru, &u.u_cru);
     {
-        register struct proc *q;
+        struct proc *q;
         int doingzomb = 0;
 
         q = allproc;
@@ -142,9 +141,9 @@ again:
  * exit system call: pass back caller's arg
  */
 void
-rexit()
+rexit(void)
 {
-    register struct a {
+    struct a {
         int rval;
     } *uap = (struct a*) u.u_arg;
 
@@ -166,15 +165,14 @@ struct args {
  * child's proc structure.
  */
 static int
-wait1 (q, uap, retval)
-    struct proc *q;
-    register struct args *uap;
-    int retval[];
+wait1 (struct proc *q,
+    struct args *uap,
+    int retval[])
 {
     int nfound, status;
     struct rusage ru;                   /* used for local conversion */
-    register struct proc *p;
-    register int error;
+    struct proc *p;
+    int error;
 
     if (uap->pid == WAIT_MYPGRP)        /* == 0 */
         uap->pid = -q->p_pgrp;
@@ -260,7 +258,7 @@ void
 wait4()
 {
     int retval[2];
-    register struct args *uap = (struct args*) u.u_arg;
+    struct args *uap = (struct args*) u.u_arg;
 
     retval[0] = 0;
     u.u_error = wait1 (u.u_procp, uap, retval);
@@ -269,7 +267,7 @@ wait4()
 }
 
 void
-reboot()
+reboot(void)
 {
     struct a {
         int opt;

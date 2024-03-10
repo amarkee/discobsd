@@ -8,7 +8,7 @@ size_t
 strlen(s)
 	register const char *s;
 {
-	register int n;
+	int n;
 
 	n = 0;
 	while (*s++)

@@ -119,10 +119,10 @@ int	get_arobj();
 int	open_archive();
 void	put_arobj();
 
-int     delete (register char **argv);
-int     move (register char **argv);
-int     print (register char **argv);
-int     append (register char **argv);
-int     replace (register char **argv);
-int     contents (register char **argv);
-int     extract (register char **argv);
+int     delete (char **argv);
+int     move (char **argv);
+int     print (char **argv);
+int     append (char **argv);
+int     replace (char **argv);
+int     contents (char **argv);
+int     extract (char **argv);

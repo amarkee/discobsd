@@ -7,11 +7,11 @@
 
 char *
 strncat(s1, s2, n)
-	register char *s1;
+	char *s1;
 	register const char *s2;
 	register size_t n;
 {
-	register char *os1;
+	char *os1;
 
 	os1 = s1;
 	while (*s1++)

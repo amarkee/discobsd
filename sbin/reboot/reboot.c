@@ -172,7 +172,7 @@ void
 markdown()
 {
 	struct utmp wtmp;
-	register int f = open(_PATH_WTMP, O_WRONLY|O_APPEND);
+	int f = open(_PATH_WTMP, O_WRONLY|O_APPEND);
 
 	if (f >= 0) {
 		bzero((char *)&wtmp, sizeof(wtmp));

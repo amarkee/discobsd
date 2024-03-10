@@ -10,7 +10,7 @@
 void
 bzero(b, length)
 	register void *b;
-	register unsigned int length;
+	unsigned int length;
 {
 	char *p;
 

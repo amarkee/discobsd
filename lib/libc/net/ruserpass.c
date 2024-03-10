@@ -53,7 +53,7 @@ static
 renv(host, aname, apass)
 	char *host, **aname, **apass;
 {
-	register char *cp;
+	char *cp;
 	char *stemp, fgetlogin, *comma;
 
 	cp = renvlook(host);
@@ -82,7 +82,7 @@ char *
 renvlook(host)
 	char *host;
 {
-	register char *cp, **env;
+	char *cp, **env;
 
 	env = environ;
 	for (env = environ; *env != NULL; env++)
@@ -261,7 +261,7 @@ char *nbsencrypt(str,key,result)
   char *result;
   char *str, *key; {
 	static char buf[20],oldbuf[20];
-	register int j;
+	int j;
 	result[0] = 0;
 	strcpy(oldbuf,key);
 	while(*str){
@@ -297,7 +297,7 @@ static
 char *nbs8encrypt(str,key)
 char *str, *key; {
 	static char keyblk[100], blk[100];
-	register int i;
+	int i;
 
 	enblkclr(keyblk,key);
 	nbssetkey(keyblk);
@@ -313,7 +313,7 @@ static
 char *nbs8decrypt(crp,key)
 char *crp, *key; {
 	static char keyblk[100], blk[100];
-	register int i;
+	int i;
 
 	enblkclr(keyblk,key);
 	nbssetkey(keyblk);
@@ -328,7 +328,7 @@ char *crp, *key; {
 static
 enblkclr(blk,str)		/* ignores top bit of chars in string str */
 char *blk,*str; {
-	register int i,j;
+	int i,j;
 	char c;
 	for(i=0;i<70;i++)blk[i] = 0;
 	for(i=0; (c= *str) && i<64; str++){
@@ -341,7 +341,7 @@ char *blk,*str; {
 static
 char *deblkclr(blk)
 char *blk; {
-	register int i,j;
+	int i,j;
 	char c;
 	static char iobuf[30];
 	for(i=0; i<10; i++){
@@ -360,7 +360,7 @@ static
 enblknot(blk,crp)
 char *blk;
 char *crp; {
-	register int i,j;
+	int i,j;
 	char c;
 	for(i=0;i<70;i++)blk[i] = 0;
 	for(i=0; (c= *crp) && i<64; crp++){
@@ -375,7 +375,7 @@ char *crp; {
 static
 char *deblknot(blk)
 char *blk; {
-	register int i,j;
+	int i,j;
 	char c;
 	static char iobuf[30];
 	for(i=0; i<11; i++){
@@ -732,9 +732,9 @@ char *sttyname;
 
 static
 sreverse(sto, sfrom)
-	register char *sto, *sfrom;
+	char *sto, *sfrom;
 {
-	register int i;
+	int i;
 
 	i = strlen(sfrom);
 	while (i >= 0)
@@ -746,9 +746,9 @@ char *mkenvkey(mch)
 	char mch;
 {
 	static char skey[40];
-	register struct utmp *putmp;
+	struct utmp *putmp;
 	char stemp[40], stemp1[40], sttyname[30];
-	register char *sk,*p;
+	char *sk,*p;
 
 	if (isatty(2))
 		strcpy(sttyname,ttyname(2));
@@ -778,7 +778,7 @@ char *mkenvkey(mch)
 mkpwunclear(spasswd,mch,sencpasswd)
 	char mch, *spasswd, *sencpasswd;
 {
-	register char *skey;
+	char *skey;
 
 	if (spasswd[0] == 0) {
 		sencpasswd[0] = 0;
@@ -795,7 +795,7 @@ mkpwunclear(spasswd,mch,sencpasswd)
 mkpwclear(sencpasswd,mch,spasswd)
 	char mch, *spasswd, *sencpasswd;
 {
-	register char *skey;
+	char *skey;
 
 	if (sencpasswd[0] == 0) {
 		spasswd[0] = 0;

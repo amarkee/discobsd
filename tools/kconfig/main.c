@@ -127,8 +127,8 @@ char *
 get_word(FILE *fp)
 {
     static char line[80];
-    register int ch;
-    register char *cp;
+    int ch;
+    char *cp;
 
     while ((ch = getc(fp)) != EOF)
         if (ch != ' ' && ch != '\t')
@@ -160,8 +160,8 @@ char *
 get_quoted_word(FILE *fp)
 {
     static char line[256];
-    register int ch;
-    register char *cp;
+    int ch;
+    char *cp;
 
     while ((ch = getc(fp)) != EOF)
         if (ch != ' ' && ch != '\t')
@@ -172,7 +172,7 @@ get_quoted_word(FILE *fp)
         return (NULL);
     cp = line;
     if (ch == '"' || ch == '\'') {
-        register int quote = ch;
+        int quote = ch;
 
         while ((ch = getc(fp)) != EOF) {
             if (ch == quote)

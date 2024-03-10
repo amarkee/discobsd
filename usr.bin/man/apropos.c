@@ -34,7 +34,7 @@ main(argc, argv)
 {
 	extern char *optarg;
 	extern int optind;
-	register char *beg, *end, **C;
+	char *beg, *end, **C;
 	int ch, foundman = NO, *found, isapropos;
 	int a_match(), w_match(), (*match)();
 	char *manpath = NULL, buf[MAXLINELEN + 1], fname[MAXPATHLEN + 1];
@@ -126,10 +126,10 @@ main(argc, argv)
  */
 static
 a_match(bp, str)
-	register char *bp, *str;
+	char *bp, *str;
 {
-	register int len;
-	register char test;
+	int len;
+	char test;
 
 	if (!*bp)
 		return(NO);
@@ -148,10 +148,10 @@ a_match(bp, str)
  */
 static
 w_match(bp, str)
-	register char *bp, *str;
+	char *bp, *str;
 {
-	register int len;
-	register char *start;
+	int len;
+	char *start;
 
 	if (!*str || !*bp)
 		return(NO);
@@ -172,7 +172,7 @@ w_match(bp, str)
  */
 static
 dashtrunc(from, to)
-	register char *from, *to;
+	char *from, *to;
 {
 	do {
 		if (from[0] == ' ' && from[1] == '-' && from[2] == ' ')
@@ -187,7 +187,7 @@ dashtrunc(from, to)
  */
 static
 lowstr(from, to)
-	register char *from, *to;
+	char *from, *to;
 {
 	do {
 		*to++ = isupper(*from) ? tolower(*from) : *from;

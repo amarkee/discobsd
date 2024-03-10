@@ -31,11 +31,11 @@ u_int nextinodeid;              /* unique id generator */
  * and build inode free list.
  */
 void
-ihinit()
+ihinit(void)
 {
-    register int i;
-    register struct inode *ip = inode;
-    register union  ihead *ih = ihead;
+    int i;
+    struct inode *ip = inode;
+    union  ihead *ih = ihead;
 
     for (i = INOHSZ; --i >= 0; ih++) {
         ih->ih_head[0] = ih;
@@ -61,11 +61,9 @@ ihinit()
  * Find an inode if it is incore.
  */
 struct inode *
-ifind(dev, ino)
-    register dev_t dev;
-    register ino_t ino;
+ifind(dev_t dev, ino_t ino)
 {
-    register struct inode *ip;
+    struct inode *ip;
     union ihead *ih;
 
     ih = &ihead[INOHASH(dev, ino)];
@@ -91,12 +89,9 @@ ifind(dev, ino)
  *  "cannot happen"
  */
 struct inode *
-iget(dev, fs, ino)
-    dev_t dev;
-    register struct fs *fs;
-    ino_t ino;
+iget(dev_t dev, struct fs *fs, ino_t ino)
 {
-    register struct inode *ip;
+    struct inode *ip;
     union ihead *ih;
     struct buf *bp;
     struct dinode *dp;
@@ -117,7 +112,7 @@ loop:
                 goto loop;
             }
             if ((ip->i_flag&IMOUNT) != 0) {
-                register struct mount *mp;
+                struct mount *mp;
 
                 for (mp = &mount[0]; mp < &mount[NMOUNT]; mp++)
                     if(mp->m_inodp == ip) {
@@ -129,7 +124,7 @@ loop:
                 panic("no imt");
             }
             if (ip->i_count == 0) {     /* ino on free list */
-                register struct inode *iq;
+                struct inode *iq;
 
                 iq = ip->i_freef;
                 if (iq)
@@ -154,7 +149,7 @@ loop:
     if (ip->i_count)
         panic("free inode isn't");
     {
-    register struct inode *iq;
+    struct inode *iq;
 
     iq = ip->i_freef;
     if (iq)
@@ -222,15 +217,14 @@ loop:
  * the inode pointer is valid.
  */
 void
-igrab (ip)
-    register struct inode *ip;
+igrab (struct inode *ip)
 {
     while ((ip->i_flag&ILOCKED) != 0) {
         ip->i_flag |= IWANT;
         sleep((caddr_t)ip, PINOD);
     }
     if (ip->i_count == 0) {     /* ino on free list */
-        register struct inode *iq;
+        struct inode *iq;
 
         iq = ip->i_freef;
         if (iq)
@@ -253,8 +247,7 @@ igrab (ip)
  * truncate and deallocate the file.
  */
 void
-iput (ip)
-    register struct inode *ip;
+iput (struct inode *ip)
 {
 #ifdef notnow
     /*
@@ -270,8 +263,7 @@ iput (ip)
 }
 
 void
-irele (ip)
-    register struct inode *ip;
+irele (struct inode *ip)
 {
     if (ip->i_count == 1) {
         ip->i_flag |= ILOCKED;
@@ -318,14 +310,11 @@ irele (ip)
  * i/o order so wait for the write to complete.
  */
 void
-iupdat (ip, ta, tm, waitfor)
-    struct inode *ip;
-    struct timeval *ta, *tm;
-    int waitfor;
+iupdat (struct inode *ip, struct timeval *ta, struct timeval *tm, int waitfor)
 {
-    register struct buf *bp;
-    register struct dinode *dp;
-    register struct inode *tip = ip;
+    struct buf *bp;
+    struct dinode *dp;
+    struct inode *tip = ip;
 
     if ((tip->i_flag & (IUPD|IACC|ICHG|IMOD)) == 0)
         return;
@@ -359,13 +348,9 @@ iupdat (ip, ta, tm, waitfor)
 #define TRIPLE  2   /* index of triple indirect block */
 
 static void
-trsingle (ip, bp, last, aflags)
-    register struct inode *ip;
-    struct buf *bp;
-    daddr_t last;
-    int aflags;
+trsingle (struct inode *ip,struct buf *bp, daddr_t last, int aflags)
 {
-    register const daddr_t *bstart, *bstop;
+    const daddr_t *bstart, *bstop;
     const daddr_t *blarray = (const daddr_t*) bp->b_addr;
 
     bstart = &blarray[NINDIR - 1];
@@ -385,14 +370,10 @@ trsingle (ip, bp, last, aflags)
  *
  * NB: triple indirect blocks are untested.
  */
-void
-indirtrunc (ip, bn, lastbn, level, aflags)
-    struct inode *ip;
-    daddr_t bn, lastbn;
-    int level;
-    int aflags;
+static void
+indirtrunc (struct inode *ip, daddr_t bn, daddr_t lastbn, int level, int aflags)
 {
-    register struct buf *bp;
+    struct buf *bp;
     daddr_t nb, last;
     long factor;
 
@@ -423,7 +404,7 @@ indirtrunc (ip, bn, lastbn, level, aflags)
      */
     {
         register daddr_t *bap;
-        register struct buf *cpy;
+        struct buf *cpy;
 
         bp = bread(ip->i_dev, bn);
         if (bp->b_flags&B_ERROR) {
@@ -491,14 +472,11 @@ indirtrunc (ip, bn, lastbn, level, aflags)
  * NB: triple indirect blocks are untested.
  */
 void
-itrunc (oip, length, ioflags)
-    register struct inode *oip;
-    u_long length;
-    int ioflags;
+itrunc (struct inode *oip, u_long length, int ioflags)
 {
     daddr_t lastblock;
-    register int i;
-    register struct inode *ip;
+    int i;
+    struct inode *ip;
     daddr_t bn, lastiblock[NIADDR];
     struct buf *bp;
     int offset, level;
@@ -645,11 +623,10 @@ updret:
  * this is called from sumount() when dev is being unmounted
  */
 int
-iflush (dev)
-    dev_t dev;
+iflush (dev_t dev)
 {
-    register struct inode *ip;
-    register int open = 0;
+    struct inode *ip;
+    int open = 0;
 
     for (ip = inode; ip < inode+NINODE; ip++) {
         if (ip->i_dev == dev)
@@ -680,8 +657,7 @@ iflush (dev)
  * Lock an inode. If its already locked, set the WANT bit and sleep.
  */
 void
-ilock(ip)
-    register struct inode *ip;
+ilock(struct inode *ip)
 {
     ILOCK(ip);
 }
@@ -690,8 +666,7 @@ ilock(ip)
  * Unlock an inode.  If WANT bit is on, wakeup.
  */
 void
-iunlock(ip)
-    register struct inode *ip;
+iunlock(struct inode *ip)
 {
     IUNLOCK(ip);
 }

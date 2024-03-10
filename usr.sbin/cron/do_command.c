@@ -67,9 +67,9 @@ child_process(e, u)
 	user	*u;
 {
 	int		stdin_pipe[2], stdout_pipe[2];
-	register char	*input_data;
+	char	*input_data;
 	char		*usernm, *mailto;
-	register int ch;
+	int ch;
 	int		children = 0, escaped;
 
 	Debug(DPROC, ("[%d] child_process('%s')\n", getpid(), e->cmd))
@@ -235,9 +235,9 @@ child_process(e, u)
 
 	if (*input_data && fork() == 0) {
 		register FILE	*out = fdopen(stdin_pipe[WRITE_PIPE], "w");
-		register int	need_newline = FALSE;
-		register int	escaped = FALSE;
-		register int	ch;
+		int	need_newline = FALSE;
+		int	escaped = FALSE;
+		int	ch;
 
 		Debug(DPROC, ("[%d] child2 sending data to grandchild\n", getpid()))
 
@@ -297,11 +297,11 @@ child_process(e, u)
 
 	/*local*/{
 		register FILE	*in = fdopen(stdout_pipe[READ_PIPE], "r");
-		register int	ch = getc(in);
+		int	ch = getc(in);
 
 		if (ch != EOF) {
 			register FILE	*mail;
-			register int	bytes = 1;
+			int	bytes = 1;
 			int		status = 0;
 
 			Debug(DPROC|DEXT,
@@ -331,7 +331,7 @@ child_process(e, u)
 			 */
 
 			if (mailto) {
-				register char	**env;
+				char	**env;
 				auto char	mailcmd[MAX_COMMAND];
 				auto char	hostname[MAXHOSTNAMELEN];
 

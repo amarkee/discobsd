@@ -3,7 +3,8 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
-
+#ifndef _SYS_MOUNT_H_
+#define _SYS_MOUNT_H_
 /*
  * file system statistics
  */
@@ -101,5 +102,7 @@ int     getmntinfo (struct statfs **mntbufp, int flags);
 int     statfs (const char *path, struct statfs *buf);
 int     mount (const char *special, const char *name, int flags);
 int     umount (const char *special);
+
+#endif
 
 #endif

@@ -42,7 +42,7 @@ extern int print_insn_mips (unsigned memaddr,
 unsigned int fgetword (f)
     register FILE *f;
 {
-    register unsigned int h;
+    unsigned int h;
 
     h = getc (f);
     h |= getc (f) << 8;
@@ -53,7 +53,7 @@ unsigned int fgetword (f)
 
 int fgethdr (text, h)
     register FILE *text;
-    register struct exec *h;
+    struct exec *h;
 {
     h->a_midmag   = fgetword (text);
     h->a_text    = fgetword (text);
@@ -71,7 +71,7 @@ int fgethdr (text, h)
  */
 void fgetrel (f, r)
     register FILE *f;
-    register struct reloc *r;
+    struct reloc *r;
 {
     r->flags = getc (f);
     if ((r->flags & RSMASK) == REXT) {
@@ -98,11 +98,11 @@ void fgetrel (f, r)
  */
 int fgetsym (text, name, value, type)
     register FILE *text;
-    register char *name;
+    char *name;
     unsigned *value;
     unsigned *type;
 {
-    register int len;
+    int len;
     unsigned nbytes;
 
     len = getc (text);
@@ -118,7 +118,7 @@ int fgetsym (text, name, value, type)
 }
 
 void prrel (r)
-    register struct reloc *r;
+    struct reloc *r;
 {
     printf ("<");
     switch (r->flags & RSMASK) {
@@ -144,7 +144,7 @@ void prrel (r)
 }
 
 void prtext (n)
-    register int n;
+    int n;
 {
     unsigned opcode;
     struct reloc relinfo;
@@ -170,7 +170,7 @@ void prtext (n)
 }
 
 void prdata (n)
-    register int n;
+    int n;
 {
     struct reloc relinfo;
 
@@ -189,9 +189,9 @@ void prdata (n)
 }
 
 void prsyms (nbytes)
-    register int nbytes;
+    int nbytes;
 {
-    register int n, c;
+    int n, c;
     unsigned value, type;
     char name [256];
 
@@ -223,7 +223,7 @@ void prsyms (nbytes)
 }
 
 void disasm (fname)
-    register char *fname;
+    char *fname;
 {
     text = fopen (fname, "r");
     if (! text) {
@@ -283,7 +283,7 @@ void disasm (fname)
 
 int main (argc, argv)
     int argc;
-    register char **argv;
+    char **argv;
 {
     int ch;
 

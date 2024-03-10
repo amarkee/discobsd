@@ -72,8 +72,8 @@ int get_arobj(fp)
 	FILE *fp;
 {
 	struct ar_hdr *hdr;
-	register int len, nr;
-	register char *p;
+	int len, nr;
+	char *p;
 	char buf[20];
         static char hb[sizeof(struct ar_hdr) + 1];	/* real header */
 
@@ -140,7 +140,7 @@ off_t nextel(af, off)
 unsigned int fgetword (f)
     register FILE *f;
 {
-        register unsigned int h;
+        unsigned int h;
 
         h = getc (f);
         h |= getc (f) << 8;
@@ -160,11 +160,11 @@ unsigned int fgetword (f)
  */
 int fgetsym (fi, name, value, type)
         register FILE *fi;
-        register char *name;
+        char *name;
         unsigned *value;
         unsigned short *type;
 {
-        register int len;
+        int len;
         unsigned nbytes;
 
         len = getc (fi);
@@ -183,7 +183,7 @@ int fgetsym (fi, name, value, type)
 }
 
 int compare(p1, p2)
-        register struct nlist *p1, *p2;
+        struct nlist *p1, *p2;
 {
 
 	if (nflg) {
@@ -196,10 +196,10 @@ int compare(p1, p2)
 }
 
 void psyms(symp, nsyms)
-	register struct nlist *symp;
+	struct nlist *symp;
 	int nsyms;
 {
-	register int n, c;
+	int n, c;
 
 	for (n=0; n<nsyms; n++) {
 		c = symp[n].n_type;
@@ -297,7 +297,7 @@ void namelist()
 
 	do {
 		off_t	o, curpos;
-		register int i, n;
+		int i, n;
 		struct nlist *symp = NULL;
 
 		curpos = ftell(fi);

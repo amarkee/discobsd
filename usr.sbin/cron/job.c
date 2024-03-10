@@ -61,7 +61,7 @@ int
 job_runqueue()
 {
 	register job	*j, *jn;
-	register int	run = 0;
+	int	run = 0;
 
 	for (j=jhead; j; j=jn) {
 		do_command(j->e, j->u);

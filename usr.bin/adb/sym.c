@@ -32,7 +32,7 @@ findsym(svalue, type)
     int     type;
 {
     long    diff, value, symval;
-    register struct SYMbol  *sp;
+    struct SYMbol  *sp;
     struct  SYMbol *symsav = 0;
     int     i;
 
@@ -136,7 +136,7 @@ static unsigned int
 fgetword (f)
     register FILE *f;
 {
-        register unsigned int h;
+        unsigned int h;
 
         h = getc (f);
         h |= getc (f) << 8;
@@ -157,10 +157,10 @@ fgetword (f)
 static int
 fgetsym (fi, name, value, type)
         register FILE *fi;
-        register char *name;
+        char *name;
         unsigned *value, *type;
 {
-        register int len;
+        int len;
         unsigned nbytes;
 
         len = getc (fi);
@@ -188,7 +188,7 @@ void
 symINI(ex)
     struct exec *ex;
 {
-    register struct SYMbol  *sp;
+    struct SYMbol  *sp;
     register FILE   *fp;
     int     nused, globals_only = 0;
     u_int   value, type;
@@ -272,9 +272,9 @@ symINI(ex)
 */
 char *
 cache_sym(symp)
-    register struct SYMbol *symp;
+    struct SYMbol *symp;
 {
-    register struct SYMcache *sc = symcache;
+    struct SYMcache *sc = symcache;
     struct  SYMcache *current;
     int     lru;
 
@@ -307,9 +307,9 @@ cache_sym(symp)
  */
 char *
 no_cache_sym(symp)
-    register struct SYMbol *symp;
+    struct SYMbol *symp;
 {
-    register struct SYMcache *sc = symcache;
+    struct SYMcache *sc = symcache;
 
     if (! symp)
         return "?";
@@ -332,7 +332,7 @@ struct SYMbol *
 cache_by_string(str)
     char *str;
 {
-    register struct SYMcache *sc;
+    struct SYMcache *sc;
 
     for (sc = symcache; sc < endcache; sc++) {
         if (! sc->name)

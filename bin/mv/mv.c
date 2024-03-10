@@ -45,10 +45,10 @@ int fflag = 0;  /* force overwriting */
 int
 main(argc, argv)
     int argc;
-    register char *argv[];
+    char *argv[];
 {
-    register int i, r;
-    register char *arg;
+    int i, r;
+    char *arg;
     char *dest;
 
     if (argc < 2)
@@ -101,7 +101,7 @@ int
 movewithshortname(src, dest)
     char *src, *dest;
 {
-    register char *shortname;
+    char *shortname;
     char target[MAXPATHLEN + 1];
 
     shortname = dname(src);
@@ -118,7 +118,7 @@ int
 query(char *prompt, ...)
 {
     va_list args;
-    register int i, c;
+    int i, c;
 
     va_start (args, prompt);
     vfprintf(stderr, prompt, args);
@@ -181,7 +181,7 @@ move(source, target)
      * between file systems.
      */
     if (ISLNK(s1)) {
-        register int m;
+        int m;
         char symln[MAXPATHLEN + 1];
 
         m = readlink(source, symln, sizeof (symln) - 1);
@@ -215,7 +215,7 @@ move(source, target)
         goto cleanup;
     }
     if (ISREG(s1)) {
-        register int fi, fo, n;
+        int fi, fo, n;
         struct timeval tv[2];
         char buf[MAXBSIZE];
 
@@ -272,9 +272,9 @@ cleanup:
 
 char *
 dname(name)
-    register char *name;
+    char *name;
 {
-    register char *p;
+    char *p;
 
     p = name;
     while (*p)

@@ -20,8 +20,8 @@ static int
 addg(as1, as2, as3)
 char    *as1, *as2, *as3;
 {
-	register char   *s1, *s2;
-	register int    c;
+	char   *s1, *s2;
+	int    c;
 
 	s2 = locstak() + BYTESPERWORD;
 	s1 = as1;
@@ -60,7 +60,7 @@ expand(as, rcnt)
 	int     count, dirf;
 	BOOL    dir = 0;
 	char    *rescan = NIL;
-	register char   *s, *cs;
+	char   *s, *cs;
 	struct argnod   *schain = gchain;
 	struct stat statb;
 	BOOL    slash;
@@ -73,7 +73,7 @@ expand(as, rcnt)
 	 * check for meta chars
 	 */
 	{
-		register BOOL open;
+		BOOL open;
 
 		slash = 0;
 		open = 0;
@@ -146,7 +146,7 @@ expand(as, rcnt)
 		*cs++ = XXX;
 	if (dir)                /* check for rescan */
 	{
-		register char *rs;
+		char *rs;
 		struct direct *e;
 
 		rs = cs;
@@ -187,7 +187,7 @@ expand(as, rcnt)
 
 		if (rescan)
 		{
-			register struct argnod  *rchain;
+			struct argnod  *rchain;
 
 			rchain = gchain;
 			gchain = schain;
@@ -205,7 +205,7 @@ expand(as, rcnt)
 	}
 
 	{
-		register char   c;
+		char   c;
 
 		s = as;
 		while (c = *s)
@@ -256,9 +256,9 @@ getdir(dirf)
 
 
 gmatch(s, p)
-register char   *s, *p;
+char   *s, *p;
 {
-	register int    scc;
+	int    scc;
 	char            c;
 
 	if (scc = /* @@@ *s++ */ cii( *s++))
@@ -349,7 +349,7 @@ register char   *s, *p;
 }
 
 makearg(args)
-	register struct argnod *args;
+	struct argnod *args;
 {
 	args->argnxt = gchain;
 	gchain = args;

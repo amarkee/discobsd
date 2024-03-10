@@ -24,16 +24,16 @@ extern int npty;
 
 extern int ptsopen(dev_t dev, int flag, int mode);
 extern int ptsclose(dev_t dev, int flag, int mode);
-extern int ptsread(dev_t dev, register struct uio *uio, int flag);
-extern int ptswrite(dev_t dev, register struct uio *uio, int flag);
+extern int ptsread(dev_t dev, struct uio *uio, int flag);
+extern int ptswrite(dev_t dev, struct uio *uio, int flag);
 extern void ptsstart(struct tty *tp);
 extern void ptcwakeup(struct tty *tp, int flag);
 extern int ptcopen(dev_t dev, int flag, int mode);
 extern int ptcclose(dev_t dev, int flag, int mode);
-extern int ptcread(dev_t dev, register struct uio *uio, int flag);
-extern void ptsstop(register struct tty *tp, int flush);
+extern int ptcread(dev_t dev, struct uio *uio, int flag);
+extern void ptsstop(struct tty *tp, int flush);
 extern int ptcselect(dev_t dev, int rw);
-extern int ptcwrite(dev_t dev, register struct uio *uio, int flag);
+extern int ptcwrite(dev_t dev, struct uio *uio, int flag);
 extern int ptyioctl(dev_t dev, u_int cmd, caddr_t data, int flag);
 
 #endif

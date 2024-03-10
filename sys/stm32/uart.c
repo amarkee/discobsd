@@ -150,11 +150,11 @@ uartinit(int unit)
 {
     register USART_TypeDef      *inst;
     register GPIO_TypeDef       *tx_port;
-    register u_int               tx_pin;
+    u_int               tx_pin;
     register GPIO_TypeDef       *rx_port;
-    register u_int               rx_pin;
-    register u_int               apb_div;
-    register u_int               af;
+    u_int               rx_pin;
+    u_int               apb_div;
+    u_int               af;
 
     if (unit < 0 || unit >= NUART)
         return;
@@ -277,9 +277,9 @@ uartinit(int unit)
 int
 uartopen(dev_t dev, int flag, int mode)
 {
-    register struct uart_inst *uip;
-    register struct tty *tp;
-    register int unit = minor(dev);
+    struct uart_inst *uip;
+    struct tty *tp;
+    int unit = minor(dev);
 
     if (unit < 0 || unit >= NUART)
         return (ENXIO);
@@ -324,8 +324,8 @@ uartopen(dev_t dev, int flag, int mode)
 int
 uartclose(dev_t dev, int flag, int mode)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -339,8 +339,8 @@ uartclose(dev_t dev, int flag, int mode)
 int
 uartread(dev_t dev, struct uio *uio, int flag)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -352,8 +352,8 @@ uartread(dev_t dev, struct uio *uio, int flag)
 int
 uartwrite(dev_t dev, struct uio *uio, int flag)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -364,8 +364,8 @@ uartwrite(dev_t dev, struct uio *uio, int flag)
 int
 uartselect(dev_t dev, int rw)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -377,9 +377,9 @@ uartselect(dev_t dev, int rw)
 int
 uartioctl(dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
-    register int error;
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
+    int error;
 
     if (! tp->t_addr)
         return ENODEV;
@@ -393,10 +393,10 @@ uartioctl(dev_t dev, u_int cmd, caddr_t addr, int flag)
 void
 uartintr(dev_t dev)
 {
-    register int c;
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
-    register struct uart_inst *uip;
+    int c;
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
+    struct uart_inst *uip;
 
     if (! tp->t_addr)
         return;
@@ -437,8 +437,8 @@ uartintr(dev_t dev)
 void
 uartstart(struct tty *tp)
 {
-    register struct uart_inst *uip;
-    register int c, s;
+    struct uart_inst *uip;
+    int c, s;
 
     if (! tp->t_addr)
         return;
@@ -490,7 +490,7 @@ uartputc(dev_t dev, char c)
     int unit = minor(dev);
     struct tty *tp = &uartttys[unit];
     register const struct uart_inst *uip = &uart[unit];
-    register int s, timo;
+    int s, timo;
 
     s = spltty();
 again:

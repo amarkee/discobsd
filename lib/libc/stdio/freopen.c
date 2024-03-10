@@ -15,7 +15,7 @@ freopen(file, mode, iop)
 	register const char *mode;
 	register FILE *iop;
 {
-	register int f, rw, oflags;
+	int f, rw, oflags;
 
 	rw = (mode[1] == '+');
 

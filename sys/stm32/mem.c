@@ -20,12 +20,12 @@ void kmemdev()
 int
 mmrw (dev, uio, flag)
     dev_t dev;
-    register struct uio *uio;
+    struct uio *uio;
     int flag;
 {
-    register struct iovec *iov;
+    struct iovec *iov;
     int error = 0;
-    register u_int c;
+    u_int c;
     caddr_t addr;
 
     //printf ("mmrw (dev=%u, len=%u, flag=%d)\n", dev, uio->uio_iov->iov_len, flag);

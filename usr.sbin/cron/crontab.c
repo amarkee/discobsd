@@ -275,7 +275,7 @@ static void
 edit_cmd() {
 	char		n[MAX_FNAME], q[MAX_TEMPSTR], *editor;
 	register FILE	*f;
-	register int	ch;
+	int	ch;
 	int		t, x;
 	struct stat	statbuf;
 	time_t		mtime;
@@ -469,7 +469,7 @@ static int
 replace_cmd() {
 	char	n[MAX_FNAME], envstr[MAX_ENVSTR], tn[MAX_FNAME];
 	register FILE	*tmp;
-	register int	ch;
+	int	ch;
 	int	eof;
 	entry	*e;
 	time_t	now = time(NULL);

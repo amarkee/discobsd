@@ -21,11 +21,10 @@ int     mpid;           /* generic for unique process id's */
  * It returns 1 in the new process, 0 in the old.
  */
 int
-newproc (isvfork)
-    int isvfork;
+newproc (int isvfork)
 {
-    register struct proc *child, *parent;
-    register int n;
+    struct proc *child, *parent;
+    int n;
     static int pidchecked = 0;
     struct file *fp;
 
@@ -193,11 +192,10 @@ again:
 }
 
 static void
-fork1 (isvfork)
-    int isvfork;
+fork1 (int isvfork)
 {
-    register int a;
-    register struct proc *p1, *p2;
+    int a;
+    struct proc *p1, *p2;
 
     a = 0;
     if (u.u_uid != 0) {
@@ -239,7 +237,7 @@ fork1 (isvfork)
  * fork system call
  */
 void
-fork()
+fork(void)
 {
     fork1 (0);
 }
@@ -248,7 +246,7 @@ fork()
  * vfork system call, fast version of fork
  */
 void
-vfork()
+vfork(void)
 {
     fork1 (1);
 }

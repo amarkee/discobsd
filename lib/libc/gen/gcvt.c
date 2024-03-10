@@ -11,8 +11,8 @@ int ndigit;
 char *buf;
 {
 	int sign, decpt;
-	register char *p1, *p2;
-	register int i;
+	char *p1, *p2;
+	int i;
 
 	p1 = ecvt(number, ndigit, &decpt, &sign);
 	p2 = buf;

@@ -68,11 +68,11 @@ gettmode()
 static void
 zap()
 {
-	register char	*namp;
+	char	*namp;
 	register bool	**fp;
-	register char	***sp;
+	char	***sp;
 #ifdef	DEBUG
-	register char	*cp;
+	char	*cp;
 #endif
 
 	namp = "ambsdadbeohchzinmimsncnsosulxbxnxtxsxx";

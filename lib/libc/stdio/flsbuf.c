@@ -13,8 +13,8 @@ int _flsbuf(c, iop)
     unsigned char c;
     register FILE *iop;
 {
-	register char *base;
-	register int n, rn;
+	char *base;
+	int n, rn;
 	char c1;
 	int size;
 	struct stat stbuf;
@@ -79,8 +79,8 @@ int
 fflush(iop)
 register FILE *iop;
 {
-	register char *base;
-	register int n;
+	char *base;
+	int n;
 
 	if ((iop->_flag&(_IONBF|_IOWRT))==_IOWRT
 	 && (base=iop->_base)!=NULL && (n=iop->_ptr-base)>0) {
@@ -98,7 +98,7 @@ int
 fclose(iop)
 	register FILE *iop;
 {
-	register int r;
+	int r;
 
 	r = EOF;
 	if (iop->_flag&(_IOREAD|_IOWRT|_IORW) && (iop->_flag&_IOSTRG)==0) {

@@ -52,11 +52,11 @@ int
 setvbuf(fp, buf, mode, size)
 	register FILE *fp;
 	char *buf;
-	register int mode;
+	int mode;
 	size_t size;
 {
 	int	ret;
-	register int flags;
+	int flags;
 
 /*
  * Verify arguments. Note, buf and size are ignored when setting _IONBF.

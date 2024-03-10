@@ -6,8 +6,8 @@ fgets(s, n, iop)
         int n;
         register FILE *iop;
 {
-	register int c = EOF;
-	register char *cs;
+	int c = EOF;
+	char *cs;
 
 	cs = s;
 	while (--n>0 && (c = getc(iop)) != EOF) {

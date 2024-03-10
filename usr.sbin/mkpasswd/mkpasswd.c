@@ -41,7 +41,7 @@ static char line[MAXLINELENGTH];
 static int
 scanpw()
 {
-	register char *cp;
+	char *cp;
 	char	*bp;
 
 	for (;;) {
@@ -91,8 +91,8 @@ main(argc, argv)
 	char **argv;
 {
 	extern int errno, optind;
-	register char *flag, *p, *t;
-	register int makeold;
+	char *flag, *p, *t;
+	int makeold;
 	FILE *oldfp;
 	DBM *dp;
 	datum key, content;
@@ -200,7 +200,7 @@ void
 rmall(fname)
 	char *fname;
 {
-	register char *p;
+	char *p;
 	char buf[MAXPATHLEN];
 
 	for (p = strcpy(buf, fname); *p; ++p);

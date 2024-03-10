@@ -217,7 +217,7 @@ lookup_mips_cp0sel_name (const struct
 
 static void
 print_insn_args (const char *d,
-    register unsigned long int l,
+    unsigned long int l,
     unsigned pc, FILE *stream, const struct mips_opcode *opp)
 {
     int op, delta;

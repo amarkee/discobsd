@@ -37,7 +37,7 @@ prp()
 prs(as)
 char    *as;
 {
-	register char   *s;
+	char   *s;
 
 	if (s = as)
 		write(output, s, length(s) - 1);
@@ -61,7 +61,7 @@ char    c;
 prt(t)
 long    t;
 {
-	register int hr, min, sec;
+	int hr, min, sec;
 	char *s;
 
 	if( hz < 0 ){
@@ -98,8 +98,8 @@ prn(n)
 
 itos(n)
 {
-	register char *abuf;
-	register unsigned a, i;
+	char *abuf;
+	unsigned a, i;
 	int pr, d;
 
 	abuf = numbuf;
@@ -119,9 +119,9 @@ itos(n)
 stoi(icp)
 char    *icp;
 {
-	register char   *cp = icp;
-	register int    r = 0;
-	register char   c;
+	char   *cp = icp;
+	int    r = 0;
+	char   c;
 
 	while ((c = *cp, digit(c)) && c && r >= 0)
 	{
@@ -182,7 +182,7 @@ void
 prs_buff(s)
 	char *s;
 {
-	register int len = length(s) - 1;
+	int len = length(s) - 1;
 
 	if (index + len >= BUFLEN)
 		flushb();
@@ -207,7 +207,7 @@ void
 prs_cntl(s)
 	char *s;
 {
-	register char *ptr = buffer;
+	char *ptr = buffer;
 	int c;
 
 	while (*s != '\0')

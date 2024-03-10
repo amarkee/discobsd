@@ -77,11 +77,11 @@ endoffile(filename)
 static void
 skip(dist, fd, fname)
     register u_long dist;       /* length in bytes, to skip */
-    register int    fd;     /* file descriptor */
+    int    fd;     /* file descriptor */
     char    *fname;         /* file name for error */
 {
-    register int    rlen;       /* read length */
-    register int    nread;
+    int    rlen;       /* read length */
+    int    nread;
 
     for (; dist; dist -= rlen) {
         rlen = MIN(dist, sizeof(buf1));
@@ -98,9 +98,9 @@ static void
 cmp()
 {
     register u_char *C1, *C2;   /* traveling pointers */
-    register int    cnt,        /* counter */
+    int    cnt,        /* counter */
             len1, len2; /* read lengths */
-    register long   byte,       /* byte count */
+    long   byte,       /* byte count */
             line;       /* line count */
     short   dfound = NO;        /* if difference found */
 
@@ -179,10 +179,10 @@ cmp()
  */
 static u_long
 otoi(C)
-    register char   *C;     /* argument string */
+    char   *C;     /* argument string */
 {
     register u_long val;        /* return value */
-    register int    base;       /* number base */
+    int    base;       /* number base */
 
     base = (*C == '0') ? 8 : 10;
     for (val = 0; isdigit(*C); ++C)

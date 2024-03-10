@@ -49,7 +49,7 @@ int argc;
 char **argv;
 {
     register FILE *fl;
-    register char *p;
+    char *p;
     char ap[MAXPATHLEN + 1];
 
     if (argc < 2) {
@@ -89,7 +89,7 @@ void
 type(file)
 char *file;
 {
-    register int j;
+    int j;
     int nl;
     char ch;
     struct stat mbuf;
@@ -457,7 +457,7 @@ shellscript(buf, sb)
     char buf[];
     struct stat *sb;
 {
-    register char *tp;
+    char *tp;
     char *cp, *xp, *index();
 
     cp = index(buf, '\n');

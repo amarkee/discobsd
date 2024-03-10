@@ -17,7 +17,7 @@
 int
 iblock(idesc, ilevel, isize)
     struct inodesc *idesc;
-    register int ilevel;
+    int ilevel;
     long isize;
 {
     register daddr_t *ap;
@@ -76,7 +76,7 @@ iblock(idesc, ilevel, isize)
 int
 ckinode(dp, idesc)
     DINODE *dp;
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
 {
     register daddr_t *ap;
     int ret, n;
@@ -137,7 +137,7 @@ ginode(inumber)
 
 void
 clri(idesc, s, flg)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
     char *s;
     int flg;
 {
@@ -192,7 +192,7 @@ pinode(ino)
     ino_t ino;
 {
     register DINODE *dp;
-    register char *p;
+    char *p;
     struct passwd *pw;
 
     printf(" I=%u ", ino);

@@ -158,7 +158,7 @@ const char cup2low[256] = {
 void
 diffreg()
 {
-	register int i, j;
+	int i, j;
 	FILE *f1, *f2;
 	char buf1[BUFSIZ], buf2[BUFSIZ];
 
@@ -284,7 +284,7 @@ char *
 copytemp()
 {
 	char buf[BUFSIZ];
-	register int i, f;
+	int i, f;
 
 	signal(SIGHUP, done);
 	signal(SIGINT, done);
@@ -332,8 +332,8 @@ prepare(i, fd)
 	int i;
 	FILE *fd;
 {
-	register struct line *p;
-	register int j, h;
+	struct line *p;
+	int j, h;
 
 	fseek(fd, (long)0, 0);
 	p = (struct line *)talloc(3*sizeof(line));
@@ -348,7 +348,7 @@ prepare(i, fd)
 void
 prune()
 {
-	register int i, j;
+	int i, j;
 	for(pref=0;pref<len[0]&&pref<len[1]&&
 		file[0][pref+1].value==file[1][pref+1].value;
 		pref++ ) ;
@@ -369,7 +369,7 @@ struct line *a, *b;
 int n, m;
 int *c;
 {
-	register int i, j;
+	int i, j;
 	i = j = 1;
 	while(i<=n && j<=m) {
 		if(a[i].value <b[j].value)
@@ -398,9 +398,9 @@ stone(a,n,b,c)
 int *a;
 int n;
 int *b;
-register int *c;
+int *c;
 {
-	register int i, k,y;
+	int i, k,y;
 	int j, l;
 	int oldc, tc;
 	int oldl;
@@ -440,7 +440,7 @@ int
 newcand(x,y,pred)
 int x, y, pred;
 {
-	register struct cand *q;
+	struct cand *q;
 	clist = (struct cand *)ralloc((char *)clist,++clen*sizeof(cand));
 	q = clist + clen -1;
 	q->x = x;
@@ -454,7 +454,7 @@ search(c, k, y)
 int *c;
 int k, y;
 {
-	register int i, j, l;
+	int i, j, l;
 	int t;
 	if(clist[c[k]].y<y)	/*quick look for typical case*/
 		return(k+1);
@@ -479,8 +479,8 @@ int
 unravel(p)
 int p;
 {
-	register int i;
-	register struct cand *q;
+	int i;
+	struct cand *q;
 	for(i=0; i<=len[0]; i++)
 		J[i] =	i<=pref ? i:
 			i>len[0]-suff ? i+len[1]-len[0]:
@@ -497,10 +497,10 @@ to confounding by hashing (which result in "jackpot")
 void
 check()
 {
-	register int i, j;
+	int i, j;
 	int jackpot;
 	long ctold, ctnew;
-	register int c,d;
+	int c,d;
 
 	if ((input[0] = fopen(file1,"r")) == NULL) {
 		perror(file1);
@@ -600,9 +600,9 @@ struct line *a;
 int n;
 {
 	struct line w;
-	register int j,m;
+	int j,m;
 	struct line *ai;
-	register struct line *aim;
+	struct line *aim;
 	int k;
 
 	if (n == 0)
@@ -637,8 +637,8 @@ struct line *f;
 int l;
 int *b;
 {
-	register int *a;
-	register int i;
+	int *a;
+	int i;
 	a = (int *)talloc((l+1)*sizeof(int));
 	for(i=1;i<=l;i++)
 		a[f[i].serial] = f[i].value;
@@ -651,7 +651,7 @@ int
 skipline(f)
 int f;
 {
-	register int i, c;
+	int i, c;
 
 	for(i=1;(c=getc(input[f]))!='\n';i++)
 		if (c < 0)
@@ -663,7 +663,7 @@ void
 output()
 {
 	int m;
-	register int i0, i1, j1;
+	int i0, i1, j1;
 	int j0;
 	input[0] = fopen(file1,"r");
 	input[1] = fopen(file2,"r");
@@ -838,10 +838,10 @@ FILE *lb;
 char *s;
 int oldfile;
 {
-	register int i, j;
-	register int c;
-	register int col;
-	register int nc;
+	int i, j;
+	int c;
+	int col;
+	int nc;
 	int oneflag = (*ifdef1!='\0') != (*ifdef2!='\0');
 
 	/*
@@ -916,10 +916,10 @@ int
 readhash(f)
 register FILE *f;
 {
-	register long sum;
-	register unsigned shift;
-	register int t;
-	register int space;
+	long sum;
+	unsigned shift;
+	int t;
+	int space;
 
 	sum = 1;
 	space = 0;
@@ -985,8 +985,8 @@ asciifile(f)
 	FILE *f;
 {
 	char buf[BUFSIZ];
-	register int cnt;
-	register char *cp;
+	int cnt;
+	char *cp;
 
 	fseek(f, (long)0, 0);
 	cnt = fread(buf, 1, BUFSIZ, f);
@@ -1008,11 +1008,11 @@ asciifile(f)
 void
 dump_context_vec()
 {
-	register int	a, b, c, d;
-	register char	ch;
+	int	a, b, c, d;
+	char	ch;
 	register struct	context_vec *cvp = context_vec_start;
-	register int	lowa, upb, lowc, upd;
-	register int	do_output;
+	int	lowa, upb, lowc, upd;
+	int	do_output;
 
 	if ( cvp > context_vec_ptr )
 		return;

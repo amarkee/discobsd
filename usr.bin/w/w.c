@@ -91,9 +91,9 @@ main(argc, argv)
     char **argv;
 {
     int days, hrs, mins;
-    register int i;
+    int i;
     char *cp;
-    register int curpid, empty;
+    int curpid, empty;
     size_t  size;
     int mib[2];
 
@@ -326,7 +326,7 @@ prttime(tim, tail)
     time_t tim;
     char *tail;
 {
-    register int didhrs = 0;
+    int didhrs = 0;
 
     if (tim >= 60) {
         printf("%3ld:", tim/60);
@@ -346,9 +346,9 @@ prttime(tim, tail)
 /* prtat prints a 12 hour time given a pointer to a time of day */
 void
 prtat(p)
-    register struct tm *p;
+    struct tm *p;
 {
-    register int pm;
+    int pm;
     time_t t;
 
     t = p -> tm_hour;
@@ -368,8 +368,8 @@ void
 readpr()
 {
     struct  kinfo_proc *kp;
-register struct proc    *p;
-register struct smproc *smp;
+struct proc    *p;
+struct smproc *smp;
     struct  kinfo_proc *kpt;
     int pn, nproc;
     long addr, daddr, saddr;
@@ -498,8 +498,8 @@ getargs(p)
 {
     int c, nbad;
     static char abuf[ARGLIST];
-    register int *ip;
-    register char *cp, *cp1;
+    int *ip;
+    char *cp, *cp1;
     char **ap;
     long addr;
 
@@ -570,8 +570,8 @@ getptr(adr)
 char **adr;
 {
     char *ptr;
-    register char *p, *pa;
-    register int i;
+    char *p, *pa;
+    int i;
 
     ptr = 0;
     pa = (char *)adr;
@@ -585,7 +585,7 @@ int
 getbyte(adr)
 char *adr;
 {
-    register struct addrmap *amap = &datmap;
+    struct addrmap *amap = &datmap;
     char b;
     long saddr;
 

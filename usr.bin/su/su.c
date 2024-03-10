@@ -32,8 +32,8 @@ void
 setenvv(ename, eval, buf)
     char *ename, *eval, *buf;
 {
-    register char *cp, *dp;
-    register char **ep = environ;
+    char *cp, *dp;
+    char **ep = environ;
 
     /*
      * this assumes an environment variable "ename" already exists
@@ -53,8 +53,8 @@ char *
 getenvv(ename)
     char *ename;
 {
-    register char *cp, *dp;
-    register char **ep = environ;
+    char *cp, *dp;
+    char **ep = environ;
 
     while (dp = *ep++) {
         for (cp = ename; *cp == *dp && *cp; cp++, dp++)
@@ -73,7 +73,7 @@ main(argc,argv)
     char *password;
     char buf[1000];
     FILE *fp;
-    register char *p;
+    char *p;
 
     openlog("su", LOG_ODELAY, LOG_AUTH);
 

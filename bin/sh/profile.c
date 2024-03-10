@@ -4,7 +4,7 @@ monitor(lowpc, highpc, buf, bufsiz, cntsiz)
 char *lowpc, *highpc;
 int *buf, bufsiz;
 {
-	register o;
+	int o;
 	static *sbuf, ssiz;
 
 	if (lowpc == NIL) {

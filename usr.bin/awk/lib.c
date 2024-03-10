@@ -48,7 +48,7 @@ error(int f, char *s, ...)
 
 getrec()
 {
-	register char *rr;
+	char *rr;
 	extern int svargc;
 	extern char **svargv;
 	register c, sep;
@@ -124,7 +124,7 @@ char *s;
 
 fldbld()
 {
-	register char *r, *fr, sep;
+	char *r, *fr, sep;
 	int i, j;
 
 	r = record;
@@ -186,7 +186,7 @@ fldbld()
 recbld()
 {
 	int i;
-	register char *r, *p;
+	char *r, *p;
 
 	if (donefld == 0 || donerec == 1)
 		return;
@@ -231,7 +231,7 @@ PUTS(s)
 #define	MAXEXPON	38	/* maximum exponenet for fp number */
 
 isnumber(s)
-register char *s;
+char *s;
 {
 	register d1, d2;
 	int point;

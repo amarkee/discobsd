@@ -39,8 +39,8 @@ static void
 qst(base, max)
 	char *base, *max;
 {
-	register char c, *i, *j, *jj;
-	register int ii;
+	char c, *i, *j, *jj;
+	int ii;
 	char *mid, *tmp;
 	unsigned int lo, hi;
 
@@ -147,7 +147,7 @@ qsort(base, n, size, compar)
 	int	size;
 	int	(*compar)();
 {
-	register char c, *i, *j, *lo, *hi;
+	char c, *i, *j, *lo, *hi;
 	char *min, *max;
 
 	if (n <= 1)

@@ -156,7 +156,7 @@ term(status)
 void
 flsh()
 {
-    register int c;
+    int c;
 
     if(obc) {
         if(obc == obs)
@@ -175,7 +175,7 @@ int
 match(s)
 char *s;
 {
-    register char *cs;
+    char *cs;
 
     cs = string;
     while(*cs++ == *s)
@@ -194,7 +194,7 @@ long
 number(big)
     long big;
 {
-    register char *cs;
+    char *cs;
     long n;
 
     cs = string;
@@ -235,7 +235,7 @@ void
 cnull(cc)
     int cc;
 {
-    register int c;
+    int c;
 
     c = cc;
     if(cflag&UCASE && c>='a' && c<='z')
@@ -261,7 +261,7 @@ void
 ascii(cc)
     int cc;
 {
-    register int c;
+    int c;
 
     c = etoa[cc] & 0377;
     if(cbs == 0) {
@@ -290,7 +290,7 @@ void
 unblock(cc)
     int cc;
 {
-    register int c;
+    int c;
 
     c = cc & 0377;
     if(cbs == 0) {
@@ -319,7 +319,7 @@ void
 ebcdic(cc)
     int cc;
 {
-    register int c;
+    int c;
 
     c = cc;
     if(cflag&UCASE && c>='a' && c<='z')
@@ -350,7 +350,7 @@ void
 ibm(cc)
     int cc;
 {
-    register int c;
+    int c;
 
     c = cc;
     if(cflag&UCASE && c>='a' && c<='z')
@@ -381,7 +381,7 @@ void
 block(cc)
     int cc;
 {
-    register int c;
+    int c;
 
     c = cc;
     if(cflag&UCASE && c>='a' && c<='z')
@@ -423,8 +423,8 @@ int argc;
 char    **argv;
 {
     void (*conv)(); // XXX Return type was 'int'.
-    register char *ip;
-    register int c;
+    char *ip;
+    int c;
     int a;
 
     conv = null;

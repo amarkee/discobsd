@@ -11,7 +11,7 @@ void
 bcopy(src0, dst0, length)
 	register const void *src0;
 	register void *dst0;
-	register unsigned int length;
+	unsigned int length;
 {
 	const char *src = src0;
 	char *dst = dst0;

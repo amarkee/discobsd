@@ -125,7 +125,7 @@ out:
     if (argc<=0)
         exit(2);
     if (yflag) {
-        register char *p, *s;
+        char *p, *s;
         for (s = ybuf, p = *argv; *p; ) {
             if (*p == '\\') {
                 *s++ = *p++;
@@ -164,8 +164,8 @@ void
 compile(astr)
 char *astr;
 {
-    register int c;
-    register char *ep, *sp;
+    int c;
+    char *ep, *sp;
     char *cstart;
     char *lastep;
     int cclcnt;
@@ -297,8 +297,8 @@ void
 execute(file)
 char *file;
 {
-    register char *p1, *p2;
-    register int c;
+    char *p1, *p2;
+    int c;
 
     if (file) {
         if (freopen(file, "r", stdin) == NULL) {
@@ -361,9 +361,9 @@ char *file;
 
 int
 advance(lp, ep)
-register char *lp, *ep;
+char *lp, *ep;
 {
-    register char *curlp;
+    char *curlp;
     char c;
     char *bbeg;
     int ct;
@@ -521,7 +521,7 @@ ecmp(a, b, count)
 char    *a, *b;
 int count;
 {
-    register int cc = count;
+    int cc = count;
     while(cc--)
         if(*a++ != *b++)    return(0);
     return(1);

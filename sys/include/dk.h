@@ -7,6 +7,8 @@
 /*
  * Instrumentation
  */
+#ifndef _SYS_DK_H_
+#define _SYS_DK_H_
 #define CPUSTATES   4
 
 #define CP_USER     0
@@ -28,4 +30,6 @@ extern int     dk_n;                   /* number of dk numbers assigned so far *
 
 extern long    tk_nin;                 /* number of tty characters input */
 extern long    tk_nout;                /* number of tty characters output */
+#endif
+
 #endif

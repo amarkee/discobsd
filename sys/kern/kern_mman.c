@@ -10,12 +10,12 @@
 #include <sys/systm.h>
 
 void
-brk()
+brk(void)
 {
     struct a {
         int naddr;
     };
-    register int newsize, d;
+    int newsize, d;
 
     /* set newsize to new data size */
     newsize = ((struct a*)u.u_arg)->naddr - u.u_procp->p_daddr;

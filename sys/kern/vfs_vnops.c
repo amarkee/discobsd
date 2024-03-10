@@ -61,12 +61,11 @@
  * (maknode) routine.
  */
 int
-vn_open (ndp, fmode, cmode)
-    register struct nameidata *ndp;
-    int fmode, cmode;
+vn_open (struct nameidata *ndp,
+    int fmode, int cmode)
 {
-    register struct inode *ip;
-    register int error;
+    struct inode *ip;
+    int error;
 
     if (fmode & O_CREAT) {
         if ((fmode & O_EXCL) == 0)
@@ -171,17 +170,19 @@ retuerr:
  * while vn_closefile (called from the closef routine for DTYPE_INODE inodes)
  * takes a "file *" and extracts the flags from the file structure.
  */
-int
-vn_close(ip, flags)
-    register struct inode *ip;
-    int flags;
+/* TODO: Determine if this is used */
+#if 0
+static int
+vn_close(struct inode *ip,
+    int flags)
 {
-    register int error;
+    int error;
 
     error = closei(ip, flags);
     irele(ip);          /* assumes inode is unlocked */
     return(error);
 }
+#endif
 
 /*
  * File table inode close routine.  This is called from 'closef()' via the
@@ -195,10 +196,9 @@ vn_close(ip, flags)
  * and call closei() and irele() ourself.
  */
 int
-vn_closefile(fp)
-    register struct file *fp;
+vn_closefile(struct file *fp)
 {
-    register struct inode *ip = (struct inode *)fp->f_data;
+    struct inode *ip = (struct inode *)fp->f_data;
 
     /*
      * Need to clear the inode pointer in the file structure so that the

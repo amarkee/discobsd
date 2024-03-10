@@ -78,7 +78,7 @@ main(argc, argv)
 	static char *skip1, *skip2;
 	int ch, end, fieldwidth, precision;
 	char convch, nextch, *format, *start;
-	register char *fmt;
+	char *fmt;
 
 	while ((ch = getopt(argc, argv, "")) != EOF)
 		switch (ch) {
@@ -211,11 +211,11 @@ next:		for (start = fmt;; ++fmt) {
 
 static char *
 mklong(str, ch)
-	register char *str;
+	char *str;
 	int ch;
 {
 	static char copy[64];
-	register int len;
+	int len;
 
 	if (ch == 'X')		/* XXX */
 		ch = 'x';
@@ -229,10 +229,10 @@ mklong(str, ch)
 
 static void
 escape(fmt)
-	register char *fmt;
+	char *fmt;
 {
-	register char *store;
-	register int value;
+	char *store;
+	int value;
 	int c;
 
 	for (store = fmt; c = *fmt; ++fmt, ++store) {
@@ -324,7 +324,7 @@ getint(ip)
 
 static int
 getlong(lp)
-	register long *lp;
+	long *lp;
 {
 	long val;
 	char *ep;
@@ -373,7 +373,7 @@ getdouble()
 static int
 asciicode()
 {
-	register int ch;
+	int ch;
 
 	ch = **gargv;
 	if (ch == '\'' || ch == '"')

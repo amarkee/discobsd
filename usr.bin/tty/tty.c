@@ -11,7 +11,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-    register char *p;
+    char *p;
 
     p = ttyname(0);
     if(argc==2 && !strcmp(argv[1], "-s"))

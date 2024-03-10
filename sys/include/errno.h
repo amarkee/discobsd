@@ -5,6 +5,8 @@
  *
  *  @(#)errno.h 7.1.3 (2.11BSD) 1999/9/6
  */
+#ifndef _SYS_ERRNO_H_
+#define _SYS_ERRNO_H_
 
 #ifndef KERNEL
 extern  int errno;              /* global error number */
@@ -118,4 +120,6 @@ extern  int errno;              /* global error number */
 /* pseudo-errors returned inside kernel to modify return back to user mode */
 #define ERESTART        -1      /* restart syscall */
 #define EJUSTRETURN     -2      /* don't modify regs, just return */
+#endif
+
 #endif

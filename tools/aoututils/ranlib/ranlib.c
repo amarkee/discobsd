@@ -117,7 +117,7 @@ int sgets(buf, n, fp)
 	int n;
 	register FILE *fp;
 {
-	register int i, c;
+	int i, c;
 
 	n--;				/* room for null */
 	for (i = 0; i < n; i++) {
@@ -133,7 +133,7 @@ int sgets(buf, n, fp)
 unsigned int fgetword (f)
     register FILE *f;
 {
-        register unsigned int h;
+        unsigned int h;
 
         h = getc (f);
         h |= getc (f) << 8;
@@ -153,11 +153,11 @@ unsigned int fgetword (f)
  */
 int fgetsym (fi, name, value, type)
         register FILE *fi;
-        register char *name;
+        char *name;
         unsigned *value;
         unsigned short *type;
 {
-        register int len;
+        int len;
         unsigned nbytes;
 
         len = getc (fi);
@@ -188,7 +188,7 @@ void rexec(rfd, wfd)
 {
 	register RLIB *rp;
 	long nsyms;
-	register int nr, symlen;
+	int nr, symlen;
 	struct exec ebuf;
 	off_t r_off, w_off;
 
@@ -458,7 +458,7 @@ int main(argc, argv)
 char *rname(path)
 	char *path;
 {
-	register char *ind;
+	char *ind;
 
 	ind = rindex(path, '/');
 	if (! ind)

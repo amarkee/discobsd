@@ -8,7 +8,7 @@ int
 knlist(list)
 	struct nlist *list;
 {
-	register struct nlist *p;
+	struct nlist *p;
 	int  mib[2], entries = 0;
 	size_t size;
 

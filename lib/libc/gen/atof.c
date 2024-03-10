@@ -20,13 +20,13 @@
 
 double
 atof(p)
-register char *p;
+char *p;
 {
-	register int c;
+	int c;
 	double fl, flexp, exp5;
 	double big = BIG;
 	int nd;
-	register int eexp, exp, neg, negexp, bexp;
+	int eexp, exp, neg, negexp, bexp;
 
 	neg = 1;
 	while((c = *p++) == ' ')

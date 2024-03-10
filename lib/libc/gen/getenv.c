@@ -36,8 +36,8 @@ _findenv(name, offset)
 	register const char *name;
 	int	*offset;
 {
-	register int	len;
-	register char	**P, *C;
+	int	len;
+	char	**P, *C;
 	register const char *E;
 
         len = 0;

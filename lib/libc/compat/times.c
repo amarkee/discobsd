@@ -10,14 +10,14 @@
 
 static long
 scale60(tvp)
-	register struct timeval *tvp;
+	struct timeval *tvp;
 {
 	return (tvp->tv_sec * 60 + tvp->tv_usec / 16667);
 }
 
 int
 times(tmsp)
-	register struct tms *tmsp;
+	struct tms *tmsp;
 {
 	struct rusage ru;
 	long scale60();

@@ -64,9 +64,9 @@ extern char *archive;			/* archive name */
  */
 int
 contents(argv)
-	register char **argv;
+	char **argv;
 {
-	register int afd, all;
+	int afd, all;
 	struct tm *tp;
 	char *file, buf[25];
 

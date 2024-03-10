@@ -80,8 +80,8 @@ getlin(fp, loc, maxlen)
     char *loc;
     int maxlen;
 {
-    register int n;
-    register char *p, *lastloc;
+    int n;
+    char *p, *lastloc;
 
     p = loc;
     lastloc = &p[maxlen-1];
@@ -119,7 +119,7 @@ getblk(bp, blk)
     register BUFAREA *bp;
     daddr_t blk;
 {
-    register struct filecntl *fcp;
+    struct filecntl *fcp;
 
     if (bp == NULL) {
         bp = search(blk);
@@ -192,13 +192,13 @@ ckfini()
 
 int
 bread(fcp, buf, blk, size)
-    register struct filecntl *fcp;
+    struct filecntl *fcp;
     char *buf;
     daddr_t blk;
     int size;
 {
     char *cp;
-    register int i, errs;
+    int i, errs;
     off_t offset;
 
     offset = ((off_t) blk << DEV_BSHIFT) + fcp->offset;
@@ -227,7 +227,7 @@ bread(fcp, buf, blk, size)
 
 void
 bwrite(fcp, buf, blk, size)
-    register struct filecntl *fcp;
+    struct filecntl *fcp;
     char *buf;
     daddr_t blk;
     int size;
@@ -284,7 +284,7 @@ getpathname(namebuf, curdir, ino)
     ino_t curdir, ino;
 {
     int len, st;
-    register char *cp;
+    char *cp;
     struct inodesc idesc;
 
     st = getstate(ino);
@@ -368,7 +368,7 @@ voidquit (sig)
  */
 int
 dofix(idesc, msg)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
     char *msg;
 {
     switch (idesc->id_fix) {
@@ -459,8 +459,8 @@ dostate(ino, s,flg)
     ino_t ino;
     int s, flg;
 {
-    register char *p;
-    register unsigned byte, shift;
+    char *p;
+    unsigned byte, shift;
     BUFAREA *bp;
 
     byte = ino / STATEPB;
@@ -492,8 +492,8 @@ domap(blk, flg)
     daddr_t blk;
     int flg;
 {
-    register char *p;
-    register unsigned n;
+    char *p;
+    unsigned n;
     register BUFAREA *bp;
     off_t byte;
 

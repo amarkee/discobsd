@@ -36,7 +36,7 @@ char *
 ttoa(tval)
 	time_t tval;
 {
-	register struct tm *tp;
+	struct tm *tp;
 	static char tbuf[50];
 
 	if (tval) {
@@ -54,7 +54,7 @@ atot(p, store)
 	char *p;
 	time_t *store;
 {
-	register char *t, **mp;
+	char *t, **mp;
 	static struct tm *lt;
 	time_t tval, time();
 	int day, month, year;
@@ -118,7 +118,7 @@ print(fp, pw)
 	register FILE *fp;
 	struct passwd *pw;
 {
-	register char *p;
+	char *p;
 	char	*bp;
 	char *getusershell(), *ttoa();
 

@@ -6,7 +6,7 @@ struct group *
 getgrnam(name)
         register const char *name;
 {
-	register struct group *p;
+	struct group *p;
 
 	setgrent();
 	while ((p = getgrent()) && strcmp(p->gr_name, name));

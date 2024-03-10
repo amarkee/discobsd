@@ -8,8 +8,8 @@
 long ftell(iop)
         register FILE *iop;
 {
-	register long tres;
-	register int adjust;
+	long tres;
+	int adjust;
 
 	if (iop->_cnt < 0)
 		iop->_cnt = 0;

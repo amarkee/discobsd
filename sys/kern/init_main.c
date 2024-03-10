@@ -34,10 +34,10 @@ int cfreecount;
  * Initialize hash links for buffers.
  */
 static void
-bhinit()
+bhinit(void)
 {
-    register int i;
-    register struct bufhd *bp;
+    int i;
+    struct bufhd *bp;
 
     for (bp = bufhash, i = 0; i < BUFHSZ; i++, bp++)
         bp->b_forw = bp->b_back = (struct buf *)bp;
@@ -48,10 +48,10 @@ bhinit()
  * all buffers and setting all device buffer lists to empty.
  */
 static void
-binit()
+binit(void)
 {
-    register struct buf *bp;
-    register int i;
+    struct buf *bp;
+    int i;
     caddr_t paddr;
 
     for (bp = bfreelist; bp < &bfreelist[BQUEUES]; bp++)
@@ -73,10 +73,10 @@ binit()
  * number of character devices. (Once-only routine)
  */
 static void
-cinit()
+cinit(void)
 {
-    register int ccp;
-    register struct cblock *cp;
+    int ccp;
+    struct cblock *cp;
 
     ccp = (int)cfree;
     ccp = (ccp + CROUND) & ~CROUND;
@@ -101,11 +101,11 @@ cinit()
  *       - process 1 execute bootstrap
  */
 int
-main()
+main(void)
 {
-    register struct proc *p;
-    register int i;
-    register struct fs *fs = NULL;
+    struct proc *p;
+    int i;
+    struct fs *fs = NULL;
     int s __attribute__((unused));
 
     startup();

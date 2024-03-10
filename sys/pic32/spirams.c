@@ -40,7 +40,7 @@ int spirams_dkindex;                    /* disk index for statistics */
 unsigned int spir_read_block(unsigned int chip, unsigned int address, unsigned int length, char *data)
 {
     struct spiio *io = &spirams_io[chip];
-    register unsigned int cs = 0;
+    unsigned int cs = 0;
 
     switch (chip) {
     case 0:
@@ -185,10 +185,10 @@ unsigned int spir_read_block(unsigned int chip, unsigned int address, unsigned i
 
 int spirams_read(unsigned int offset, char *data, unsigned int bcount)
 {
-    register unsigned int chip;
-    register unsigned int toread;
-    register unsigned int address;
-    register unsigned int pass = 0;
+    unsigned int chip;
+    unsigned int toread;
+    unsigned int address;
+    unsigned int pass = 0;
 
     while (bcount > 0) {
         pass++;
@@ -215,7 +215,7 @@ int spirams_read(unsigned int offset, char *data, unsigned int bcount)
 unsigned int spir_write_block(unsigned int chip, unsigned int address, unsigned int length, char *data)
 {
     struct spiio *io = &spirams_io[chip];
-    register unsigned int cs = 0;
+    unsigned int cs = 0;
     char blank __attribute__((unused));
 
     switch (chip) {
@@ -288,10 +288,10 @@ unsigned int spir_write_block(unsigned int chip, unsigned int address, unsigned 
 
 int spirams_write (unsigned int offset, char *data, unsigned bcount)
 {
-    register unsigned int chip;
-    register unsigned int address;
-    register unsigned int towrite;
-    register unsigned int pass = 0;
+    unsigned int chip;
+    unsigned int address;
+    unsigned int towrite;
+    unsigned int pass = 0;
 
     while (bcount > 0) {
         pass++;

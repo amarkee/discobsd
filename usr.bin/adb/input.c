@@ -70,8 +70,8 @@ void
 getformat(deformat)
     char *deformat;
 {
-    register char   *fptr;
-    register int    quote;
+    char   *fptr;
+    int    quote;
 
     fptr = deformat;
     quote = FALSE;

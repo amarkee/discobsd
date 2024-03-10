@@ -253,7 +253,7 @@ const int nchrdev = sizeof(cdevsw) / sizeof(cdevsw[0]) - 1;
  */
 int
 iskmemdev(dev)
-    register dev_t dev;
+    dev_t dev;
 {
     if (major(dev) == 1 && (minor(dev) == 0 || minor(dev) == 1))
         return 1;
@@ -268,7 +268,7 @@ iskmemdev(dev)
 int
 isdisk(dev, type)
     dev_t dev;
-    register int type;
+    int type;
 {
     if (type != IFBLK)
         return 0;

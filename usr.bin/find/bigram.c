@@ -17,7 +17,7 @@ char oldpath[MAXPATH] = " ";
 int
 main ( )
 {
-  	register int count, j;
+  	int count, j;
 
      	while ( gets ( path ) != NULL ) {
 
@@ -40,7 +40,7 @@ int
 prefix_length ( s1, s2 )	/* return length of longest common prefix */
 	char *s1, *s2;		/* ... of strings s1 and s2 */
 {
-	register char *start;
+	char *start;
 
     	for ( start = s1; *s1 == *s2; s1++, s2++ )
 		if ( *s1 == NULL )

@@ -15,7 +15,7 @@ fopen(file, mode)
 	register const char *mode;
 {
 	register FILE *iop;
-	register int f, rw, oflags;
+	int f, rw, oflags;
 	extern FILE *_findiop();
 
 	iop = _findiop();

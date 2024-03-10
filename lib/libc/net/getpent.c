@@ -47,7 +47,7 @@ struct protoent *
 getprotoent()
 {
 	char *p;
-	register char *cp, **q;
+	char *cp, **q;
 
 	if (protof == NULL && (protof = fopen(PROTODB, "r" )) == NULL)
 		return (NULL);
@@ -92,10 +92,10 @@ again:
 
 static char *
 any(cp, match)
-	register char *cp;
+	char *cp;
 	char *match;
 {
-	register char *mp, c;
+	char *mp, c;
 
 	while (c = *cp) {
 		for (mp = match; *mp; mp++)

@@ -177,7 +177,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-    register char *p1, *p2;
+    char *p1, *p2;
     sig_t oldintr;
 
     oldquit = signal (SIGQUIT, SIG_IGN);
@@ -230,7 +230,7 @@ void
 commands()
 {
     int getfile(), gettty();
-    register int *a1, c;
+    int *a1, c;
 
     for (;;) {
     if (pflag) {
@@ -439,7 +439,7 @@ commands()
 int *
 address()
 {
-    register int *a1, minus, c;
+    int *a1, minus, c;
     int n, relerr;
 
     minus = 0;
@@ -571,7 +571,7 @@ nonzero()
 void
 newline()
 {
-    register int c;
+    int c;
 
     if ((c = getchr()) == '\n')
         return;
@@ -589,8 +589,8 @@ void
 filename(comm)
     int comm;
 {
-    register char *p1, *p2;
-    register int c;
+    char *p1, *p2;
+    int c;
 
     count = 0;
     c = getchr();
@@ -639,7 +639,7 @@ void
 error(s)
 char *s;
 {
-    register int c;
+    int c;
 
     wrapp = 0;
     listf = 0;
@@ -686,9 +686,9 @@ getchr()
 int
 gettty()
 {
-    register int c;
-    register char *gf;
-    register char *p;
+    int c;
+    char *gf;
+    char *p;
 
     p = linebuf;
     gf = globp;
@@ -713,8 +713,8 @@ gettty()
 int
 getfile()
 {
-    register int c;
-    register char *lp, *fp;
+    int c;
+    char *lp, *fp;
 
     lp = linebuf;
     fp = nextip;
@@ -749,8 +749,8 @@ void
 putfile()
 {
     int *a1, n;
-    register char *fp, *lp;
-    register int nib;
+    char *fp, *lp;
+    int nib;
 
     nib = 512;
     fp = genbuf;
@@ -786,7 +786,7 @@ append(f, a)
 int *a;
 int (*f)();
 {
-    register int *a1, *a2, *rdot;
+    int *a1, *a2, *rdot;
     int nline, tl;
 
     nline = 0;
@@ -818,7 +818,7 @@ int (*f)();
 void
 callunix()
 {
-    register int pid, rpid;
+    int pid, rpid;
     sig_t savint;
     int retcode;
 
@@ -849,7 +849,7 @@ void
 rdelete(ad1, ad2)
 int *ad1, *ad2;
 {
-    register int *a1, *a2, *a3;
+    int *a1, *a2, *a3;
 
     a1 = ad1;
     a2 = ad2+1;
@@ -868,7 +868,7 @@ int *ad1, *ad2;
 void
 gdelete()
 {
-    register int *a1, *a2, *a3;
+    int *a1, *a2, *a3;
 
     a3 = dol;
     for (a1=zero+1; (*a1&01)==0; a1++)
@@ -891,8 +891,8 @@ char *
 getline(tl)
     int tl;
 {
-    register char *bp, *lp;
-    register int nl;
+    char *bp, *lp;
+    int nl;
 
     lp = linebuf;
     bp = getblock(tl, READ);
@@ -909,8 +909,8 @@ getline(tl)
 int
 putline()
 {
-    register char *bp, *lp;
-    register int nl;
+    char *bp, *lp;
+    int nl;
     int tl;
 
     fchange = 1;
@@ -939,9 +939,9 @@ char *
 getblock(atl, iof)
     int atl, iof;
 {
-    register int bno, off;
-    register char *p1, *p2;
-    register int n;
+    int bno, off;
+    char *p1, *p2;
+    int n;
 
     bno = (atl>>8)&0377;
     off = (atl<<1)&0774;
@@ -987,7 +987,7 @@ int (*iofcn)();
 void
 init()
 {
-    register int *markp;
+    int *markp;
 
     close(tfile);
     tline = 2;
@@ -1007,9 +1007,9 @@ void
 global(k)
     int k;
 {
-    register char *gp;
-    register int c;
-    register int *a1;
+    char *gp;
+    int c;
+    int *a1;
     char globuf[GBSIZE];
 
     if (globp)
@@ -1060,8 +1060,8 @@ global(k)
 void
 join()
 {
-    register char *gp, *lp;
-    register int *a1;
+    char *gp, *lp;
+    int *a1;
 
     gp = genbuf;
     for (a1=addr1; a1<=addr2; a1++) {
@@ -1084,7 +1084,7 @@ void
 substitute(inglob)
     int inglob;
 {
-    register int *markp, *a1, nl;
+    int *markp, *a1, nl;
     int gsubf;
     int getsub();
 
@@ -1124,8 +1124,8 @@ substitute(inglob)
 int
 compsub()
 {
-    register int seof, c;
-    register char *p;
+    int seof, c;
+    char *p;
 
     if ((seof = getchr()) == '\n' || seof == ' ')
         error(Q);
@@ -1160,7 +1160,7 @@ compsub()
 int
 getsub()
 {
-    register char *p1, *p2;
+    char *p1, *p2;
 
     p1 = linebuf;
     if ((p2 = linebp) == 0)
@@ -1174,7 +1174,7 @@ getsub()
 void
 dosub()
 {
-    register char *lp, *sp, *rp;
+    char *lp, *sp, *rp;
     int c;
 
     lp = linebuf;
@@ -1207,7 +1207,7 @@ dosub()
 
 char *
 place(sp, l1, l2)
-register char *sp, *l1, *l2;
+char *sp, *l1, *l2;
 {
     while (l1 < l2) {
         *sp++ = *l1++;
@@ -1221,7 +1221,7 @@ void
 move(cflag)
     int cflag;
 {
-    register int *adt, *ad1, *ad2;
+    int *adt, *ad1, *ad2;
     int getcopy();
 
     setdot();
@@ -1264,9 +1264,9 @@ move(cflag)
 
 void
 reverse(a1, a2)
-register int *a1, *a2;
+int *a1, *a2;
 {
-    register int t;
+    int t;
 
     for (;;) {
         t = *--a2;
@@ -1290,8 +1290,8 @@ void
 compile(aeof)
     int aeof;
 {
-    register int eof, c;
-    register char *ep;
+    int eof, c;
+    char *ep;
     char *lastep;
     char bracket[NBRA], *bracketp;
     int cclcnt;
@@ -1422,7 +1422,7 @@ execute(gf, addr)
 int gf;
 int *addr;
 {
-    register char *p1, *p2, c;
+    char *p1, *p2, c;
 
     for (c=0; c<NBRA; c++) {
         braslist[c] = 0;
@@ -1472,9 +1472,9 @@ int *addr;
 
 int
 advance(lp, ep)
-register char *ep, *lp;
+char *ep, *lp;
 {
-    register char *curlp;
+    char *curlp;
     int i;
 
     for (;;) switch (*ep++) {
@@ -1580,10 +1580,10 @@ register char *ep, *lp;
 
 int
 backref(i, lp)
-register int i;
-register char *lp;
+int i;
+char *lp;
 {
-    register char *bp;
+    char *bp;
 
     bp = braslist[i];
     while (*bp++ == *lp++)
@@ -1594,10 +1594,10 @@ register char *lp;
 
 int
 cclass(set, c, af)
-register char *set, c;
+char *set, c;
 int af;
 {
-    register int n;
+    int n;
 
     if (c==0)
         return(0);
@@ -1611,7 +1611,7 @@ int af;
 void
 putd()
 {
-    register int r;
+    int r;
 
     r = count%10;
     count /= 10;
@@ -1622,7 +1622,7 @@ putd()
 
 void
 putstr (sp)
-register char *sp;
+char *sp;
 {
     col = 0;
     while (*sp)
@@ -1637,8 +1637,8 @@ void
 putchr(ac)
     int ac;
 {
-    register char *lp;
-    register int c;
+    char *lp;
+    int c;
 
     lp = linp;
     c = ac;

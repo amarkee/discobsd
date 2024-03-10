@@ -13,7 +13,7 @@ fwrite(vptr, size, count, iop)
 	register FILE *iop;
 {
 	register const char *ptr = vptr;
-	register unsigned s;
+	unsigned s;
 
 	s = size * count;
 	if (iop->_flag & _IOLBF)

@@ -11,7 +11,7 @@ char *
 setbrk(incr)
 int	incr;
 {
-	register char *a = sbrk(incr);
+	char *a = sbrk(incr);
 
 	brkend = a + incr;
 	return(a);

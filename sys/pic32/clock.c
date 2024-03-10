@@ -10,7 +10,7 @@
  * Setup core timer for `hz' timer interrupts per second.
  */
 void
-clkstart()
+clkstart(void)
 {
     unsigned count = mips_read_c0_register (C0_COUNT, 0);
 

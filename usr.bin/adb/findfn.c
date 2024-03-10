@@ -4,7 +4,7 @@ int
 findroutine(cframe)
     long cframe;
 {
-    register int narg, inst;
+    int narg, inst;
     int lastpc, back2;
     char v;
 

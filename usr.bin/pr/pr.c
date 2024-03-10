@@ -184,9 +184,9 @@ char *fp;
 char **argp;
 {
     struct stat sbuf;
-    register int sncol;
-    register char *sheader;
-    register char *cbuf;
+    int sncol;
+    char *sheader;
+    char *cbuf;
     char linebuf[150], *cp;
 
     if (ntflg)
@@ -276,7 +276,7 @@ void
 mopen(ap)
 char **ap;
 {
-    register char **p, *p1;
+    char **p, *p1;
 
     p = ap;
     while((p1 = *p) && p++ <= lastarg) {
@@ -296,7 +296,7 @@ char **ap;
 void
 putpage()
 {
-    register int lastcol, i, c;
+    int lastcol, i, c;
     int j;
 
     if (ncol==0) {
@@ -342,8 +342,8 @@ putpage()
 void
 nexbuf()
 {
-    register int n;
-    register char *rbufp;
+    int n;
+    char *rbufp;
 
     rbufp = bufp;
     n = &buffer[BUFS] - rbufp;
@@ -366,8 +366,8 @@ int
 tpgetc(ai)
     int ai;
 {
-    register char **p;
-    register int c, i;
+    char **p;
+    int c, i;
 
     i = ai;
     if (mflg) {
@@ -403,7 +403,7 @@ int
 pgetc(i)
     int i;
 {
-    register int c;
+    int c;
 
     if (peekc) {
         c = peekc;
@@ -438,7 +438,7 @@ void
 put(ac)
     int ac;
 {
-    register int ns, c;
+    int ns, c;
 
     c = ac;
     if (tabc) {

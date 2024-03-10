@@ -15,7 +15,7 @@ void
 exit (code)
     int code;
 {
-    register struct atexit *p;
+    struct atexit *p;
 
     for (p = __atexit; p; p = p->next)
         (*p->func)();
@@ -31,7 +31,7 @@ atexit(fn)
     void (*fn)();
 {
     static struct atexit __atexit0; /* one guaranteed table */
-    register struct atexit *p;
+    struct atexit *p;
 
     p = __atexit;
     if (! p) {

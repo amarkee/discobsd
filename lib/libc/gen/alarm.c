@@ -14,7 +14,7 @@ alarm(secs)
 	int secs;
 {
 	struct itimerval it, oitv;
-	register struct itimerval *itp = &it;
+	struct itimerval *itp = &it;
 
 	timerclear(&itp->it_interval);
 	itp->it_value.tv_sec = secs;

@@ -81,9 +81,9 @@ fp_query(msg,file)
 	FILE *file;
 {
 #ifdef DEBUG
-	register char *cp;
+	char *cp;
 	register HEADER *hp;
-	register int n;
+	int n;
 
 	/*
 	 * Print header fields.

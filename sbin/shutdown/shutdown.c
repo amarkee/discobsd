@@ -106,7 +106,7 @@ warning(term, sdt, now, type)
 	char *type;
 {
 	char *ts;
-	register int delay = sdt - now;
+	int delay = sdt - now;
 
 	if (delay > 8)
 		while (delay % 5)
@@ -134,8 +134,8 @@ main(argc,argv)
 	int argc;
 	char **argv;
 {
-	register int i, ufd;
-	register char *f;
+	int i, ufd;
+	char *f;
 	char *ts;
 	time_t sdt;
 	int h, m;
@@ -319,10 +319,10 @@ main(argc,argv)
 
 time_t
 getsdt(s)
-	register char *s;
+	char *s;
 {
 	time_t t, t1, tim;
-	register char c;
+	char c;
 	struct tm *lt;
 
 	if (strcmp(s, "now") == 0)

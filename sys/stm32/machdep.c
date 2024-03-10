@@ -524,12 +524,12 @@ idle()
 
 void
 boot(dev, howto)
-    register dev_t dev;
-    register int howto;
+    dev_t dev;
+    int howto;
 {
     if ((howto & RB_NOSYNC) == 0 && waittime < 0 && bfreelist[0].b_forw) {
-        register struct fs *fp;
-        register struct buf *bp;
+        struct fs *fp;
+        struct buf *bp;
         int iter, nbusy;
 
         /*
@@ -654,7 +654,7 @@ int
 ffs(mask)
     register u_long mask;
 {
-    register int cnt;
+    int cnt;
 
     if (mask == 0)
         return (0);
@@ -671,8 +671,8 @@ ffs(mask)
  */
 int
 copystr(src, dest, maxlength, lencopied)
-    register caddr_t src, dest;
-    register u_int maxlength, *lencopied;
+    caddr_t src, dest;
+    u_int maxlength, *lencopied;
 {
     caddr_t dest0 = dest;
     int error = ENOENT;
@@ -713,7 +713,7 @@ strlen(s)
  */
 int
 baduaddr(addr)
-    register caddr_t addr;
+    caddr_t addr;
 {
     if (addr >= (caddr_t)__user_data_start &&
         addr < (caddr_t)__user_data_end)
@@ -727,7 +727,7 @@ baduaddr(addr)
  */
 int
 badkaddr(addr)
-    register caddr_t addr;
+    caddr_t addr;
 {
     if (addr >= (caddr_t)__kernel_data_start &&
         addr < (caddr_t)__kernel_data_end)
@@ -748,8 +748,8 @@ void insque(void *element, void *predecessor)
         struct que *q_next;
         struct que *q_prev;
     };
-    register struct que *e = (struct que *) element;
-    register struct que *prev = (struct que *) predecessor;
+    struct que *e = (struct que *) element;
+    struct que *prev = (struct que *) predecessor;
 
     e->q_prev = prev;
     e->q_next = prev->q_next;
@@ -766,7 +766,7 @@ void remque(void *element)
         struct que *q_next;
         struct que *q_prev;
     };
-    register struct que *e = (struct que *) element;
+    struct que *e = (struct que *) element;
 
     e->q_prev->q_next = e->q_next;
     e->q_next->q_prev = e->q_prev;
@@ -777,7 +777,7 @@ void remque(void *element)
  */
 int strncmp(const char *s1, const char *s2, size_t n)
 {
-    register int ret, tmp;
+    int ret, tmp;
 
     if (n == 0)
         return 0;

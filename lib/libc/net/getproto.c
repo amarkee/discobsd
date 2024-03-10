@@ -14,9 +14,9 @@ extern int _proto_stayopen;
 
 struct protoent *
 getprotobynumber(proto)
-	register int proto;
+	int proto;
 {
-	register struct protoent *p;
+	struct protoent *p;
 
 	setprotoent(_proto_stayopen);
 	while (p = getprotoent())

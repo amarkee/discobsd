@@ -160,9 +160,9 @@ main(argc, argv)
 int argc;
 char    **argv;
 {
-    register char *p;
-    register char *l;
-    register int n, same;
+    char *p;
+    char *l;
+    int n, same;
     struct dfmt *d;
     struct dfmt **cv = conv_vec;
     int showall = NO;
@@ -386,9 +386,9 @@ void
 line(n)
 int n;
 {
-    register int i, first;
-    register struct dfmt *c;
-    register struct dfmt **cv = conv_vec;
+    int i, first;
+    struct dfmt *c;
+    struct dfmt **cv = conv_vec;
 
     first = YES;
     while (c = *cv++)
@@ -494,8 +494,8 @@ char    *cc;
 struct dfmt *d;
 {
     int c = *cc;
-    register char *s = "   ";
-    register int pbit = parity((int)c & 0377);
+    char *s = "   ";
+    int pbit = parity((int)c & 0377);
 
     c &= 0177;
     if (isgraphic(c))
@@ -522,8 +522,8 @@ int
 parity(word)
 int word;
 {
-    register int p = 0;
-    register int w = word;
+    int p = 0;
+    int w = word;
 
     if (w)
         do
@@ -538,7 +538,7 @@ underline(s)
 char    *s;
 {
     static char ulbuf[16];
-    register char *u = ulbuf;
+    char *u = ulbuf;
 
     while (*s)
     {
@@ -567,9 +567,9 @@ c_put(cc, d)
 char    *cc;
 struct dfmt *d;
 {
-    register char   *s;
-    register int    n;
-    register int    c = *cc & 0377;
+    char   *s;
+    int    n;
+    int    c = *cc & 0377;
 
     s = scvt(c, d);
     for (n = d->df_field - strlen(s); n > 0; n--)
@@ -637,7 +637,7 @@ st_put(cc, d)
 char    *cc;
 struct dfmt *d;
 {
-    register int    c;
+    int    c;
 
     if (cc == 0)
     {
@@ -691,7 +691,7 @@ pr_sbuf(d, end)
 struct dfmt *d;
 int end;
 {
-    register char   *p = str_buf;
+    char   *p = str_buf;
 
     if (str_mode == S_EMPTY
         || (!(str_mode & S_CONT) && (str_ptr - str_buf) < d->df_size))
@@ -725,12 +725,12 @@ int radix;
 int signd;
 int ndigits;
 {
-    register long   val = value;
-    register long   rad = radix;
-    register char   *b = &_icv_buf[MAXINTLENGTH];
-    register char   *d = _digit;
-    register long   tmp1;
-    register long   tmp2;
+    long   val = value;
+    long   rad = radix;
+    char   *b = &_icv_buf[MAXINTLENGTH];
+    char   *d = _digit;
+    long   tmp1;
+    long   tmp2;
     long    rem;
     long    kludge;
     int sign;
@@ -809,11 +809,11 @@ done:
 }
 
 long get_addr(s)
-register char *s;
+char *s;
 {
-    register char *p;
-    register long a;
-    register int d;
+    char *p;
+    long a;
+    int d;
 
     if (*s=='+')
         s++;

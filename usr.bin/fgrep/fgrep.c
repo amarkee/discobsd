@@ -138,10 +138,10 @@ void
 execute(file)
 char *file;
 {
-    register struct words *c;
-    register int ccount;
-    register char ch;
-    register char *p;
+    struct words *c;
+    int ccount;
+    char ch;
+    char *p;
     static char *buf;
     static int blksize;
     struct stat stb;
@@ -267,7 +267,7 @@ char *file;
 int
 getargc()
 {
-    register int c;
+    int c;
     if (wordf)
         return(getc(wordf));
     if ((c = *argptr++) == '\0')
@@ -278,8 +278,8 @@ getargc()
 void
 cgotofn()
 {
-    register int c;
-    register struct words *s;
+    int c;
+    struct words *s;
 
     s = smax = w;
 nword:  for(;;) {
@@ -354,8 +354,8 @@ cfail()
     struct words **front, **rear;
     struct words *state;
     int bstart;
-    register char c;
-    register struct words *s;
+    char c;
+    struct words *s;
     s = w;
     front = rear = queue;
 init:   if ((s->inp) != 0) {

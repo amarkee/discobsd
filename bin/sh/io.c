@@ -15,7 +15,7 @@ short topfd;
 initf(fd)
 int     fd;
 {
-	register struct fileblk *f = standin;
+	struct fileblk *f = standin;
 
 	f->fdes = fd;
 	f->fsiz = ((flags & oneflg) == 0 ? BUFSIZ : 1);
@@ -26,9 +26,9 @@ int     fd;
 }
 
 estabf(s)
-register char *s;
+char *s;
 {
-	register struct fileblk *f;
+	struct fileblk *f;
 
 	(f = standin)->fdes = -1;
 	f->fend = length(s) + (f->fnxt = s);
@@ -39,7 +39,7 @@ register char *s;
 push(af)
 struct fileblk *af;
 {
-	register struct fileblk *f;
+	struct fileblk *f;
 
 	(f = af)->fstak = standin;
 	f->feof = 0;
@@ -49,7 +49,7 @@ struct fileblk *af;
 
 pop()
 {
-	register struct fileblk *f;
+	struct fileblk *f;
 
 	if ((f = standin)->fstak)
 	{
@@ -95,7 +95,7 @@ int     *pv;
 chkopen(idf)
 char *idf;
 {
-	register int    rc;
+	int    rc;
 
 	if ((rc = open(idf, 0)) < 0)
 		failed(idf, badopen);
@@ -104,7 +104,7 @@ char *idf;
 }
 
 rename(f1, f2)
-register int    f1, f2;
+int    f1, f2;
 {
 #if defined(RES) || defined(pdp11)
 	if (f1 != f2)
@@ -134,7 +134,7 @@ register int    f1, f2;
 create(s)
 char *s;
 {
-	register int    rc;
+	int    rc;
 
 	if ((rc = creat(s, 0666)) < 0)
 		failed(s, badcreate);
@@ -163,9 +163,9 @@ extern BOOL             nosubst;
 copy(ioparg)
 struct ionod    *ioparg;
 {
-	register char   *cline;
-	register char   *clinep;
-	register struct ionod   *iop;
+	char   *cline;
+	char   *clinep;
+	struct ionod   *iop;
 	char    c;
 	char    *ends;
 	char    *start;
@@ -289,7 +289,7 @@ swap_iodoc_nm(i)
 savefd(fd)
 	int fd;
 {
-	register int    f;
+	int    f;
 
 	f = fcntl(fd, F_DUPFD, 10);
 	return(f);
@@ -297,10 +297,10 @@ savefd(fd)
 
 
 restore(last)
-	register int    last;
+	int    last;
 {
-	register int    i;
-	register int    dupfd;
+	int    i;
+	int    dupfd;
 
 	for (i = topfd - 1; i >= last; i--)
 	{

@@ -35,8 +35,8 @@ res_mkquery(op, dname, class, type, data, datalen, newrr, buf, buflen)
 	int buflen;		/* size of buffer */
 {
 	register HEADER *hp;
-	register char *cp;
-	register int n;
+	char *cp;
+	int n;
 	char dnbuf[MAXDNAME];
 	char *dnptrs[10], **dpp, **lastdnptr;
 	extern char *index();

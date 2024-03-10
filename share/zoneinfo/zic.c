@@ -361,8 +361,8 @@ main(argc, argv)
 int	argc;
 char *	argv[];
 {
-	register int	i, j;
-	register int	c;
+	int	i, j;
+	int	c;
 
 #ifdef unix
 	umask(umask(022) | 022);
@@ -451,7 +451,7 @@ char *	argv[];
 static void
 setboundaries()
 {
-	register time_t bit;
+	time_t bit;
         struct tm zerotm = {0};
 
 	for (bit = 1; bit > 0; bit <<= 1)
@@ -517,10 +517,10 @@ char *	cp2;
 static void
 associate()
 {
-	register struct zone *	zp;
-	register struct rule *	rp;
-	register int		base, out;
-	register int		i;
+	struct zone *	zp;
+	struct rule *	rp;
+	int		base, out;
+	int		i;
 
 	if (nrules != 0)
 		(void) qsort((char *) rules, nrules, sizeof *rules, rcomp);
@@ -567,12 +567,12 @@ infile(name)
 char *	name;
 {
 	register FILE *			fp;
-	register char **		fields;
-	register char *			cp;
-	register struct lookup *	lp;
-	register int			nfields;
-	register int			wantcont;
-	register int			num;
+	char **		fields;
+	char *			cp;
+	struct lookup *	lp;
+	int			nfields;
+	int			wantcont;
+	int			num;
 	char				buf[BUFSIZ];
 
 	if (strcmp(name, "-") == 0) {
@@ -690,7 +690,7 @@ int signable;
 
 static void
 inrule(fields, nfields)
-register char **	fields;
+char **	fields;
 int nfields;
 {
 	struct rule	r;
@@ -717,10 +717,10 @@ int nfields;
 
 static int
 inzone(fields, nfields)
-register char **	fields;
+char **	fields;
 int nfields;
 {
-	register int	i;
+	int	i;
 	char		buf[132];
 
 	if (nfields < ZONE_MINFIELDS || nfields > ZONE_MAXFIELDS) {
@@ -750,7 +750,7 @@ int nfields;
 
 static int
 inzcont(fields,  nfields)
-register char **	fields;
+char **	fields;
 int nfields;
 {
 	if (nfields < ZONEC_MINFIELDS || nfields > ZONEC_MAXFIELDS) {
@@ -762,16 +762,16 @@ int nfields;
 
 static int
 inzsub(fields, nfields, iscont)
-register char **	fields;
+char **	fields;
 int nfields;
 int  iscont;
 {
-	register char *	cp;
+	char *	cp;
 	struct zone	z;
-	register int	i_gmtoff, i_rule, i_format;
-	register int	i_untilyear, i_untilmonth;
-	register int	i_untilday, i_untiltime;
-	register int	hasuntil;
+	int	i_gmtoff, i_rule, i_format;
+	int	i_untilyear, i_untilmonth;
+	int	i_untilday, i_untiltime;
+	int	hasuntil;
 
 	if (iscont) {
 		i_gmtoff = ZFC_GMTOFF;
@@ -834,7 +834,7 @@ error("Zone continuation line end time is not after end time of previous line");
 
 static void
 inlink(fields, nfields)
-register char **	fields;
+char **	fields;
 int  nfields;
 {
 	struct link	l;
@@ -862,7 +862,7 @@ int  nfields;
 
 static void
 rulesub(rp, loyearp, hiyearp, typep, monthp, dayp, timep)
-register struct rule *	rp;
+struct rule *	rp;
 char *			loyearp;
 char *			hiyearp;
 char *			typep;
@@ -870,8 +870,8 @@ char *			monthp;
 char *			dayp;
 char *			timep;
 {
-	register struct lookup *	lp;
-	register char *			cp;
+	struct lookup *	lp;
+	char *			cp;
 
 	if ((lp = byword(monthp, mon_names)) == NULL) {
 		error("invalid month name");
@@ -1006,8 +1006,8 @@ puttzcode(val, fp)
 long	val;
 FILE *	fp;
 {
-	register int	c;
-	register int	shift;
+	int	c;
+	int	shift;
 
 	for (shift = 24; shift >= 0; shift -= 8) {
 		c = val >> shift;
@@ -1020,7 +1020,7 @@ writezone(name)
 char *	name;
 {
 	register FILE *		fp;
-	register int		i;
+	int		i;
 	char			fullname[BUFSIZ];
 
 	if (strlen(directory) + 1 + strlen(name) >= sizeof fullname) {
@@ -1067,17 +1067,17 @@ outzone(zpfirst, zonecount)
 struct zone *	zpfirst;
 int zonecount;
 {
-	register struct zone *		zp;
-	register struct rule *		rp;
-	register int			i, j;
-	register int			usestart, useuntil;
-	register time_t			starttime = 0, untiltime = 0;
+	struct zone *		zp;
+	struct rule *		rp;
+	int			i, j;
+	int			usestart, useuntil;
+	time_t			starttime = 0, untiltime = 0;
 	register long			gmtoff;
 	register long			stdoff;
-	register int			year;
+	int			year;
 	register long			startoff = 0;
-	register int			startisdst;
-	register int			type;
+	int			startisdst;
+	int			type;
 	char				startbuf[BUFSIZ];
 
 	/*
@@ -1122,8 +1122,8 @@ int zonecount;
 					rp->r_temp = rpytime(rp, year);
 			}
 			for ( ; ; ) {
-				register int	k;
-				register time_t	jtime, ktime = 0;
+				int	k;
+				time_t	jtime, ktime = 0;
 				register long	offset;
 				char		buf[BUFSIZ];
 
@@ -1230,7 +1230,7 @@ long	gmtoff;
 char *	abbr;
 int isdst;
 {
-	register int	i, j;
+	int	i, j;
 
 	/*
 	** See if there's already an entry for this zone type.
@@ -1297,8 +1297,8 @@ lowerit(int a)
 
 static int
 ciequal(ap, bp)		/* case-insensitive equality */
-register char *	ap;
-register char *	bp;
+char *	ap;
+char *	bp;
 {
 	while (lowerit(*ap) == lowerit(*bp++))
 		if (*ap++ == '\0')
@@ -1308,8 +1308,8 @@ register char *	bp;
 
 static int
 isabbr(abbr, word)
-register char *	abbr;
-register char *	word;
+char *	abbr;
+char *	word;
 {
 	if (lowerit(*abbr) != lowerit(*word))
 		return FALSE;
@@ -1323,11 +1323,11 @@ register char *	word;
 
 static struct lookup *
 byword(word, table)
-register char *			word;
-register struct lookup *	table;
+char *			word;
+struct lookup *	table;
 {
-	register struct lookup *	foundlp;
-	register struct lookup *	lp;
+	struct lookup *	foundlp;
+	struct lookup *	lp;
 
 	if (word == NULL || table == NULL)
 		return NULL;
@@ -1352,11 +1352,11 @@ register struct lookup *	table;
 
 static char **
 getfields(cp)
-register char *	cp;
+char *	cp;
 {
-	register char *		dp;
-	register char **	array;
-	register int		nsubs;
+	char *		dp;
+	char **	array;
+	int		nsubs;
 
 	if (cp == NULL)
 		return NULL;
@@ -1406,7 +1406,7 @@ tadd(t1, t2)
 time_t	t1;
 long	t2;
 {
-	register time_t	t;
+	time_t	t;
 
 	if (t1 == max_time && t2 > 0)
 		return max_time;
@@ -1428,12 +1428,12 @@ long	t2;
 
 static time_t
 rpytime(rp, wantedy)
-register struct rule *	rp;
-register int		wantedy;
+struct rule *	rp;
+int		wantedy;
 {
-	register int	y, m, i;
+	int	y, m, i;
 	register long	dayoff;			/* with a nod to Margaret O. */
-	register time_t	t;
+	time_t	t;
 
 	dayoff = 0;
 	m = TM_JANUARY;
@@ -1521,7 +1521,7 @@ static void
 newabbr(string)
 char *	string;
 {
-	register int	i;
+	int	i;
 
 	i = strlen(string) + 1;
 	if (charcnt + i >= TZ_MAX_CHARS) {
@@ -1536,7 +1536,7 @@ static int
 mkdirs(name)
 char *	name;
 {
-	register char *	cp;
+	char *	cp;
 
 	if ((cp = name) == NULL || *cp == '\0')
 		return 0;

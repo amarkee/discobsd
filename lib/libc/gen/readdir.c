@@ -12,9 +12,9 @@
  */
 struct direct *
 readdir(dirp)
-	register DIR *dirp;
+	DIR *dirp;
 {
-	register struct direct *dp;
+	struct direct *dp;
 
 	for (;;) {
 		if (dirp->dd_loc == 0) {

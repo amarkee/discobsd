@@ -282,7 +282,7 @@ char **argv;
 }
 
 compare(p1, p2)
-register struct nnlist *p1, *p2;
+struct nnlist *p1, *p2;
 {
     register i;
 
@@ -318,10 +318,10 @@ register FILE *af;
 }
 
 fcompare(fi1, fi2)
-register long *fi1, *fi2;
+long *fi1, *fi2;
 {
     register i;
-    register struct nnlist *p1, *p2;
+    struct nnlist *p1, *p2;
 
     p1 = get_sym(*fi1);
     p2 = get_sym(*fi2);

@@ -99,7 +99,7 @@ struct tty {
 #ifdef KERNEL
 
 extern const int tthiwat[NSPEEDS], ttlowat[NSPEEDS];
-extern int q_to_b(register struct clist *q, char *cp, int cc);
+extern int q_to_b(struct clist *q, char *cp, int cc);
 
 #define TTHIWAT(tp) tthiwat[(tp)->t_ospeed&TTMASK]
 #define TTLOWAT(tp) ttlowat[(tp)->t_ospeed&TTMASK]

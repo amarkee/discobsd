@@ -20,7 +20,7 @@ struct ns_addr addr;
 	char *spectHex();
 	union { union ns_net net_e; u_long long_e; } net;
 	u_short port = htons(addr.x_port);
-	register char *cp;
+	char *cp;
 	char *cp2;
 	register u_char *up = addr.x_host.c_host;
 	u_char *uplim = up + 6;
@@ -56,7 +56,7 @@ char *p0;
 {
 	int ok = 0;
 	int nonzero = 0;
-	register char *p = p0;
+	char *p = p0;
 	for (; *p; p++) switch (*p) {
 
 	case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':

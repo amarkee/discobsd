@@ -5,7 +5,8 @@
  *
  *  @(#)wait.h  7.2.1 (2.11BSD GTE) 1995/06/23
  */
-
+#ifndef _SYS_WAIT_H_
+#define _SYS_WAIT_H_
 /*
  * This file holds definitions relevent to the wait system call.
  * Some of the options here are available only through the ``wait3''
@@ -84,4 +85,6 @@ int wait (int *istat);
 int wait3 (int *istat, int options, struct rusage *rup);
 int waitpid (int pid, int *istat, int options);
 int wait4 (int pid, int *istat, int options, struct rusage *rup);
+#endif
+
 #endif

@@ -70,9 +70,9 @@ flushbuf()
 
 static int
 convert(cp)
-    register char **cp;
+    char **cp;
 {
-    register char c;
+    char c;
     int     n = 0;
 
     while ((c = *(*cp)++) >= '0' && c <= '9') {
@@ -84,11 +84,11 @@ convert(cp)
 
 static void
 printnum(n, fmat, base)
-    register int n;
+    int n;
     int fmat, base;
 {
-    register char k;
-    register int *dptr;
+    char k;
+    int *dptr;
     int digs[15];
 
     dptr = digs;
@@ -176,8 +176,8 @@ static void
 printdate(tvec)
     long    tvec;
 {
-    register int i;
-    register char *timeptr;
+    int i;
+    char *timeptr;
 
     timeptr = ctime(&tvec);
     for (i=20; i<24; i++)

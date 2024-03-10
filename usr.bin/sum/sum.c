@@ -9,10 +9,10 @@ main(argc,argv)
 int argc;
 char **argv;
 {
-    register unsigned int sum;
-    register int i, c;
+    unsigned int sum;
+    int i, c;
     register FILE *f;
-    register long nbytes;
+    long nbytes;
     int errflg = 0;
 
     i = 1;

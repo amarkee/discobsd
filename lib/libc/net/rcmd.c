@@ -216,7 +216,7 @@ ruserok(rhost, superuser, ruser, luser)
 	FILE *hostf;
 	char fhost[MAXHOSTNAMELEN];
 	int first = 1;
-	register char *sp, *p;
+	char *sp, *p;
 	int baselen = -1;
 
 	sp = rhost;
@@ -275,7 +275,7 @@ _validuser(hostf, rhost, luser, ruser, baselen)
 {
 	char *user;
 	char ahost[MAXHOSTNAMELEN];
-	register char *p;
+	char *p;
 
 	while (fgets(ahost, sizeof (ahost), hostf)) {
 		p = ahost;
@@ -309,7 +309,7 @@ _checkhost(rhost, lhost, len)
 	static char ldomain[MAXHOSTNAMELEN + 1];
 	static char *domainp = NULL;
 	static int nodomain = 0;
-	register char *cp;
+	char *cp;
 
 	if (len == -1)
 		return(!strcmp(rhost, lhost));

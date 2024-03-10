@@ -60,9 +60,9 @@ typedef	unsigned char bitstr_t;
 				/* clear bits start ... stop in bitstring */
 #define	bit_nclear(name, start, stop) { \
 	register bitstr_t *_name = name; \
-	register int _start = start, _stop = stop; \
-	register int _startbyte = _bit_byte(_start); \
-	register int _stopbyte = _bit_byte(_stop); \
+	int _start = start, _stop = stop; \
+	int _startbyte = _bit_byte(_start); \
+	int _stopbyte = _bit_byte(_stop); \
 	if (_startbyte == _stopbyte) { \
 		_name[_startbyte] &= ((0xff >> (8 - (_start&0x7))) | \
 				      (0xff << ((_stop&0x7) + 1))); \
@@ -77,9 +77,9 @@ typedef	unsigned char bitstr_t;
 				/* set bits start ... stop in bitstring */
 #define	bit_nset(name, start, stop) { \
 	register bitstr_t *_name = name; \
-	register int _start = start, _stop = stop; \
-	register int _startbyte = _bit_byte(_start); \
-	register int _stopbyte = _bit_byte(_stop); \
+	int _start = start, _stop = stop; \
+	int _startbyte = _bit_byte(_start); \
+	int _stopbyte = _bit_byte(_stop); \
 	if (_startbyte == _stopbyte) { \
 		_name[_startbyte] |= ((0xff << (_start&0x7)) & \
 				    (0xff >> (7 - (_stop&0x7)))); \
@@ -94,8 +94,8 @@ typedef	unsigned char bitstr_t;
 				/* find first bit clear in name */
 #define	bit_ffc(name, nbits, value) { \
 	register bitstr_t *_name = name; \
-	register int _byte, _nbits = nbits; \
-	register int _stopbyte = _bit_byte(_nbits), _value = -1; \
+	int _byte, _nbits = nbits; \
+	int _stopbyte = _bit_byte(_nbits), _value = -1; \
 	for (_byte = 0; _byte <= _stopbyte; ++_byte) \
 		if (_name[_byte] != 0xff) { \
 			_value = _byte << 3; \
@@ -109,8 +109,8 @@ typedef	unsigned char bitstr_t;
 				/* find first bit set in name */
 #define	bit_ffs(name, nbits, value) { \
 	register bitstr_t *_name = name; \
-	register int _byte, _nbits = nbits; \
-	register int _stopbyte = _bit_byte(_nbits), _value = -1; \
+	int _byte, _nbits = nbits; \
+	int _stopbyte = _bit_byte(_nbits), _value = -1; \
 	for (_byte = 0; _byte <= _stopbyte; ++_byte) \
 		if (_name[_byte]) { \
 			_value = _byte << 3; \

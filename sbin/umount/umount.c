@@ -57,7 +57,7 @@ void	 usage();
 int
 main(argc, argv)
 	int argc;
-	register char *argv[];
+	char *argv[];
 {
 	int ch, errs;
 
@@ -107,9 +107,9 @@ main(argc, argv)
 int
 umountall()
 {
-	register struct fstab *fs;
+	struct fstab *fs;
 	int rval, type;
-	register char *cp;
+	char *cp;
 
 	while ((fs = getfsent()) != NULL) {
 		/* Ignore the root. */
@@ -152,7 +152,7 @@ umountfs(name)
 {
 	struct stat sb;
 	int type;
-	register char *mntpt;
+	char *mntpt;
 
 	if (stat(name, &sb) < 0) {
 		if (((mntpt = getmntname(name, MNTFROM, &type)) == NULL) &&
@@ -200,7 +200,7 @@ getmntname(name, what, type)
 	int *type;
 {
 	struct statfs *mntbuf;
-	register int i, mntsize;
+	int i, mntsize;
 
 	if ((mntsize = getmntinfo(&mntbuf, MNT_NOWAIT)) == 0) {
 		warn("getmntinfo");
@@ -238,9 +238,9 @@ selected(type)
 
 void
 maketypelist(fslist)
-	register char *fslist;
+	char *fslist;
 {
-	register int *av, i;
+	int *av, i;
 	char *nextcp;
 
 	if ((fslist == NULL) || (fslist[0] == '\0'))
@@ -281,7 +281,7 @@ fsnametotype(name)
 	char *name;
 {
 	static char *namelist[] = INITMOUNTNAMES;
-	register char **cp;
+	char **cp;
 
 	for (cp = namelist; *cp; ++cp)
 		if (strcmp(name, *cp) == 0)

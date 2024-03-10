@@ -178,7 +178,7 @@ unlink_user(db, u)
 user *
 find_user(db, name)
 	cron_db	*db;
-	register char	*name;
+	char	*name;
 {
 	char	*env_get();
 	register user	*u;

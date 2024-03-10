@@ -28,6 +28,8 @@
  * We only need three words for these, so this abbreviated
  * definition saves some space.
  */
+#ifndef _SYS_BUF_H_
+#define _SYS_BUF_H_
 struct bufhd
 {
     int     b_flags;                /* see defines below */
@@ -220,8 +222,10 @@ int geterror (struct buf *bp);
  * mark it as being use (B_BUSY) by a device.
  */
 #define notavail(bp) { \
-    register int x = splbio(); \
+    int x = splbio(); \
     bremfree(bp); \
     (bp)->b_flags |= B_BUSY; \
     splx(x); \
 }
+
+#endif

@@ -50,7 +50,7 @@ static int
 fstabscan()
 {
 	char *cp;
-	register char *bp;
+	char *bp;
 #define	MAXLINELENGTH	256
 	static char line[MAXLINELENGTH];
 	char subline[MAXLINELENGTH], *colon = ":";
@@ -154,7 +154,7 @@ getfsent()
 
 struct fstab *
 getfsspec(name)
-	register char *name;
+	char *name;
 {
 	if (setfsent())
 		while (fstabscan())
@@ -165,7 +165,7 @@ getfsspec(name)
 
 struct fstab *
 getfsfile(name)
-	register char *name;
+	char *name;
 {
 	if (setfsent())
 		while (fstabscan())
@@ -201,7 +201,7 @@ static void
 error(err)
 	int err;
 {
-	register int saverrno;
+	int saverrno;
 
 	saverrno = errno;
 	errno = err;

@@ -105,7 +105,7 @@ int get_disk_size(char *fn)
  */
 int
 makedir (protodir, entries)
-	register struct direct *protodir;
+	struct direct *protodir;
 	int entries;
 {
 	char *cp;
@@ -165,11 +165,11 @@ wtfs (bno, bf)
 
 void
 iput (ip)
-	register struct inode *ip;
+	struct inode *ip;
 {
 	struct	dinode	buf [INOPB];
-	register struct dinode *dp;
-	register int i;
+	struct dinode *dp;
+	int i;
 	daddr_t d;
 
 	filsys.fs.fs_tinode--;
@@ -192,7 +192,7 @@ iput (ip)
 daddr_t
 alloc()
 {
-	register int i;
+	int i;
 	daddr_t bno;
 
 	filsys.fs.fs_tfree--;
@@ -314,7 +314,7 @@ mkswap ()
 void
 fsinit()
 {
-	register int i;
+	int i;
 
 	/*
 	 * initialize the node
@@ -357,7 +357,7 @@ void
 bfree (bno)
 	daddr_t bno;
 {
-	register int i;
+	int i;
 
 	if (bno != 0)
 		filsys.fs.fs_tfree++;
@@ -402,7 +402,7 @@ main (argc,argv)
 	int	argc;
 	char	**argv;
 {
-	register int c;
+	int c;
 	unsigned n, kbytes, swapsz = 0;
 	char *special;
 

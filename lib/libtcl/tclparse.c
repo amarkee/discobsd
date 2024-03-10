@@ -143,7 +143,7 @@ Tcl_Backslash(src, readPtr)
     int *readPtr;		/* Fill in with number of characters read
 				 * from src, unless NULL. */
 {
-    register unsigned char *p = src+1;
+    unsigned char *p = src+1;
     char result;
     int count;
 
@@ -289,7 +289,7 @@ TclParseQuotes(interp, string, termChar, flags, termPtr, pvPtr)
     ParseValue *pvPtr;		/* Information about where to place
 				 * fully-substituted result of parse. */
 {
-    register unsigned char *src, *dst, c;
+    unsigned char *src, *dst, c;
 
     src = string;
     dst = pvPtr->next;
@@ -472,8 +472,8 @@ TclParseBraces(interp, string, termPtr, pvPtr)
 				 * result of command. */
 {
     int level;
-    register unsigned char *src, *dst, *end;
-    register char c;
+    unsigned char *src, *dst, *end;
+    char c;
 
     src = string;
     dst = pvPtr->next;
@@ -603,8 +603,8 @@ TclParseWords(interp, string, flags, maxWords, termPtr, argcPtr, argv, pvPtr)
     register ParseValue *pvPtr;	/* Information about where to place
 				 * fully-substituted word. */
 {
-    register unsigned char *src, *dst;
-    register char c;
+    unsigned char *src, *dst;
+    char c;
     int type, result, argc;
     unsigned char *oldBuffer;	/* Used to detect when pvPtr's buffer gets
 				 * reallocated, so we can adjust all of the
@@ -887,7 +887,7 @@ TclWordEnd(start, nested)
 				 * One means this is a nested command (close
 				 * brace is a word terminator). */
 {
-    register unsigned char *p;
+    unsigned char *p;
     int count;
 
     p = start;
@@ -1008,7 +1008,7 @@ QuoteEnd(string, term)
     int term;			/* This character will terminate the
 				 * quoted string (e.g. '"' or ')'). */
 {
-    register unsigned char *p = string;
+    unsigned char *p = string;
     int count;
 
     while (*p != term) {
@@ -1062,7 +1062,7 @@ static unsigned char *
 VarNameEnd(string)
     unsigned char *string;	/* Pointer to dollar-sign character. */
 {
-    register unsigned char *p = string+1;
+    unsigned char *p = string+1;
 
     if (*p == '{') {
 	for (p++; (*p != '}') && (*p != 0); p++) {
@@ -1104,7 +1104,7 @@ VarNameEnd(string)
 unsigned char *
 Tcl_ParseVar(interp, string, termPtr)
     Tcl_Interp *interp;			/* Context for looking up variable. */
-    register unsigned char *string;	/* String containing variable name.
+    unsigned char *string;	/* String containing variable name.
 					 * First character must be "$". */
     unsigned char **termPtr;		/* If non-NULL, points to word to fill
 					 * in with character just after last
@@ -1112,7 +1112,7 @@ Tcl_ParseVar(interp, string, termPtr)
 
 {
     unsigned char *name1, *name1End, c, *result;
-    register unsigned char *name2;
+    unsigned char *name2;
 #define NUM_CHARS 200
     unsigned char copyStorage[NUM_CHARS];
     ParseValue pv;

@@ -45,7 +45,7 @@ strcspn (s1, s2)
 	const char *s2;
 {
 	register const char *p, *spanp;
-	register char c, sc;
+	char c, sc;
 
 	/*
 	 * Stop as soon as we find any character from s2.  Note that there

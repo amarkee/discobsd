@@ -51,10 +51,10 @@ main(argc, argv)
 #define	SFLAG	0x08
 #define	VFLAG	0x10
 #define	PFLAG	0x20
-	register u_int flags;
+	u_int flags;
 	int ch, mib[2];
 	size_t len, tlen;
-	register char *p, *prefix;
+	char *p, *prefix;
 	char buf[1024];
 
 	flags = 0;

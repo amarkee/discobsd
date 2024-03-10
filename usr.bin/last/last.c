@@ -69,13 +69,13 @@ main(ac, av)
     int ac;
     char **av;
 {
-    register int i, k;
+    int i, k;
     int wtmp;
     off_t bl;
     char *ct;
     char wtmpfile[256];
     char progname[256];
-    register struct utmp *bp;
+    struct utmp *bp;
     long otime;
     struct stat stb;
     int print;
@@ -207,8 +207,8 @@ int
 want(bp)
     struct utmp *bp;
 {
-    register char **av;
-    register int ac;
+    char **av;
+    int ac;
 
     if (bp->ut_line[0] == '~' && bp->ut_name[0] == '\0')
         strcpy(bp->ut_name, "reboot");      /* bandaid */

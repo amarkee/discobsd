@@ -34,7 +34,7 @@ struct nodelist {
 
 int              present(struct nodelist *, struct nodelist *);
 int              anypred(struct nodelist *);
-struct nodelist *nindex(register char *);
+struct nodelist *nindex(char *);
 int              cmp(char *, char *);
 void             error(char *, char *);
 void             note(char *, char *);
@@ -51,9 +51,9 @@ main(argc,argv)
 int argc;
 char **argv;
 {
-    register struct predlist *t;
+    struct predlist *t;
     FILE *input = stdin;
-    register struct nodelist *i, *j;
+    struct nodelist *i, *j;
     int x;
     char precedes[50], follows[50];
     if(argc>1) {
@@ -100,7 +100,7 @@ int
 present(i,j)
 struct nodelist *i, *j;
 {
-    register struct predlist *t;
+    struct predlist *t;
     for(t=j->inedges; t!=NULL; t=t->nextpred)
         if(t->pred==i)
             return(1);
@@ -113,7 +113,7 @@ int
 anypred(i)
 struct nodelist *i;
 {
-    register struct predlist *t;
+    struct predlist *t;
     for(t=i->inedges; t!=NULL; t=t->nextpred)
         if(t->pred->live==LIVE)
             return(1);
@@ -124,10 +124,10 @@ struct nodelist *i;
  */
 struct nodelist *
 nindex(s)
-register char *s;
+char *s;
 {
-    register struct nodelist *i;
-    register char *t;
+    struct nodelist *i;
+    char *t;
     for(i= &firstnode; i->nextnode!=NULL; i=i->nextnode)
         if(cmp(s,i->name))
             return(i);
@@ -147,7 +147,7 @@ register char *s;
 
 int
 cmp(s,t)
-register char *s, *t;
+char *s, *t;
 {
     while(*s==*t) {
         if(*s==0)
@@ -179,7 +179,7 @@ char *s,*t;
 struct nodelist *
 findloop()
 {
-    register struct nodelist *i, *j;
+    struct nodelist *i, *j;
     for(i= &firstnode; i->nextnode!=NULL; i=i->nextnode)
         if(i->live==LIVE)
             break;
@@ -200,10 +200,10 @@ findloop()
  */
 struct nodelist *
 mark(i)
-register struct nodelist *i;
+struct nodelist *i;
 {
-    register struct nodelist *j;
-    register struct predlist *t;
+    struct nodelist *j;
+    struct predlist *t;
     if(i->live==DEAD)
         return(NULL);
     if(i->live==VISITED)

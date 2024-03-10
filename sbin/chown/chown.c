@@ -69,7 +69,7 @@ int
 isnumber(s)
 	char *s;
 {
-	register int c;
+	int c;
 
 	while(c = *s++)
 		if (!isdigit(c))
@@ -84,8 +84,8 @@ chownr(dir, uid, gid, savedir)
 	gid_t gid;
 	int savedir;
 {
-	register DIR *dirp;
-	register struct direct *dp;
+	DIR *dirp;
+	struct direct *dp;
 	struct stat st;
 	int ecode;
 
@@ -133,9 +133,9 @@ main(argc, argv)
 	int argc;
 	char *argv[];
 {
-	register int c;
+	int c;
 	register gid_t gid;
-	register char *cp, *group;
+	char *cp, *group;
 	struct group *grp;
 	int	fcurdir;
 

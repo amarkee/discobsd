@@ -30,7 +30,7 @@ main(argc, argv)
     int argc;
     char **argv;
 {
-    register char *tp, *s;
+    char *tp, *s;
     register FILE *fi;
 
     s = _PATH_UTMP;
@@ -71,7 +71,7 @@ main(argc, argv)
 void
 putline()
 {
-    register char *cbuf;
+    char *cbuf;
 
     printf("%-*.*s %-*.*s",
         NMAX, NMAX, utmp.ut_name,

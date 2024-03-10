@@ -43,10 +43,10 @@
 int
 getloadavg(loadavg, nelem)
 	unsigned loadavg[];
-	register int nelem;
+	int nelem;
 {
 	struct loadavg loadinfo;
-	register int i;
+	int i;
 	int mib[2];
 	size_t size;
 

@@ -1,9 +1,9 @@
 int
 atoi(p)
-	register char *p;
+	char *p;
 {
-	register int n;
-	register int f;
+	int n;
+	int f;
 
 	n = 0;
 	f = 0;

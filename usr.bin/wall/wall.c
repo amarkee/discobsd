@@ -41,8 +41,8 @@ main(argc, argv)
 int argc;
 char *argv[];
 {
-    register int i, c;
-    register struct utmp *p;
+    int i, c;
+    struct utmp *p;
     int f;
     struct stat statb;
 
@@ -102,7 +102,7 @@ void
 sendmes(tty)
 char *tty;
 {
-    register int f, flags;
+    int f, flags;
     static char t[50] = "/dev/";
     int e, i;
 

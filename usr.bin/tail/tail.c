@@ -50,7 +50,7 @@ int argc;
 char **argv;
 {
     long n,di;
-    register int i,j,k;
+    int i,j,k;
     char    *arg;
     int partial,bylines,bkwds,fromend,lastnl;
     char *p;
@@ -229,7 +229,7 @@ errcom:
 
 void
 fexit()
-{   register int n;
+{   int n;
     if (!follow || piped) exit(0);
     for (;;)
     {   sleep(1);

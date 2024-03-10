@@ -26,13 +26,13 @@ static char _sctab[256] = {
 
 static int
 _instr (ptr, type, len, iop, eofptr)
-	register char *ptr;
+	char *ptr;
 	int type, len;
 	register FILE *iop;
 	int *eofptr;
 {
-	register int ch;
-	register char *optr;
+	int ch;
+	char *optr;
 	int ignstp;
 
 	*eofptr = 0;
@@ -76,9 +76,9 @@ _innum (ptr, type, len, size, iop, eofptr)
 	int type, len, size;
 	FILE *iop;
 {
-	register char *np;
+	char *np;
 	char numbuf[64];
-	register int c, base;
+	int c, base;
 	int expseen, scale, negflg, c1, ndigit;
 	long lcval;
 
@@ -185,7 +185,7 @@ _doscan (iop, fmt, argp)
 	register const char *fmt;
 	va_list argp;
 {
-	register int ch;
+	int ch;
 	int nmatch, len, ch1;
 	int *ptr, fileended, size;
 
@@ -253,9 +253,9 @@ _doscan (iop, fmt, argp)
 
 static char *
 _getccl(s)
-register unsigned char *s;
+unsigned char *s;
 {
-	register int c, t;
+	int c, t;
 
 	t = 0;
 	if (*s == '^') {

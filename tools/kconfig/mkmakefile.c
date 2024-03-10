@@ -41,14 +41,14 @@
 #include "config.h"
 
 #define next_word(fp, wd) \
-    { register char *word = get_word(fp); \
+    { char *word = get_word(fp); \
       if (word == (char *)EOF) \
         return; \
       else \
         wd = word; \
     }
 #define next_quoted_word(fp, wd) \
-    { register char *word = get_quoted_word(fp); \
+    { char *word = get_quoted_word(fp); \
       if (word == (char *)EOF) \
         return; \
       else \
@@ -64,7 +64,7 @@ char *tail();
 struct file_list *
 fl_lookup(char *file)
 {
-    register struct file_list *fp;
+    struct file_list *fp;
 
     for (fp = ftab ; fp != 0; fp = fp->f_next) {
         if (eq(fp->f_fn, file))
@@ -79,7 +79,7 @@ fl_lookup(char *file)
 struct file_list *
 fltail_lookup(char *file)
 {
-    register struct file_list *fp;
+    struct file_list *fp;
 
     for (fp = ftab ; fp != 0; fp = fp->f_next) {
         if (eq(tail(fp->f_fn), tail(file)))
@@ -94,7 +94,7 @@ fltail_lookup(char *file)
 struct file_list *
 new_fent(void)
 {
-    register struct file_list *fp;
+    struct file_list *fp;
 
     fp = (struct file_list *) malloc(sizeof *fp);
     bzero(fp, sizeof *fp);
@@ -131,10 +131,10 @@ void
 read_files(void)
 {
     FILE *fp;
-    register struct file_list *tp, *pf;
-    register struct device *dp;
+    struct file_list *tp, *pf;
+    struct device *dp;
     struct device *save_dp = 0;
-    register struct opt *op;
+    struct opt *op;
     char *wd, *this, *needs, *special;
     char fname[32];
     int nreqs, first = 1, isdup, std, filetype;
@@ -283,9 +283,9 @@ doneparam:
 void
 do_objs(FILE *fp)
 {
-    register struct file_list *tp, *fl;
-    register int lpos, len;
-    register char *cp, och, *sp;
+    struct file_list *tp, *fl;
+    int lpos, len;
+    char *cp, och, *sp;
     char swapname[32];
 
     fprintf(fp, "OBJS = ");
@@ -321,8 +321,8 @@ cont:
 void
 do_cfiles(FILE *fp)
 {
-    register struct file_list *tp, *fl;
-    register int lpos, len;
+    struct file_list *tp, *fl;
+    int lpos, len;
     char swapname[32];
 
     fputs("CFILES = ", fp);
@@ -364,8 +364,8 @@ do_cfiles(FILE *fp)
 void
 do_rules(FILE *f)
 {
-    register char *cp, *np, och;
-    register struct file_list *ftp;
+    char *cp, *np, och;
+    struct file_list *ftp;
     char *special;
 
     for (ftp = ftab; ftp != 0; ftp = ftp->f_next) {
@@ -396,8 +396,8 @@ do_rules(FILE *f)
 void
 do_load(FILE *f)
 {
-    register struct file_list *fl;
-    register int first;
+    struct file_list *fl;
+    int first;
     struct file_list *do_systemspec();
 
     for (first = 1, fl = conf_list; fl; first = 0)
@@ -536,7 +536,7 @@ makefile(void)
 char *
 tail(char *fn)
 {
-    register char *cp;
+    char *cp;
 
     cp = rindex(fn, '/');
     if (cp == 0)
@@ -581,7 +581,7 @@ char *
 raise(char *str)
 {
     static char buf[100];
-    register char *cp = buf;
+    char *cp = buf;
 
     while (*str) {
         *cp++ = islower(*str) ? toupper(*str++) : *str++;

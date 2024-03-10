@@ -3,7 +3,8 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
-
+#ifndef _SYS_VMPARAM_H_
+#define _SYS_VMPARAM_H_
 /*
  * CTL_VM identifiers
  */
@@ -19,4 +20,6 @@
     { "loadavg", CTLTYPE_STRUCT }, \
     { "swapmap", CTLTYPE_STRUCT }, \
 }
+#endif
+
 #endif

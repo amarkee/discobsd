@@ -26,7 +26,7 @@ timezone(zone, dst)
 	int	zone,
 		dst;
 {
-	register char	*beg,
+	char	*beg,
 			*end;
 
         beg = getenv("TZNAME");
@@ -74,11 +74,11 @@ static struct zone {
  */
 char *
 tztab(zone,dst)
-	register int	zone;
+	int	zone;
 	int	dst;
 {
-	register struct zone	*zp;
-	register char	sign;
+	struct zone	*zp;
+	char	sign;
 
 	for (zp = zonetab; zp->offset != -1;++zp)	/* static tables */
 		if (zp->offset == zone) {

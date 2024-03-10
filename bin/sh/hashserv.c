@@ -18,10 +18,10 @@ static struct entry     *relcmd = NIL;
 
 static int
 argpath(arg)
-	register struct argnod	*arg;
+	struct argnod	*arg;
 {
-	register char 	*s;
-	register char	*start;
+	char 	*s;
+	char	*start;
 
 	while (arg)
 	{
@@ -56,10 +56,10 @@ short
 pathlook(com, flg, arg)
 	char	*com;
 	int		flg;
-	register struct argnod	*arg;
+	struct argnod	*arg;
 {
-	register char	*name = com;
-	register ENTRY	*h;
+	char	*name = com;
+	ENTRY	*h;
 
 	ENTRY		hentry;
 	int		count = 0;
@@ -217,8 +217,8 @@ hashpr()
 
 set_dotpath()
 {
-	register char	*path;
-	register int	cnt = 1;
+	char	*path;
+	int	cnt = 1;
 
 	dotpath = 10000;
 	path = getpath("");
@@ -314,9 +314,9 @@ hash_cmd(name)
 
 
 what_is_path(name)
-	register char *name;
+	char *name;
 {
-	register ENTRY	*h;
+	ENTRY	*h;
 	int		cnt;
 	short	hashval;
 
@@ -388,11 +388,11 @@ what_is_path(name)
 
 
 findpath(name, oldpath)
-	register char *name;
+	char *name;
 	int oldpath;
 {
-	register char 	*path;
-	register int	count = 1;
+	char 	*path;
+	int	count = 1;
 
 	char	*p;
 	int	ok = 1;
@@ -441,7 +441,7 @@ findpath(name, oldpath)
 
 
 chk_access(name)
-	register char	*name;
+	char	*name;
 {
 
 	if (access(name, EXECUTE) == 0)
@@ -452,10 +452,10 @@ chk_access(name)
 
 
 pr_path(name, count)
-	register char	*name;
+	char	*name;
 	int count;
 {
-	register char	*path;
+	char	*path;
 
 	path = getpath(name);
 

@@ -13,7 +13,7 @@ getfile(filnam, cnt)
     char    *filnam;
     int     cnt;
 {
-    register int f;
+    int f;
 
     if (strcmp("-", filnam) == 0)
         return -1;
@@ -113,7 +113,7 @@ setcor()
         datbas = datmap.b1;
         if (! kernel && magic) {
             /* User's frame pointer in user's address space. */
-            register u_int frame;
+            u_int frame;
             frame = (long) ((struct user*)corhdr)->u_frame;
             frame -= KERNEL_DATA_END - USIZE;
             if (frame > 0 && frame < USIZE && ! (frame & 3)) {

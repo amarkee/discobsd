@@ -33,7 +33,7 @@ obj	false	= { OBOOL, BFALSE, 0 };
 
 run()
 {
-	register int i;
+	int i;
 
 	execute(winner);
 
@@ -606,9 +606,9 @@ obj split(a,nnn) node **a;
 {
 	obj x;
 	cell *ap;
-	register char *s, *p;
+	char *s, *p;
 	char *t, temp, num[5];
-	register int sep;
+	int sep;
 	int n, flag;
 
 	x = execute(a[0]);
@@ -855,7 +855,7 @@ obj nodetoobj(a) node *a;
 
 redirprint(s, a, b) char *s; node *b;
 {
-	register int i;
+	int i;
 	obj x;
 
 	x = execute(b);

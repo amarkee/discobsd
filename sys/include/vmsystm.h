@@ -7,7 +7,8 @@
  *
  *  @(#)vmsystm.h   7.2.1 (2.11BSD GTE) 1/15/95
  */
-
+#ifndef _SYS_VM_SYSTM_H_
+#define _SYS_VM_SYSTM_H_
 /*
  * Fork/vfork accounting.
  */
@@ -31,4 +32,6 @@ extern u_short avefree30;      /* 30 sec (avefree is 5 sec) moving average */
 extern int     maxslp;         /* max sleep time before very swappable */
 
 extern struct  forkstat forkstat;
+#endif
+
 #endif

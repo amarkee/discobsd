@@ -80,7 +80,7 @@ int
 build(path)
     char *path;
 {
-    register char *p;
+    char *p;
     struct stat sb;
     int create, ch;
 

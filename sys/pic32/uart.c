@@ -91,7 +91,7 @@ void cnstart (struct tty *tp);
  */
 void uartinit(int unit)
 {
-    register struct uartreg *reg;
+    struct uartreg *reg;
 
     if (unit >= NUART)
         return;
@@ -160,9 +160,9 @@ void uartinit(int unit)
 
 int uartopen(dev_t dev, int flag, int mode)
 {
-    register struct uartreg *reg;
-    register struct tty *tp;
-    register int unit = minor(dev);
+    struct uartreg *reg;
+    struct tty *tp;
+    int unit = minor(dev);
 
     if (unit >= NUART)
         return (ENXIO);
@@ -206,8 +206,8 @@ int uartopen(dev_t dev, int flag, int mode)
 int
 uartclose (dev_t dev, int flag, int mode)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -219,13 +219,12 @@ uartclose (dev_t dev, int flag, int mode)
 
 /*ARGSUSED*/
 int
-uartread (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+uartread (dev_t dev,
+    struct uio *uio,
+    int flag)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -235,13 +234,12 @@ uartread (dev, uio, flag)
 
 /*ARGSUSED*/
 int
-uartwrite (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+uartwrite (dev_t dev,
+    struct uio *uio,
+    int flag)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -250,12 +248,11 @@ uartwrite (dev, uio, flag)
 }
 
 int
-uartselect (dev, rw)
-    register dev_t dev;
-    int rw;
+uartselect (dev_t dev,
+    int rw)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
 
     if (! tp->t_addr)
         return ENODEV;
@@ -267,9 +264,9 @@ uartselect (dev, rw)
 int
 uartioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
-    register int error;
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
+    int error;
 
     if (! tp->t_addr)
         return ENODEV;
@@ -281,13 +278,12 @@ uartioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 }
 
 void
-uartintr (dev)
-    dev_t dev;
+uartintr (dev_t dev)
 {
-    register int c;
-    register int unit = minor(dev);
-    register struct tty *tp = &uartttys[unit];
-    register struct uartreg *reg = (struct uartreg *)tp->t_addr;
+    int c;
+    int unit = minor(dev);
+    struct tty *tp = &uartttys[unit];
+    struct uartreg *reg = (struct uartreg *)tp->t_addr;
 
     if (! tp->t_addr)
         return;
@@ -330,11 +326,11 @@ uartintr (dev)
     }
 }
 
-void uartstart (register struct tty *tp)
+void uartstart (struct tty *tp)
 {
-    register struct uartreg *reg = (struct uartreg*) tp->t_addr;
-    register int c, s;
-    register int unit = minor(tp->t_dev);
+    struct uartreg *reg = (struct uartreg*) tp->t_addr;
+    int c, s;
+    int unit = minor(tp->t_dev);
 
     if (! tp->t_addr)
         return;
@@ -372,8 +368,8 @@ void uartputc(dev_t dev, char c)
 {
     int unit = minor(dev);
     struct tty *tp = &uartttys[unit];
-    register struct uartreg *reg = uart[unit];
-    register int s, timo;
+    struct uartreg *reg = uart[unit];
+    int s, timo;
 
     s = spltty();
 again:
@@ -413,7 +409,7 @@ again:
 char uartgetc(dev_t dev)
 {
     int unit = minor(dev);
-    register struct uartreg *reg = uart[unit];
+    struct uartreg *reg = uart[unit];
     int s, c;
 
     s = spltty();
@@ -441,8 +437,8 @@ char uartgetc(dev_t dev)
  * Return true if found and initialized ok.
  */
 static int
-uartprobe(config)
-    struct conf_device *config;
+uartprobe(struct conf_device *config)
+    
 {
     int unit = config->dev_unit - 1;
     int is_console = (CONS_MAJOR == UART_MAJOR &&

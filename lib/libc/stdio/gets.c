@@ -4,8 +4,8 @@ char *
 gets(s)
 char *s;
 {
-	register int c;
-	register char *cs;
+	int c;
+	char *cs;
 
 	cs = s;
 	while ((c = getchar()) != '\n' && c != EOF)

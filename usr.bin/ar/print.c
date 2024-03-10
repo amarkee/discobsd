@@ -61,7 +61,7 @@ print(argv)
 	char **argv;
 {
 	CF cf;
-	register int afd, all;
+	int afd, all;
 	char *file;
 
 	afd = open_archive(O_RDONLY);

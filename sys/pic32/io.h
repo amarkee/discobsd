@@ -106,7 +106,7 @@ mips_set_stack_pointer (void *x)
  * Get value of stack pointer register.
  */
 static inline __attribute__ ((always_inline))
-void *mips_get_stack_pointer ()
+void *mips_get_stack_pointer (void)
 {
     void *x;
 
@@ -142,7 +142,7 @@ void *mips_get_stack_pointer ()
  * saving the interrupt state into the supplied variable.
  */
 static inline int __attribute__ ((always_inline))
-mips_intr_disable ()
+mips_intr_disable (void)
 {
     int status;
     asm volatile ("di   %0" : "=r" (status));
@@ -163,7 +163,7 @@ mips_intr_restore (int x)
  * Explicit hazard barrier.
  */
 static inline void __attribute__ ((always_inline))
-mips_ehb()
+mips_ehb(void)
 {
     asm volatile ("ehb");
 }
@@ -172,7 +172,7 @@ mips_ehb()
  * Enable hardware interrupts.
  */
 static inline int __attribute__ ((always_inline))
-mips_intr_enable ()
+mips_intr_enable (void)
 {
     int status;
     asm volatile ("ei   %0" : "=r" (status));

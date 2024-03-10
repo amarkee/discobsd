@@ -78,7 +78,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-    register int i;
+    int i;
     char *name;
     struct passwd *pwent;
 
@@ -120,8 +120,8 @@ sig_t f;
 
 int
 any(c, str)
-    register int c;
-    register char *str;
+    int c;
+    char *str;
 {
     while (*str)
         if (c == *str++)
@@ -314,7 +314,7 @@ printmail(argc, argv)
 void
 copyback()
 {
-    register int i, c;
+    int i, c;
     sigset_t set;
     int fd, new = 0;
     struct stat stbuf;
@@ -414,9 +414,9 @@ copylet(n, f, type)
 
 int
 isfrom(lp)
-register char *lp;
+char *lp;
 {
-    register char *p;
+    char *p;
 
     for (p = from; *p; )
         if (*lp++ != *p++)
@@ -431,10 +431,10 @@ char **argv;
 {
     char *truename;
     int first;
-    register char *cp;
+    char *cp;
     char *newargv[1000];
-    register char **ap;
-    register char **vp;
+    char **ap;
+    char **vp;
     int dflag;
 
     dflag = 0;
@@ -551,9 +551,9 @@ int n;
 char *name;
 {
     FILE *rmf, *popen();
-    register char *p;
+    char *p;
     char rsys[64], cmd[64];
-    register int pid;
+    int pid;
     int sts;
 
     for (p=rsys; *name!='!'; *p++ = *name++)
@@ -682,7 +682,7 @@ void
 cat(to, from1, from2)
     char *to, *from1, *from2;
 {
-    register char *cp, *dp;
+    char *cp, *dp;
 
     cp = to;
     for (dp = from1; *cp = *dp++; cp++)
@@ -694,7 +694,7 @@ cat(to, from1, from2)
 /* copy p... into s, update p */
 char *
 getarg(s, p)
-    register char *s, *p;
+    char *s, *p;
 {
     while (*p == ' ' || *p == '\t')
         p++;

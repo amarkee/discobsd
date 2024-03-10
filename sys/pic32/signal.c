@@ -26,17 +26,16 @@
  * pc and regs.
  */
 void
-sendsig (p, sig, mask)
-    sig_t p;
-    int sig;
-    long mask;
+sendsig (sig_t p,
+    int sig,
+    long mask)
 {
     struct sigframe {
         int     sf_space [4];
         struct  sigcontext sf_sc;
     };
     struct trapframe *regs = u.u_frame;
-    register struct sigframe *sfp;
+    struct sigframe *sfp;
     int oonstack;
 
 #ifdef DIAGNOSTIC
@@ -137,10 +136,10 @@ sendsig (p, sig, mask)
  * a machine fault.
  */
 void
-sigreturn()
+sigreturn(void)
 {
     struct trapframe *regs = u.u_frame;
-    register struct sigcontext *scp =
+    struct sigcontext *scp =
         (struct sigcontext*) (regs->tf_sp + 16);
 
 #ifdef DIAGNOSTIC

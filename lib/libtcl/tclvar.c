@@ -84,7 +84,7 @@ Tcl_GetVar(interp, varName, flags)
     int flags;			/* OR-ed combination of TCL_GLOBAL_ONLY
 				 * or TCL_LEAVE_ERR_MSG bits. */
 {
-    register unsigned char *p;
+    unsigned char *p;
 
     /*
      * If varName refers to an array (it ends with a parenthesized
@@ -269,7 +269,7 @@ Tcl_SetVar(interp, varName, newValue, flags)
 				 * TCL_LIST_ELEMENT, TCL_NO_SPACE, or
 				 * TCL_LEAVE_ERR_MSG. */
 {
-    register unsigned char *p;
+    unsigned char *p;
 
     /*
      * If varName refers to an array (it ends with a parenthesized
@@ -532,7 +532,7 @@ Tcl_UnsetVar(interp, varName, flags)
     int flags;			/* OR-ed combination of any of
 				 * TCL_GLOBAL_ONLY or TCL_LEAVE_ERR_MSG. */
 {
-    register unsigned char *p;
+    unsigned char *p;
     int result;
 
     /*
@@ -758,7 +758,7 @@ Tcl_TraceVar(interp, varName, flags, proc, clientData)
 				 * invoked upon varName. */
     void *clientData;		/* Arbitrary argument to pass to proc. */
 {
-    register unsigned char *p;
+    unsigned char *p;
 
     /*
      * If varName refers to an array (it ends with a parenthesized
@@ -935,7 +935,7 @@ Tcl_UntraceVar(interp, varName, flags, proc, clientData)
     Tcl_VarTraceProc *proc;	/* Procedure assocated with trace. */
     void *clientData;		/* Arbitrary argument to pass to proc. */
 {
-    register unsigned char *p;
+    unsigned char *p;
 
     /*
      * If varName refers to an array (it ends with a parenthesized
@@ -1104,7 +1104,7 @@ Tcl_VarTraceInfo(interp, varName, flags, proc, prevClientData)
 				 * If NULL, this call will return the
 				 * first trace. */
 {
-    register unsigned char *p;
+    unsigned char *p;
 
     /*
      * If varName refers to an array (it ends with a parenthesized

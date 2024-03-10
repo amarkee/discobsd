@@ -100,7 +100,7 @@ void
 printhdr(sig)
     int sig;
 {
-    register int i, j;
+    int i, j;
 
     if (pflag)
         printf("-procs- -----memory----- -swap- ");
@@ -137,7 +137,7 @@ main(argc, argv)
     char **argv;
 {
     extern char *ctime();
-    register int i;
+    int i;
     int iter, iflag = 0;
     long nintv, t;
     char *arg, **cp, buf[BUFSIZ];
@@ -422,7 +422,7 @@ stat1(row)
     int row;
 {
     double t;
-    register int i;
+    int i;
 
     t = 0;
     for(i=0; i<CPUSTATES; i++)
@@ -448,7 +448,7 @@ void
 read_names()
 {
     char two_char[2];
-    register int i;
+    int i;
 
     lseek(mf, (long)nl[X_DK_NAME].n_value, L_SET);
     read(mf, dk_name, dk_ndrive * sizeof (char *));

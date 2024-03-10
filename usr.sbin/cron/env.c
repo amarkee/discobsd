@@ -26,7 +26,7 @@ static char rcsid[] = "$Id: env.c,v 2.7 1994/01/26 02:25:50 vixie Exp vixie $";
 char **
 env_init()
 {
-	register char	**p = (char **) malloc(sizeof(char **));
+	char	**p = (char **) malloc(sizeof(char **));
 
 	p[0] = NULL;
 	return (p);
@@ -37,7 +37,7 @@ void
 env_free(envp)
 	char	**envp;
 {
-	register char	**p;
+	char	**p;
 
 	for (p = envp;  *p;  p++)
 		free(*p);
@@ -49,8 +49,8 @@ char **
 env_copy(envp)
 	char	**envp;
 {
-	register int	count, i;
-	register char	**p;
+	int	count, i;
+	char	**p;
 
 	for (count = 0;  envp[count] != NULL;  count++)
 		;
@@ -67,8 +67,8 @@ env_set(envp, envstr)
 	char	**envp;
 	char	*envstr;
 {
-	register int	count, found;
-	register char	**p;
+	int	count, found;
+	char	**p;
 
 	/*
 	 * count the number of elements, including the null pointer;
@@ -165,8 +165,8 @@ env_get(name, envp)
 	char	*name;
 	char	**envp;
 {
-	register int	len = strlen(name);
-	register char	*p, *q;
+	int	len = strlen(name);
+	char	*p, *q;
 
 	while (p = *envp++) {
 		if (!(q = strchr(p, '=')))

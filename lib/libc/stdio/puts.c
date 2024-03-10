@@ -4,7 +4,7 @@ int
 puts(s)
 	register const char *s;
 {
-	register int c;
+	int c;
 
 	while ((c = *s++))
 		putchar(c);

@@ -18,10 +18,10 @@ struct ipc ipc;
  * sys-trace system call.
  */
 void
-ptrace()
+ptrace(void)
 {
-    register struct proc *p;
-    register struct a {
+    struct proc *p;
+    struct a {
         int req;
         int pid;
         int *addr;
@@ -62,9 +62,9 @@ ptrace()
  * of the parent process in tracing.
  */
 int
-procxmt()
+procxmt(void)
 {
-    register int i, *p;
+    int i, *p;
 
     if (ipc.ip_lock != u.u_procp->p_pid)
         return(0);

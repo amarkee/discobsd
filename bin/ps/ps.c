@@ -135,9 +135,9 @@ struct psout *outargs;  /* info for first npr processes */
  */
 void
 maybetty(cp)
-    register char *cp;
+    char *cp;
 {
-    register struct ttys *dp;
+    struct ttys *dp;
     struct stat stb;
 
     /* Allow only terminal devices. */
@@ -170,8 +170,8 @@ maybetty(cp)
 void
 getdev()
 {
-    register DIR *df;
-    register struct direct *dbuf;
+    DIR *df;
+    struct direct *dbuf;
 
     if (chdir("/dev") < 0) {
         perror("/dev");
@@ -189,8 +189,8 @@ getdev()
 char *
 gettty()
 {
-    register int tty_step;
-    register char *p;
+    int tty_step;
+    char *p;
 
     if (u.u_ttyp) {
         for (tty_step = 0; tty_step < nttys; ++tty_step) {
@@ -219,7 +219,7 @@ getptr(adr)
 
 int
 getbyte(adr)
-    register char *adr;
+    char *adr;
 {
     char    b;
 
@@ -231,7 +231,7 @@ getbyte(adr)
 int
 getcmd(a, addr)
     off_t addr;
-    register struct psout *a;
+    struct psout *a;
 {
     /* amount of top of stack to examine for args */
 #define ARGLIST (DEV_BSIZE * 2)
@@ -344,9 +344,9 @@ savcom(puid)
     char    *tp;
     off_t   addr;
     off_t   daddr, saddr;
-    register struct psout   *a;
-    register struct proc    *procp  = mproc;
-    register struct user    *up = &u;
+    struct psout   *a;
+    struct proc    *procp  = mproc;
+    struct user    *up = &u;
     long    txtsiz, datsiz, stksiz;
 
     if (procp->p_flag & SLOAD) {
@@ -411,9 +411,9 @@ savcom(puid)
 
 int
 pscomp(x1, x2)
-    register struct psout *x1, *x2;
+    struct psout *x1, *x2;
 {
-    register int c;
+    int c;
 
     c = (x1)->o_ttyd - (x2)->o_ttyd;
     if (c == 0)
@@ -426,10 +426,10 @@ pscomp(x1, x2)
  */
 void
 fixup(np)
-    register int np;
+    int np;
 {
-    register int i;
-    register struct passwd  *pw;
+    int i;
+    struct passwd  *pw;
 
     if (uflg) {
         setpwent();
@@ -453,7 +453,7 @@ fixup(np)
 
 int
 wchancomp(x1, x2)
-    register WCHAN *x1, *x2;
+    WCHAN *x1, *x2;
 {
     if (x1->caddr > x2->caddr)
         return(1);
@@ -469,7 +469,7 @@ addchan(name, caddr)
     unsigned caddr;
 {
     static  int left = 0;
-    register WCHAN  *wp;
+    WCHAN  *wp;
 
     if (left == 0) {
         if (wchand) {
@@ -495,10 +495,10 @@ addchan(name, caddr)
 
 char *
 getchan(chan)
-    register unsigned int chan;
+    unsigned int chan;
 {
-    register int    i;
-    register char   *prevsym;
+    int    i;
+    char   *prevsym;
 
     prevsym = "";
     if (chan) {
@@ -598,7 +598,7 @@ char *uhdr = "USER       PID NICE SZ TTY  TIME";
 
 void
 upr(a)
-    register struct psout *a;
+    struct psout *a;
 {
     printf("%-8.8s%6u%4d%4d %-3.3s",a->o_uname,a->o_pid,a->o_nice,a->o_size,a->o_tty);
     ptime(a);
@@ -608,7 +608,7 @@ char *shdr = "   PID TTY  TIME";
 
 void
 spr (a)
-    register struct psout *a;
+    struct psout *a;
 {
     printf("%6u %-3.3s",a->o_pid,a->o_tty);
     ptime(a);
@@ -618,7 +618,7 @@ char *lhdr = "  F S   UID   PID  PPID CPU PRI NICE  ADDR  SZ WCHAN    TTY  TIME"
 
 void
 lpr(a)
-    register struct psout *a;
+    struct psout *a;
 {
     static char clist[] = "0SWRIZT";
 
@@ -640,7 +640,7 @@ lpr(a)
 void
 printhdr()
 {
-    register char   *hdr, *cmdstr   = " COMMAND";
+    char   *hdr, *cmdstr   = " COMMAND";
 
     if (rflg)
         return;
@@ -663,9 +663,9 @@ main (argc, argv)
     char **argv;
 {
     int     uid, euid, puid, nread;
-    register int i, j;
+    int i, j;
     char    *ap;
-    register struct proc    *procp;
+    struct proc    *procp;
 
     if ((ioctl(fileno(stdout), TIOCGWINSZ, &ws) != -1 &&
          ioctl(fileno(stderr), TIOCGWINSZ, &ws) != -1 &&
@@ -805,8 +805,8 @@ main (argc, argv)
     }
     fixup(npr);
     for (i = 0; i < npr; i++) {
-        register int    cmdwidth = twidth - cmdstart - 2;
-        register struct psout *a = &outargs[i];
+        int    cmdwidth = twidth - cmdstart - 2;
+        struct psout *a = &outargs[i];
 
         if (rflg) {
             if (write(1, (char *) a, sizeof (*a)) != sizeof (*a))

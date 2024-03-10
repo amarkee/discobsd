@@ -66,9 +66,9 @@ void (*sigval[])() = {
 
 void
 fault(sig)
-register int    sig;
+int    sig;
 {
-	register int    flag;
+	int    flag;
 
 	signal(sig, fault);
 	if (sig == SIGSEGV)
@@ -117,7 +117,7 @@ stdsigs()
 
 ignsig(n)
 {
-	register int    s, i;
+	int    s, i;
 
 	if ((i = n) == SIGSEGV)
 	{
@@ -133,7 +133,7 @@ ignsig(n)
 
 getsig(n)
 {
-	register int    i;
+	int    i;
 
 	if (trapflg[i = n] & SIGMOD || ignsig(i) == 0)
 		signal(i, fault);
@@ -142,7 +142,7 @@ getsig(n)
 
 setsig(n)
 {
-	register int    i;
+	int    i;
 
 	if (ignsig(i = n) == 0)
 		signal(i, sigval[i]);
@@ -150,8 +150,8 @@ setsig(n)
 
 oldsigs()
 {
-	register int    i;
-	register char   *t;
+	int    i;
+	char   *t;
 
 	i = MAXTRAP;
 	while (i--)
@@ -181,8 +181,8 @@ int     i;
  */
 chktrap()
 {
-	register int    i = MAXTRAP;
-	register char   *t;
+	int    i = MAXTRAP;
+	char   *t;
 
 	trapnote &= ~TRAPSET;
 	while (--i)

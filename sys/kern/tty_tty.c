@@ -19,9 +19,8 @@
 
 /*ARGSUSED*/
 int
-syopen (dev, flag)
-    dev_t dev;
-    int flag;
+syopen (dev_t dev,
+    int flag)
 {
     if (u.u_ttyp == NULL)
         return (ENXIO);
@@ -30,10 +29,10 @@ syopen (dev, flag)
 
 /*ARGSUSED*/
 int
-syread (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+syread (dev_t dev,
+    struct uio *uio,
+    int flag)
+    
 {
     if (u.u_ttyp == NULL)
         return (ENXIO);
@@ -42,10 +41,9 @@ syread (dev, uio, flag)
 
 /*ARGSUSED*/
 int
-sywrite (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+sywrite (dev_t dev,
+    struct uio *uio,
+    int flag)
 {
     if (u.u_ttyp == NULL)
         return (ENXIO);
@@ -54,11 +52,10 @@ sywrite (dev, uio, flag)
 
 /*ARGSUSED*/
 int
-syioctl (dev, cmd, addr, flag)
-    dev_t dev;
-    u_int cmd;
-    caddr_t addr;
-    int flag;
+syioctl (dev_t dev,
+    u_int cmd,
+    caddr_t addr,
+    int flag)
 {
     if (cmd == TIOCNOTTY) {
         u.u_ttyp = 0;
@@ -73,9 +70,8 @@ syioctl (dev, cmd, addr, flag)
 
 /*ARGSUSED*/
 int
-syselect (dev, flag)
-    dev_t dev;
-    int flag;
+syselect (dev_t dev,
+    int flag)
 {
 
     if (u.u_ttyp == NULL) {

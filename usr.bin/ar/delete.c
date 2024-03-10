@@ -63,7 +63,7 @@ extern char *tname;                     /* temporary file "name" */
  */
 int
 delete(argv)
-	register char **argv;
+	char **argv;
 {
 	CF cf;
 	off_t size;

@@ -69,7 +69,7 @@ getanswer(answer, anslen, iquery)
 {
 	register HEADER *hp;
 	register u_char *cp;
-	register int n;
+	int n;
 	u_char *eom;
 	char *bp, **ap;
 	int type, class, buflen, ancount, qdcount;
@@ -207,7 +207,7 @@ gethostbyname(name)
 	char *name;
 {
 	querybuf buf;
-	register char *cp;
+	char *cp;
 	int n;
 	struct hostent *hp, *gethostdomain();
 	extern struct hostent *_gethtbyname();
@@ -248,7 +248,7 @@ gethostbyaddr(addr, len, type)
 {
 	int n;
 	querybuf buf;
-	register struct hostent *hp;
+	struct hostent *hp;
 	char qbuf[MAXDNAME];
 	extern struct hostent *_gethtbyaddr();
 	
@@ -302,7 +302,7 @@ struct hostent *
 _gethtent()
 {
 	char *p;
-	register char *cp, **q;
+	char *cp, **q;
 
 	if (hostf == NULL && (hostf = fopen(HOSTDB, "r" )) == NULL)
 		return (NULL);
@@ -351,10 +351,10 @@ again:
 
 static char *
 any(cp, match)
-	register char *cp;
+	char *cp;
 	char *match;
 {
-	register char *mp, c;
+	char *mp, c;
 
 	while (c = *cp) {
 		for (mp = match; *mp; mp++)
@@ -369,8 +369,8 @@ struct hostent *
 _gethtbyname(name)
 	char *name;
 {
-	register struct hostent *p;
-	register char **cp;
+	struct hostent *p;
+	char **cp;
 	
 	_sethtent(0);
 	while (p = _gethtent()) {
@@ -390,7 +390,7 @@ _gethtbyaddr(addr, len, type)
 	char *addr;
 	int len, type;
 {
-	register struct hostent *p;
+	struct hostent *p;
 
 	_sethtent(0);
 	while (p = _gethtent())

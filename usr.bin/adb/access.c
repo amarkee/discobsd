@@ -13,8 +13,8 @@ within(adr, lbd, ubd)
 
 static int
 chkmap(adr, space)
-    register long *adr;
-    register int space;
+    long *adr;
+    int space;
 {
     register MAPPTR amap;
 
@@ -126,7 +126,7 @@ chkget(n, space)
     long    n;
     int     space;
 {
-    register int w;
+    int w;
 
     w = get(n, space);
     chkerr();

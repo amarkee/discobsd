@@ -44,11 +44,11 @@ static int		LogFD = ERR;
 
 int
 strcmp_until(left, right, until)
-	register char	*left;
-	register char	*right;
+	char	*left;
+	char	*right;
 	int	until;
 {
-	register int	diff;
+	int	diff;
 
 	while (*left && *left != until && *left == *right) {
 		left++;
@@ -70,9 +70,9 @@ strcmp_until(left, right, until)
  */
 int
 strdtb(s)
-	register char	*s;
+	char	*s;
 {
-	register char	*x = s;
+	char	*x = s;
 
 	/* scan forward to the null
 	 */
@@ -114,7 +114,7 @@ set_debug_flags(flags)
 
 #else /* DEBUGGING */
 
-	register char	*pc = flags;
+	char	*pc = flags;
 
 	DebugFlags = 0;
 
@@ -291,7 +291,7 @@ int
 get_char(file)
 	register FILE	*file;
 {
-	register int	ch;
+	int	ch;
 
 	ch = getc(file);
 	if (ch == '\n')
@@ -304,7 +304,7 @@ get_char(file)
  */
 void
 unget_char(ch, file)
-	register int	ch;
+	int	ch;
 	register FILE	*file;
 {
 	ungetc(ch, file);
@@ -321,12 +321,12 @@ unget_char(ch, file)
  */
 int
 get_string(string, size, file, terms)
-	register char	*string;
+	char	*string;
 	int	size;
 	FILE	*file;
 	char	*terms;
 {
-	register int	ch;
+	int	ch;
 
 	while (EOF != (ch = get_char(file)) && !strchr(terms, ch)) {
 		if (size > 1) {
@@ -348,7 +348,7 @@ void
 skip_comments(file)
 	register FILE	*file;
 {
-	register int	ch;
+	int	ch;
 
 	while (EOF != (ch = get_char(file))) {
 		/* ch is now the first character of a line.
@@ -452,7 +452,7 @@ log_it(username, xpid, event, detail)
 #if defined(LOG_FILE)
 	char			*msg;
 	TIME_T			now = time((TIME_T) 0);
-	register struct tm	*t = localtime(&now);
+	struct tm	*t = localtime(&now);
 #endif /*LOG_FILE*/
 
 #if defined(SYSLOG)
@@ -537,12 +537,12 @@ log_close() {
  */
 char *
 first_word(s, t)
-	register char *s;	/* string we want the first word of */
+	char *s;	/* string we want the first word of */
 	char *t;		/* terminators, implicitly including \0 */
 {
 	static char retbuf[2][MAX_TEMPSTR + 1];	/* sure wish C had GC */
 	static int retsel = 0;
-	register char *rb, *rp;
+	char *rb, *rp;
 
 	/* select a return buffer */
 	retsel = 1-retsel;
@@ -570,13 +570,13 @@ first_word(s, t)
  */
 void
 mkprint(dst, src, len)
-	register char *dst;
-	register unsigned char *src;
-	register int len;
+	char *dst;
+	unsigned char *src;
+	int len;
 {
 	while (len-- > 0)
 	{
-		register unsigned char ch = *src++;
+		unsigned char ch = *src++;
 
 		if (ch < ' ') {			/* control character */
 			*dst++ = '^';
@@ -603,7 +603,7 @@ mkprints(src, len)
 	unsigned char *src;
 	unsigned int len;
 {
-	register char *dst = (char *)malloc(len*4 + 1);
+	char *dst = (char *)malloc(len*4 + 1);
 
 	mkprint(dst, src, len);
 

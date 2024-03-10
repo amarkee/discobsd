@@ -95,7 +95,7 @@ static struct kt key_words[] = {
 static int
 kw_lookup(char *word)
 {
-    register struct kt *kp;
+    struct kt *kp;
 
     for (kp = key_words; kp->kt_name != 0; kp++)
         if (eq(word, kp->kt_name))

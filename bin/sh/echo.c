@@ -12,8 +12,8 @@ extern int exitval;
 echo(argc, argv)
 char **argv;
 {
-	register char   *cp;
-	register int    i, wd;
+	char   *cp;
+	int    i, wd;
 	int     j;
 	int nonl = 0;   /* echo -n */
 

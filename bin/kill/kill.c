@@ -19,7 +19,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-    register int signo, pid, res;
+    int signo, pid, res;
     int errlev;
     extern int errno;
 

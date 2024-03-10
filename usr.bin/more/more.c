@@ -297,10 +297,10 @@ int argc;
 char *argv[];
 {
     register FILE	*f;
-    register char	*s;
-    register char	*p;
-    register char	ch;
-    register int	left;
+    char	*s;
+    char	*p;
+    char	ch;
+    int	left;
     int			prnames = 0;
     int			initopt = 0;
     int			srchopt = 0;
@@ -512,7 +512,7 @@ char *s;
 
 FILE *
 checkf (fs, clearfirst)
-register char *fs;
+char *fs;
 int *clearfirst;
 {
     struct stat stbuf;
@@ -583,10 +583,10 @@ char ch;
 void
 screen (f, num_lines)
 register FILE *f;
-register int num_lines;
+int num_lines;
 {
-    register int c;
-    register int nchars;
+    int c;
+    int nchars;
     int length;			/* length of current line */
     static int prev_len = 1;	/* length of previous line */
 
@@ -659,7 +659,7 @@ void
 copy_file(f)
 register FILE *f;
 {
-    register int c;
+    int c;
 
     while ((c = getc(f)) != EOF)
 	putchar(c);
@@ -680,9 +680,9 @@ char *str;
 
 void
 Sprintf (n)
-register int n;
+int n;
 {
-    register int a;
+    int a;
 
     if (a = n/10)
 	Sprintf (a);
@@ -698,9 +698,9 @@ static char bell = ctrl('G');
 int
 tailequ (path, string)
 char *path;
-register char *string;
+char *string;
 {
-	register char *tail;
+	char *tail;
 
 	tail = path + strlen(path);
 	while (tail >= path)
@@ -759,9 +759,9 @@ getline(f, length)
 register FILE *f;
 int *length;
 {
-    register int	c;
-    register char	*p;
-    register int	column;
+    int	c;
+    char	*p;
+    int	column;
     static int		colflg;
 
     p = Line;
@@ -838,7 +838,7 @@ int *length;
 
 void
 erase (col)
-register int col;
+int col;
 {
 
     if (promptlen == 0)
@@ -892,8 +892,8 @@ int
 pr(s1)
 char	*s1;
 {
-    register char	*s;
-    register char	c;
+    char	*s;
+    char	c;
 
     for (s = s1; c = *s++; )
 	putchar(c);
@@ -905,11 +905,11 @@ char	*s1;
 
 void
 prbuf (s, n)
-register char *s;
-register int n;
+char *s;
+int n;
 {
-    register char c;			/* next output character */
-    register int state;			/* next output char's UL state */
+    char c;			/* next output character */
+    int state;			/* next output char's UL state */
 #define wouldul(s,n)	((n) >= 2 && (((s)[0] == '_' && (s)[1] == '\b') || ((s)[1] == '\b' && (s)[2] == '_')))
 
     while (--n >= 0)
@@ -979,9 +979,9 @@ char shell_line[132];
 */
 int
 printd (n)
-register int n;
+int n;
 {
-    register int a, nchars;
+    int a, nchars;
 
     if (a = n/10)
        nchars = 1 + printd(a);
@@ -1003,9 +1003,9 @@ command (filename, f)
 char *filename;
 register FILE *f;
 {
-    register int nlines;
-    register int retval;
-    register char c;
+    int nlines;
+    int retval;
+    char c;
     char colonch;
     FILE *helpf;
     int done;
@@ -1044,7 +1044,7 @@ register FILE *f;
 	case 'b':
 	case ctrl('B'):
 	    {
-		register int initline;
+		int initline;
 
 		if (no_intty) {
 		    write(2, &bell, 1);
@@ -1294,7 +1294,7 @@ int
 number(cmd)
 char *cmd;
 {
-	register int i;
+	int i;
 
 	i = 0; ch = otty.sg_kill;
 	for (;;) {
@@ -1345,15 +1345,15 @@ void
 search (buf, file, n)
 char buf[];
 FILE *file;
-register int n;
+int n;
 {
     int re_exec(char *);
 
     long startline = Ftell (file);
-    register long line1 = startline;
-    register long line2 = startline;
-    register long line3 = startline;
-    register int lncount;
+    long line1 = startline;
+    long line2 = startline;
+    long line3 = startline;
+    int lncount;
     int saveln, rv;
     char *s;
 
@@ -1462,10 +1462,10 @@ char *cmd, *args;
 
 void
 skiplns (n, f)
-register int n;
+int n;
 register FILE *f;
 {
-    register char c;
+    char c;
 
     while (n > 0) {
 	while ((c = Getc (f)) != '\n')
@@ -1483,7 +1483,7 @@ register FILE *f;
 
 void
 skipf (nskip)
-register int nskip;
+int nskip;
 {
     if (nskip == 0) return;
     if (nskip > 0) {
@@ -1653,12 +1653,12 @@ static char CARAT = '^';
 void
 ttyin (buf, nmax, pchar)
 char buf[];
-register int nmax;
+int nmax;
 char pchar;
 {
-    register char *sptr;
-    register char ch;
-    register int slash = 0;
+    char *sptr;
+    char ch;
+    int slash = 0;
     int	maxlen;
     char cbuf;
 
@@ -1737,9 +1737,9 @@ expand (outbuf, inbuf)
 char *outbuf;
 char *inbuf;
 {
-    register char *instr;
-    register char *outstr;
-    register char ch;
+    char *instr;
+    char *outstr;
+    char ch;
     char temp[200];
     int changed = 0;
 
@@ -1778,7 +1778,7 @@ char *inbuf;
 
 void
 show (ch)
-register char ch;
+char ch;
 {
     char cbuf;
 
@@ -1838,8 +1838,8 @@ void
 rdline (f)
 register FILE *f;
 {
-    register char c;
-    register char *p;
+    char c;
+    char *p;
 
     p = Line;
     while ((c = Getc (f)) != '\n' && c != EOF && p - Line < LINSIZ - 1)

@@ -90,7 +90,7 @@ extern int picga_open(dev_t dev, int flag, int mode);
 extern int picga_close(dev_t dev, int flag, int mode);
 extern int picga_read(dev_t dev, struct uio *uio, int flag);
 extern int picga_write(dev_t dev, struct uio *uio, int flag);
-extern int picga_ioctl(dev_t dev, register u_int cmd, caddr_t addr, int flag);
+extern int picga_ioctl(dev_t dev, u_int cmd, caddr_t addr, int flag);
 #endif
 
 #define PICGA_CLS       _IO('g', 1)

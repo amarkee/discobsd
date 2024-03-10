@@ -41,10 +41,7 @@ union nchash {
 struct  namecache *nchhead, **nchtail;  /* LRU chain pointers */
 
 static void
-dirbad (ip, offset, how)
-    struct inode *ip;
-    off_t offset;
-    char *how;
+dirbad (struct inode *ip, off_t offset, char *how)
 {
     printf ("%s: bad dir I=%u off %ld: %s\n",
         ip->i_fs->fs_fsmnt, ip->i_number, offset, how);
@@ -57,13 +54,10 @@ dirbad (ip, offset, how)
  * remaining space in the directory.
  */
 static struct buf *
-blkatoff(ip, offset, res)
-    struct inode *ip;
-    off_t offset;
-    char **res;
+blkatoff(struct inode *ip, off_t offset, char **res)
 {
     daddr_t lbn = lblkno(offset);
-    register struct buf *bp;
+    struct buf *bp;
     daddr_t bn;
     char *junk;
 
@@ -94,11 +88,9 @@ blkatoff(ip, offset, res)
  *  name must be as long as advertised, and null terminated
  */
 static int
-dirbadentry (ep, entryoffsetinblock)
-    register struct direct *ep;
-    int entryoffsetinblock;
+dirbadentry (struct direct *ep, int entryoffsetinblock)
 {
-    register int i;
+    int i;
 
     if ((ep->d_reclen & 0x3) != 0 ||
         ep->d_reclen > DIRBLKSIZ - (entryoffsetinblock & (DIRBLKSIZ - 1)) ||
@@ -178,10 +170,9 @@ dirbadentry (ep, entryoffsetinblock)
  *   but unlocked.
  */
 struct inode *
-namei (ndp)
-    register struct nameidata *ndp;
+namei (struct nameidata *ndp)
 {
-    register char *cp;          /* pointer into pathname argument */
+    char *cp;          /* pointer into pathname argument */
 /* these variables refer to things which must be freed or unlocked */
     struct inode *dp = 0;       /* the directory we are searching */
     struct namecache *ncp = 0;  /* cache slot for entry */
@@ -201,7 +192,7 @@ namei (ndp)
     off_t prevoff = 0;          /* ndp->ni_offset of previous entry */
     int nlink = 0;              /* number of symbolic links taken */
     struct inode *pdp;          /* saved dp during symlink work */
-    register int i;
+    int i;
     int error;
     int lockparent;
     int docache;                /* == 0 do not cache last component */
@@ -691,8 +682,8 @@ found:
             makeentry = 0;
         } else if (ndp->ni_dent.d_ino == ROOTINO &&
             dp->i_number == ROOTINO) {
-            register struct mount *mp;
-            register dev_t d;
+            struct mount *mp;
+            dev_t d;
 
             d = dp->i_dev;
             for (mp = &mount[1]; mp < &mount[NMOUNT]; mp++)
@@ -898,12 +889,10 @@ retNULL:
  * how the space for the new entry is to be gotten.
  */
 int
-direnter(ip, ndp)
-    struct inode *ip;
-    register struct nameidata *ndp;
+direnter(struct inode *ip, struct nameidata *ndp)
 {
-    register struct direct *ep, *nep;
-    register struct inode *dp = ndp->ni_pdir;
+    struct direct *ep, *nep;
+    struct inode *dp = ndp->ni_pdir;
     struct buf *bp;
     int loc, spacefree, error = 0;
     u_int dsize;
@@ -1018,11 +1007,10 @@ direnter(ip, ndp)
  * to the size of the previous entry.
  */
 int
-dirremove (ndp)
-    register struct nameidata *ndp;
+dirremove (struct nameidata *ndp)
 {
-    register struct inode *dp = ndp->ni_pdir;
-    register struct buf *bp;
+    struct inode *dp = ndp->ni_pdir;
+    struct buf *bp;
     struct direct *ep;
 
     if (ndp->ni_count == 0) {
@@ -1053,10 +1041,7 @@ dirremove (ndp)
  * set up by a call to namei.
  */
 void
-dirrewrite(dp, ip, ndp)
-    register struct inode *dp;
-    struct inode *ip;
-    register struct nameidata *ndp;
+dirrewrite(struct inode *dp, struct inode *ip, struct nameidata *ndp)
 {
     ndp->ni_dent.d_ino = ip->i_number;
     u.u_error = rdwri (UIO_WRITE, dp, (caddr_t) &ndp->ni_dent,
@@ -1123,12 +1108,11 @@ dirempty (struct inode *ip, ino_t parentino)
  * The target is always iput() before returning.
  */
 int
-checkpath (source, target)
-    struct inode *source, *target;
+checkpath (struct inode *source, struct inode *target)
 {
     struct dirtemplate dirbuf;
-    register struct inode *ip;
-    register int error = 0;
+    struct inode *ip;
+    int error = 0;
 
     ip = target;
     if (ip->i_number == source->i_number) {
@@ -1180,10 +1164,10 @@ out:
  * Name cache initialization, from main() when we are booting
  */
 void
-nchinit()
+nchinit(void)
 {
-    register union nchash *nchp;
-    register struct namecache *ncp;
+    union nchash *nchp;
+    struct namecache *ncp;
 
     nchhead = 0;
     nchtail = &nchhead;
@@ -1211,10 +1195,9 @@ nchinit()
  * inode.  This makes the algorithm O(n^2), but do you think I care?
  */
 void
-nchinval (dev)
-    register dev_t dev;
+nchinval (dev_t dev)
 {
-    register struct namecache *ncp, *nxtcp;
+    struct namecache *ncp, *nxtcp;
 
     for (ncp = nchhead; ncp; ncp = nxtcp) {
         nxtcp = ncp->nc_nxt;
@@ -1250,9 +1233,9 @@ nchinval (dev)
  * Name cache invalidation of all entries.
  */
 void
-cinvalall()
+cinvalall(void)
 {
-    register struct namecache *ncp, *encp = &namecache[NNAMECACHE];
+    struct namecache *ncp, *encp = &namecache[NNAMECACHE];
 
     for (ncp = namecache; ncp < encp; ncp++)
         ncp->nc_id = 0;

@@ -122,7 +122,7 @@ extern FILE * fin;
 int retsh(q)
 char *q;
 {
-    register char *p;
+    char *p;
     struct shblock *sp;
     char *copys();
 
@@ -141,8 +141,8 @@ int nextlin()
     static char yytext[INMAX];
     static char *yytextl = yytext+INMAX;
     char *text, templin[INMAX];
-    register char c;
-    register char *p, *t;
+    char c;
+    char *p, *t;
     char lastch, *lastchp;
     int incom;
     int kc;
@@ -238,8 +238,8 @@ endloop:
 
 int yylex()
 {
-    register char *p;
-    register char *q;
+    char *p;
+    char *q;
     char word[INMAX];
 
     if (zznextc == 0)

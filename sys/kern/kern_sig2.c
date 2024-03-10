@@ -57,12 +57,11 @@
 #include <sys/user.h>       /* for coredump */
 
 static void
-setsigvec(signum, sa)
-    int signum;
-    register struct sigaction *sa;
+setsigvec(int signum,
+    struct sigaction *sa)
 {
     unsigned long bit;
-    register struct proc *p = u.u_procp;
+    struct proc *p = u.u_procp;
 
     bit = sigmask(signum);
     /*
@@ -108,17 +107,17 @@ setsigvec(signum, sa)
 }
 
 void
-sigaction()
+sigaction(void)
 {
-    register struct a {
+    struct a {
         int signum;
         struct  sigaction *nsa;
         struct  sigaction *osa;
         u_int   sigtramp;
     } *uap = (struct a *)u.u_arg;
     struct sigaction vec;
-    register struct sigaction *sa;
-    register int signum;
+    struct sigaction *sa;
+    int signum;
     u_long bit;
     int error = 0;
 
@@ -165,11 +164,10 @@ out:
  * reconstruct the process state safely.
  */
 void
-fatalsig(signum)
-    int signum;
+fatalsig(int signum)
 {
     unsigned long mask;
-    register struct proc *p = u.u_procp;
+    struct proc *p = u.u_procp;
 
     u.u_signal[signum] = SIG_DFL;
     mask = sigmask(signum);
@@ -184,10 +182,9 @@ fatalsig(signum)
  * set to ignore signals that are ignored by default.
  */
 void
-siginit(p)
-    register struct proc *p;
+siginit(struct proc *p)
 {
-    register int i;
+    int i;
 
     for (i = 0; i < NSIG; i++)
         if (sigprop[i] & SA_IGNORE && i != SIGCONT)
@@ -203,16 +200,16 @@ siginit(p)
  * the 2BSD syscall return mechanism.
  */
 void
-sigprocmask()
+sigprocmask(void)
 {
-    register struct a {
+    struct a {
         int how;
         sigset_t *set;
         sigset_t *oset;
     } *uap = (struct a *)u.u_arg;
     int error = 0;
     sigset_t oldmask, newmask;
-    register struct proc *p = u.u_procp;
+    struct proc *p = u.u_procp;
 
     oldmask = p->p_sigmask;
     if (! uap->set) /* No new mask, go possibly return old mask */
@@ -248,12 +245,12 @@ out:
  * used a nonstandard (mask instead of pointer) calling convention.
  */
 void
-sigpending()
+sigpending(void)
 {
-    register struct a {
+    struct a {
         struct sigset_t *set;
     } *uap = (struct a *)u.u_arg;
-    register int error = 0;
+    int error = 0;
     struct  proc *p = u.u_procp;
 
     if (uap->set)
@@ -269,9 +266,9 @@ sigpending()
  * copyin by assuming a mask of 0.
  */
 void
-sigsuspend()
+sigsuspend(void)
 {
-    register struct a {
+    struct a {
         struct sigset_t *set;
     } *uap = (struct a *)u.u_arg;
     sigset_t nmask = 0;
@@ -295,9 +292,9 @@ sigsuspend()
 }
 
 void
-sigaltstack()
+sigaltstack(void)
 {
-    register struct a {
+    struct a {
         struct sigaltstack * nss;
         struct sigaltstack * oss;
     } *uap = (struct a *)u.u_arg;
@@ -336,14 +333,14 @@ out:
 }
 
 void
-sigwait()
+sigwait(void)
 {
-    register struct a {
+    struct a {
         sigset_t *set;
         int *sig;
     } *uap = (struct a *)u.u_arg;
     sigset_t wanted, sigsavail;
-    register struct proc *p = u.u_procp;
+    struct proc *p = u.u_procp;
     int signo, error;
 
     if (uap->set == 0 || uap->sig == 0) {

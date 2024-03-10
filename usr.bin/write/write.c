@@ -47,7 +47,7 @@ void
 sigs(sig)
     sig_t sig;
 {
-    register int i;
+    int i;
 
     for (i=0; signum[i]; i++)
         signal(signum[i], sig);
@@ -57,7 +57,7 @@ void
 ex(bp)
     char *bp;
 {
-    register int i;
+    int i;
 
     sigs(SIG_IGN);
     i = fork();
@@ -86,7 +86,7 @@ main(argc, argv)
     char *argv[];
 {
     struct stat stbuf;
-    register int i;
+    int i;
     register FILE *uf;
     int c1, c2;
     time_t clock = time(0);
@@ -204,7 +204,7 @@ cont:
     }
     for (;;) {
         char buf[BUFSIZ];
-        register char *bp;
+        char *bp;
         i = read(0, buf, sizeof buf);
         if (i <= 0)
             eof();

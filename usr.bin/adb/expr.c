@@ -28,7 +28,7 @@ symchar(dig)
 static void
 readsym()
 {
-    register char *p;
+    char *p;
 
     p = isymbol;
     do {
@@ -55,7 +55,7 @@ static struct SYMbol *
 lookupsym(symstr)
     char *symstr;
 {
-    register struct SYMbol *symp, *sc;
+    struct SYMbol *symp, *sc;
 
     symset();
     while ((symp = symget())) {
@@ -102,7 +102,7 @@ item(a)
         float r;
         long i;
     } real;
-    register struct SYMbol *symp;
+    struct SYMbol *symp;
 
     hex = FALSE;
 
@@ -312,7 +312,7 @@ varchk(name)
 
 int
 eqsym(s1, s2, c)
-    register char *s1, *s2;
+    char *s1, *s2;
     int c;
 {
     if (! strcmp(s1, s2))

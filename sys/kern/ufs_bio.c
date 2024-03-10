@@ -17,11 +17,10 @@
  * Read in (if necessary) the block and return a buffer pointer.
  */
 struct buf *
-bread (dev, blkno)
-    dev_t dev;
-    daddr_t blkno;
+bread (dev_t dev,
+    daddr_t blkno)
 {
-    register struct buf *bp;
+    struct buf *bp;
 
     bp = getblk(dev, blkno);
     if (bp->b_flags&(B_DONE|B_DELWRI)) {
@@ -40,12 +39,11 @@ bread (dev, blkno)
  * read-ahead block (which is not allocated to the caller)
  */
 struct buf *
-breada(dev, blkno, rablkno)
-    register dev_t dev;
-    daddr_t blkno;
-    daddr_t rablkno;
+breada(dev_t dev,
+    daddr_t blkno,
+    daddr_t rablkno)
 {
-    register struct buf *bp, *rabp;
+    struct buf *bp, *rabp;
 
     bp = NULL;
     /*
@@ -97,10 +95,9 @@ breada(dev, blkno, rablkno)
  * Then release the buffer.
  */
 void
-bwrite(bp)
-    register struct buf *bp;
+bwrite(struct buf *bp)
 {
-    register int flag;
+    int flag;
 
     flag = bp->b_flags;
     bp->b_flags &= ~(B_READ | B_DONE | B_ERROR | B_DELWRI);
@@ -130,8 +127,7 @@ bwrite(bp)
  * in the same order as requested.
  */
 void
-bdwrite (bp)
-    register struct buf *bp;
+bdwrite (struct buf *bp)
 {
 
     if ((bp->b_flags&B_DELWRI) == 0)
@@ -149,11 +145,10 @@ bdwrite (bp)
  * Release the buffer, with no I/O implied.
  */
 void
-brelse (bp)
-    register struct buf *bp;
+brelse (struct buf *bp)
 {
-    register struct buf *flist;
-    register int s;
+    struct buf *flist;
+    int s;
 
     /*
      * If someone's waiting for the buffer, or
@@ -197,12 +192,11 @@ brelse (bp)
  * (mainly to avoid getting hung up on a wait in breada)
  */
 int
-incore (dev, blkno)
-    register dev_t dev;
-    daddr_t blkno;
+incore (dev_t dev,
+    daddr_t blkno)
 {
-    register struct buf *bp;
-    register struct buf *dp;
+    struct buf *bp;
+    struct buf *dp;
 
     dp = BUFHASH(dev, blkno);
     blkno = fsbtodb(blkno);
@@ -219,9 +213,9 @@ incore (dev, blkno)
  * Preference is to AGE list, then LRU list.
  */
 struct buf *
-getnewbuf()
+getnewbuf(void)
 {
-    register struct buf *bp, *dp;
+    struct buf *bp, *dp;
     int s;
 
 loop:
@@ -263,11 +257,10 @@ loop:
  * want to lower the ipl back to 0.
  */
 struct buf *
-getblk(dev, blkno)
-    register dev_t dev;
-    daddr_t blkno;
+getblk(dev_t dev,
+    daddr_t blkno)
 {
-    register struct buf *bp, *dp;
+    struct buf *bp, *dp;
     daddr_t dblkno;
     int s;
 
@@ -313,9 +306,9 @@ loop:
  * not assigned to any particular device
  */
 struct buf *
-geteblk()
+geteblk(void)
 {
-    register struct buf *bp, *flist;
+    struct buf *bp, *flist;
 
     bp = getnewbuf();
     bp->b_flags |= B_INVAL;
@@ -333,10 +326,9 @@ geteblk()
  * to the user.
  */
 void
-biowait(bp)
-    register struct buf *bp;
+biowait(struct buf *bp)
 {
-    register int s;
+    int s;
 
     s = splbio();
     while ((bp->b_flags & B_DONE) == 0)
@@ -351,8 +343,7 @@ biowait(bp)
  * Wake up anyone waiting for it.
  */
 void
-biodone(bp)
-    register struct buf *bp;
+biodone(struct buf *bp)
 {
     if (bp->b_flags & B_DONE)
         panic("dup biodone");
@@ -369,13 +360,12 @@ biodone(bp)
  * Insure that no part of a specified block is in an incore buffer.
  */
 void
-blkflush (dev, blkno)
-    register dev_t dev;
-    daddr_t blkno;
+blkflush (dev_t dev,
+    daddr_t blkno)
 {
-    register struct buf *ep;
+    struct buf *ep;
     struct buf *dp;
-    register int s;
+    int s;
 
     dp = BUFHASH(dev, blkno);
     blkno = fsbtodb(blkno);
@@ -406,11 +396,10 @@ loop:
  * (from umount and sync)
  */
 void
-bflush(dev)
-    register dev_t dev;
+bflush(dev_t dev)
 {
-    register struct buf *bp;
-    register struct buf *flist;
+    struct buf *bp;
+    struct buf *flist;
     int s;
 
 loop:
@@ -436,10 +425,9 @@ loop:
  * if there is an error but the number is 0 set a generalized code.
  */
 int
-geterror (bp)
-    register struct buf *bp;
+geterror (struct buf *bp)
 {
-    register int error = 0;
+    int error = 0;
 
     if (bp->b_flags&B_ERROR)
         if ((error = bp->b_error)==0)
@@ -459,11 +447,10 @@ geterror (bp)
  * correctness.                     ... kre
  */
 void
-binval(dev)
-    register dev_t dev;
+binval(dev_t dev)
 {
-    register struct buf *bp;
-    register struct bufhd *hp;
+    struct buf *bp;
+    struct bufhd *hp;
 #define dp ((struct buf *)hp)
 
     for (hp = bufhash; hp < &bufhash[BUFHSZ]; hp++)

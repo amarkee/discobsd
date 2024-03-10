@@ -17,8 +17,8 @@ ttyname(f)
 {
 	struct stat fsb;
 	struct stat tsb;
-	register struct direct *db;
-	register DIR *df;
+	struct direct *db;
+	DIR *df;
 	static char rbuf[32];
 
 	if (isatty(f)==0)

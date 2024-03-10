@@ -20,7 +20,7 @@ struct timeb {
 
 int
 ftime(tp)
-	register struct timeb *tp;
+	struct timeb *tp;
 {
 	struct timeval t;
 	struct timezone tz;

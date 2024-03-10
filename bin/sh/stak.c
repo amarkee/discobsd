@@ -11,8 +11,8 @@ char *
 getstak(asize)			/* allocate requested stack */
 int	asize;
 {
-	register char	*oldstak;
-	register int	size;
+	char	*oldstak;
+	int	size;
 
 	size = round(asize, BYTESPERWORD);
 	oldstak = stakbot;
@@ -46,9 +46,9 @@ savstak()
 
 char *
 endstak(argp)		/* tidy up after `locstak' */
-register char	*argp;
+char	*argp;
 {
-	register char	*oldstak;
+	char	*oldstak;
 
 	*argp++ = 0;
 	oldstak = stakbot;
@@ -57,7 +57,7 @@ register char	*argp;
 }
 
 tdystak(x)		/* try to bring stack back to x */
-register char	*x;
+char	*x;
 {
 	while ((char *)(stakbsy) > (char *)(x))
 	{

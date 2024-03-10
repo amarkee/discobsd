@@ -45,7 +45,7 @@ getgrouplist(uname, agroup, groups, grpcnt)
 	register gid_t *groups;
 	int *grpcnt;
 {
-	register struct group *grp;
+	struct group *grp;
 	int i, ngroups, ret, maxgroups;
 
 	ret = 0;

@@ -23,7 +23,7 @@ static
 rmslash(string)
 	char *string;
 {
-	register char *pstring;
+	char *pstring;
 
 	pstring = string;
 	while(*pstring)
@@ -49,10 +49,10 @@ rmslash(string)
 }
 
 cwd(dir)
-	register char *dir;
+	char *dir;
 {
-	register char *pcwd;
-	register char *pdir;
+	char *pcwd;
+	char *pdir;
 
 	/* First remove extra /'s */
 

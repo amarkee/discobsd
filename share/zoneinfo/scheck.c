@@ -13,11 +13,11 @@ scheck(string, format)
 char *	string;
 char *	format;
 {
-	register char *	fbuf;
-	register char *	fp;
-	register char *	tp;
-	register int	c;
-	register char *	result;
+	char *	fbuf;
+	char *	fp;
+	char *	tp;
+	int	c;
+	char *	result;
 	char		dummy;
 
 	result = "";

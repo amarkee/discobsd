@@ -81,7 +81,7 @@ static void		SetupAppendBuffer (Interp *iPtr, int newSpace);
 int
 TclFindElement(interp, list, elementPtr, nextPtr, sizePtr, bracePtr)
     Tcl_Interp *interp;		/* Interpreter to use for error reporting. */
-    register unsigned char *list; /* String containing Tcl list with zero
+    unsigned char *list; /* String containing Tcl list with zero
 				 * or more elements (possibly in braces). */
     unsigned char **elementPtr;	/* Fill in with location of first significant
 				 * character in first element of list. */
@@ -95,7 +95,7 @@ TclFindElement(interp, list, elementPtr, nextPtr, sizePtr, bracePtr)
 				 * to indicate that arg was/wasn't
 				 * in braces. */
 {
-    register unsigned char *p;
+    unsigned char *p;
     int openBraces = 0;
     int inQuotes = 0;
     int size;
@@ -277,10 +277,10 @@ void
 TclCopyAndCollapse(count, src, dst)
     int count;			/* Total number of characters to copy
 				 * from src. */
-    register unsigned char *src; /* Copy from here... */
-    register unsigned char *dst; /* ... to here. */
+    unsigned char *src; /* Copy from here... */
+    unsigned char *dst; /* ... to here. */
 {
-    register char c;
+    char c;
     int numRead;
 
     for (c = *src; count > 0; src++, c = *src, count--) {
@@ -339,7 +339,7 @@ Tcl_SplitList(interp, list, argcPtr, argvPtr)
 				 * of pointers to list elements. */
 {
     unsigned char **argv;
-    register unsigned char *p;
+    unsigned char *p;
     int size, i, result, elSize, brace;
     unsigned char *element;
 
@@ -422,7 +422,7 @@ Tcl_ScanElement(string, flagPtr)
 				 * Tcl_ConvertElement. */
 {
     int flags, nestingLevel;
-    register unsigned char *p;
+    unsigned char *p;
 
     /*
      * This procedure and Tcl_ConvertElement together do two things:
@@ -539,11 +539,11 @@ Tcl_ScanElement(string, flagPtr)
 
 int
 Tcl_ConvertElement(src, dst, flags)
-    register unsigned char *src; /* Source information for list element. */
+    unsigned char *src; /* Source information for list element. */
     unsigned char *dst;		/* Place to put list-ified element. */
     int flags;			/* Flags produced by Tcl_ScanElement. */
 {
-    register unsigned char *p = dst;
+    unsigned char *p = dst;
 
     /*
      * See the comment block at the beginning of the Tcl_ScanElement
@@ -657,7 +657,7 @@ Tcl_Merge (int argc,		/* How many strings to merge. */
     int localFlags[LOCAL_SIZE], *flagPtr;
     int numChars;
     unsigned char *result;
-    register unsigned char *dst;
+    unsigned char *dst;
     int i;
 
     /*
@@ -722,7 +722,7 @@ Tcl_Concat (int argc,		/* Number of strings to concatenate. */
 	unsigned char **argv)	/* Array of strings to concatenate. */
 {
     int totalSize, i;
-    register unsigned char *p;
+    unsigned char *p;
     unsigned char *result;
 
     for (totalSize = 1, i = 0; i < argc; i++) {
@@ -789,8 +789,8 @@ Tcl_Concat (int argc,		/* Number of strings to concatenate. */
 
 int
 Tcl_StringMatch(string, pattern)
-    register unsigned char *string;	/* String. */
-    register unsigned char *pattern;	/* Pattern, which may contain
+    unsigned char *string;	/* String. */
+    unsigned char *pattern;	/* Pattern, which may contain
 					 * special characters. */
 {
     char c2;

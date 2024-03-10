@@ -67,9 +67,9 @@ extern char **environ;
 int isprecious(p)
 char *p;
 {
-    register struct lineblock *lp;
-    register struct depblock *dp;
-    register struct nameblock *np;
+    struct lineblock *lp;
+    struct depblock *dp;
+    struct nameblock *np;
 
     np = srchname(".PRECIOUS");
     if (np)
@@ -123,7 +123,7 @@ int rdd1(k)
 
 void readenv()
 {
-    register char **ep, *p;
+    char **ep, *p;
 
     for(ep=environ; *ep; ++ep) {
         for (p = *ep; *p; p++) {
@@ -238,8 +238,8 @@ int main(argc, argv)
     int argc;
     char *argv[];
 {
-    register struct nameblock *p;
-    register int i, j;
+    struct nameblock *p;
+    int i, j;
     int descset, nfargs;
     TIMETYPE tjunk;
     char c, *s;

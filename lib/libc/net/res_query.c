@@ -124,7 +124,7 @@ res_search(name, class, type, answer, anslen)
 	u_char *answer;		/* buffer to put answer */
 	int anslen;		/* size of answer */
 {
-	register char *cp, **domain;
+	char *cp, **domain;
 	int n, ret;
 	char *hostalias();
 
@@ -215,9 +215,9 @@ res_querydomain(name, domain, class, type, answer, anslen)
 
 char *
 hostalias(name)
-	register char *name;
+	char *name;
 {
-	register char *C1, *C2;
+	char *C1, *C2;
 	FILE *fp;
 	char *file, *getenv(), *strcpy(), *strncpy();
 	char buf[BUFSIZ];

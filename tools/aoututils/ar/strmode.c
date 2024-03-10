@@ -41,7 +41,7 @@
 void
 strmode(mode, p)
 	register mode_t mode;
-	register char *p;
+	char *p;
 {
 	 /* print type */
 	switch (mode & S_IFMT) {

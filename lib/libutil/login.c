@@ -27,7 +27,7 @@ void
 login(ut)
 	struct utmp *ut;
 {
-	register int fd;
+	int fd;
 	int tty;
 	off_t lseek();
 

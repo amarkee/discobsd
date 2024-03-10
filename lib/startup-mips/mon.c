@@ -63,8 +63,8 @@ monitor(lowpc, highpc, buf, bufsize, cntsize)
 	char *buf;		/* really (short *) but easier this way */
 	unsigned bufsize, cntsize;
 {
-	register unsigned o;
-	register struct phdr *php;
+	unsigned o;
+	struct phdr *php;
 	static char *sbuf;	/* saved base of profiling buffer */
 	static unsigned ssize;	/* saved buffer size */
 

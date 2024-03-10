@@ -27,7 +27,7 @@ struct  file {
 #ifdef KERNEL
 struct uio;
 
-struct  fileops {
+struct fileops {
     int (*fo_rw) (struct file *fp, struct uio *uio);
     int (*fo_ioctl) (struct file *fp, u_int com, char *data);
     int (*fo_select) (struct file *fp, int flag);

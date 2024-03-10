@@ -55,7 +55,7 @@ struct state _res = {
 res_init()
 {
     register FILE *fp;
-    register char *cp, **pp;
+    char *cp, **pp;
     char buf[BUFSIZ];
     extern u_long inet_addr();
     extern char *index();

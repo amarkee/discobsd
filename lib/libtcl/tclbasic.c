@@ -451,7 +451,7 @@ Tcl_Eval(interp, cmd, flags, termPtr)
     int argc;
     int argSize = NUM_ARGS;
 
-    register unsigned char *src;	/* Points to current character
+    unsigned char *src;	/* Points to current character
 					 * in cmd. */
     char termChar;			/* Return when this character is found
 					 * (either ']' or '\0').  Zero means
@@ -745,7 +745,7 @@ Tcl_Eval(interp, cmd, flags, termPtr)
 
     if ((result == TCL_ERROR) && !(iPtr->flags & ERR_ALREADY_LOGGED)) {
 	int numChars;
-	register unsigned char *p;
+	unsigned char *p;
 
 	/*
 	 * Compute the line number where the error occurred.

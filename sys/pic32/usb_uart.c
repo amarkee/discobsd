@@ -70,7 +70,7 @@ void usbinit()
 
 int usbopen (dev_t dev, int flag, int mode)
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     tp->t_oproc = usbstart;
 
@@ -94,7 +94,7 @@ int usbopen (dev_t dev, int flag, int mode)
 
 int usbclose (dev_t dev, int flag, int mode)
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     ttywflush(tp);
     ttyclose (tp);
@@ -106,7 +106,7 @@ int usbread (dev, uio, flag)
     struct uio *uio;
     int flag;
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     return ttread (tp, uio, flag);
 }
@@ -116,15 +116,15 @@ int usbwrite (dev, uio, flag)
     struct uio *uio;
     int flag;
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     return ttwrite (tp, uio, flag);
 }
 
 int usbioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
-    register struct tty *tp = &usbttys[0];
-    register int error;
+    struct tty *tp = &usbttys[0];
+    int error;
 
     error = ttioctl (tp, cmd, addr, flag);
     if (error < 0)
@@ -133,18 +133,18 @@ int usbioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 }
 
 int usbselect (dev, rw)
-    register dev_t dev;
+    dev_t dev;
     int rw;
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     return ttyselect (tp, rw);
 }
 
 void usbstart (tp)
-    register struct tty *tp;
+    struct tty *tp;
 {
-    register int s;
+    int s;
 
     s = spltty();
     if (tp->t_state & (TS_TIMEOUT | TS_BUSY | TS_TTSTOP)) {
@@ -174,7 +174,7 @@ out:    /* Disable transmit_interrupt. */
  */
 void usbputc(dev_t dev, char c)
 {
-    register int s;
+    int s;
 
     s = spltty();
     while (! cdc_is_tx_ready()) {
@@ -209,7 +209,7 @@ static void store_char (int c)
  */
 char usbgetc(dev_t dev)
 {
-    register int s;
+    int s;
 
     s = spltty();
     for (getc_data = -1; getc_data < 0; ) {
@@ -226,7 +226,7 @@ char usbgetc(dev_t dev)
  */
 static void usb_rx (int c)
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     if ((tp->t_state & TS_ISOPEN) == 0)
         return;
@@ -238,7 +238,7 @@ static void usb_rx (int c)
  */
 void usbintr (int chan)
 {
-    register struct tty *tp = &usbttys[0];
+    struct tty *tp = &usbttys[0];
 
     // Must call this function from interrupt or periodically.
     usb_device_tasks();

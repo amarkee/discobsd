@@ -36,7 +36,7 @@ static char **curshell = NULL;
 static char **
 initshells()
 {
-	register char **sp, *cp;
+	char **sp, *cp;
 	register FILE *fp;
 	struct stat statb;
 

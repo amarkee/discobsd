@@ -9,8 +9,8 @@ char *prompt;
 {
 	struct sgttyb ttyb;
 	int flags;
-	register char *p;
-	register int c;
+	char *p;
+	int c;
 	FILE *fi;
 	static char pbuf[9];
 	sig_t sig;

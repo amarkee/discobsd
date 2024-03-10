@@ -217,7 +217,7 @@ current()
 
 void
 user(pw)
-	register struct passwd *pw;
+	struct passwd *pw;
 {
 	struct group *gr;
 	gid_t groups[NGROUPS + 1];

@@ -39,7 +39,7 @@ int mrams_dkindex;                      /* disk index for statistics */
 
 unsigned int mr_read_block(unsigned int chip, unsigned int address, unsigned int length, char *data)
 {
-    register unsigned int cs = 0;
+    unsigned int cs = 0;
     struct spiio *io = &mrams_io[chip];
 
     switch (chip) {
@@ -113,10 +113,10 @@ unsigned int mr_read_block(unsigned int chip, unsigned int address, unsigned int
 
 int mrams_read(unsigned int offset, char *data, unsigned int bcount)
 {
-    register unsigned int chip;
-    register unsigned int toread;
-    register unsigned int address;
-    register unsigned int pass = 0;
+    unsigned int chip;
+    unsigned int toread;
+    unsigned int address;
+    unsigned int pass = 0;
 
     while (bcount > 0) {
         pass++;
@@ -143,7 +143,7 @@ int mrams_read(unsigned int offset, char *data, unsigned int bcount)
 unsigned int mr_write_block(unsigned int chip, unsigned int address, unsigned int length, char *data)
 {
     struct spiio *io = &mrams_io[chip];
-    register unsigned int cs = 0;
+    unsigned int cs = 0;
     char blank __attribute__((unused));
 
     switch (chip) {
@@ -216,10 +216,10 @@ unsigned int mr_write_block(unsigned int chip, unsigned int address, unsigned in
 
 int mrams_write(unsigned int offset, char *data, unsigned bcount)
 {
-    register unsigned int chip;
-    register unsigned int address;
-    register unsigned int towrite;
-    register unsigned int pass = 0;
+    unsigned int chip;
+    unsigned int address;
+    unsigned int towrite;
+    unsigned int pass = 0;
 
     while (bcount > 0) {
         pass++;

@@ -63,7 +63,7 @@ static int
 _conv(int n, int digits, char pad)
 {
 	static char buf[10];
-	register char *p;
+	char *p;
 
 	for (p = buf + sizeof(buf) - 2; n > 0 && p > buf; n /= 10, --digits)
 		*p-- = n % 10 + '0';

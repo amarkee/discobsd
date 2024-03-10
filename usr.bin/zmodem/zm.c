@@ -113,10 +113,10 @@ static char badcrc[] = "Bad CRC";
 
 /* Send ZMODEM binary header hdr of type type */
 zsbhdr(len, type, hdr)
-register char *hdr;
+char *hdr;
 {
-	register int n;
-	register unsigned short crc;
+	int n;
+	unsigned short crc;
 
 #ifndef DSZ
 	vfile("zsbhdr: %c %d %s %lx", Usevhdrs?'v':'f', len,
@@ -159,9 +159,9 @@ register char *hdr;
 
 /* Send ZMODEM binary header hdr of type type */
 zsbh32(len, hdr, type, flavour)
-register char *hdr;
+char *hdr;
 {
-	register int n;
+	int n;
 	register UNSL long crc;
 
 	xsendline(flavour); 
@@ -183,10 +183,10 @@ register char *hdr;
 
 /* Send ZMODEM HEX header hdr of type type */
 zshhdr(len, type, hdr)
-register char *hdr;
+char *hdr;
 {
-	register int n;
-	register unsigned short crc;
+	int n;
+	unsigned short crc;
 
 #ifndef DSZ
 	vfile("zshhdr: %c %d %s %lx", Usevhdrs?'v':'f', len,
@@ -224,9 +224,9 @@ register char *hdr;
  */
 static char *Zendnames[] = { "ZCRCE", "ZCRCG", "ZCRCQ", "ZCRCW"};
 zsdata(buf, length, frameend)
-register char *buf;
+char *buf;
 {
-	register unsigned short crc;
+	unsigned short crc;
 
 #ifndef DSZ
 	vfile("zsdata: %d %s", length, Zendnames[frameend-ZCRCE&3]);
@@ -253,9 +253,9 @@ register char *buf;
 }
 
 zsda32(buf, length, frameend)
-register char *buf;
+char *buf;
 {
-	register int c;
+	int c;
 	register UNSL long crc;
 
 	crc = 0xFFFFFFFFL;
@@ -282,12 +282,12 @@ register char *buf;
  *  NB: On errors may store length+1 bytes!
  */
 zrdata(buf, length)
-register char *buf;
+char *buf;
 {
-	register int c;
-	register unsigned short crc;
-	register char *end;
-	register int d;
+	int c;
+	unsigned short crc;
+	char *end;
+	int d;
 
 	switch (Crc32r) {
 	case 1:
@@ -344,12 +344,12 @@ crcfoo:
 }
 
 zrdat32(buf, length)
-register char *buf;
+char *buf;
 {
-	register int c;
+	int c;
 	register UNSL long crc;
-	register char *end;
-	register int d;
+	char *end;
+	int d;
 
 	crc = 0xFFFFFFFFL;  Rxcount = 0;  end = buf + length;
 	while (buf <= end) {
@@ -421,7 +421,7 @@ garbitch()
 zgethdr(hdr, eflag)
 char *hdr;
 {
-	register int c, n, cancount;
+	int c, n, cancount;
 
 	n = Zrwindow + Effbaud;		/* Max bytes before start of frame */
 	Rxframeind = Rxtype = 0;
@@ -584,10 +584,10 @@ fifi:
 
 /* Receive a binary style header (type and position) */
 zrbhdr(hdr)
-register char *hdr;
+char *hdr;
 {
-	register int c, n;
-	register unsigned short crc;
+	int c, n;
+	unsigned short crc;
 
 	if ((c = zdlread()) & ~0377)
 		return c;
@@ -619,9 +619,9 @@ register char *hdr;
 
 /* Receive a binary style header (type and position) with 32 bit FCS */
 zrbhd32(hdr)
-register char *hdr;
+char *hdr;
 {
-	register int c, n;
+	int c, n;
 	register UNSL long crc;
 
 	if ((c = zdlread()) & ~0377)
@@ -665,9 +665,9 @@ register char *hdr;
 zrhhdr(hdr)
 char *hdr;
 {
-	register int c;
-	register unsigned short crc;
-	register int n;
+	int c;
+	unsigned short crc;
+	int n;
 
 	if ((c = zgethex()) < 0)
 		return c;
@@ -711,7 +711,7 @@ char *hdr;
 
 /* Send a byte as two hex digits */
 zputhex(c)
-register int c;
+int c;
 {
 	static char	digits[]	= "0123456789abcdef";
 
@@ -768,7 +768,7 @@ zsendline(c)
 /* Decode two lower case hex digits into an 8 bit byte value */
 zgethex()
 {
-	register int c;
+	int c;
 
 	c = zgeth1();
 #ifdef DEBUGZ
@@ -779,7 +779,7 @@ zgethex()
 }
 zgeth1()
 {
-	register int c, n;
+	int c, n;
 
 	if ((c = noxrd7()) < 0)
 		return c;
@@ -805,7 +805,7 @@ zgeth1()
  */
 zdlread()
 {
-	register int c;
+	int c;
 
 again:
 	/* Quick check for non control characters */
@@ -870,7 +870,7 @@ again2:
  */
 noxrd7()
 {
-	register int c;
+	int c;
 
 	for (;;) {
 		if ((c = readline(Rxtimeout)) < 0)
@@ -903,9 +903,9 @@ long pos;
 /* Recover a long integer from a header */
 long
 rclhdr(hdr)
-register char *hdr;
+char *hdr;
 {
-	register long l;
+	long l;
 
 	l = (hdr[ZP3] & 0377);
 	l = (l << 8) | (hdr[ZP2] & 0377);

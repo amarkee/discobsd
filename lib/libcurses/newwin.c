@@ -166,7 +166,7 @@ void
 _set_subwin_(orig, win)
         register WINDOW	*orig, *win;
 {
-	register int	i, j, k;
+	int	i, j, k;
 
 	j = win->_begy - orig->_begy;
 	k = win->_begx - orig->_begx;

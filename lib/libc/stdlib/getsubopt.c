@@ -43,12 +43,12 @@ char *suboptarg;
 
 int
 getsubopt(optionp, tokens, valuep)
-	register char **optionp;
-	register char **valuep;
-	register char **tokens;
+	char **optionp;
+	char **valuep;
+	char **tokens;
 {
-	register int cnt;
-	register char *p;
+	int cnt;
+	char *p;
 
 	suboptarg = *valuep = NULL;
 

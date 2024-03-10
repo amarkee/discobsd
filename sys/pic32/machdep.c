@@ -24,8 +24,8 @@
 #include <machine/uart.h>
 #include <machine/usb_uart.h>
 #ifdef UARTUSB_ENABLED
-#   include <machine/usb_device.h>
-#   include <machine/usb_function_cdc.h>
+#include <machine/usb_device.h>
+#include <machine/usb_function_cdc.h>
 #endif
 
 #ifdef POWER_ENABLED
@@ -146,8 +146,7 @@ int waittime = -1;
 int cpu_pins;
 
 static int
-nodump(dev)
-    dev_t dev;
+nodump(dev_t dev)
 {
     printf("\ndumping to dev %o off %D: not implemented\n", dumpdev, dumplo);
     return 0;
@@ -162,7 +161,7 @@ daddr_t dumplo = (daddr_t) 1024;
  * Check whether button 1 is pressed.
  */
 static inline int
-button1_pressed()
+button1_pressed(void)
 {
 #ifdef BUTTON1_PORT
     int val;
@@ -182,9 +181,9 @@ button1_pressed()
  * Machine dependent startup code
  */
 void
-startup()
+startup(void)
 {
-    extern void _etext(), _exception_base_();
+    extern void _etext(void), _exception_base_(void);
     extern unsigned __data_start;
 
     /* Initialize STATUS register: master interrupt disable.
@@ -409,7 +408,7 @@ startup()
     }
 }
 
-static void cpuidentify()
+static void cpuidentify(void)
 {
     unsigned devid = DEVID, osccon = OSCCON;
     static const char pllmult[]  = { 15, 16, 17, 18, 19, 20, 21, 24 };
@@ -484,9 +483,8 @@ static void cpuidentify()
  * Check whether the controller has been successfully initialized.
  */
 static int
-is_controller_alive(driver, unit)
-    struct driver *driver;
-    int unit;
+is_controller_alive(struct driver *driver,
+    int unit)
 {
     struct conf_ctlr *ctlr;
 
@@ -509,7 +507,7 @@ is_controller_alive(driver, unit)
  * Configure all controllers and devices as specified
  * in the kernel configuration file.
  */
-void kconfig()
+void kconfig(void)
 {
     struct conf_ctlr *ctlr;
     struct conf_device *dev;
@@ -537,7 +535,7 @@ void kconfig()
  * Sit and wait for something to happen...
  */
 void
-idle()
+idle(void)
 {
     /* Indicate that no process is running. */
     noproc = 1;
@@ -553,13 +551,12 @@ idle()
 }
 
 void
-boot(dev, howto)
-    register dev_t dev;
-    register int howto;
+boot(dev_t dev,
+    int howto)
 {
     if ((howto & RB_NOSYNC) == 0 && waittime < 0 && bfreelist[0].b_forw) {
-        register struct fs *fp;
-        register struct buf *bp;
+        struct fs *fp;
+        struct buf *bp;
         int iter, nbusy;
 
         /*
@@ -673,8 +670,7 @@ boot(dev, howto)
  * every next clock cycle, i.e. at rate CPU_KHZ/2 per millisecond.
  */
 void
-udelay(usec)
-    u_int usec;
+udelay(u_int usec)
 {
     unsigned now = mips_read_c0_register(C0_COUNT, 0);
     unsigned final = now + usec * (CPU_KHZ / 1000) / 2;
@@ -744,8 +740,7 @@ void addupc(caddr_t pc, struct uprof *pbuf, int ticks)
  * Return 0 when no bit is set.
  */
 int
-ffs(i)
-    u_long i;
+ffs(u_long i)
 {
     if (i != 0)
         i = 32 - mips_clz(i & -i);
@@ -759,9 +754,8 @@ ffs(i)
  * (including the null terminating byte).
  */
 int
-copystr(src, dest, maxlength, lencopied)
-    register caddr_t src, dest;
-    register u_int maxlength, *lencopied;
+copystr(caddr_t src, caddr_t dest,
+    u_int maxlength, u_int *lencopied)
 {
     caddr_t dest0 = dest;
     int error = ENOENT;
@@ -786,8 +780,7 @@ done:
  * Calculate the length of a string.
  */
 size_t
-strlen(s)
-    register const char *s;
+strlen(const char *s)
 {
     const char *s0 = s;
 
@@ -801,8 +794,7 @@ strlen(s)
  * There are two memory regions allowed for user: flash and RAM.
  */
 int
-baduaddr(addr)
-    register caddr_t addr;
+baduaddr(caddr_t addr)
 {
     if (addr >= (caddr_t) USER_FLASH_START &&
         addr < (caddr_t) USER_FLASH_END)
@@ -818,8 +810,7 @@ baduaddr(addr)
  * There are two memory regions allowed for kernel: RAM and flash.
  */
 int
-badkaddr(addr)
-    register caddr_t addr;
+badkaddr(caddr_t addr)
 {
     if (addr >= (caddr_t) KERNEL_DATA_START &&
         addr < (caddr_t) KERNEL_DATA_END)
@@ -840,8 +831,8 @@ void insque(void *element, void *predecessor)
         struct que *q_next;
         struct que *q_prev;
     };
-    register struct que *e = (struct que *) element;
-    register struct que *prev = (struct que *) predecessor;
+    struct que *e = (struct que *) element;
+    struct que *prev = (struct que *) predecessor;
 
     e->q_prev = prev;
     e->q_next = prev->q_next;
@@ -858,7 +849,7 @@ void remque(void *element)
         struct que *q_next;
         struct que *q_prev;
     };
-    register struct que *e = (struct que *) element;
+    struct que *e = (struct que *) element;
 
     e->q_prev->q_next = e->q_next;
     e->q_next->q_prev = e->q_prev;
@@ -869,7 +860,7 @@ void remque(void *element)
  */
 int strncmp(const char *s1, const char *s2, size_t n)
 {
-    register int ret, tmp;
+    int ret, tmp;
 
     if (n == 0)
         return 0;

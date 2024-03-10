@@ -31,12 +31,11 @@ char    *panicstr;
  * are saved in msgbuf for inspection later.
  */
 static void
-putchar (c, flags, tp)
-    int c, flags;
-    register struct tty *tp;
+putchar (int c, int flags,
+    struct tty *tp)
 {
     if (flags & TOTTY) {
-        register int s = spltty();
+        int s = spltty();
 
         if (tp && (tp->t_state & (TS_CARR_ON | TS_ISOPEN)) ==
             (TS_CARR_ON | TS_ISOPEN)) {
@@ -133,11 +132,10 @@ void puts(char *s, int flags, struct tty *ttyp)
 #define HION "\e[1m"
 #define HIOFF "\e[0m"
 static void
-prf (fmt, ap, flags, ttyp)
-    register char *fmt;
-    register u_int *ap;
-    int flags;
-    struct tty *ttyp;
+prf (char *fmt,
+    u_int *ap,
+    int flags,
+    struct tty *ttyp)
 {
 #define va_arg(ap,type) *(type*) (void*) (ap++)
 
@@ -441,8 +439,7 @@ number:
 }
 
 static void
-logpri (level)
-    int level;
+logpri (int level)
 {
     putchar ('<', TOLOG, (struct tty*) 0);
     prf ("%u", &level, TOLOG, (struct tty*) 0);
@@ -499,7 +496,7 @@ void _printf_cdnopsuxX(char *fmt, ...)
 void
 uprintf (char *fmt, ...)
 {
-    register struct tty *tp;
+    struct tty *tp;
 
     tp = u.u_ttyp;
     if (tp == NULL)
@@ -516,7 +513,7 @@ uprintf (char *fmt, ...)
  * (does not sleep).
  */
 void
-tprintf (register struct tty *tp, char *fmt, ...)
+tprintf (struct tty *tp, char *fmt, ...)
 {
     int flags = TOTTY | TOLOG;
 
@@ -540,7 +537,7 @@ tprintf (register struct tty *tp, char *fmt, ...)
 void
 log (int level, char *fmt, ...)
 {
-    register int s = splhigh();
+    int s = splhigh();
 
     logpri(level);
     prf(fmt, &fmt + 1, TOLOG, (struct tty *)0);
@@ -561,8 +558,7 @@ log (int level, char *fmt, ...)
  * sync the disks as this often leads to recursive panics.
  */
 void
-panic(s)
-    char *s;
+panic(char *s)
 {
     int bootopt = RB_HALT | RB_DUMP;
 

@@ -6,7 +6,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-    register char *p1, *p2, *p3;
+    char *p1, *p2, *p3;
 
     if (argc < 2) {
         putchar('\n');

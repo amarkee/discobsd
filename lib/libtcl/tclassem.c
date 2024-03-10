@@ -213,7 +213,7 @@ int
 Tcl_CommandComplete(cmd)
     unsigned char *cmd;		/* Command to check. */
 {
-    register unsigned char *p = cmd;
+    unsigned char *p = cmd;
 
     p = cmd;
     while (1) {

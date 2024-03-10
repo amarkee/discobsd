@@ -76,8 +76,8 @@ replace(argv)
 	char **argv;
 {
 	extern char *posarg, *posname;	/* positioning file name */
-	register char *file;
-	register int afd, curfd, mods, sfd;
+	char *file;
+	int afd, curfd, mods, sfd;
 	struct stat sb;
 	CF cf;
 	off_t size, tsize;

@@ -17,7 +17,7 @@ static botch(s)
 char *s;
 {
 	struct	iovec	iov[3];
-	register struct iovec *v = iov;
+	struct iovec *v = iov;
 	char	*ab = "assertion botched: ";
 
 	v->iov_base = ab;
@@ -93,8 +93,8 @@ void *
 malloc(nbytes)
 	size_t nbytes;
 {
-	register union store *p, *q;
-	register int nw;
+	union store *p, *q;
+	int nw;
 	static int temp;	/* coroutines assume no auto */
 
 	if (nbytes == 0)
@@ -164,7 +164,7 @@ found:
 void free(ap)
 	register void *ap;
 {
-	register union store *p = (union store *)ap;
+	union store *p = (union store *)ap;
 
 	if (p == NULL)
 	        return;
@@ -186,10 +186,10 @@ realloc(vp, nbytes)
 	register void *vp;
 	size_t nbytes;
 {
-	register union store *p = vp;
-	register union store *q;
+	union store *p = vp;
+	union store *q;
 	union store *s, *t;
-	register unsigned nw;
+	unsigned nw;
 	unsigned onw;
 
 	if (p == NULL)
@@ -216,7 +216,7 @@ realloc(vp, nbytes)
 static allock()
 {
 #ifdef longdebug
-	register union store *p;
+	union store *p;
 	int x;
 	x = 0;
 	for (p= &allocs[0]; clearbusy(p->ptr) > p; p=clearbusy(p->ptr)) {

@@ -40,7 +40,7 @@
 
 struct pwm_state state[PWM_MAX_DEV];
 
-int pwm_set_mode(int unit, int mode)
+static int pwm_set_mode(int unit, int mode)
 {
     switch (mode) {
     case PWM_MODE_PWM:
@@ -108,7 +108,7 @@ int pwm_set_mode(int unit, int mode)
     return 0;
 }
 
-int pwm_duty(int unit, unsigned int duty)
+static int pwm_duty(int unit, unsigned int duty)
 {
     if (state[unit].mode != PWM_MODE_PWM)
         return EINVAL;
@@ -156,10 +156,9 @@ pwm_close (dev_t dev, int flag, int mode)
 }
 
 int
-pwm_read (dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+pwm_read (dev_t dev,
+    struct uio *uio,
+    int flag)
 {
     // TODO
     return ENODEV;
@@ -197,8 +196,7 @@ pwm_ioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
  * Return true if found and initialized ok.
  */
 static int
-pwmprobe(config)
-    struct conf_device *config;
+pwmprobe(struct conf_device *config)
 {
     printf("pwm: %u channels\n", PWM_MAX_DEV);
     return 1;

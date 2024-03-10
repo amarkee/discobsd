@@ -95,7 +95,7 @@ int exec_check(struct exec_params *epp)
 }
 
 void
-execv()
+execv(void)
 {
     struct execa *arg = (struct execa *)u.u_arg;
 
@@ -104,13 +104,13 @@ execv()
 }
 
 void
-execve()
+execve(void)
 {
     struct execa *uap = (struct execa *)u.u_arg;
     int error;
     struct inode *ip;
     struct nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     struct exec_params eparam;
 
     DEBUG("\n\texecve(): start\n");

@@ -23,14 +23,12 @@
  * thing on which to mount, otherwise return error.
  */
 static int
-getmdev (pdev, fname)
-    caddr_t fname;
-    dev_t *pdev;
+getmdev (dev_t *pdev, caddr_t fname)
 {
-    register dev_t dev;
-    register struct inode *ip;
+    dev_t dev;
+    struct inode *ip;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     if (!suser())
         return (u.u_error);
@@ -54,10 +52,10 @@ getmdev (pdev, fname)
 }
 
 void
-mount_updname (fs, on, from, lenon, lenfrom)
-    struct  fs  *fs;
-    char    *on, *from;
-    int lenon, lenfrom;
+mount_updname (struct  fs  *fs,
+    char    *on, char *from,
+    int lenon, int lenfrom)
+    
 {
     struct  mount   *mp;
 
@@ -71,16 +69,16 @@ mount_updname (fs, on, from, lenon, lenfrom)
 }
 
 void
-smount()
+smount(void)
 {
-    register struct a {
+    struct a {
         char    *fspec;
         char    *freg;
         int flags;
     } *uap = (struct a *)u.u_arg;
     dev_t dev = 0;
-    register struct inode *ip;
-    register struct fs *fs;
+    struct inode *ip;
+    struct fs *fs;
     struct  nameidata nd;
     struct  nameidata *ndp = &nd;
     struct  mount   *mp;
@@ -176,15 +174,14 @@ cmnout:
  * this routine has races if running twice
  */
 struct fs *
-mountfs (dev, flags, ip)
-    dev_t dev;
-    int flags;
-    struct inode *ip;
+mountfs (dev_t dev,
+    int flags,
+    struct inode *ip)
 {
-    register struct mount *mp = 0;
+    struct mount *mp = 0;
     struct buf *tp = 0;
-    register struct fs *fs;
-    register int error;
+    struct fs *fs;
+    int error;
     int ronly = flags & MNT_RDONLY;
     int needclose = 0;
 
@@ -254,13 +251,12 @@ out:
 }
 
 static int
-unmount1 (fname)
-    caddr_t fname;
+unmount1 (caddr_t fname)
 {
     dev_t dev = 0;
-    register struct mount *mp;
-    register struct inode *ip;
-    register int error;
+    struct mount *mp;
+    struct inode *ip;
+    int error;
     int aflag;
 
     error = getmdev(&dev, fname);
@@ -291,7 +287,7 @@ found:
 }
 
 void
-umount()
+umount(void)
 {
     struct a {
         char    *fspec;

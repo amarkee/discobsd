@@ -91,7 +91,7 @@ run(argv)
 	char **argv;
 {
 	int noinvoke;
-	register char **p;
+	char **p;
 	pid_t pid;
 	int status;
 
@@ -139,8 +139,8 @@ main(argc, argv)
 	int argc;
 	char **argv;
 {
-	register int ch;
-	register char *p, *bbp, *ebp, **bxp, **exp, **xp;
+	int ch;
+	char *p, *bbp, *ebp, **bxp, **exp, **xp;
 	int cnt, indouble, insingle, nargs, nflag, nline, xflag;
 	char **av, *argp;
 

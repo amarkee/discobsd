@@ -23,9 +23,9 @@ scandir(dirname, namelist, select, dcomp)
 	struct direct *(*namelist[]);
 	int (*select)(), (*dcomp)();
 {
-	register struct direct *d, *p, **names;
-	register int nitems;
-	register char *cp1, *cp2;
+	struct direct *d, *p, **names;
+	int nitems;
+	char *cp1, *cp2;
 	struct stat stb;
 	int arraysz;
 	DIR *dirp;

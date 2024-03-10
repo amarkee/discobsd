@@ -79,7 +79,7 @@ p_passwd(p, pw, ep)
 /* ARGSUSED */
 int
 p_uid(p, pw, ep)
-	register char *p;
+	char *p;
 	struct passwd *pw;
 	struct entry *ep;
 {
@@ -106,7 +106,7 @@ p_uid(p, pw, ep)
 /* ARGSUSED */
 int
 p_gid(p, pw, ep)
-	register char *p;
+	char *p;
 	struct passwd *pw;
 	struct entry *ep;
 {
@@ -173,11 +173,11 @@ p_hdir(p, pw, ep)
 /* ARGSUSED */
 int
 p_shell(p, pw, ep)
-	register char *p;
+	char *p;
 	struct passwd *pw;
 	struct entry *ep;
 {
-	register char *sh, *t;
+	char *sh, *t;
 	char *getusershell();
 
 	if (!*p) {

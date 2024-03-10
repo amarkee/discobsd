@@ -14,8 +14,8 @@
  */
 unsigned
 ualarm(usecs, reload)
-	register unsigned usecs;
-	register unsigned reload;
+	unsigned usecs;
+	unsigned reload;
 {
 	struct itimerval new, old;
 

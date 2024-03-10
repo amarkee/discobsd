@@ -112,7 +112,7 @@ void
 setkey(key)
 char *key;
 {
-	register int i, j, k;
+	int i, j, k;
 	int t;
 
 	/*
@@ -240,7 +240,7 @@ char *block;
 int edflag;
 {
 	int i, ii;
-	register int t, j, k;
+	int t, j, k;
 
 	/*
 	 * First, permute the bits in the input
@@ -326,7 +326,7 @@ crypt(pw,salt)
 char *pw;
 char *salt;
 {
-	register int i, j, c;
+	int i, j, c;
 	int temp;
 	static char block[66], iobuf[16];
 

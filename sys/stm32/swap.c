@@ -18,16 +18,13 @@
 #define NTMP 3
 #endif
 
-extern struct buf *getnewbuf();
 
 static unsigned int tdsize[NTMP];   // Number of blocks allocated
 static unsigned int tdstart[NTMP];  // Starting location in map
 
 extern dev_t swapdev;
-extern int physio(void (*strat) (struct buf*),
-    struct buf *bp, dev_t dev, int rw, struct uio *uio);
 
-extern void swap(size_t blkno, size_t coreaddr, register int count, int rdflg);
+extern void swap(size_t blkno, size_t coreaddr, int count, int rdflg);
 
 int swopen(dev_t dev, int mode, int flag)
 {
@@ -87,7 +84,7 @@ int swcclose(dev_t dev, int mode, int flag)
     return 0;
 }
 
-int swcread(dev_t dev, register struct uio *uio, int flag)
+int swcread(dev_t dev, struct uio *uio, int flag)
 {
     unsigned int block;
     unsigned int boff;
@@ -128,7 +125,7 @@ int swcread(dev_t dev, register struct uio *uio, int flag)
     return 0;
 }
 
-int swcwrite(dev_t dev, register struct uio *uio, int flag)
+int swcwrite(dev_t dev, struct uio *uio, int flag)
 {
     unsigned int block;
     unsigned int boff;
@@ -173,7 +170,7 @@ int swcwrite(dev_t dev, register struct uio *uio, int flag)
     return 0;
 }
 
-int swcioctl (dev_t dev, register u_int cmd, caddr_t addr, int flag)
+int swcioctl (dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
     unsigned int *uival;
     off_t *offtval;
@@ -214,7 +211,7 @@ int swcioctl (dev_t dev, register u_int cmd, caddr_t addr, int flag)
     return EINVAL;
 }
 
-void swstrategy(register struct buf *bp)
+void swstrategy(struct buf *bp)
 {
     int unit = minor(bp->b_dev);
 

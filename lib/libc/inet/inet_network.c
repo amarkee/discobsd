@@ -15,12 +15,12 @@
  */
 u_long
 inet_network(cp)
-	register char *cp;
+	char *cp;
 {
 	register u_long val, base, n;
-	register char c;
+	char c;
 	u_long parts[4], *pp = parts;
-	register int i;
+	int i;
 
 again:
 	val = 0; base = 10;

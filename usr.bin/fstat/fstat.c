@@ -449,8 +449,8 @@ main(argc, argv)
 {
 	extern char *optarg;
 	extern int optind;
-	register struct passwd *passwd;
-	register int pflg = 0, pid = 0, uflg = 0, uid = 0;
+	struct passwd *passwd;
+	int pflg = 0, pid = 0, uflg = 0, uid = 0;
 	int ch, size;
 
 	while ((ch = getopt(argc, argv, "p:u:v")) != EOF)

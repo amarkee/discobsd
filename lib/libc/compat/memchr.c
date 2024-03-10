@@ -11,7 +11,7 @@
 void *
 memchr(vs, c, n)
 	const void *vs;
-	register int c;
+	int c;
 	register size_t n;
 {
 	register const char *s = vs;

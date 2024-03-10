@@ -14,10 +14,10 @@ extern int _net_stayopen;
 
 struct netent *
 getnetbyaddr(net, type)
-	register long net;
-	register int type;
+	long net;
+	int type;
 {
-	register struct netent *p;
+	struct netent *p;
 
 	setnetent(_net_stayopen);
 	while (p = getnetent())

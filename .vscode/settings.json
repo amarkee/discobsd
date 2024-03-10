@@ -16,6 +16,16 @@
         "namei.h": "c",
         "unistd.h": "c",
         "systm.h": "c",
-        "dir.h": "c"
+        "dir.h": "c",
+        "chrono": "c",
+        "typeindex": "c",
+        "typeinfo": "c",
+        "usb_uart.h": "c",
+        "sysctl.h": "c",
+        "hash_map": "c",
+        "hash_set": "c",
+        "bitset": "c",
+        "algorithm": "c",
+        "format": "c"
     }
 }

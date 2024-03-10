@@ -2,8 +2,8 @@
 
 void
 _strout(count, string, adjust, file, fillch)
-        register char *string;
-        register int count;
+        char *string;
+        int count;
         int adjust;
         register FILE *file;
 	int fillch;

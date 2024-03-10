@@ -107,7 +107,7 @@ char *
 files(argv)
 	char **argv;
 {
-	register char **list;
+	char **list;
 	char *p;
 
 	for (list = argv; *list; ++list)
@@ -133,7 +133,7 @@ char *
 rname(path)
 	char *path;
 {
-	register char *ind;
+	char *ind;
 
 	ind = strrchr(path, '/');
 	return(ind ? ind + 1 : path);

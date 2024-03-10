@@ -45,7 +45,7 @@ FILE *
 cron_popen(program, type)
 	char *program, *type;
 {
-	register char *cp;
+	char *cp;
 	FILE *iop;
 	int argc, pdes[2];
 	PID_T pid;
@@ -144,7 +144,7 @@ int
 cron_pclose(iop)
 	FILE *iop;
 {
-	register int fdes;
+	int fdes;
 	sigset_t omask, nmask;
 	WAIT_T stat_loc;
 	register PID_T pid;

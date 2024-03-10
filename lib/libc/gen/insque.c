@@ -16,7 +16,7 @@ struct vaxque {		/* queue format expected by VAX queue instructions */
 };
 
 insque(e, prev)
-	register struct vaxque *e, *prev;
+	struct vaxque *e, *prev;
 {
 	e->vq_prev = prev;
 	e->vq_next = prev->vq_next;

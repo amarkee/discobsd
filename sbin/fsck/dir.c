@@ -76,8 +76,8 @@ dircheck(idesc, dp)
     struct inodesc *idesc;
     register DIRECT *dp;
 {
-    register int size;
-    register char *cp;
+    int size;
+    char *cp;
     int spaceleft;
 
     size = DIRSIZ(dp);
@@ -105,7 +105,7 @@ dircheck(idesc, dp)
  */
 DIRECT *
 fsck_readdir(idesc)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
 {
     register DIRECT *dp, *ndp;
     u_int size;
@@ -153,7 +153,7 @@ dpok:
 
 int
 dirscan(idesc)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
 {
     register DIRECT *dp;
     int dsize, n;
@@ -212,7 +212,7 @@ direrr(ino, s)
 
 void
 adjust(idesc, lcnt)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
     short lcnt;
 {
     register DINODE *dp;
@@ -392,7 +392,7 @@ lftempname(bufp, ino)
     ino_t ino;
 {
     register ino_t in;
-    register char *cp;
+    char *cp;
     int namlen;
 
     cp = bufp + 2;

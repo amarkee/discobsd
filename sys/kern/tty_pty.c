@@ -63,7 +63,7 @@ int npty = PTY_NUNITS;          /* for pstat -t */
 /*ARGSUSED*/
 int ptsopen(dev_t dev, int flag, int mode)
 {
-    register struct tty *tp;
+    struct tty *tp;
     int error;
 
 #ifdef lint
@@ -91,7 +91,7 @@ int ptsopen(dev_t dev, int flag, int mode)
 
 int ptsclose(dev_t dev, int flag, int mode)
 {
-    register struct tty *tp;
+    struct tty *tp;
 
     tp = &pt_tty[minor(dev)];
     ttyclose(tp);
@@ -99,10 +99,10 @@ int ptsclose(dev_t dev, int flag, int mode)
     return 0;
 }
 
-int ptsread(dev_t dev, register struct uio *uio, int flag)
+int ptsread(dev_t dev, struct uio *uio, int flag)
 {
-    register struct tty *tp = &pt_tty[minor(dev)];
-    register struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
+    struct tty *tp = &pt_tty[minor(dev)];
+    struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
     int error = 0;
 
 again:
@@ -142,9 +142,9 @@ again:
  * Wakeups of controlling tty will happen
  * indirectly, when tty driver calls ptsstart.
  */
-int ptswrite(dev_t dev, register struct uio *uio, int flag)
+int ptswrite(dev_t dev, struct uio *uio, int flag)
 {
-    register struct tty *tp;
+    struct tty *tp;
 
     tp = &pt_tty[minor(dev)];
     if (tp->t_oproc == 0)
@@ -158,7 +158,7 @@ int ptswrite(dev_t dev, register struct uio *uio, int flag)
  */
 void ptsstart(struct tty *tp)
 {
-    register struct pt_ioctl *pti = &pt_ioctl[minor(tp->t_dev)];
+    struct pt_ioctl *pti = &pt_ioctl[minor(tp->t_dev)];
 
     if (tp->t_state & TS_TTSTOP)
         return;
@@ -194,7 +194,7 @@ void ptcwakeup(struct tty *tp, int flag)
 /*ARGSUSED*/
 int ptcopen(dev_t dev, int flag, int mode)
 {
-    register struct tty *tp;
+    struct tty *tp;
     struct pt_ioctl *pti;
 
     if (minor(dev) >= PTY_NUNITS)
@@ -213,7 +213,7 @@ int ptcopen(dev_t dev, int flag, int mode)
 
 int ptcclose(dev_t dev, int flag, int mode)
 {
-    register struct tty *tp;
+    struct tty *tp;
 
     tp = &pt_tty[minor(dev)];
     ttymodem(tp, 0);
@@ -222,9 +222,9 @@ int ptcclose(dev_t dev, int flag, int mode)
     return 0;
 }
 
-int ptcread(dev_t dev, register struct uio *uio, int flag)
+int ptcread(dev_t dev, struct uio *uio, int flag)
 {
-    register struct tty *tp = &pt_tty[minor(dev)];
+    struct tty *tp = &pt_tty[minor(dev)];
     struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
     char buf[BUFSIZ];
     int error = 0, cc;
@@ -282,7 +282,7 @@ int ptcread(dev_t dev, register struct uio *uio, int flag)
     return (error);
 }
 
-void ptsstop(register struct tty *tp, int flush)
+void ptsstop(struct tty *tp, int flush)
 {
     struct pt_ioctl *pti = &pt_ioctl[minor(tp->t_dev)];
     int flag;
@@ -305,7 +305,7 @@ void ptsstop(register struct tty *tp, int flush)
 
 int ptcselect(dev_t dev, int rw)
 {
-    register struct tty *tp = &pt_tty[minor(dev)];
+    struct tty *tp = &pt_tty[minor(dev)];
     struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
     struct proc *p;
     int s;
@@ -362,11 +362,11 @@ int ptcselect(dev_t dev, int rw)
     return (0);
 }
 
-int ptcwrite(dev_t dev, register struct uio *uio, int flag)
+int ptcwrite(dev_t dev, struct uio *uio, int flag)
 {
-    register struct tty *tp = &pt_tty[minor(dev)];
-    register char *cp = NULL;
-    register int cc = 0;
+    struct tty *tp = &pt_tty[minor(dev)];
+    char *cp = NULL;
+    int cc = 0;
     char locbuf[BUFSIZ];
     int cnt = 0;
     struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
@@ -444,8 +444,8 @@ block:
 
 int ptyioctl(dev_t dev, u_int cmd, caddr_t data, int flag)
 {
-    register struct tty *tp = &pt_tty[minor(dev)];
-    register struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
+    struct tty *tp = &pt_tty[minor(dev)];
+    struct pt_ioctl *pti = &pt_ioctl[minor(dev)];
     int stop, error;
 
     /*

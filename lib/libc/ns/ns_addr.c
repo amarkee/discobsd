@@ -69,7 +69,7 @@ char *buf;
 u_char *out;
 int len;
 {
-	register char *bp = buf;
+	char *bp = buf;
 	int i, ibase, base16 = 0, base10 = 0, clen = 0;
 	int hb[6], *hp;
 	char *fmt;

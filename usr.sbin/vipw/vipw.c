@@ -43,7 +43,7 @@ char *passwd, *temp;
 int
 main()
 {
-	register int n, fd_passwd, fd;
+	int n, fd_passwd, fd;
 	struct rlimit rlim;
 	struct stat s1, s2;
 	FILE *tfp;
@@ -158,8 +158,8 @@ check(tfp)
 {
 	long id;
 	int	root;
-	register int lcnt;
-	register char *p, *sh;
+	int lcnt;
+	char *p, *sh;
 	char buf[256], *getusershell();
 	char *bp;
 
@@ -259,7 +259,7 @@ edit()
 int
 prompt()
 {
-	register int c;
+	int c;
 
 	for (;;) {
 		(void)printf("re-edit the password file? [y]: ");

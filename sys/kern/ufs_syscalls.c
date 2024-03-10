@@ -18,15 +18,14 @@
  * Common routine for chroot and chdir.
  */
 static void
-chdirec(ipp)
-    register struct inode **ipp;
+chdirec(struct inode **ipp)
 {
-    register struct inode *ip;
+    struct inode *ip;
     struct a {
         char    *fname;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, LOOKUP, FOLLOW, uap->fname);
     ip = namei(ndp);
@@ -52,18 +51,18 @@ bad:
  * Change current working directory (``.'').
  */
 void
-chdir()
+chdir(void)
 {
     chdirec (&u.u_cdir);
 }
 
 void
-fchdir()
+fchdir(void)
 {
-    register struct a {
+    struct a {
         int     fd;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
 
     ip = getinode (uap->fd);
     if (ip == NULL)
@@ -89,7 +88,7 @@ bad:
  * Change notion of root (``/'') directory.
  */
 void
-chroot()
+chroot(void)
 {
     if (suser())
         chdirec (&u.u_rdir);
@@ -100,15 +99,14 @@ chroot()
  * and call the device open routine if any.
  */
 static int
-copen (mode, cmode, fname)
-    int mode;
-    int cmode;
-    caddr_t fname;
+copen (int mode,
+    int cmode,
+    caddr_t fname)
 {
-    register struct inode *ip;
-    register struct file *fp;
+    struct inode *ip;
+    struct file *fp;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     int indx, type, flags, error;
 
     if (! fname)
@@ -179,9 +177,9 @@ copen (mode, cmode, fname)
  * Open system call.
  */
 void
-open()
+open(void)
 {
-    register struct a {
+    struct a {
         char    *fname;
         int     mode;
         int     crtmode;
@@ -194,16 +192,16 @@ open()
  * Mknod system call
  */
 void
-mknod()
+mknod(void)
 {
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *fname;
         int     fmode;
         int     dev;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     if (! suser())
         return;
@@ -241,15 +239,15 @@ out:
  * link system call
  */
 void
-link()
+link(void)
 {
-    register struct inode *ip, *xp;
-    register struct a {
+    struct inode *ip, *xp;
+    struct a {
         char    *target;
         char    *linkname;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, LOOKUP, FOLLOW, uap->target);
     ip = namei(ndp);    /* well, this routine is doomed anyhow */
@@ -296,17 +294,17 @@ out:
  * symlink -- make a symbolic link
  */
 void
-symlink()
+symlink(void)
 {
-    register struct a {
+    struct a {
         char    *target;
         char    *linkname;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
     char *tp;
     int c, nc;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     tp = uap->target;
     nc = 0;
@@ -345,14 +343,14 @@ symlink()
  * in unlinking directories.
  */
 void
-unlink()
+unlink(void)
 {
-    register struct a {
+    struct a {
         char    *fname;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip, *dp;
+    struct inode *ip, *dp;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, DELETE, LOCKPARENT, uap->fname);
     ip = namei(ndp);
@@ -388,17 +386,17 @@ out:
  * Access system call
  */
 void
-saccess()
+saccess(void)
 {
     uid_t t_uid;
     gid_t t_gid;
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *fname;
         int     fmode;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     t_uid = u.u_uid;
     t_gid = u.u_groups[0];
@@ -421,17 +419,16 @@ done:
 }
 
 static void
-stat1 (follow)
-    int follow;
+stat1 (int follow)
 {
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *fname;
         struct stat *ub;
     } *uap = (struct a *)u.u_arg;
     struct stat sb;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, LOOKUP, follow, uap->fname);
     ip = namei(ndp);
@@ -446,7 +443,7 @@ stat1 (follow)
  * Stat system call.  This version follows links.
  */
 void
-stat()
+stat(void)
 {
     stat1 (FOLLOW);
 }
@@ -455,7 +452,7 @@ stat()
  * Lstat system call.  This version does not follow links.
  */
 void
-lstat()
+lstat(void)
 {
     stat1 (NOFOLLOW);
 }
@@ -464,16 +461,16 @@ lstat()
  * Return target name of a symbolic link
  */
 void
-readlink()
+readlink(void)
 {
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *name;
         char    *buf;
         int     count;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     int resid;
 
     NDINIT (ndp, LOOKUP, NOFOLLOW, uap->name);
@@ -492,9 +489,7 @@ out:
 }
 
 static int
-chflags1 (ip, flags)
-    register struct inode *ip;
-    u_short flags;
+chflags1 (struct inode *ip, u_short flags)
 {
     struct  vattr   vattr;
 
@@ -507,15 +502,15 @@ chflags1 (ip, flags)
  * change flags of a file given pathname.
  */
 void
-chflags()
+chflags(void)
 {
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *fname;
         u_int   flags;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, LOOKUP, FOLLOW, uap->fname);
     if ((ip = namei(ndp)) == NULL)
@@ -528,13 +523,13 @@ chflags()
  * change flags of a file given file descriptor.
  */
 void
-fchflags()
+fchflags(void)
 {
-    register struct a {
+    struct a {
         int     fd;
         u_int   flags;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
 
     ip = getinode (uap->fd);
     if (ip == NULL)
@@ -548,16 +543,16 @@ fchflags()
  * Change mode of a file given path name.
  */
 void
-chmod()
+chmod(void)
 {
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *fname;
         int     fmode;
     } *uap = (struct a *)u.u_arg;
     struct  vattr   vattr;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, LOOKUP, FOLLOW, uap->fname);
     ip = namei(ndp);
@@ -573,13 +568,13 @@ chmod()
  * Change mode of a file given a file descriptor.
  */
 void
-fchmod()
+fchmod(void)
 {
-    register struct a {
+    struct a {
         int     fd;
         int     fmode;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
     struct  vattr   vattr;
 
     if ((ip = getinode(uap->fd)) == NULL)
@@ -596,9 +591,7 @@ fchmod()
  * Inode must be locked before calling.
  */
 int
-chmod1(ip, mode)
-    register struct inode *ip;
-    register int mode;
+chmod1(struct inode *ip, int mode)
 {
     if (u.u_uid != ip->i_uid && !suser())
         return(u.u_error);
@@ -618,16 +611,16 @@ chmod1(ip, mode)
  * Set ownership given a path name.
  */
 void
-chown()
+chown(void)
 {
-    register struct inode *ip;
-    register struct a {
+    struct inode *ip;
+    struct a {
         char    *fname;
         int     uid;
         int     gid;
     } *uap = (struct a *)u.u_arg;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     struct  vattr   vattr;
 
     NDINIT (ndp, LOOKUP, NOFOLLOW, uap->fname);
@@ -645,14 +638,14 @@ chown()
  * Set ownership given a file descriptor.
  */
 void
-fchown()
+fchown(void)
 {
-    register struct a {
+    struct a {
         int     fd;
         int     uid;
         int     gid;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
     struct  vattr   vattr;
 
     if ((ip = getinode(uap->fd)) == NULL)
@@ -670,9 +663,7 @@ fchown()
  * inode must be locked prior to call.
  */
 int
-chown1 (ip, uid, gid)
-    register struct inode *ip;
-    register int uid, gid;
+chown1 (struct inode *ip, int uid, int gid)
 {
     int ouid, ogid;
 
@@ -705,15 +696,15 @@ chown1 (ip, uid, gid)
  * Truncate a file given its path name.
  */
 void
-truncate()
+truncate(void)
 {
-    register struct a {
+    struct a {
         char    *fname;
         off_t   length;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     struct  vattr   vattr;
 
     NDINIT (ndp, LOOKUP, FOLLOW, uap->fname);
@@ -733,15 +724,15 @@ bad:
  * Truncate a file given a file descriptor.
  */
 void
-ftruncate()
+ftruncate(void)
 {
-    register struct a {
+    struct a {
         int     fd;
         off_t   length;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
-    register struct file *fp;
-    struct  vattr   vattr;
+    struct inode *ip;
+    struct file *fp;
+    struct vattr vattr;
 
     if ((fp = getf(uap->fd)) == NULL)
         return;
@@ -785,17 +776,17 @@ ftruncate()
  * not be directories.  If target is a directory, it must be empty.
  */
 void
-rename()
+rename(void)
 {
     struct a {
         char    *from;
         char    *to;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip, *xp, *dp;
+    struct inode *ip, *xp, *dp;
     struct dirtemplate dirbuf;
     int doingdirectory = 0, oldparent = 0, newparent = 0;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     int error = 0;
 
     NDINIT (ndp, DELETE, LOCKPARENT, uap->from);
@@ -818,7 +809,7 @@ rename()
     }
 
     if ((ip->i_mode&IFMT) == IFDIR) {
-        register struct direct *d;
+        struct direct *d;
 
         d = &ndp->ni_dent;
         /*
@@ -1082,12 +1073,10 @@ out:
  * Make a new file.
  */
 struct inode *
-maknode (mode, ndp)
-    int mode;
-    register struct nameidata *ndp;
+maknode (int mode, struct nameidata *ndp)
 {
-    register struct inode *ip;
-    register struct inode *pdir = ndp->ni_pdir;
+    struct inode *ip;
+    struct inode *pdir = ndp->ni_pdir;
 
     ip = ialloc(pdir);
     if (ip == NULL) {
@@ -1134,16 +1123,16 @@ const struct dirtemplate mastertemplate = {
  * Mkdir system call
  */
 void
-mkdir()
+mkdir(void)
 {
-    register struct a {
+    struct a {
         char    *name;
         int     dmode;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip, *dp;
+    struct inode *ip, *dp;
     struct dirtemplate dirtemplate;
-    struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, CREATE, NOFOLLOW, uap->name);
     ip = namei(ndp);
@@ -1235,14 +1224,14 @@ bad:
  * Rmdir system call.
  */
 void
-rmdir()
+rmdir(void)
 {
     struct a {
         char    *name;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip, *dp;
+    struct inode *ip, *dp;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
 
     NDINIT (ndp, DELETE, LOCKPARENT, uap->name);
     ip = namei(ndp);
@@ -1320,10 +1309,9 @@ out:
  * Get an inode pointer of a file descriptor.
  */
 struct inode *
-getinode(fdes)
-    int fdes;
+getinode(int fdes)
 {
-    register struct file *fp;
+    struct file *fp;
 
     if ((unsigned)fdes >= NOFILE || (fp = u.u_ofile[fdes]) == NULL) {
         u.u_error = EBADF;
@@ -1333,5 +1321,5 @@ getinode(fdes)
         u.u_error = EINVAL;
         return ((struct inode *)0);
     }
-    return((struct inode *)fp->f_data);
+    return ((struct inode *)fp->f_data);
 }

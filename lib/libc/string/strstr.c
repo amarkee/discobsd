@@ -42,7 +42,7 @@ char *
 strstr(s, find)
 	register const char *s, *find;
 {
-	register char c;
+	char c;
 	char	sc;
 	size_t	len;
 

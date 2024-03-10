@@ -439,7 +439,7 @@ void fputword (w, f)
 */
 void fgetrel (f, r)
     register FILE *f;
-    register struct reloc *r;
+    struct reloc *r;
 {
     r->flags = getc (f);
     if ((r->flags & RSMASK) == REXT) {
@@ -460,10 +460,10 @@ void fgetrel (f, r)
 * Return a written length.
 */
 unsigned fputrel (r, f)
-    register struct reloc *r;
+    struct reloc *r;
     register FILE *f;
 {
-    register unsigned nbytes = 1;
+    unsigned nbytes = 1;
 
     putc (r->flags, f);
     if ((r->flags & RSMASK) == REXT) {
@@ -487,7 +487,7 @@ unsigned fputrel (r, f)
  * Little-endian.
  */
 void fputhdr (filhdr, coutb)
-    register struct exec *filhdr;
+    struct exec *filhdr;
     register FILE *coutb;
 {
     fputword (filhdr->a_magic, coutb);
@@ -504,10 +504,10 @@ void fputhdr (filhdr, coutb)
  * Emit the nlist record for the symbol.
  */
 void fputsym (s, file)
-    register struct nlist *s;
+    struct nlist *s;
     register FILE *file;
 {
-    register int i;
+    int i;
 
     putc (s->n_len, file);
     putc (s->n_type & ~N_LOC, file);
@@ -521,7 +521,7 @@ void fputsym (s, file)
  */
 void startup ()
 {
-    register int i;
+    int i;
 
     int fd = mkstemp (tfilename);
     if (fd == -1) {
@@ -549,7 +549,7 @@ void startup ()
 unsigned hash_rot13 (s)
     register const char *s;
 {
-    register unsigned hash, c;
+    unsigned hash, c;
 
     hash = 0;
     while ((c = (unsigned char) *s++) != 0) {
@@ -561,7 +561,7 @@ unsigned hash_rot13 (s)
 
 void hashinit ()
 {
-    register int i, h;
+    int i, h;
     register const struct optable *p;
 
     for (i=0; i<HCMDSZ; i++)
@@ -578,7 +578,7 @@ void hashinit ()
 }
 
 int hexdig (c)
-    register int c;
+    int c;
 {
     if (c <= '9')
         return (c - '0');
@@ -593,8 +593,8 @@ int hexdig (c)
  */
 void gethnum ()
 {
-    register int c;
-    register char *cp;
+    int c;
+    char *cp;
 
     c = getchar ();
     for (cp=name; ISHEX(c); c=getchar())
@@ -614,9 +614,9 @@ void gethnum ()
  * 01234 - octal
  */
 void getnum (c)
-    register int c;
+    int c;
 {
-    register char *cp;
+    char *cp;
     int leadingzero;
 
     leadingzero = (c=='0');
@@ -645,9 +645,9 @@ void getnum (c)
 }
 
 void getname (c)
-    register int c;
+    int c;
 {
-    register char *cp;
+    char *cp;
 
     for (cp=name; ISLETTER (c) || ISDIGIT (c); c=getchar())
         *cp++ = c;
@@ -891,7 +891,7 @@ int lookreg ()
 
 int lookcmd ()
 {
-    register int i, h;
+    int i, h;
 
     h = hash_rot13 (name) & (HCMDSZ-1);
     while ((i = hashctab[h]) != -1) {
@@ -906,7 +906,7 @@ int lookcmd ()
 char *alloc (len)
     int len;
 {
-    register int r;
+    int r;
 
     r = lastfree;
     lastfree += len;
@@ -917,7 +917,7 @@ char *alloc (len)
 
 int lookname ()
 {
-    register int i, h;
+    int i, h;
 
     /* Search for symbol name. */
     h = hash_rot13 (name) & (HASHSZ-1);
@@ -964,9 +964,9 @@ int lookname ()
  * LSECTION - .section assembler instruction.
  */
 int getlex (pval)
-    register int *pval;
+    int *pval;
 {
-    register int c;
+    int c;
 
     if (blexflag) {
         blexflag = 0;
@@ -1056,7 +1056,7 @@ void ungetlex (val, type)
 
 int getterm ()
 {
-    register int ty;
+    int ty;
     int cval, s;
 
     switch (getlex (&cval)) {
@@ -1124,9 +1124,9 @@ int getterm ()
  * op         = "+" | "-" | "&" | "|" | "^" | "~" | "<<" | ">>" | "/" | "*"
  */
 unsigned getexpr (s)
-    register int *s;
+    int *s;
 {
-    register int clex;
+    int clex;
     int cval, s2;
     unsigned rez;
 
@@ -1237,8 +1237,8 @@ void reorder_flush ()
  * Default emit function.
  */
 void emitword (w, r, clobber_reg)
-    register unsigned w;
-    register struct reloc *r;
+    unsigned w;
+    struct reloc *r;
     int clobber_reg;
 {
     if (mode_reorder && segm == STEXT) {
@@ -1258,10 +1258,10 @@ void emitword (w, r, clobber_reg)
  * LI pseudo instruction.
  */
 void emit_li (opcode, relinfo)
-    register unsigned opcode;
-    register struct reloc *relinfo;
+    unsigned opcode;
+    struct reloc *relinfo;
 {
-    register unsigned value;
+    unsigned value;
     int cval, segment, reg;
 
     if (getlex (&cval) != ',')
@@ -1292,10 +1292,10 @@ void emit_li (opcode, relinfo)
  * LA pseudo instruction.
  */
 void emit_la (opcode, relinfo)
-    register unsigned opcode;
-    register struct reloc *relinfo;
+    unsigned opcode;
+    struct reloc *relinfo;
 {
-    register unsigned value, hi;
+    unsigned value, hi;
     int cval, segment;
 
     if (getlex (&cval) != ',')
@@ -1775,7 +1775,7 @@ void add_space (nbytes, fill_data)
 
 void makeascii ()
 {
-    register int c, nbytes;
+    int c, nbytes;
     int cval;
 
     c = getlex (&cval);
@@ -1949,9 +1949,9 @@ void align (align_bits)
 
 void pass1 ()
 {
-    register int clex;
+    int clex;
     int cval, tval, csegm, nbytes;
-    register unsigned addr;
+    unsigned addr;
 
     segm = STEXT;
     for (;;) {
@@ -2391,7 +2391,7 @@ int findlabel (int addr, int sym)
 
 void middle ()
 {
-    register int i, snum, nbytes;
+    int i, snum, nbytes;
 
     stlength = 0;
     for (snum=0, i=0; i<stabfree; i++) {
@@ -2448,8 +2448,8 @@ void makeheader (rtsize, rdsize)
 }
 
 unsigned relocate (opcode, offset, relinfo)
-    register unsigned opcode, offset;
-    register struct reloc *relinfo;
+    unsigned opcode, offset;
+    struct reloc *relinfo;
 {
     switch (relinfo->flags & RFMASK) {
     case RBYTE32:                       /* 32 bits of byte address */
@@ -2487,8 +2487,8 @@ unsigned relocate (opcode, offset, relinfo)
 }
 
 unsigned makeword (opcode, relinfo, offset)
-    register unsigned opcode, offset;
-    register struct reloc *relinfo;
+    unsigned opcode, offset;
+    struct reloc *relinfo;
 {
     struct nlist *sym;
     unsigned value;
@@ -2556,8 +2556,8 @@ unsigned makeword (opcode, relinfo, offset)
 
 void pass2 ()
 {
-    register int i;
-    register unsigned h;
+    int i;
+    unsigned h;
 
     tbase = 0;
     dbase = tbase + count[STEXT];
@@ -2633,9 +2633,9 @@ int typerel (t)
  * Put string pseudo-section to data section.
  */
 void relrel (relinfo)
-    register struct reloc *relinfo;
+    struct reloc *relinfo;
 {
-    register unsigned type;
+    unsigned type;
 
     switch ((int) relinfo->flags & REXT) {
     case RSTRNG:
@@ -2663,9 +2663,9 @@ void relrel (relinfo)
  * Return a size of relocation data in bytes.
  */
 unsigned makereloc (s)
-    register int s;
+    int s;
 {
-    register unsigned i, nbytes;
+    unsigned i, nbytes;
     struct reloc relinfo;
 
     if (count [s] <= 0)
@@ -2684,7 +2684,7 @@ unsigned makereloc (s)
  * Align the relocation section to an integral number of words.
  */
 unsigned alignreloc (nbytes)
-    register unsigned nbytes;
+    unsigned nbytes;
 {
     while (nbytes % WORDSZ) {
         putchar (0);
@@ -2695,7 +2695,7 @@ unsigned alignreloc (nbytes)
 
 void makesymtab ()
 {
-    register int i;
+    int i;
 
     for (i=0; i<stabfree; i++) {
         if (! xflags || (stab[i].n_type & N_EXT) ||
@@ -2722,10 +2722,10 @@ void usage ()
 
 int main (argc, argv)
     int argc;
-    register char *argv[];
+    char *argv[];
 {
-    register int i;
-    register char *cp;
+    int i;
+    char *cp;
     int ofile = 0;
     unsigned rtsize, rdsize;
 

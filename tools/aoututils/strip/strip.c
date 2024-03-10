@@ -21,7 +21,7 @@ void
 strip(name)
     char *name;
 {
-    register int f;
+    int f;
     long size;
 
     f = open(name, O_RDWR);
@@ -61,7 +61,7 @@ main(argc, argv)
     int argc;
     char *argv[];
 {
-    register int i;
+    int i;
 
     while ((i = getopt(argc, argv, "h")) != EOF) {
         switch(i) {

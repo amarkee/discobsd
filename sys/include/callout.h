@@ -19,6 +19,8 @@
  * forced to use a long, you might as well start doing the real-time
  * timer as a timeout like 4.3BSD.
  */
+#ifndef _SYS_CALLOUT_H_
+#define _SYS_CALLOUT_H_
 struct  callout {
     int     c_time;                 /* incremental time */
     caddr_t c_arg;                  /* argument to routine */
@@ -28,4 +30,6 @@ struct  callout {
 
 #ifdef KERNEL
 extern struct   callout *callfree, callout[], calltodo;
+#endif
+
 #endif

@@ -103,10 +103,10 @@ extern long atol();
 void
 expr_operator(op, sp, fs)
 	int op;
-	register struct value *sp;
+	struct value *sp;
 	struct filestat *fs;
 {
-	register int i;
+	int i;
 
 	switch (op) {
 	case NOT:
@@ -255,7 +255,7 @@ filebit:	if (fs->stat.st_mode & i && fs->rcode >= 0)
  */
 void
 get_int(v, lp)
-	register char *v;
+	char *v;
 	long *lp;
 {
 
@@ -292,9 +292,9 @@ main(argc, argv)
 {
 
 	struct operator opstack[STACKSIZE];
-	register struct operator *opsp;
+	struct operator *opsp;
 	struct value valstack[STACKSIZE + 1];
-	register struct value *valsp;
+	struct value *valsp;
 	struct filestat fs;
 	char  c, **ap, *opname, *p;
 	int binary, nest, op, pri, ret_val, skipping;
@@ -483,7 +483,7 @@ done:	return (expr_is_false(&valstack[0]));
 
 int
 expr_is_false(val)
-	register struct value *val;
+	struct value *val;
 {
 
 	if (val->type == STRING) {

@@ -106,7 +106,7 @@ rd(file,buf)
 FILE *file;
 char *buf;
 {
-    register int i, c;
+    int i, c;
     i = 0;
     while((c = getc(file)) != EOF) {
         *buf = c;
@@ -158,7 +158,7 @@ int
 compare(a,b)
     char    *a,*b;
 {
-    register char *ra,*rb;
+    char *ra,*rb;
 
     ra = --a;
     rb = --b;

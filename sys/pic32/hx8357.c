@@ -561,7 +561,7 @@ int gpanel_write(dev_t dev, struct uio *uio, int flag)
 /*
  * TODO: check whether user pointers are valid.
  */
-int gpanel_ioctl(dev_t dev, register u_int cmd, caddr_t addr, int flag)
+int gpanel_ioctl(dev_t dev, u_int cmd, caddr_t addr, int flag)
 {
     switch (cmd) {
         /*

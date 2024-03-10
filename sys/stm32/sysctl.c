@@ -191,7 +191,7 @@ static const struct {
 void
 ucall()
 {
-    register struct a {
+    struct a {
         int priority;
         int (*routine)();
         int arg1;
@@ -256,13 +256,13 @@ sc_msec()
  * became (even more) system specific and didn't belong in kern_sysctl.c
  */
 int
-cpu_sysctl (name, namelen, oldp, oldlenp, newp, newlen)
-    int *name;
-    u_int namelen;
-    void *oldp;
-    size_t *oldlenp;
-    void *newp;
-    size_t newlen;
+cpu_sysctl (int *name,
+    u_int namelen,
+    void *oldp,
+    size_t *oldlenp,
+    void *newp,
+    size_t newlen)
+    
 {
     int i, khz;
     dev_t dev;

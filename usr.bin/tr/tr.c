@@ -21,9 +21,9 @@ main(argc,argv)
 int argc;
 char **argv;
 {
-    register int i;
+    int i;
     int j;
-    register int c, d;
+    int c, d;
     char *compl;
     int lastd;
 
@@ -127,7 +127,7 @@ int
 nextc(s)
 struct string *s;
 {
-    register int c, i, n;
+    int c, i, n;
 
     c = *s->p++;
     if(c=='\\') {

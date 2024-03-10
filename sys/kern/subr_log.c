@@ -58,7 +58,7 @@ logopen(dev, mode, unused)
     dev_t dev;
     int mode;
 {
-    register int    unit = minor(dev);
+    int    unit = minor(dev);
 
     if (unit >= NLOG)
         return(ENODEV);
@@ -78,7 +78,7 @@ logclose(dev, flag, unused)
     dev_t   dev;
     int flag;
 {
-    register int unit = minor(dev);
+    int unit = minor(dev);
 
     logsoftc[unit].sc_state = 0;
     return(0);
@@ -104,9 +104,9 @@ logread(dev, uio, flag)
     struct uio *uio;
     int flag;
 {
-    register int l;
-    register struct logsoftc *lp;
-    register struct msgbuf *mp;
+    int l;
+    struct logsoftc *lp;
+    struct msgbuf *mp;
     int s, error = 0;
     char    buf [128];
 
@@ -167,7 +167,7 @@ logselect(dev, rw)
     dev_t dev;
     int rw;
 {
-    register int s = splhigh();
+    int s = splhigh();
     int unit = minor(dev);
 
     switch (rw) {
@@ -187,9 +187,9 @@ void
 logwakeup(unit)
     int unit;
 {
-    register struct proc *p;
-    register struct logsoftc *lp;
-    register struct msgbuf *mp;
+    struct proc *p;
+    struct logsoftc *lp;
+    struct msgbuf *mp;
 
     if (! logisopen(unit))
         return;
@@ -220,10 +220,10 @@ logioctl(dev, com, data, flag)
     int flag;
 {
     long l;
-    register int s;
+    int s;
     int unit;
-    register struct logsoftc *lp;
-    register struct msgbuf *mp;
+    struct logsoftc *lp;
+    struct msgbuf *mp;
 
     unit = minor(dev);
     lp = &logsoftc[unit];
@@ -268,9 +268,9 @@ logwrt (buf, len, log)
     int len;
     int log;
 {
-    register struct msgbuf *mp = &msgbuf[log];
+    struct msgbuf *mp = &msgbuf[log];
     struct  logsoftc *lp = &logsoftc[log];
-    register int    infront;
+    int    infront;
     int  s, n, writer, err = 0;
 
     if (mp->msg_magic != MSG_MAGIC || (len > MSG_BSIZE))
@@ -326,7 +326,7 @@ again:      infront = MSG_BSIZE - mp->msg_bufx;
 int
 loginit()
 {
-    register struct msgbuf *mp;
+    struct msgbuf *mp;
 
     for (mp = &msgbuf[0]; mp < &msgbuf[NLOG]; mp++) {
         mp->msg_magic = MSG_MAGIC;

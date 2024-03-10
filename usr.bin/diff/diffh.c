@@ -37,8 +37,8 @@ getl(f,n)
 int f;
 long n;
 {
-	register char *t;
-	register long delta, nt;
+	char *t;
+	long delta, nt;
 again:
 	delta = n - lineno[f];
 	nt = ntext[f];
@@ -73,7 +73,7 @@ clrl(f,n)
 int f;
 long n;
 {
-	register long i,j;
+	long i,j;
 	j = n-lineno[f]+1;
 	for(i=0;i+j<ntext[f];i++)
 		movstr(text[f][i+j],text[f][i]);
@@ -83,7 +83,7 @@ long n;
 
 void
 movstr(s,t)
-register char *s, *t;
+char *s, *t;
 {
 	while(*t++= *s++)
 		continue;
@@ -96,7 +96,7 @@ char **argv;
 {
 	char *s0,*s1;
 	FILE *dopen();
-	register int status = 0;
+	int status = 0;
 
 	while(*argv[1]=='-') {
 		argc--;
@@ -137,7 +137,7 @@ int
 easysynch()
 {
 	int i,j;
-	register int k,m;
+	int k,m;
 	char *s0,*s1;
 	for(i=j=1;i<RANGE&&j<RANGE;i++,j++) {
 		s0 = getl(0,n0+i);
@@ -170,7 +170,7 @@ int
 output(a,b)
 int a, b;
 {
-	register int i;
+	int i;
 	char *s;
 	if(a<0)
 		change(n0-1,0,n1,b,"a");

@@ -19,7 +19,7 @@ int     *pf1, *pf2;
 	/*
 	 * `stakbot' is preserved by this routine
 	 */
-	register struct trenod  *t;
+	struct trenod  *t;
 	char            *sav = savstak();
 
 	sigchk();
@@ -28,9 +28,9 @@ int     *pf1, *pf2;
 
 	if ((t = argt) && execbrk == 0)
 	{
-		register int    treeflgs;
+		int    treeflgs;
 		int                     type;
-		register char   **com;
+		char   **com;
 		short                   pos;
 		int                     linked;
 		int                     execflg;
@@ -137,7 +137,7 @@ int     *pf1, *pf2;
 						case SYSDOT:
 							if (a1)
 							{
-								register int    f;
+								int    f;
 
 								if ((f = pathopen(getpath(a1), a1)) < 0)
 									failed(a1, notfound);
@@ -807,8 +807,8 @@ int     *pf1, *pf2;
 
 		case TSW:
 			{
-				register char   *r = mactrim(swptr(t)->swarg);
-				register struct regnod *regp;
+				char   *r = mactrim(swptr(t)->swarg);
+				struct regnod *regp;
 
 				regp = swptr(t)->swlst;
 				while (regp)
@@ -817,7 +817,7 @@ int     *pf1, *pf2;
 
 					while (rex)
 					{
-						register char   *s;
+						char   *s;
 
 						if (gmatch(r, s = macro(rex->argval)) || (trim(s), eq(r, s)))
 						{
@@ -863,7 +863,7 @@ int     f;
 execprint(com)
 	char **com;
 {
-	register int    argn = 0;
+	int    argn = 0;
 
 	prs(execpmsg);
 

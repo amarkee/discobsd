@@ -38,7 +38,7 @@ int
 setsid()
 {
 	int	newpgrp;
-	register int	fd;
+	int	fd;
 
 	newpgrp = setpgrp(0, getpid());
 	if	((fd = open(_PATH_TTY, 2)) >= 0)

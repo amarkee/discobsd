@@ -92,7 +92,7 @@ usage:
     }
     do
         if (argv[0][0] == '-') {
-            register char *cp = argv[0] + 1;
+            char *cp = argv[0] + 1;
             while (*cp) switch (*cp++) {
 
             case 'f':
@@ -165,9 +165,9 @@ int print;
 
 void
 lookup(cp)
-    register char *cp;
+    char *cp;
 {
-    register char *dp;
+    char *dp;
 
     for (dp = cp; *dp; dp++)
         continue;
@@ -286,9 +286,9 @@ findin(dir, cp)
 
 int
 itsit(cp, dp)
-    register char *cp, *dp;
+    char *cp, *dp;
 {
-    register int i = strlen(dp);
+    int i = strlen(dp);
 
     if (dp[0] == 's' && dp[1] == '.' && itsit(cp, dp+2))
         return (1);

@@ -47,10 +47,10 @@
  */
 char *
 strsep(stringp, delim)
-	register char **stringp;
+	char **stringp;
 	const char *delim;
 {
-	register char *s;
+	char *s;
 	register const char *spanp;
 	int c, sc;
 	char *tok;

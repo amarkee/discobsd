@@ -24,11 +24,11 @@
 daddr_t rablock;        /* block to be read ahead */
 
 int
-ino_rw(fp, uio)
-    struct file *fp;
-    register struct uio *uio;
+ino_rw(struct file *fp,
+    struct uio *uio)
+    
 {
-    register struct inode *ip = (struct inode *)fp->f_data;
+    struct inode *ip = (struct inode *)fp->f_data;
     u_int count, error;
     int ioflag;
 
@@ -60,12 +60,9 @@ ino_rw(fp, uio)
 }
 
 int
-ino_ioctl(fp, com, data)
-    register struct file *fp;
-    register u_int com;
-    caddr_t data;
+ino_ioctl(struct file *fp, u_int com, caddr_t data)
 {
-    register struct inode *ip = ((struct inode *)fp->f_data);
+    struct inode *ip = ((struct inode *)fp->f_data);
     dev_t dev;
 
     switch (ip->i_mode & IFMT) {
@@ -109,17 +106,16 @@ ino_ioctl(fp, com, data)
              */
             return(u.u_error);
         }
-        return((*bdevsw[major(dev)].d_ioctl)(dev,com,data,fp->f_flag));
+        return ((*bdevsw[major(dev)].d_ioctl)(dev,com,data,fp->f_flag));
     }
+    return (ENOTTY);
 }
 
 int
-ino_select(fp, which)
-    struct file *fp;
-    int which;
+ino_select(struct file *fp, int which)
 {
-    register struct inode *ip = (struct inode *)fp->f_data;
-    register dev_t dev;
+    struct inode *ip = (struct inode *)fp->f_data;
+    dev_t dev;
 
     switch (ip->i_mode & IFMT) {
 
@@ -130,6 +126,7 @@ ino_select(fp, which)
         dev = ip->i_rdev;
         return (*cdevsw[major(dev)].d_select)(dev, which);
     }
+    return 1;
 }
 
 const struct fileops inodeops = {
@@ -137,18 +134,17 @@ const struct fileops inodeops = {
 };
 
 int
-rdwri (rw, ip, base, len, offset, ioflg, aresid)
-    enum uio_rw rw;
-    struct inode *ip;
-    caddr_t base;
-    int len;
-    off_t offset;
-    int ioflg;
-    register int *aresid;
+rdwri (enum uio_rw rw,
+    struct inode *ip,
+    caddr_t base,
+    int len,
+    off_t offset,
+    int ioflg,
+    int *aresid)
 {
     struct uio auio;
     struct iovec aiov;
-    register int error;
+    int error;
 
     auio.uio_iov = &aiov;
     auio.uio_iovcnt = 1;
@@ -167,13 +163,12 @@ rdwri (rw, ip, base, len, offset, ioflg, aresid)
 }
 
 int
-rwip (ip, uio, ioflag)
-    register struct inode *ip;
-    register struct uio *uio;
-    int ioflag;
+rwip (    struct inode *ip,
+    struct uio *uio,
+    int ioflag)
 {
     dev_t dev = (dev_t)ip->i_rdev;
-    register struct buf *bp;
+    struct buf *bp;
     off_t osize;
     daddr_t lbn, bn;
     int n, on, type, resid;
@@ -357,11 +352,10 @@ rwip (ip, uio, ioflag)
 }
 
 int
-ino_stat(ip, sb)
-    register struct inode *ip;
-    register struct stat *sb;
+ino_stat(struct inode *ip,
+    struct stat *sb)
 {
-    register struct icommon2 *ic2;
+    struct icommon2 *ic2;
 
     ic2 = &ip->i_ic2;
 
@@ -405,12 +399,11 @@ ino_stat(ip, sb)
  * they have their own close routines.
 */
 int
-closei (ip, flag)
-    register struct inode *ip;
-    int flag;
+closei (struct inode *ip,
+    int flag)
 {
-    register struct mount *mp;
-    register struct file *fp;
+    struct mount *mp;
+    struct file *fp;
     int mode, error;
     dev_t   dev;
     int (*cfunc)();
@@ -481,12 +474,12 @@ closei (ip, flag)
  *       error return ERESTART.
  */
 int
-ino_lock(fp, cmd)
-    register struct file *fp;
-    int cmd;
+ino_lock(struct file *fp,
+    int cmd)
+    
 {
-    register int priority = PLOCK;
-    register struct inode *ip = (struct inode *)fp->f_data;
+    int priority = PLOCK;
+    struct inode *ip = (struct inode *)fp->f_data;
     int error;
 
     if ((cmd & LOCK_EX) == 0)
@@ -557,12 +550,12 @@ again:
  * Unlock a file.
  */
 void
-ino_unlock(fp, kind)
-    register struct file *fp;
-    int kind;
+ino_unlock(struct file *fp,
+    int kind)
+    
 {
-    register struct inode *ip = (struct inode *)fp->f_data;
-    register int flags;
+    struct inode *ip = (struct inode *)fp->f_data;
+    int flags;
 
     kind &= fp->f_flag;
     if (ip == NULL || kind == 0)
@@ -591,12 +584,12 @@ ino_unlock(fp, kind)
  * validate before actual IO.
  */
 int
-openi (ip, mode)
-    register struct inode *ip;
-    int mode;
+openi (struct inode *ip,
+    int mode)
+    
 {
-    register dev_t dev = ip->i_rdev;
-    register int maj = major(dev);
+    dev_t dev = ip->i_rdev;
+    int maj = major(dev);
     dev_t bdev;
     int error;
 
@@ -659,11 +652,11 @@ openi (ip, mode)
 }
 
 static void
-forceclose(dev)
-    register dev_t dev;
+forceclose(dev_t dev)
+    
 {
-    register struct file *fp;
-    register struct inode *ip;
+    struct file *fp;
+    struct inode *ip;
 
     for (fp = file; fp < file+NFILE; fp++) {
         if (fp->f_count == 0)
@@ -687,7 +680,7 @@ forceclose(dev)
  * to give ``clean'' terminals at login.
  */
 void
-vhangup()
+vhangup(void)
 {
     if (! suser())
         return;

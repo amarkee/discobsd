@@ -15,9 +15,9 @@ static int      getch();
 
 static char *
 copyto(endch)
-register char   endch;
+char   endch;
 {
-	register char   c;
+	char   c;
 
 	while ((c = getch(endch)) != endch && c)
 		pushstak( quote ? qmask(c) : c );       /* c | quote @@@ */
@@ -28,12 +28,12 @@ register char   endch;
 
 static
 skipto(endch)
-register char   endch;
+char   endch;
 {
 	/*
 	 * skip chars up to }
 	 */
-	register char   c;
+	char   c;
 
 	while ((c = readc()) && c != endch)
 	{
@@ -63,21 +63,21 @@ comsubst()
 	 * command substn
 	 */
 	struct fileblk  cb;
-	register char   d;
-	register char *savptr = fixstak();
+	char   d;
+	char *savptr = fixstak();
 
 	usestak();
 	while ((d = readc()) != SQUOTE && d)
 		pushstak(d);
 	{
-		register char   *argc;
+		char   *argc;
 
 		trim(argc = fixstak());
 		push(&cb);
 		estabf(argc);
 	}
 	{
-		register struct trenod *t = makefork(FPOU, cmd(EOFSYM, MTFLG | NLFLG));
+		struct trenod *t = makefork(FPOU, cmd(EOFSYM, MTFLG | NLFLG));
 		int             pv[2];
 
 		/*
@@ -112,7 +112,7 @@ static int
 getch(endch)
 char    endch;
 {
-	register char   d;
+	char   d;
 
 retry:
 	d = readc();
@@ -120,7 +120,7 @@ retry:
 		return(d);
 	if (d == DOLLAR)
 	{
-		register int    c;
+		int    c;
 
 		if ((c = cii(readc()), dolchar(c)))  /* @@@ */
 		{
@@ -128,7 +128,7 @@ retry:
 			int             dolg = 0;
 			BOOL            bra;
 			BOOL            nulflg;
-			register char   *argp, *v;
+			char   *argp, *v;
 			char            idb[2];
 			char            *id = idb;
 
@@ -284,8 +284,8 @@ char    *as;
 	 * Strip "" and do $ substitution
 	 * Leaves result on top of stack
 	 */
-	register BOOL   savqu = quoted;
-	register char   savq = quote;
+	BOOL   savqu = quoted;
+	char   savq = quote;
 	struct filehdr  fb;
 
 	push(&fb);
@@ -319,9 +319,9 @@ flush(ot)
 subst(in, ot)
 int     in, ot;
 {
-	register char   c;
+	char   c;
 	struct fileblk  fb;
-	register int    count = CPYSIZ;
+	int    count = CPYSIZ;
 
 	push(&fb);
 	initf(in);

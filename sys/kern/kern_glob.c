@@ -16,7 +16,7 @@
 
 unsigned char global_segment[GLOBSZ];
 
-void rdglob()
+void rdglob(void)
 {
     struct a {
         int    addr;
@@ -37,7 +37,7 @@ void rdglob()
     u.u_rval = global_segment[uap->addr];
 }
 
-void wrglob()
+void wrglob(void)
 {
     struct a {
         int         addr;

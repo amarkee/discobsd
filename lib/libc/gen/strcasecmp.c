@@ -49,7 +49,7 @@ int
 strcasecmp(s1, s2)
 	register const char *s1, *s2;
 {
-	register char *cm = charmap;
+	char *cm = charmap;
 
 	while (cm[(unsigned char)*s1] == cm[(unsigned char)*s2++])
 		if (*s1++ == '\0')
@@ -62,7 +62,7 @@ strncasecmp(s1, s2, n)
 	register const char *s1, *s2;
 	register size_t n;
 {
-	register char *cm = charmap;
+	char *cm = charmap;
 
 	while (n-- > 0 && cm[(unsigned char)*s1] == cm[(unsigned char)*s2++])
 		if (*s1++ == '\0')

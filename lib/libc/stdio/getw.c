@@ -4,8 +4,8 @@ int
 getw(iop)
         register FILE *iop;
 {
-	register int i;
-	register char *p;
+	int i;
+	char *p;
 	int w;
 
 	p = (char *)&w;
@@ -21,8 +21,8 @@ long
 getlw(iop)
 register FILE *iop;
 {
-	register int i;
-	register char *p;
+	int i;
+	char *p;
 	long w;
 
 	p = (char *)&w;

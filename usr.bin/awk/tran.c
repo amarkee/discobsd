@@ -102,9 +102,9 @@ cell **tab;
 }
 
 hash(s)	/* form hash value for string s */
-register unsigned char *s;
+unsigned char *s;
 {
-	register int hashval;
+	int hashval;
 
 	for (hashval = 0; *s != '\0'; )
 		hashval += *s++;
@@ -112,7 +112,7 @@ register unsigned char *s;
 }
 
 cell *lookup(s, tab, flag)	/* look for s in tab, flag must match*/
-register char *s;
+char *s;
 cell **tab;
 {
 	register cell *p;
@@ -217,9 +217,9 @@ register cell *vp;
 }
 
 char *tostring(s)
-register char *s;
+char *s;
 {
-	register char *p;
+	char *p;
 
 	if (s==NULL){
 		p = malloc(1);

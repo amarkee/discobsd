@@ -47,8 +47,6 @@ struct exec_params {
             int stoffset;       /* String table file pos */
             char str[STRLEN];
         } elf;
-        struct {
-        } aout;
     };
 
     gid_t gid;

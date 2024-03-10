@@ -47,8 +47,8 @@ char *argv[];
 void
 commnds()
 {
-	register int c;
-	register struct blk *p,*q;
+	int c;
+	struct blk *p,*q;
 	long l;
 	int sign;
 	struct blk **ptr,*s,*t;
@@ -621,7 +621,7 @@ struct blk *ddivd,*ddivr;
 	int carry, dig,magic,d,dd;
 	long c,td,cc;
 	struct blk *ps;
-	register struct blk *p,*divd,*divr;
+	struct blk *p,*divd,*divr;
 
 	rem = 0;
 	p = salloc(0);
@@ -739,8 +739,8 @@ ddone:
 int
 dscale()
 {
-	register struct blk *dd,*dr;
-	register struct blk *r;
+	struct blk *dd,*dr;
+	struct blk *r;
 	int c;
 
 	dr = pop();
@@ -775,7 +775,7 @@ struct blk *p;
 int n;
 {
 	int nn;
-	register struct blk *q,*s,*r;
+	struct blk *q,*s,*r;
 
 	rewind(p);
 	nn = (n+1)/2;
@@ -856,7 +856,7 @@ struct blk *
 expr(base,ex)
 struct blk *base,*ex;
 {
-	register struct blk *r,*e,*p;
+	struct blk *r,*e,*p;
 	struct blk *e1,*t,*cp;
 	int temp,c,n;
 	r = salloc(1);
@@ -926,7 +926,7 @@ init(argc,argv)
 int argc;
 char *argv[];
 {
-	register struct sym *sp;
+	struct sym *sp;
 
 	if (signal(SIGINT, SIG_IGN) != SIG_IGN)
 		signal(SIGINT, onintr);
@@ -1007,9 +1007,9 @@ pop()
 struct blk *
 readin()
 {
-	register struct blk *p,*q;
+	struct blk *p,*q;
 	int dp,dpct;
-	register int c;
+	int c;
 
 	dp = dpct=0;
 	p = salloc(0);
@@ -1060,7 +1060,7 @@ int ct;
 struct blk *p;
 {
 		/* returns pointer to struct with ct 0's & p */
-	register struct blk *q,*t;
+	struct blk *q,*t;
 
 	q = salloc(length(p)+(ct+1)/2);
 	while(ct>1){
@@ -1084,7 +1084,7 @@ struct blk *
 mult(p,q)
 struct blk *p,*q;
 {
-	register struct blk *mp,*mq,*mr;
+	struct blk *mp,*mq,*mr;
 	int sign,offset,carry;
 	int cq,cp,mt,mcr;
 
@@ -1141,8 +1141,8 @@ void
 chsign(p)
 struct blk *p;
 {
-	register int carry;
-	register char ct;
+	int carry;
+	char ct;
 
 	carry=0;
 	rewind(p);
@@ -1214,7 +1214,7 @@ void
 binop(c)
 char c;
 {
-	register struct blk *r;
+	struct blk *r;
 
 	switch(c){
 	case '+':
@@ -1239,7 +1239,7 @@ print(hptr)
 struct blk *hptr;
 {
 	int sc;
-	register struct blk *p,*q,*dec;
+	struct blk *p,*q,*dec;
 	int dig,dout,ct;
 
 	rewind(hptr);
@@ -1321,7 +1321,7 @@ struct blk *p;
 int sc;
 {
 	int cc;
-	register struct blk *q,*t,*s;
+	struct blk *q,*t,*s;
 
 	rewind(p);
 	if(length(p)*2 < sc){
@@ -1354,7 +1354,7 @@ tenot(p,sc)
 struct blk *p;
 int sc;
 {
-	register int c,f;
+	int c,f;
 
 	fsfile(p);
 	f=0;
@@ -1407,7 +1407,7 @@ struct blk *p;
 int sc;
 char ch;
 {
-	register struct blk *q;
+	struct blk *q;
 
 	q = removc(p,sc);
 	create(strptr);
@@ -1428,7 +1428,7 @@ hexot(p,flg)
 struct blk *p;
 int flg;
 {
-	register int c;
+	int c;
 	rewind(p);
 	if(sfeof(p) != 0){
 		sputc(strptr,'0');
@@ -1450,8 +1450,8 @@ bigot(p,flg)
 struct blk *p;
 int flg;
 {
-	register struct blk *t,*q;
-	register int l;
+	struct blk *t,*q;
+	int l;
 	int neg;
 
 	if(flg == 1)t = salloc(0);
@@ -1503,8 +1503,8 @@ struct blk *
 add(a1,a2)
 struct blk *a1,*a2;
 {
-	register struct blk *p;
-	register int carry,n;
+	struct blk *p;
+	int carry,n;
 	int size;
 	int c,n1,n2;
 
@@ -1550,8 +1550,8 @@ struct blk *a1,*a2;
 int
 eqk()
 {
-	register struct blk *p,*q;
-	register int skp;
+	struct blk *p,*q;
+	int skp;
 	int skq;
 
 	p = pop();
@@ -1584,7 +1584,7 @@ removc(p,n)
 struct blk *p;
 int n;
 {
-	register struct blk *q,*r;
+	struct blk *q,*r;
 
 	rewind(p);
 	while(n>1){
@@ -1607,7 +1607,7 @@ struct blk *
 scalint(p)
 struct blk *p;
 {
-	register int n;
+	int n;
 	n = sunputc(p);
 	p = removc(p,n);
 	return(p);
@@ -1618,7 +1618,7 @@ scale(p,n)
 struct blk *p;
 int n;
 {
-	register struct blk *q,*s,*t;
+	struct blk *q,*s,*t;
 
 	t = add0(p,n);
 	q = salloc(1);
@@ -1653,7 +1653,7 @@ command()
 	int c;
 	char line[100],*sl;
 	register void (*savint)(int);
-        register int pid, rpid;
+        int pid, rpid;
 	int retcode;
 
 	switch(c = readc()){
@@ -1684,8 +1684,8 @@ int
 cond(c)
 char c;
 {
-	register struct blk *p;
-	register char cc;
+	struct blk *p;
+	char cc;
 
 	if(subt() != 0)return(1);
 	p = pop();
@@ -1726,8 +1726,8 @@ char c;
 void
 load()
 {
-	register int c;
-	register struct blk *p,*q;
+	int c;
+	struct blk *p,*q;
 	struct blk *t,*s;
 	c = readc() & 0377;
 	sptr = stable[c];
@@ -1763,7 +1763,7 @@ int
 log2v(n)
 long n;
 {
-	register int i;
+	int i;
 
 	if(n == 0)return(0);
 	i=31;
@@ -1776,8 +1776,8 @@ struct blk *
 salloc(size)
 int size;
 {
-	register struct blk *hdr;
-	register char *ptr;
+	struct blk *hdr;
+	char *ptr;
 
 	if (size == 0)
 		size++;		/* malloc returns NULL for 0 length requests */
@@ -1799,7 +1799,7 @@ int size;
 struct blk *
 morehd()
 {
-	register struct blk *h,*kk;
+	struct blk *h,*kk;
 	headmor++;
 	nbytes += HEADSZ;
 	hfree = h = (struct blk *)malloc(HEADSZ);
@@ -1829,9 +1829,9 @@ copy(hptr,size)
 struct blk *hptr;
 int size;
 {
-	register struct blk *hdr;
-	register unsigned sz;
-	register char *ptr;
+	struct blk *hdr;
+	unsigned sz;
+	char *ptr;
 
 	all++;
 	nbytes += size;
@@ -1871,7 +1871,7 @@ seekc(hptr,n)
 struct blk *hptr;
 int n;
 {
-	register char *nn,*p;
+	char *nn,*p;
 
 	nn = hptr->beg+n;
 	if(nn > hptr->last){
@@ -1907,8 +1907,8 @@ void
 more(hptr)
 struct blk *hptr;
 {
-	register unsigned size;
-	register char *p;
+	unsigned size;
+	char *p;
 
 	if((size=(hptr->last-hptr->beg)*2) == 0)size=1;
 	nbytes += size/2;
@@ -1989,8 +1989,8 @@ void
 redef(p)
 struct blk *p;
 {
-	register int offset;
-	register char *newp;
+	int offset;
+	char *newp;
 
 	if ((int)p->beg&01) {
 		printf("odd ptr %o hdr %o\n",p->beg,p);
@@ -2007,7 +2007,7 @@ struct blk *p;
 
 void
 release(p)
-register struct blk *p;
+struct blk *p;
 {
 	rel++;
 	nbytes -= p->last - p->beg;
@@ -2020,7 +2020,7 @@ struct blk *
 getpwd(p)
 struct blk *p;
 {
-	register struct wblk *wp;
+	struct wblk *wp;
 
 	wp = (struct wblk *)p;
 	if (wp->rdw == wp->wtw)
@@ -2032,7 +2032,7 @@ void
 putwd(p, c)
 struct blk *p, *c;
 {
-	register struct wblk *wp;
+	struct wblk *wp;
 
 	wp = (struct wblk *)p;
 	if (wp->wtw == wp->lastw)
@@ -2044,7 +2044,7 @@ struct blk *
 lookwd(p)
 struct blk *p;
 {
-	register struct wblk *wp;
+	struct wblk *wp;
 
 	wp = (struct wblk *)p;
 	if (wp->rdw == wp->wtw)
@@ -2054,10 +2054,10 @@ struct blk *p;
 
 char *
 nalloc(p,nbytes)
-register char *p;
+char *p;
 unsigned nbytes;
 {
-	register char *q, *r;
+	char *q, *r;
 
 	q = r = malloc(nbytes);
 	if(q==0)

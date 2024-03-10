@@ -86,7 +86,7 @@ main(argc, argv)
 
 	struct anode *exlist;
 	int paths;
-	register char *cp, *sp = 0;
+	char *cp, *sp = 0;
 #ifdef	SUID_PWD
 	FILE *pwd, *popen();
 #endif
@@ -157,7 +157,7 @@ usage:		fprintf(stderr, "Usage: find path-list predicate-list\n");
 
 struct anode *expr() { /* parse ALTERNATION (-o)  */
 	int or();
-	register struct anode * p1;
+	struct anode * p1;
 
 	p1 = e1() /* get left operand */ ;
 	if(EQ(nxtarg(), "-o")) {
@@ -170,8 +170,8 @@ struct anode *expr() { /* parse ALTERNATION (-o)  */
 
 struct anode *e1() { /* parse CONCATENATION (formerly -a) */
 	int and();
-	register struct anode * p1;
-	register char *a;
+	struct anode * p1;
+	char *a;
 
 	p1 = e2();
 	a = nxtarg();
@@ -210,8 +210,8 @@ struct anode *e3() { /* parse parens and predicates */
 
 	struct anode *p1;
 	int i;
-	register char *a, *b;
-	register int s;
+	char *a, *b;
+	int s;
 
 	a = nxtarg();
 	if(EQ(a, "(")) {
@@ -351,28 +351,28 @@ char *nxtarg() { /* get next arg from command line */
 /* execution time functions */
 int
 and(p)
-register struct anode *p;
+struct anode *p;
 {
 	return(((*p->L->F)(p->L)) && ((*p->R->F)(p->R))?1:0);
 }
 
 int
 or(p)
-register struct anode *p;
+struct anode *p;
 {
 	 return(((*p->L->F)(p->L)) || ((*p->R->F)(p->R))?1:0);
 }
 
 int
 not(p)
-register struct anode *p;
+struct anode *p;
 {
 	return( !((*p->L->F)(p->L)));
 }
 
 int
 glob(p)
-register struct { int f; char *pat; } *p;
+struct { int f; char *pat; } *p;
 {
 	int gmatch();
 
@@ -389,21 +389,21 @@ struct anode *p;
 
 int
 mtime(p)
-register struct { int f, t, s; } *p;
+struct { int f, t, s; } *p;
 {
 	return(scomp((int)((Now - Statb.st_mtime) / A_DAY), p->t, p->s));
 }
 
 int
 atime(p)
-register struct { int f, t, s; } *p;
+struct { int f, t, s; } *p;
 {
 	return(scomp((int)((Now - Statb.st_atime) / A_DAY), p->t, p->s));
 }
 
 int
 user(p)
-register struct { int f, u, s; } *p;
+struct { int f, u, s; } *p;
 {
 	return(scomp(Statb.st_uid, p->u, p->s));
 }
@@ -419,14 +419,14 @@ struct anode *p;
 
 int
 ino(p)
-register struct { int f, u, s; } *p;
+struct { int f, u, s; } *p;
 {
 	return(scomp((int)Statb.st_ino, p->u, p->s));
 }
 
 int
 group(p)
-register struct { int f, u; } *p;
+struct { int f, u; } *p;
 {
 	return(p->u == Statb.st_gid);
 }
@@ -442,37 +442,37 @@ struct anode *p;
 
 int
 links(p)
-register struct { int f, link, s; } *p;
+struct { int f, link, s; } *p;
 {
 	return(scomp(Statb.st_nlink, p->link, p->s));
 }
 
 int
 size(p)
-register struct { int f, sz, s; } *p;
+struct { int f, sz, s; } *p;
 {
 	return(scomp((int)((Statb.st_size+511)>>9), p->sz, p->s));
 }
 
 int
 perm(p)
-register struct { int f, per, s; } *p;
+struct { int f, per, s; } *p;
 {
-	register int i;
+	int i;
 	i = (p->s=='-') ? p->per : 07777; /* '-' means only arg bits */
 	return((Statb.st_mode & i & 07777) == p->per);
 }
 
 int
 type(p)
-register struct { int f, per, s; } *p;
+struct { int f, per, s; } *p;
 {
 	return((Statb.st_mode&S_IFMT)==p->per);
 }
 
 int
 exeq(p)
-register struct { int f, com; } *p;
+struct { int f, com; } *p;
 {
 	fflush(stdout); /* to flush possible `-print' */
 	return(doex(p->com));
@@ -529,9 +529,9 @@ struct anode *p;
 		short	h_filesize[2];
 		char	h_name[256];
 	} hdr;
-	register int ifile, ct;
+	int ifile, ct;
 	static long fsz;
-	register int i;
+	int i;
 
 	hdr.h_magic = MAGIC;
 	strcpy(hdr.h_name, !strncmp(Pathname, "./", 2)? Pathname+2: Pathname);
@@ -598,8 +598,8 @@ struct anode *p;
 /* support functions */
 int
 scomp(a, b, s) /* funny signed compare */
-register int a, b;
-register char s;
+int a, b;
+char s;
 {
 	if(s == '+')
 		return(a > b);
@@ -612,11 +612,11 @@ int
 doex(com)
 int com;
 {
-	register int np;
-	register char *na;
+	int np;
+	char *na;
 	static char *nargv[50];
 	static int ccode;
-	register int w, pid;
+	int w, pid;
 	long omask;
 
 	ccode = np = 0;
@@ -659,9 +659,9 @@ int com;
 
 int
 getunum(f, s) char *f, *s; { /* find user/group name and return number */
-	register int i;
-	register char *sp;
-	register int c;
+	int i;
+	char *sp;
+	int c;
 	char str[20];
 	FILE *pin;
 
@@ -696,8 +696,8 @@ descend(name, fname, exlist)
 	char *name, *fname;
 {
 	DIR	*dir = NULL;
-	register struct direct	*dp;
-	register char *c1;
+	struct direct	*dp;
+	char *c1;
 	int rv = 0;
 	char *endofname;
 
@@ -753,7 +753,7 @@ ret:
 
 int
 gmatch(s, p) /* string match as in glob */
-register char *s, *p;
+char *s, *p;
 {
 	if (*s=='.' && *p!='.') return(0);
 	return amatch(s, p);
@@ -761,9 +761,9 @@ register char *s, *p;
 
 int
 amatch(s, p)
-register char *s, *p;
+char *s, *p;
 {
-	register int cc;
+	int cc;
 	int scc, k;
 	int c, lc;
 
@@ -805,7 +805,7 @@ register char *s, *p;
 
 int
 umatch(s, p)
-register char *s, *p;
+char *s, *p;
 {
 	if(*p==0) return(1);
 	while(*s)
@@ -816,7 +816,7 @@ register char *s, *p;
 void
 bwrite(rp, c)
 register short *rp;
-register int c;
+int c;
 {
 	int chgreel(int, int);
 
@@ -844,7 +844,7 @@ int
 chgreel(x, fl)
 int x, fl;
 {
-	register int f;
+	int f;
 	char str[22];
 	FILE *devtty;
 	struct stat statb;
@@ -907,8 +907,8 @@ void
 fastfind ( pathpart )
 	char pathpart[];
 {
-	register char *p, *s;
-	register int c;
+	char *p, *s;
+	int c;
 	char *q, *index(), *patprep();
 	int i, count = 0, globflag;
 	FILE *fp, *fopen();
@@ -968,8 +968,8 @@ char *
 patprep ( name )
 	char *name;
 {
-	register char *p, *endmark;
-	register char *subp = globfree;
+	char *p, *endmark;
+	char *subp = globfree;
 
 	*subp++ = '\0';
 	p = name + strlen ( name ) - 1;
@@ -1039,9 +1039,9 @@ char *
 getname(uid)
 uid_t uid;
 {
-	register struct passwd *pw;
+	struct passwd *pw;
 	struct passwd *getpwent();
-	register int cp;
+	int cp;
 
 	setpassent(1);
 
@@ -1064,7 +1064,7 @@ char *
 getgroup(gid)
 gid_t gid;
 {
-	register struct group *gr;
+	struct group *gr;
 	static int init;
 	struct group *getgrent();
 
@@ -1113,7 +1113,7 @@ int
 xgetuid(username)
 	char *username;
 {
-	register struct passwd *pw;
+	struct passwd *pw;
 	struct passwd *getpwnam();
 #ifndef	NO_PW_STAYOPEN
 
@@ -1131,7 +1131,7 @@ int
 xgetgid(groupname)
 	char *groupname;
 {
-	register struct group *gr;
+	struct group *gr;
 	struct group *getgrnam();
 
 	gr = getgrnam(groupname);
@@ -1148,7 +1148,7 @@ xgetgid(groupname)
 int
 list(file, stp)
 	char *file;
-	register struct stat *stp;
+	struct stat *stp;
 {
 	char pmode[32], uname[32], gname[32], fsize[32], ftime[32];
 	char *getname(), *getgroup(), *ctime();
@@ -1157,8 +1157,8 @@ list(file, stp)
 #ifdef	S_IFLNK
 	char flink[MAXPATHLEN + 1];
 #endif
-	register int who;
-	register char *cp;
+	int who;
+	char *cp;
 	time_t now;
 
 	if (file == NULL || stp == NULL)

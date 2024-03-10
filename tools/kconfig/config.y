@@ -585,7 +585,7 @@ yyerror(char *s)
 void
 newdev(struct device *dp)
 {
-    register struct device *np;
+    struct device *np;
 
     np = (struct device *) malloc(sizeof *np);
     *np = *dp;
@@ -603,7 +603,7 @@ newdev(struct device *dp)
 void
 mkconf(char *sysname)
 {
-    register struct file_list *fl, **flp;
+    struct file_list *fl, **flp;
 
     fl = (struct file_list *) malloc(sizeof *fl);
     fl->f_type = SYSTEMSPEC;
@@ -638,7 +638,7 @@ newflist(u_char ftype)
 void
 mkswap(struct file_list *system, struct file_list *fl, int size, int flag)
 {
-    register struct file_list **flp;
+    struct file_list **flp;
 
     if (system == 0 || system->f_type != SYSTEMSPEC) {
         yyerror("\"swap\" spec precedes \"config\" specification");
@@ -680,7 +680,7 @@ mkswap(struct file_list *system, struct file_list *fl, int size, int flag)
 struct device *
 connect(char *dev, int num)
 {
-    register struct device *dp;
+    struct device *dp;
 
     if (num == QUES)
         return (huhcon(dev));
@@ -706,7 +706,7 @@ connect(char *dev, int num)
 struct device *
 huhcon(char *dev)
 {
-    register struct device *dp, *dcp;
+    struct device *dp, *dcp;
     struct device rdev;
     int oldtype;
 
@@ -816,7 +816,7 @@ void
 checksystemspec(struct file_list *fl)
 {
     char buf[BUFSIZ];
-    register struct file_list *swap;
+    struct file_list *swap;
     int generic;
 
     if (fl == 0 || fl->f_type != SYSTEMSPEC) {
@@ -889,9 +889,9 @@ checksystemspec(struct file_list *fl)
 void
 verifysystemspecs(void)
 {
-    register struct file_list *fl;
+    struct file_list *fl;
     dev_t checked[50];
-    register dev_t *pchecked = checked;
+    dev_t *pchecked = checked;
 
     for (fl = conf_list; fl; fl = fl->f_next) {
         if (fl->f_type != SYSTEMSPEC)
@@ -938,7 +938,7 @@ verifyswap(struct file_list *fl, dev_t checked[], dev_t *pchecked)
 int
 alreadychecked(dev_t dev, dev_t *list, dev_t *last)
 {
-    register dev_t *p;
+    dev_t *p;
 
     for (p = list; p < last; p++)
         if (samedev(*p, dev))

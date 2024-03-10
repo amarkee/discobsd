@@ -9,7 +9,7 @@ void *
 calloc(num, size)
 	size_t num, size;
 {
-	register char *p;
+	char *p;
 
 	size *= num;
 	p = malloc(size);

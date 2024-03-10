@@ -41,7 +41,7 @@
 zsdar32(buf, length, frameend)
 char *buf;
 {
-	register int c, l, n;
+	int c, l, n;
 	register UNSL long crc;
 
 	crc = 0xFFFFFFFFL;  l = *buf++ & 0377;
@@ -98,12 +98,12 @@ char *buf;
 
 /* Receive data subpacket RLE encoded with 32 bit FCS */
 zrdatr32(buf, length)
-register char *buf;
+char *buf;
 {
-	register int c;
+	int c;
 	register UNSL long crc;
-	register char *end;
-	register int d;
+	char *end;
+	int d;
 
 	crc = 0xFFFFFFFFL;  Rxcount = 0;  end = buf + length;
 	d = 0;	/* Use for RLE decoder state */

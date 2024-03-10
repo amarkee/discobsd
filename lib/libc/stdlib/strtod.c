@@ -37,7 +37,7 @@ double strtod (const char *string, char **endPtr)
 	int sign = 0, expSign = 0, i;
 	double fraction, dblExp;
 	register const char *p;
-	register char c;
+	char c;
 
 	/* Exponent read from "EX" field. */
 	int exp = 0;

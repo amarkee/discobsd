@@ -104,9 +104,9 @@ int getarch()
 {
     char hb[sizeof(HDR) + 1];   /* real header */
     register HDR *hdr;
-    register int len;
+    int len;
     int nr;
-    register char *p;
+    char *p;
     char buf[20];
 
     if (!arfd)
@@ -160,7 +160,7 @@ int getarch()
 }
 
 void openarch(f)
-    register char *f;
+    char *f;
 {
     char    magic[SARMAG];
 
@@ -218,10 +218,10 @@ TIMETYPE lookarch(filename)
 }
 
 char *execat(s1, s2, si)
-    register char *s1, *s2;
+    char *s1, *s2;
     char *si;
 {
-    register char *s;
+    char *s;
 
     s = si;
     while (*s1 && *s1 != ':' && *s1 != '-')
@@ -240,9 +240,9 @@ char *execat(s1, s2, si)
 static char fname[128];
 
 char *findfl(name)
-    register char *name;
+    char *name;
 {
-    register char *p;
+    char *p;
     struct varblock *cp;
     struct stat buf;
 
@@ -267,7 +267,7 @@ TIMETYPE exists(pname)
     struct nameblock *pname;
 {
     struct stat buf;
-    register char *s, *filename;
+    char *s, *filename;
 
     filename = pname->namep;
 
@@ -316,7 +316,7 @@ static int umatch(s, p)
 static int amatch(s, p)
     char *s, *p;
 {
-    register int cc, scc, k;
+    int cc, scc, k;
     int c, lc;
 
     scc = *s;
@@ -356,11 +356,11 @@ static int amatch(s, p)
 }
 
 struct depblock *srchdir(pat, mkchain, nextdbl)
-    register char *pat;         /* pattern to be matched in directory */
+    char *pat;         /* pattern to be matched in directory */
     int mkchain;                /* nonzero if results to be remembered */
     struct depblock *nextdbl;   /* final value for chain */
 {
-    register DIR *dirf;
+    DIR *dirf;
     int cldir;
     char *dirname, *dirpref, *endir, *filepat, *p, temp[MAXPATHLEN];
     char fullname[MAXPATHLEN], *p1, *p2;
@@ -522,7 +522,7 @@ void meter(file)
 void fixname(s, d)
     char *s, *d;
 {
-    register char *r, *q;
+    char *r, *q;
     struct nameblock *pn;
     char name[MAXPATHLEN];
 

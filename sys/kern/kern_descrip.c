@@ -26,8 +26,7 @@
  * Allocate a user file descriptor.
  */
 static int
-ufalloc(i)
-    register int i;
+ufalloc(int i)
 {
     for (; i < NOFILE; i++)
         if (u.u_ofile[i] == NULL) {
@@ -45,16 +44,16 @@ ufalloc(i)
  * System calls on descriptors.
  */
 void
-getdtablesize()
+getdtablesize(void)
 {
     u.u_rval = NOFILE;
 }
 
 static void
-dupit(fd, fp, flags)
-    register int fd;
-    register struct file *fp;
-    int flags;
+dupit(int fd,
+    struct file *fp,
+    int flags)
+    
 {
     u.u_ofile[fd] = fp;
     u.u_pofile[fd] = flags;
@@ -64,13 +63,13 @@ dupit(fd, fp, flags)
 }
 
 void
-dup()
+dup(void)
 {
-    register struct a {
+    struct a {
         int i;
     } *uap = (struct a *) u.u_arg;
-    register struct file *fp;
-    register int j;
+    struct file *fp;
+    int j;
 
     if (uap->i &~ 077) { uap->i &= 077; dup2(); return; }   /* XXX */
 
@@ -82,12 +81,12 @@ dup()
 }
 
 void
-dup2()
+dup2(void)
 {
-    register struct a {
+    struct a {
         int i, j;
     } *uap = (struct a *) u.u_arg;
-    register struct file *fp;
+    struct file *fp;
 
     GETF(fp, uap->i);
     if (uap->j < 0 || uap->j >= NOFILE) {
@@ -109,16 +108,16 @@ dup2()
  * The file control system call.
  */
 void
-fcntl()
+fcntl(void)
 {
-    register struct file *fp;
-    register struct a {
+    struct file *fp;
+    struct a {
         int fdes;
         int cmd;
         int arg;
     } *uap;
-    register int i;
-    register char *pop;
+    int i;
+    char *pop;
 
     uap = (struct a *)u.u_arg;
     fp = getf(uap->fdes);
@@ -174,10 +173,9 @@ fcntl()
 }
 
 int
-fioctl(fp, cmd, value)
-    register struct file *fp;
-    u_int cmd;
-    caddr_t value;
+fioctl(struct file *fp,
+    u_int cmd,
+    caddr_t value)
 {
     return ((*Fops[fp->f_type]->fo_ioctl)(fp, cmd, value));
 }
@@ -186,9 +184,9 @@ fioctl(fp, cmd, value)
  * Set/clear file flags: nonblock and async.
  */
 int
-fset (fp, bit, value)
-    register struct file *fp;
-    int bit, value;
+fset (struct file *fp,
+    int bit, int value)
+    
 {
     if (value)
         fp->f_flag |= bit;
@@ -202,11 +200,10 @@ fset (fp, bit, value)
  * Get process group id for a file.
  */
 int
-fgetown(fp, valuep)
-    register struct file *fp;
-    register int *valuep;
+fgetown(struct file *fp,
+    int *valuep)
 {
-    register int error;
+    int error;
 
 #ifdef INET
     if (fp->f_type == DTYPE_SOCKET) {
@@ -223,9 +220,9 @@ fgetown(fp, valuep)
  * Set process group id for a file.
  */
 int
-fsetown(fp, value)
-    register struct file *fp;
-    int value;
+fsetown(struct file *fp,
+    int value)
+    
 {
 #ifdef INET
     if (fp->f_type == DTYPE_SOCKET) {
@@ -234,7 +231,7 @@ fsetown(fp, value)
     }
 #endif
     if (value > 0) {
-        register struct proc *p = pfind(value);
+        struct proc *p = pfind(value);
         if (p == 0)
             return (ESRCH);
         value = p->p_pgrp;
@@ -244,12 +241,12 @@ fsetown(fp, value)
 }
 
 void
-close()
+close(void)
 {
-    register struct a {
+    struct a {
         int i;
     } *uap = (struct a *)u.u_arg;
-    register struct file *fp;
+    struct file *fp;
 
     GETF(fp, uap->i);
     u.u_ofile[uap->i] = NULL;
@@ -260,10 +257,10 @@ close()
 }
 
 void
-fstat()
+fstat(void)
 {
-    register struct file *fp;
-    register struct a {
+    struct file *fp;
+    struct a {
         int fdes;
         struct  stat *sb;
     } *uap;
@@ -305,10 +302,10 @@ struct  file *lastf;
  * to point at the file structure.
  */
 struct file *
-falloc()
+falloc(void)
 {
-    register struct file *fp;
-    register int i;
+    struct file *fp;
+    int i;
 
     i = ufalloc(0);
     if (i < 0)
@@ -340,10 +337,9 @@ slot:
  * consideration.
  */
 struct file *
-getf(f)
-    register int f;
+getf(int f)
 {
-    register struct file *fp;
+    struct file *fp;
 
     if ((unsigned)f >= NOFILE || (fp = u.u_ofile[f]) == NULL) {
         u.u_error = EBADF;
@@ -357,8 +353,7 @@ getf(f)
  * Decrement reference count on file structure.
  */
 int
-closef(fp)
-    register struct file *fp;
+closef(struct file *fp)
 {
     int error;
 
@@ -381,13 +376,13 @@ closef(fp)
  * Apply an advisory lock on a file descriptor.
  */
 void
-flock()
+flock(void)
 {
-    register struct a {
+    struct a {
         int fd;
         int how;
     } *uap = (struct a *)u.u_arg;
-    register struct file *fp;
+    struct file *fp;
     int error;
 
     if ((fp = getf(uap->fd)) == NULL)
@@ -423,9 +418,8 @@ flock()
  */
 /* ARGSUSED */
 int
-fdopen(dev, mode, type)
-    dev_t dev;
-    int mode, type;
+fdopen(dev_t dev,
+    int mode, int type)
 {
     /*
      * XXX Kludge: set u.u_dupfd to contain the value of the
@@ -443,12 +437,11 @@ fdopen(dev, mode, type)
  * Duplicate the specified descriptor to a free descriptor.
  */
 int
-dupfdopen (indx, dfd, mode, error)
-    register int indx, dfd;
-    int mode;
-    int error;
+dupfdopen (int indx, int dfd,
+    int mode,
+    int error)
 {
-    register struct file *wfp;
+    struct file *wfp;
     struct file *fp;
 
     /*

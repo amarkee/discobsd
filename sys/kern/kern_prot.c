@@ -11,24 +11,24 @@
 #include <sys/systm.h>
 
 void
-getpid()
+getpid(void)
 {
     u.u_rval = u.u_procp->p_pid;
 }
 
 void
-getppid()
+getppid(void)
 {
     u.u_rval = u.u_procp->p_ppid;
 }
 
 void
-getpgrp()
+getpgrp(void)
 {
-    register struct a {
+    struct a {
         int pid;
     } *uap = (struct a *)u.u_arg;
-    register struct proc *p;
+    struct proc *p;
 
     if (uap->pid == 0)      /* silly... */
         uap->pid = u.u_procp->p_pid;
@@ -41,25 +41,25 @@ getpgrp()
 }
 
 void
-getuid()
+getuid(void)
 {
     u.u_rval = u.u_ruid;
 }
 
 void
-geteuid()
+geteuid(void)
 {
     u.u_rval = u.u_uid;
 }
 
 void
-getgid()
+getgid(void)
 {
     u.u_rval = u.u_rgid;
 }
 
 void
-getegid()
+getegid(void)
 {
     u.u_rval = u.u_groups[0];
 }
@@ -69,9 +69,9 @@ getegid()
  * entries in the user structure as shorts and has to convert them to ints.
  */
 void
-getgroups()
+getgroups(void)
 {
-    register struct a {
+    struct a {
         u_int   gidsetsize;
         int *gidset;
     } *uap = (struct a *)u.u_arg;
@@ -93,10 +93,10 @@ getgroups()
 }
 
 void
-setpgrp()
+setpgrp(void)
 {
-    register struct proc *p;
-    register struct a {
+    struct proc *p;
+    struct a {
         int pid;
         int pgrp;
     } *uap = (struct a *)u.u_arg;
@@ -117,9 +117,9 @@ setpgrp()
 }
 
 void
-setgroups()
+setgroups(void)
 {
-    register struct a {
+    struct a {
         u_int   gidsetsize;
         int *gidset;
     } *uap = (struct a *)u.u_arg;
@@ -143,8 +143,7 @@ setgroups()
  * Check if gid is a member of the group set.
  */
 int
-groupmember(gid)
-    gid_t gid;
+groupmember(gid_t gid)
 {
     register gid_t *gp;
 

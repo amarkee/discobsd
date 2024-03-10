@@ -3,6 +3,9 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
+#ifndef _SYS_MSGBUF_H_
+#define _SYS_MSGBUF_H_
+
 #define MSG_MAGIC   0x063061
 #define MSG_BSIZE   2048
 
@@ -20,4 +23,6 @@ struct  msgbuf {
  * Check that log is open by a user program.
  */
 int logisopen (int unit);
+#endif
+
 #endif

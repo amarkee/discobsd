@@ -102,8 +102,8 @@ main(argc, argv)
 	struct timeval tp;
 	struct tm *ttp;
 	struct group *gr;
-	register int ch;
-	register char *p;
+	int ch;
+	char *p;
 	int ask, fflag, hflag, pflag, cnt;
 	int quietlog, passwd_req, ioctlval;
 	char *domain, *salt, *envinit[1], *ttyn, *pp;
@@ -439,8 +439,8 @@ nouser:
 void
 getloginname()
 {
-	register int ch;
-	register char *p;
+	int ch;
+	char *p;
 	static char nbuf[UT_NAMESIZE + 1];
 
 	for (;;) {
@@ -485,7 +485,7 @@ void sigint(sig)
 void
 motd()
 {
-	register int fd, nchars;
+	int fd, nchars;
 	sig_t oldint;
 	char tbuf[BUFSIZ];
 
@@ -502,7 +502,7 @@ motd()
 void
 checknologin()
 {
-	register int fd, nchars;
+	int fd, nchars;
 	char tbuf[BUFSIZ];
 
 	if ((fd = open(_PATH_NOLOGIN, O_RDONLY, 0)) >= 0) {

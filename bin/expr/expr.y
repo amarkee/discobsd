@@ -101,8 +101,8 @@ int op[] = { OR, AND, ADD,  SUBT, MULT, DIV, REM, MCH,
 int
 yylex()
 {
-    register char *p;
-    register int i;
+    char *p;
+    int i;
 
     if(Argi >= Ac) return NOARG;
 
@@ -120,9 +120,9 @@ yylex()
 char *
 rel(op, r1, r2)
     int op;
-    register char *r1, *r2;
+    char *r1, *r2;
 {
-    register long i;
+    long i;
 
     if(ematch(r1, "-*[0-9]*$") && ematch(r2, "[0-9]*$"))
         i = atol(r1) - atol(r2);
@@ -145,7 +145,7 @@ arith(op, r1, r2)
     char *r1, *r2;
 {
     long i1, i2;
-    register char *rv;
+    char *rv;
 
     if(!(ematch(r1, "[0-9]*$") && ematch(r2, "[0-9]*$")))
         yyerror("non-numeric argument");
@@ -169,7 +169,7 @@ conju(op, r1, r2)
     int op;
     char *r1, *r2;
 {
-    register char *rv;
+    char *rv;
 
     switch(op) {
 
@@ -200,8 +200,8 @@ conju(op, r1, r2)
 
 char *substr(v, s, w) char *v, *s, *w;
 {
-register int si, wi;
-register char *res;
+int si, wi;
+char *res;
 
     si = atol(s);
     wi = atol(w);
@@ -215,10 +215,10 @@ register char *res;
     return res;
 }
 
-char *length(s) register char *s;
+char *length(s) char *s;
 {
-    register int i = 0;
-    register char *rv;
+    int i = 0;
+    char *rv;
 
     while(*s++) ++i;
 
@@ -229,8 +229,8 @@ char *length(s) register char *s;
 
 char *cindex(s, t) char *s, *t;
 {
-    register int i, j;
-    register char *rv;
+    int i, j;
+    char *rv;
 
     for(i = 0; s[i] ; ++i)
         for(j = 0; t[j] ; ++j)
@@ -246,7 +246,7 @@ match(s, p)
     char *s;
     char *p;
 {
-    register char *rv;
+    char *rv;
 
     sprintf(rv = malloc(8), "%d", ematch(s, p));
     if(nbra) {
@@ -256,7 +256,7 @@ match(s, p)
     return rv;
 }
 
-#define INIT    register char *sp = instring;
+#define INIT    char *sp = instring;
 #define GETC()      (*sp++)
 #define PEEKC()     (*sp)
 #define UNGETC(c)   (--sp)
@@ -266,11 +266,11 @@ match(s, p)
 int
 ematch(s, p)
 char *s;
-register char *p;
+char *p;
 {
     static char expbuf[ESIZE];
     char *compile();
-    register int num;
+    int num;
     extern char *braslist[], *braelist[], *loc2;
 
     compile(p, expbuf, &expbuf[ESIZE], 0);
@@ -335,13 +335,13 @@ char    bittab[] = {
 
 char *
 compile(instring, ep, endbuf, seof)
-register char *ep;
+char *ep;
 char *instring, *endbuf;
 int seof;
 {
     INIT    /* Dependent declarations and initializations */
-    register int c;
-    register int eof = seof;
+    int c;
+    int eof = seof;
     char *lastep = instring;
     int cclcnt;
     char bracket[NBRA], *bracketp;
@@ -515,9 +515,9 @@ int seof;
 
 int
 step(p1, p2)
-register char *p1, *p2;
+char *p1, *p2;
 {
-    register int c;
+    int c;
 
     if (circf) {
         loc1 = p1;
@@ -548,9 +548,9 @@ register char *p1, *p2;
 
 int
 advance(lp, ep)
-register char *lp, *ep;
+char *lp, *ep;
 {
-    register char *curlp;
+    char *curlp;
     char c;
     char *bbeg;
     int ct;
@@ -695,7 +695,7 @@ register char *lp, *ep;
 
 void
 getrnge(str)
-register char *str;
+char *str;
 {
     low = *str++ & 0377;
     size = *str == 255 ? 20000 : (*str &0377) - low;
@@ -703,8 +703,8 @@ register char *str;
 
 int
 ecmp(a, b, count)
-register char   *a, *b;
-register int    count;
+char   *a, *b;
+int    count;
 {
     if(a == b) /* should have been caught in compile() */
         error(51);

@@ -73,7 +73,7 @@ main(argc, argv)
 {
 	extern int optind;
 	struct afile *fp0, *fplast;
-	register struct afile *fp;
+	struct afile *fp;
 	struct sgttyb sgbuf;
 	int ch, i;
 	time_t time();
@@ -217,8 +217,8 @@ formatd(name, dotitle)
 	char *name;
 	int dotitle;
 {
-	register struct afile *fp;
-	register struct subdirs *dp;
+	struct afile *fp;
+	struct subdirs *dp;
 	struct afile *dfp0, *dfplast;
 	int isadir;
 	long nkb, getdir();
@@ -259,9 +259,9 @@ getdir(dir, pfp0, pfplast, isadir)
 	struct afile **pfp0, **pfplast;
 	int *isadir;
 {
-	register struct afile *fp;
+	struct afile *fp;
 	DIR *dirp;
-	register struct direct *dp;
+	struct direct *dp;
 	struct	stat st;
 	long nb;
 	int nent = 20;
@@ -313,7 +313,7 @@ int	stat(), lstat();
 
 struct afile *
 gstat(fp, file, statarg, pnb)
-	register struct afile *fp;
+	struct afile *fp;
 	char *file;
 	int statarg;
 	long *pnb;
@@ -389,8 +389,8 @@ void
 formatf(fp0, fplast)
 	struct afile *fp0, *fplast;
 {
-	register struct afile *fp;
-	register int i, j, w;
+	struct afile *fp;
+	int i, j, w;
 	int width = 0, nentry = fplast - fp0;
 	int columns, lines, maxflags;
 	char *cp;
@@ -448,7 +448,7 @@ formatf(fp0, fplast)
 
 int
 fcmp(f1, f2)
-	register struct afile *f1, *f2;
+	struct afile *f1, *f2;
 {
 
 	if (dflg == 0 && fflg == 0) {
@@ -475,7 +475,7 @@ cat(dir, file)
 	char *dir, *file;
 {
 	static char dfile[BUFSIZ];
-	register int dlen;
+	int dlen;
 
 	if ((dlen = strlen(dir))+1+strlen(file)+1 > BUFSIZ) {
 		fputs("ls: filename too long\n", stderr);
@@ -494,7 +494,7 @@ char *
 savestr(str)
 	char *str;
 {
-	register char *cp = strdup(str);
+	char *cp = strdup(str);
 
 	if (cp == NULL) {
 		fputs("ls: out of memory\n", stderr);
@@ -507,11 +507,11 @@ char	*fmtinum(), *fmtsize(), *fmtlstuff(), *fmtmode();
 
 char *
 fmtentry(fp, maxflags)
-	register struct afile *fp;
+	struct afile *fp;
 	int maxflags;
 {
 	static char fmtres[BUFSIZ];
-	register char *cp, *dp;
+	char *cp, *dp;
 
 	(void) sprintf(fmtres, "%s%s%s",
 	    iflg ? fmtinum(fp) : "",
@@ -547,7 +547,7 @@ fmtentry(fp, maxflags)
 
 char *
 fmtinum(p)
-	register struct afile *p;
+	struct afile *p;
 {
 	static char inumbuf[8];
 
@@ -557,7 +557,7 @@ fmtinum(p)
 
 char *
 fmtsize(p)
-	register struct afile *p;
+	struct afile *p;
 {
 	static char sizebuf[16];
 
@@ -567,12 +567,12 @@ fmtsize(p)
 
 char *
 fmtlstuff(p, maxflags)
-	register struct afile *p;
+	struct afile *p;
 	int maxflags;
 {
 	static char lstuffbuf[256];
 	char gname[32], uname[32], fsize[32], ftime[32], fflags[64];
-	register char *lp = lstuffbuf;
+	char *lp = lstuffbuf;
 
 	/* type mode uname gname fsize ftime */
 /* get uname */
@@ -632,13 +632,13 @@ int	*m[] = { m1, m2, m3, m4, m5, m6, m7, m8, m9};
 char *
 fmtmode(lp, flags)
 	char *lp;
-	register int flags;
+	int flags;
 {
 	int **mp;
 
 	for (mp = &m[0]; mp < &m[sizeof(m)/sizeof(m[0])]; ) {
-		register int *pairp = *mp++;
-		register int n = *pairp++;
+		int *pairp = *mp++;
+		int n = *pairp++;
 
 		while (--n >= 0 && (flags&*pairp) != *pairp)
 			pairp += 2;
@@ -668,8 +668,8 @@ getname(uid)
 		uid_t	uid;
 		char	name[NMAX+1];
 	} c_uid[NCACHE];
-	register struct passwd *pw;
-	register struct ncache *cp;
+	struct passwd *pw;
+	struct ncache *cp;
 
 	setpassent(1);
 	cp = c_uid + (uid & CAMASK);
@@ -690,8 +690,8 @@ getgroup(gid)
 		gid_t	gid;
 		char	name[NMAX+1];
 	} c_gid[NCACHE];
-	register struct group *gr;
-	register struct ncache *cp;
+	struct group *gr;
+	struct ncache *cp;
 
 	cp = c_gid + (gid & CAMASK);
 	if (cp->gid == gid && *cp->name)

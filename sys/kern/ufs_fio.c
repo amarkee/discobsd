@@ -11,6 +11,7 @@
 #include <sys/namei.h>
 #include <sys/systm.h>
 #include <sys/stat.h>
+#include <sys/proc.h>
 
 /*
  * Check mode permission on inode pointer.
@@ -26,11 +27,11 @@
  * permissions.
  */
 int
-access (ip, mode)
-    register struct inode *ip;
-    int mode;
+access (struct inode *ip,
+    int mode)
+    
 {
-    register int m;
+    int m;
     register gid_t *gp;
 
     m = mode;
@@ -88,7 +89,7 @@ found:
  * super user.
  */
 int
-suser()
+suser(void)
 {
     if (u.u_uid == 0) {
         return (1);
@@ -102,9 +103,8 @@ suser()
  * is too large already (it will probably be split into two files eventually).
  */
 int
-ufs_setattr (ip, vap)
-    register struct inode *ip;
-    register struct vattr *vap;
+ufs_setattr (struct inode *ip,
+    struct vattr *vap)
 {
     int error;
     struct  timeval atimeval, mtimeval;
@@ -171,10 +171,9 @@ ufs_setattr (ip, vap)
  * Return EBUSY if mounted, 0 otherwise.
  */
 int
-ufs_mountedon (dev)
-    dev_t dev;
+ufs_mountedon (dev_t dev)
 {
-    register struct mount *mp;
+    struct mount *mp;
 
     for (mp = mount; mp < &mount[NMOUNT]; mp++) {
         if (mp->m_inodp == NULL)

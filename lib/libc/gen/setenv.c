@@ -22,7 +22,7 @@ setenv(name, value, rewrite)
 	int	rewrite;
 {
 	static int	alloced;		/* if allocated space before */
-	register char	*C;
+	char	*C;
 	register const char *E;
 	int l_value, offset;
 
@@ -38,8 +38,8 @@ setenv(name, value, rewrite)
 		}
 	}
 	else {					/* create new slot */
-		register int	cnt;
-		register char	**P;
+		int	cnt;
+		char	**P;
 
 		for (P = environ,cnt = 0;*P;++P,++cnt);
 		if (alloced) {			/* just increase size */
@@ -77,7 +77,7 @@ int
 unsetenv(name)
 	const char	*name;
 {
-	register char	**P;
+	char	**P;
 	int	offset;
 
 	while (_findenv(name,&offset))		/* if set multiple times */

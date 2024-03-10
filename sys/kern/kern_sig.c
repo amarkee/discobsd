@@ -28,11 +28,11 @@
  * SIGCONT and the target process is a descendant of the current process
  */
 static int
-cansignal (q, signum)
-    register struct proc *q;
-    int signum;
+cansignal (struct proc *q,
+    int signum)
+    
 {
-    register struct proc *curp = u.u_procp;
+    struct proc *curp = u.u_procp;
     uid_t   ruid;
 
     fill_from_u(q, &ruid, NULL, NULL);  /* XXX */
@@ -50,14 +50,14 @@ cansignal (q, signum)
  * 4.3 Compatibility
  */
 void
-sigstack()
+sigstack(void)
 {
-    register struct a {
+    struct a {
         struct  sigstack *nss;
         struct  sigstack *oss;
     } *uap = (struct a*) u.u_arg;
     struct sigstack ss;
-    register int error = 0;
+    int error = 0;
 
     ss.ss_sp = u.u_sigstk.ss_base;
     ss.ss_onstack = u.u_sigstk.ss_flags & SA_ONSTACK;
@@ -76,10 +76,9 @@ out:
 }
 
 static int
-killpg1 (signo, pgrp, all)
-    int signo, pgrp, all;
+killpg1 (int signo, int pgrp, int all)
 {
-    register struct proc *p;
+    struct proc *p;
     int f, error = 0;
 
     if (! all && pgrp == 0) {
@@ -107,14 +106,14 @@ killpg1 (signo, pgrp, all)
 }
 
 void
-kill()
+kill(void)
 {
-    register struct a {
+    struct a {
         int pid;
         int signo;
     } *uap = (struct a *)u.u_arg;
-    register struct proc *p;
-    register int error = 0;
+    struct proc *p;
+    int error = 0;
 
     /*
      * BSD4.3 botches the comparison against NSIG - it's a good thing for
@@ -158,13 +157,13 @@ out:
 }
 
 void
-killpg()
+killpg(void)
 {
-    register struct a {
+    struct a {
         int pgrp;
         int signo;
     } *uap = (struct a *)u.u_arg;
-    register int error = 0;
+    int error = 0;
 
     if (uap->signo < 0 || uap->signo >= NSIG) {
         error = EINVAL;
@@ -181,8 +180,7 @@ out:
  * Signals are handled elsewhere.
  */
 void
-stop(p)
-    register struct proc *p;
+stop(struct proc *p)
 {
     p->p_stat = SSTOP;
     p->p_flag &= ~P_WAITED;
@@ -195,11 +193,10 @@ stop(p)
  * process group.
  */
 void
-gsignal (pgrp, sig)
-    register int pgrp;
-    register int sig;
+gsignal (int pgrp,
+    int sig)
 {
-    register struct proc *p;
+    struct proc *p;
 
     if (pgrp == 0)
         return;
@@ -214,11 +211,10 @@ gsignal (pgrp, sig)
  * the specified process.
  */
 void
-psignal(p, sig)
-    register struct proc *p;
-    register int sig;
+psignal(struct proc *p,
+    int sig)
 {
-    register int s;
+    int s;
     sig_t action;
     int prop;
     long mask;
@@ -405,10 +401,9 @@ out:
  *      postsig(signum);
  */
 int
-issignal (p)
-    register struct proc *p;
+issignal (struct proc *p)
 {
-    register int sig;
+    int sig;
     long mask;
     int prop;
 
@@ -556,12 +551,12 @@ issignal (p)
  * data+stack segments.
  */
 static int
-core()
+core(void)
 {
-    register struct inode *ip;
+    struct inode *ip;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
-    register char *np;
+    struct nameidata *ndp = &nd;
+    char *np;
     char    *cp, name[MAXCOMLEN + 6];
 
     /*
@@ -619,10 +614,9 @@ out:
  * from the current set of pending signals.
  */
 void
-postsig(sig)
-    int sig;
+postsig(int sig)
 {
-    register struct proc *p = u.u_procp;
+    struct proc *p = u.u_procp;
     long mask = sigmask(sig), returnmask;
     register sig_t action;
 
@@ -671,9 +665,9 @@ postsig(sig)
  * switch.
  */
 void
-execsigs(register struct proc *p)
+execsigs(struct proc *p)
 {
-    register int nc;
+    int nc;
     unsigned long mask;
 
     /*
@@ -707,7 +701,7 @@ execsigs(register struct proc *p)
  * Q: should we do that all the time ??
  */
 void
-nosys()
+nosys(void)
 {
     if (u.u_signal[SIGSYS] == SIG_IGN || u.u_signal[SIGSYS] == SIG_HOLD)
         u.u_error = EINVAL;

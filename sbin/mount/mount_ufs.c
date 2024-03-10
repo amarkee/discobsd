@@ -54,7 +54,7 @@ static struct mntopt mopts[] = {
 int
 mount_ufs(argc, argv)
 	int argc;
-	register char *argv[];
+	char *argv[];
 {
 	extern int optreset;
 	int ch, mntflags;

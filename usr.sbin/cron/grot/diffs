@@ -373,7 +373,7 @@ diff -c -r /tmp/cron/compat.c cron/compat.c
   setsid()
   {
   	int	newpgrp;
-! 	register int	fd;
+! 	int	fd;
 ! 
   	newpgrp = setpgrp(0, getpid());
 ! 	if	((fd = open(_PATH_TTY, 2)) >= 0)
@@ -742,7 +742,7 @@ diff -c -r /tmp/cron/crontab.c cron/crontab.c
   edit_cmd() {
   	char		n[MAX_FNAME], q[MAX_TEMPSTR], *editor;
 ! 	register FILE	*f;
-! 	register int	ch;
+! 	int	ch;
 ! 	int		t, x;
   	struct stat	statbuf;
   	time_t		mtime;
@@ -776,7 +776,7 @@ diff -c -r /tmp/cron/crontab.c cron/crontab.c
   replace_cmd() {
   	char	n[MAX_FNAME], envstr[MAX_ENVSTR], tn[MAX_FNAME];
 ! 	register FILE	*tmp;
-! 	register int	ch;
+! 	int	ch;
 ! 	int	eof;
   	entry	*e;
   	time_t	now = time(NULL);
@@ -941,7 +941,7 @@ diff -c -r /tmp/cron/database.c cron/database.c
   user *
   find_user(db, name)
   	cron_db	*db;
-! 	register char	*name;
+! 	char	*name;
   {
   	char	*env_get();
 ! 	register user	*u;
@@ -1009,7 +1009,7 @@ diff -c -r /tmp/cron/do_command.c cron/do_command.c
 ***************
 *** 76,82 ****
   	int		stdin_pipe[2], stdout_pipe[2];
-  	register char	*input_data;
+  	char	*input_data;
   	char		*usernm, *mailto;
 ! 	int		children = 0;
   
@@ -1017,9 +1017,9 @@ diff -c -r /tmp/cron/do_command.c cron/do_command.c
   
 --- 69,76 ----
   	int		stdin_pipe[2], stdout_pipe[2];
-  	register char	*input_data;
+  	char	*input_data;
   	char		*usernm, *mailto;
-! 	register int ch;
+! 	int ch;
 ! 	int		children = 0, escaped;
   
   	Debug(DPROC, ("[%d] child_process('%s')\n", getpid(), e->cmd))
@@ -1030,7 +1030,7 @@ diff -c -r /tmp/cron/do_command.c cron/do_command.c
   	 * our program name.  This has no effect on some kernels.
   	 */
 ! 	/*local*/{
-! 		register char	*pch;
+! 		char	*pch;
   
 - 		for (pch = ProgramName;  *pch;  pch++)
 - 			*pch = MkUpper(*pch);
@@ -1082,8 +1082,8 @@ diff -c -r /tmp/cron/do_command.c cron/do_command.c
   	 * but that happens later.
   	 */
 ! 	/*local*/{
-! 		register int escaped = FALSE;
-! 		register int ch;
+! 		int escaped = FALSE;
+! 		int ch;
 ! 
 ! 		for (input_data = e->cmd;  ch = *input_data;  input_data++) {
 ! 			if (escaped) {
@@ -1223,7 +1223,7 @@ diff -c -r /tmp/cron/entry.c cron/entry.c
   load_entry(file, error_func, pw, envp)
   	FILE		*file;
   	void		(*error_func)();
-! 	register struct passwd	*pw;
+! 	struct passwd	*pw;
   	char		**envp;
   {
   	/* this function reads one crontab entry -- the next -- from a file.
@@ -1264,7 +1264,7 @@ diff -c -r /tmp/cron/entry.c cron/entry.c
   	int		ch;		/* current character being processed */
 ! 	FILE		*file;		/* file being read */
   {
-  	register int	done;
+  	int	done;
   
 --- 307,313 ----
   	int		low, high;	/* bounds, impl. offset for bitstr */
@@ -1272,7 +1272,7 @@ diff -c -r /tmp/cron/entry.c cron/entry.c
   	int		ch;		/* current character being processed */
 ! 	register FILE		*file;		/* file being read */
   {
-  	register int	done;
+  	int	done;
   
 ***************
 *** 355,361 ****
@@ -1287,7 +1287,7 @@ diff -c -r /tmp/cron/entry.c cron/entry.c
   	bitstr_t	*bits;		/* one bit per flag, default=FALSE */
   	int		low, high;	/* bounds, impl. offset for bitstr */
   	char		*names[];	/* NULL or names of elements */
-! 	register int	ch;		/* current character being processed */
+! 	int	ch;		/* current character being processed */
   	FILE		*file;		/* file being read */
   {
   	/* range = number | number "-" number [ "/" number ]
@@ -1304,7 +1304,7 @@ diff -c -r /tmp/cron/entry.c cron/entry.c
   	int	*numptr;	/* where does the result go? */
   	int	low;		/* offset applied to result if symbolic enum used */
   	char	*names[];	/* symbolic names, if any, for enums */
-! 	register int	ch;	/* current character */
+! 	int	ch;	/* current character */
   	FILE	*file;		/* source */
   {
   	char	temp[MAX_TEMPSTR], *pc;
@@ -1324,7 +1324,7 @@ diff -c -r /tmp/cron/env.c cron/env.c
   env_free(envp)
   	char	**envp;
   {
-! 	register char	**p;
+! 	char	**p;
   
   	for (p = envp;  *p;  p++)
   		free(*p);
@@ -1333,28 +1333,28 @@ diff -c -r /tmp/cron/env.c cron/env.c
   
   char **
   env_copy(envp)
-! 	register char	**envp;
+! 	char	**envp;
   {
-  	register int	count, i;
-  	register char	**p;
+  	int	count, i;
+  	char	**p;
 --- 47,53 ----
   
   char **
   env_copy(envp)
 ! 	char	**envp;
   {
-  	register int	count, i;
-  	register char	**p;
+  	int	count, i;
+  	char	**p;
 ***************
 *** 162,169 ****
   
   char *
   env_get(name, envp)
-! 	register char	*name;
-! 	register char	**envp;
+! 	char	*name;
+! 	char	**envp;
   {
-  	register int	len = strlen(name);
-  	register char	*p, *q;
+  	int	len = strlen(name);
+  	char	*p, *q;
 --- 162,169 ----
   
   char *
@@ -1362,8 +1362,8 @@ diff -c -r /tmp/cron/env.c cron/env.c
 ! 	char	*name;
 ! 	char	**envp;
   {
-  	register int	len = strlen(name);
-  	register char	*p, *q;
+  	int	len = strlen(name);
+  	char	*p, *q;
 diff -c -r /tmp/cron/externs.h cron/externs.h
 *** /tmp/cron/externs.h	Fri Jun 18 19:37:52 1999
 --- cron/externs.h	Tue Jun 15 20:32:34 1999
@@ -1554,7 +1554,7 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
 ! 	char	*right;
   	int	until;
   {
-  	register int	diff;
+  	int	diff;
 --- 40,51 ----
   #define LOG_CRON LOG_DAEMON
   #endif
@@ -1563,11 +1563,11 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
   
   int
   strcmp_until(left, right, until)
-! 	register char	*left;
-! 	register char	*right;
+! 	char	*left;
+! 	char	*right;
   	int	until;
   {
-  	register int	diff;
+  	int	diff;
 ***************
 *** 76,84 ****
    */
@@ -1583,9 +1583,9 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
    */
   int
   strdtb(s)
-! 	register char	*s;
+! 	char	*s;
   {
-! 	register char	*x = s;
+! 	char	*x = s;
   
   	/* scan forward to the null
   	 */
@@ -1602,7 +1602,7 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
   
   #else /* DEBUGGING */
   
-! 	register char	*pc = flags;
+! 	char	*pc = flags;
   
   	DebugFlags = 0;
   
@@ -1643,7 +1643,7 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
   get_char(file)
 ! 	register FILE	*file;
   {
-! 	register int	ch;
+! 	int	ch;
   
   	ch = getc(file);
   	if (ch == '\n')
@@ -1661,7 +1661,7 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
    */
   void
   unget_char(ch, file)
-! 	register int	ch;
+! 	int	ch;
 ! 	register FILE	*file;
   {
   	ungetc(ch, file);
@@ -1684,12 +1684,12 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
    */
   int
   get_string(string, size, file, terms)
-! 	register char	*string;
+! 	char	*string;
   	int	size;
   	FILE	*file;
   	char	*terms;
   {
-! 	register int	ch;
+! 	int	ch;
   
   	while (EOF != (ch = get_char(file)) && !strchr(terms, ch)) {
   		if (size > 1) {
@@ -1710,7 +1710,7 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
   skip_comments(file)
 ! 	register FILE	*file;
   {
-! 	register int	ch;
+! 	int	ch;
   
   	while (EOF != (ch = get_char(file))) {
   		/* ch is now the first character of a line.
@@ -1749,15 +1749,15 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
 *** 555,561 ****
   char *
   first_word(s, t)
-  	register char *s;	/* string we want the first word of */
-! 	register char *t;	/* terminators, implicitly including \0 */
+  	char *s;	/* string we want the first word of */
+! 	char *t;	/* terminators, implicitly including \0 */
   {
   	static char retbuf[2][MAX_TEMPSTR + 1];	/* sure wish C had GC */
   	static int retsel = 0;
 --- 538,544 ----
   char *
   first_word(s, t)
-  	register char *s;	/* string we want the first word of */
+  	char *s;	/* string we want the first word of */
 ! 	char *t;		/* terminators, implicitly including \0 */
   {
   	static char retbuf[2][MAX_TEMPSTR + 1];	/* sure wish C had GC */
@@ -1767,10 +1767,10 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
    */
   char *
   mkprints(src, len)
-! 	register unsigned char *src;
-! 	register unsigned int len;
+! 	unsigned char *src;
+! 	unsigned int len;
   {
-! 	register char *dst = malloc(len*4 + 1);
+! 	char *dst = malloc(len*4 + 1);
   
   	mkprint(dst, src, len);
   
@@ -1781,7 +1781,7 @@ diff -c -r /tmp/cron/misc.c cron/misc.c
 ! 	unsigned char *src;
 ! 	unsigned int len;
   {
-! 	register char *dst = (char *)malloc(len*4 + 1);
+! 	char *dst = (char *)malloc(len*4 + 1);
   
   	mkprint(dst, src, len);
   

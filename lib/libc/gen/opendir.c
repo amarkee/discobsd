@@ -16,8 +16,8 @@ DIR *
 opendir(name)
 	const char *name;
 {
-	register DIR *dirp;
-	register int fd;
+	DIR *dirp;
+	int fd;
 
 	if ((fd = open(name, 0)) == -1)
 		return NULL;

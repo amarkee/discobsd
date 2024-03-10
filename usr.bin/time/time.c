@@ -18,7 +18,7 @@ main(argc, argv)
     char **argv;
 {
     int status;
-    register int p;
+    int p;
     struct timeval before, after;
     struct rusage ru;
 

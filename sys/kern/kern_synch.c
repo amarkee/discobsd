@@ -29,8 +29,8 @@ char    curpri;                 /* more scheduling */
 void
 schedcpu (caddr_t arg)
 {
-    register struct proc *p;
-    register int a;
+    struct proc *p;
+    int a;
 
     wakeup((caddr_t)&lbolt);
     for (p = allproc; p != NULL; p = p->p_nxt) {
@@ -75,10 +75,9 @@ schedcpu (caddr_t arg)
  * Recalculate the priority of a process after it has slept for a while.
  */
 void
-updatepri(p)
-    register struct proc *p;
+updatepri(struct proc *p)
 {
-    register int a = p->p_cpu & 0377;
+    int a = p->p_cpu & 0377;
 
     p->p_slptime--;     /* the first time was done in schedcpu */
     while (a && --p->p_slptime)
@@ -97,10 +96,9 @@ updatepri(p)
  * is stopped just unsleep so it will remain stopped.
  */
 static void
-endtsleep (p)
-    register struct proc *p;
+endtsleep (struct proc *p)
 {
-    register int    s;
+    int    s;
 
     s = splhigh();
     if (p->p_wchan) {
@@ -127,13 +125,12 @@ endtsleep (p)
  * interrupted and EINTR returned to the user process.
  */
 int
-tsleep (ident, priority, timo)
-    caddr_t ident;
-    int priority;
-    u_int   timo;
+tsleep (caddr_t ident,
+    int priority,
+    u_int   timo)
 {
-    register struct proc *p = u.u_procp;
-    register struct proc **qp;
+    struct proc *p = u.u_procp;
+    struct proc **qp;
     int s;
     int sig, catch = priority & PCATCH;
 
@@ -222,11 +219,10 @@ resume:
  * that the reason for sleeping has gone away.
  */
 void
-sleep (chan, pri)
-    caddr_t chan;
-    int pri;
+sleep (caddr_t chan,
+    int pri)
 {
-    register int priority = pri;
+    int priority = pri;
 
     if (pri > PZERO)
         priority |= PCATCH;
@@ -256,11 +252,10 @@ sleep (chan, pri)
  * Remove a process from its wait queue
  */
 void
-unsleep (p)
-    register struct proc *p;
+unsleep (struct proc *p)
 {
-    register struct proc **hp;
-    register int s;
+    struct proc **hp;
+    int s;
 
     s = splhigh();
     if (p->p_wchan) {
@@ -277,10 +272,9 @@ unsleep (p)
  * Wake up all processes sleeping on chan.
  */
 void
-wakeup (chan)
-    register caddr_t chan;
+wakeup (caddr_t chan)
 {
-    register struct proc *p, **q;
+    struct proc *p, **q;
     struct proc **qp;
     int s;
 
@@ -331,10 +325,9 @@ restart:
  * arrange for it to be swapped in if necessary.
  */
 void
-setrun (p)
-    register struct proc *p;
+setrun (struct proc *p)
 {
-    register int s;
+    int s;
 
     s = splhigh();
     switch (p->p_stat) {
@@ -376,10 +369,9 @@ setrun (p)
  * than the currently running process.
  */
 int
-setpri (pp)
-    register struct proc *pp;
+setpri (struct proc *pp)
 {
-    register int p;
+    int p;
 
     p = (pp->p_cpu & 0377)/16;
     p += PUSER + pp->p_nice;
@@ -400,10 +392,10 @@ setpri (pp)
  * spl() in.
  */
 void
-swtch()
+swtch(void)
 {
-    register struct proc *p, *q;
-    register int n;
+    struct proc *p, *q;
+    int n;
     struct proc *pp, *pq;
     int s;
 
@@ -490,15 +482,14 @@ loop:
  * Put the process into the run queue.
  */
 void
-setrq (p)
-    register struct proc *p;
+setrq (struct proc *p)
 {
-    register int s;
+    int s;
 
     s = splhigh();
 #ifdef DIAGNOSTIC
     {           /* see if already on the run queue */
-        register struct proc *q;
+        struct proc *q;
 
         for (q = qs;q != NULL;q = q->p_link)
             if (q == p)
@@ -516,11 +507,10 @@ setrq (p)
  * reinserted in the qs with setrq when it is swapped back in.
  */
 void
-remrq (p)
-    register struct proc *p;
+remrq (struct proc *p)
 {
-    register struct proc *q;
-    register int s;
+    struct proc *q;
+    int s;
 
     s = splhigh();
     if (p == qs)

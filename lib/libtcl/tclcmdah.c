@@ -112,7 +112,7 @@ Tcl_CaseCmd(dummy, interp, argc, argv)
     for (i = 0; i < caseArgc; i += 2) {
 	int patArgc, j;
 	unsigned char **patArgv;
-	register unsigned char *p;
+	unsigned char *p;
 
 	if (i == (caseArgc-1)) {
 	    interp->result = (unsigned char*) "extra case pattern with no body";
@@ -613,7 +613,7 @@ Tcl_FormatCmd(dummy, interp, argc, argv)
     int argc;				/* Number of arguments. */
     unsigned char **argv;		/* Argument strings. */
 {
-    register unsigned char *format; /* Used to read characters from the format
+    unsigned char *format; /* Used to read characters from the format
 				 * string. */
     unsigned char newFormat[40]; /* A new format specifier is generated here. */
     int width;			/* Field width from field specifier, or 0 if
@@ -659,7 +659,7 @@ Tcl_FormatCmd(dummy, interp, argc, argv)
     curArg = argv+2;
     argc -= 2;
     for (format = argv[1]; *format != 0; ) {
-	register unsigned char *newPtr = newFormat;
+	unsigned char *newPtr = newFormat;
 
 	width = precision = noPercent = useShort = 0;
 
@@ -669,7 +669,7 @@ Tcl_FormatCmd(dummy, interp, argc, argv)
 	 */
 
 	if (*format != '%') {
-	    register unsigned char *p;
+	    unsigned char *p;
 	    int bsSize;
 
 	    oneWordValue = p = format;

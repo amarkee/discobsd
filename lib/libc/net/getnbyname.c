@@ -14,10 +14,10 @@ extern int _net_stayopen;
 
 struct netent *
 getnetbyname(name)
-	register char *name;
+	char *name;
 {
-	register struct netent *p;
-	register char **cp;
+	struct netent *p;
+	char **cp;
 
 	setnetent(_net_stayopen);
 	while (p = getnetent()) {

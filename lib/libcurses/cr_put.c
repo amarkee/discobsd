@@ -70,8 +70,8 @@ static int
 plod(cnt)
 	int	cnt;
 {
-	register int i, j, k;
-	register int soutcol, soutline;
+	int i, j, k;
+	int soutcol, soutline;
 
 	plodcnt = plodflg = cnt;
 	soutcol = outcol;

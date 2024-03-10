@@ -114,7 +114,7 @@ main(argc, argv)
 {
 	int vhangup();
 
-	register char *tname;
+	char *tname;
 	long allflags;
 	int repcnt = 0;
 	int someflags;
@@ -218,7 +218,7 @@ main(argc, argv)
 			alarm((int)TO);
 		}
 		if (getname()) {
-			register int i;
+			int i;
 
 			oflush();
 			alarm(0);
@@ -259,8 +259,8 @@ putstr(s)
 static int
 getname(void)
 {
-	register char *np;
-	register int c;
+	char *np;
+	int c;
 	char cs;
 
 	/*
@@ -343,10 +343,10 @@ short	tmspc10[] = {
 
 static void
 putpad(s)
-	register char *s;
+	char *s;
 {
-	register int pad = 0;
-	register int mspc10;
+	int pad = 0;
+	int mspc10;
 
 	if (isdigit(*s)) {
 		while (isdigit(*s)) {
@@ -424,7 +424,7 @@ prompt(void)
 
 static void
 putf(cp)
-	register char *cp;
+	char *cp;
 {
 	char *ttyn, *slash;
 	char datebuffer[60];

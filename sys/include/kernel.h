@@ -3,7 +3,8 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
-
+#ifndef _SYS_KERNEL_H_
+#define _SYS_KERNEL_H_
 /*
  * Global variables for the kernel
  */
@@ -25,3 +26,5 @@ extern int     usechz;             /* # microseconds per hz */
 extern int     lbolt;              /* awoken once a second */
 
 extern short   avenrun[3];
+
+#endif

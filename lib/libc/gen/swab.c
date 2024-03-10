@@ -4,13 +4,13 @@
  */
 void
 swab (from, to, n)
-	register char *from, *to;
-	register int n;
+	char *from, *to;
+	int n;
 {
 #ifdef pdp11
-	register int temp;
+	int temp;
 #else
-	register unsigned long temp;
+	unsigned long temp;
 #endif
 
 	n >>= 1; n++;

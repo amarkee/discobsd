@@ -19,8 +19,8 @@ psignal(sig, s)
 	unsigned sig;
 	char *s;
 {
-	register char *c;
-	register int n;
+	char *c;
+	int n;
 
 	c = "Unknown signal";
 	if (sig < NSIG)

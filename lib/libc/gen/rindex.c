@@ -8,9 +8,9 @@
 char *
 rindex(sp, c)
 	register const char *sp;
-	register int c;
+	int c;
 {
-	register char *r;
+	char *r;
 
 	r = NULL;
 	do {

@@ -154,7 +154,7 @@ int
 input(n)        /* get input line and split into fields */
     int n;
 {
-    register int i, c;
+    int i, c;
     char *bp;
     char **pp;
 

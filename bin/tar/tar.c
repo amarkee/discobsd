@@ -385,7 +385,7 @@ void
 dorep(argv)
     char *argv[];
 {
-    register char *cp, *cp2;
+    char *cp, *cp2;
     char wdir[MAXPATHLEN], tempdir[MAXPATHLEN], *parent;
 
     if (!cflag) {
@@ -472,7 +472,7 @@ endtape()
 void
 getdir()
 {
-    register struct stat *sp;
+    struct stat *sp;
     int i;
 top:
     readtape((char *)&dblock);
@@ -539,10 +539,10 @@ putfile(longname, shortname, parent)
     long blocks;
     char buf[TBLOCK];
     char *bigbuf;
-    register char *cp;
+    char *cp;
     struct direct *dp;
     DIR *dirp;
-    register int i;
+    int i;
     long l;
     char newparent[NAMSIZ+64];
     extern int errno;
@@ -705,7 +705,7 @@ putfile(longname, shortname, parent)
 
         while ((i = read(infile, bigbuf, min((hint*TBLOCK), maxread))) > 0
           && blocks > 0) {
-            register int nblks;
+            int nblks;
 
             nblks = ((i-1)/TBLOCK)+1;
             if (nblks > blocks)
@@ -828,9 +828,9 @@ doxtract(argv)
             fprintf(vfile, "x %s, %ld bytes, %ld tape blocks\n",
                 dblock.dbuf.name, bytes, blocks);
         for (; blocks > 0;) {
-            register int nread;
+            int nread;
             char    *bufp;
-            register int nwant;
+            int nwant;
 
             nwant = NBLOCK*TBLOCK;
             if (nwant > (blocks*TBLOCK))
@@ -862,7 +862,7 @@ void
 dotable(argv)
     char *argv[];
 {
-    register int i;
+    int i;
 
     for (;;) {
         if ((i = wantit(argv)) == 0)
@@ -892,9 +892,9 @@ putempty()
 
 void
 longt(st)
-    register struct stat *st;
+    struct stat *st;
 {
-    register char *cp;
+    char *cp;
     char *ctime();
 
     pmode(st);
@@ -930,9 +930,9 @@ int *m[] = { m1, m2, m3, m4, m5, m6, m7, m8, m9};
 
 void
 pmode(st)
-    register struct stat *st;
+    struct stat *st;
 {
-    register int **mp;
+    int **mp;
 
     for (mp = &m[0]; mp < &m[9];)
         selectbits(*mp++, st);
@@ -943,7 +943,7 @@ selectbits(pairp, st)
     int *pairp;
     struct stat *st;
 {
-    register int n, *ap;
+    int n, *ap;
 
     ap = pairp;
     n = *ap++;
@@ -959,9 +959,9 @@ selectbits(pairp, st)
  */
 int
 checkdir(name)
-    register char *name;
+    char *name;
 {
-    register char *cp;
+    char *cp;
 
     /*
      * Quick check for existence of directory.
@@ -999,9 +999,9 @@ checkdir(name)
 
 void
 tomodes(sp)
-register struct stat *sp;
+struct stat *sp;
 {
-    register char *cp;
+    char *cp;
 
     for (cp = dblock.dummy; cp < &dblock.dummy[TBLOCK]; cp++)
         *cp = '\0';
@@ -1015,8 +1015,8 @@ register struct stat *sp;
 int
 checksum()
 {
-    register int i;
-    register char *cp;
+    int i;
+    char *cp;
 
     for (cp = dblock.dbuf.chksum;
          cp < &dblock.dbuf.chksum[sizeof(dblock.dbuf.chksum)]; cp++)
@@ -1115,7 +1115,7 @@ int
 wantit(argv)
     char *argv[];
 {
-    register char **cp;
+    char **cp;
 
     getdir();
     if (endtape())
@@ -1134,7 +1134,7 @@ wantit(argv)
  */
 int
 prefix(s1, s2)
-    register char *s1, *s2;
+    char *s1, *s2;
 {
     while (*s1)
         if (*s1++ != *s2++)
@@ -1151,7 +1151,7 @@ daddr_t
 lookup(s)
     char *s;
 {
-    register int i;
+    int i;
     daddr_t a;
 
     for(i=0; s[i]; i++)
@@ -1167,7 +1167,7 @@ bsrch(s, n, l, h)
     char *s;
     int n;
 {
-    register int i, j;
+    int i, j;
     char b[N];
     daddr_t m, m1;
 
@@ -1213,7 +1213,7 @@ cmp(b, s, n)
     char *b, *s;
     int n;
 {
-    register int i;
+    int i;
 
     if (b[0] != '\n')
         exit(2);
@@ -1244,7 +1244,7 @@ readtbuf(bufpp, size)
     char **bufpp;
     int size;
 {
-    register int i;
+    int i;
 
     if (recno >= nblock || first == 0) {
         if ((i = bread(mt, (char *)tbuf, TBLOCK*nblock)) < 0)
@@ -1272,8 +1272,8 @@ readtbuf(bufpp, size)
 
 int
 writetbuf(buffer, n)
-    register char *buffer;
-    register int n;
+    char *buffer;
+    int n;
 {
     int i;
 
@@ -1430,9 +1430,9 @@ void
 dodirtimes(hp)
     union hblock *hp;
 {
-    register char *p = dirstack;
-    register char *q = hp->dbuf.name;
-    register int ndir = 0;
+    char *p = dirstack;
+    char *q = hp->dbuf.name;
+    int ndir = 0;
     char *savp;
     int savndir;
 

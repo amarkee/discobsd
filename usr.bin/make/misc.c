@@ -12,9 +12,9 @@ FSTATIC int nhashed = 0;
 int hashloc(s)
     char *s;
 {
-    register int i;
-    register int hashval;
-    register char *t;
+    int i;
+    int hashval;
+    char *t;
 
     hashval = 0;
 
@@ -49,7 +49,7 @@ struct nameblock *makename(s)
     char *s;
 {
     /* make a fresh copy of the string s */
-    register struct nameblock *p;
+    struct nameblock *p;
 
     if (nhashed++ > HASHSIZE-3)
         fatal("Hash table overflow");
@@ -73,9 +73,9 @@ struct nameblock *makename(s)
 }
 
 char *copys(s)
-    register char *s;
+    char *s;
 {
-    register char *t, *t0;
+    char *t, *t0;
 
     t = t0 = calloc(strlen(s) + 1, sizeof(char));
     if (t == NULL)
@@ -89,10 +89,10 @@ char *copys(s)
  * c = concatenation of a and b
  */
 char *concat(a, b, c)
-    register char *a, *b;
+    char *a, *b;
     char *c;
 {
-    register char *t;
+    char *t;
     t = c;
 
     while ((*t = *a++))
@@ -105,7 +105,7 @@ char *concat(a, b, c)
  * is b the suffix of a?  if so, set p = prefix
  */
 int suffix(a, b, p)
-    register char *a, *b, *p;
+    char *a, *b, *p;
 {
     char *a0 = a, *b0 = b;
 
@@ -126,9 +126,9 @@ int suffix(a, b, p)
 }
 
 int *ckalloc(n)
-    register int n;
+    int n;
 {
-    register int *p;
+    int *p;
 
     p = (int *) calloc(1,n);
     if (! p)
@@ -141,10 +141,10 @@ int *ckalloc(n)
  * copy string a into b, substituting for arguments
  */
 char *subst(a,b)
-    register char *a,*b;
+    char *a,*b;
 {
     static int depth = 0;
-    register char *s;
+    char *s;
     char vname[BUFSIZ];
     struct varblock *vbp;
     char closer;
@@ -208,7 +208,7 @@ void setvar(v, s)
 int eqsign(a)
     char *a;
 {
-    register char *s, *t, *b;
+    char *s, *t, *b;
     char buf[256];
 
     while (*a == ' ')
@@ -231,7 +231,7 @@ int eqsign(a)
 struct varblock *varptr(v)
     char *v;
 {
-    register struct varblock *vp;
+    struct varblock *vp;
 
     for (vp = firstvar; vp ; vp = vp->nxtvarblock)
         if (! unequal(v, vp->varname))
@@ -278,7 +278,7 @@ struct chain *appendq(head, tail)
     struct chain *head;
     char *tail;
 {
-    register struct chain *p, *q;
+    struct chain *p, *q;
 
     p = ALLOC(chain);
     p->datap = tail;
@@ -294,7 +294,7 @@ struct chain *appendq(head, tail)
 char *mkqlist(p)
     struct chain *p;
 {
-    register char *qbufp, *s;
+    char *qbufp, *s;
     static char qbuf[QBUFMAX];
 
     if (p == NULL) {

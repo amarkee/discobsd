@@ -10,7 +10,7 @@ fseek(iop, offset, ptrname)
 	long offset;
 	int ptrname;
 {
-	register int resync, c;
+	int resync, c;
 	long p = -1;			/* can't happen? */
 
 	iop->_flag &= ~_IOEOF;

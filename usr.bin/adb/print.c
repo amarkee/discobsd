@@ -124,7 +124,7 @@ printtrace(modif)
     int     word, stack = 0;
     char    *comptr;
     long    argp, frame, link;
-    register struct SYMbol  *symp;
+    struct SYMbol  *symp;
 
     if (cntflg == 0) {
         cntval = -1;
@@ -392,7 +392,7 @@ getreg(regnam)
     int     regnam;
 {
     register const REGLIST *p;
-    register char *regptr;
+    char *regptr;
     char regnxt;
 
     if (kernel)                         /* not supported */

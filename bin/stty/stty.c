@@ -167,10 +167,10 @@ char	*Nfmt = "%-8s";
 int
 main(argc, argv)
 	int	argc;
-	register char	**argv;
+	char	**argv;
 {
 	int i, fmt = 0, ch, zero = 0;
-	register struct special *sp;
+	struct special *sp;
 	char	obuf[BUFSIZ];
 	char	*arg2;
 
@@ -354,9 +354,9 @@ void
 prmodes(all)
 	int	all;		/* 0 for short display, !0 for long display */
 {
-	register int m;
+	int m;
 	int any, i;
-	register struct special *sp;
+	struct special *sp;
 
 #ifdef NETLDISC
 	if (ldisc==NETLDISC)
@@ -466,9 +466,9 @@ void
 pit(sp)
 	struct special *sp;
 {
-	register int	c = *sp->cp & 0xff;
+	int	c = *sp->cp & 0xff;
 	char	junk[6];
-	register char *p = junk;
+	char *p = junk;
 
 	if (c == 0xff) {
 		fprintf(stderr, Nfmt, "<undef>");

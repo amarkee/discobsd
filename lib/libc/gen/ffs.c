@@ -9,9 +9,9 @@
  */
 int
 ffs(mask)
-	register int mask;
+	int mask;
 {
-	register int cnt;
+	int cnt;
 
 	if (mask == 0)
 		return(0);

@@ -43,7 +43,7 @@ S               = ../..
 
 DEPFLAGS	= -MT $@ -MP -MD -MF .deps/$*.dep
 DEFS            = -I. ${PARAM} -DKERNEL $(DEPFLAGS)
-CFLAGS          = ${DEBUG} -mips32r2 -EL -nostdinc -fno-builtin -Os ${DEFS} -Wall -ffunction-sections
+CFLAGS          = ${DEBUG} -mips32r2 -EL -nostdinc -fno-builtin -Os ${DEFS} -Wall -ffunction-sections -Wold-style-definition -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations
 
 # compile rules: rules are named COMPILE_${SUFFIX}
 # SUFFIX is the file suffix, capitalized (e.g. C for a .c file).

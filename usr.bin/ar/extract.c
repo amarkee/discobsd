@@ -74,7 +74,7 @@ int
 extract(argv)
 	char **argv;
 {
-	register int afd, all, tfd;
+	int afd, all, tfd;
 	struct timeval tv[2];
 	struct stat sb;
 	CF cf;

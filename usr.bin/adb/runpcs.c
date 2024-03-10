@@ -17,7 +17,7 @@ getsig(sig)
 static void
 bpwait()
 {
-    register int w;
+    int w;
     int stat;
 
     signal(SIGINT, SIG_IGN);
@@ -66,7 +66,7 @@ bpwait()
 static void
 readregs()
 {
-    register u_int i;
+    u_int i;
 
     for (i=0; i<NREG; i++) {
         uframe[reglist[i].roffs] = ptrace(PT_READ_U, pid,
@@ -287,7 +287,7 @@ void
 set1bp(bkptr)
     BKPTR bkptr;
 {
-    register int a;
+    int a;
 
     a = bkptr->loc;
     bkptr->ins = ptrace(PT_READ_I, pid, (void*) a, 0);

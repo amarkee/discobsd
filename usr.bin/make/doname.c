@@ -14,10 +14,10 @@
 extern char *sys_siglist[], arfile[], *arfname;
 
 int docom1(comstring, nohalt, noprint)
-    register char *comstring;
+    char *comstring;
     int nohalt, noprint;
 {
-    register int status;
+    int status;
 
     if (comstring[0] == '\0')
         return(0);
@@ -55,8 +55,8 @@ int docom1(comstring, nohalt, noprint)
 int docom(q)
     struct shblock *q;
 {
-    register char *s;
-    register int ign, nopr;
+    char *s;
+    int ign, nopr;
     char string[OUTMAX];
     char string2[OUTMAX];
 
@@ -96,7 +96,7 @@ int docom(q)
 }
 
 int doname(p, reclevel, tval)
-    register struct nameblock *p;
+    struct nameblock *p;
     int reclevel;
     TIMETYPE *tval;
 {
@@ -104,11 +104,11 @@ int doname(p, reclevel, tval)
     u_char okdel1;
     u_char didwork;
     TIMETYPE td, td1, tdep, ptime, ptime1;
-    register struct depblock *q;
+    struct depblock *q;
     struct depblock *qtemp, *srchdir(), *suffp, *suffp1;
     struct nameblock *p1, *p2;
     struct shblock *implcom, *explcom;
-    register struct lineblock *lp;
+    struct lineblock *lp;
     struct lineblock *lp1, *lp2;
     char *pnamep, *p1namep, *cp, *savenamep = NULL;
     struct chain *qchain;
@@ -323,9 +323,9 @@ endloop:
  * expand into a list, after searching directory
  */
 void expand(q)
-    register struct depblock *q;
+    struct depblock *q;
 {
-    register char *s;
+    char *s;
     char *s1;
     struct depblock *p;
 

@@ -166,8 +166,8 @@ copy(name, np, fp, pw)
 	FILE *fp;
 	struct passwd *pw;
 {
-	register int done;
-	register char *p;
+	int done;
+	char *p;
 	char buf[256];
 
 	for (done = 0; fgets(buf, sizeof(buf), stdin);) {
@@ -209,10 +209,10 @@ copy(name, np, fp, pw)
 
 char *
 getnewpasswd(pw, temp)
-	register struct passwd *pw;
+	struct passwd *pw;
 	char *temp;
 {
-	register char *p, *t;
+	char *p, *t;
 	char buf[10], salt[2], *crypt(), *getpass();
 	time_t time();
 

@@ -3,7 +3,8 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
-
+#ifndef _SYS_VMMETER_H_
+#define _SYS_VMMETER_H_
 /*
  * Virtual memory related instrumentation
  */
@@ -67,5 +68,7 @@ extern struct  vmtotal total;
 void vmmeter (void);
 
 void vmtotal (void);
+
+#endif
 
 #endif

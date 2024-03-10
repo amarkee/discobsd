@@ -18,8 +18,8 @@ initgroups(uname, agroup)
 	int agroup;
 {
 	gid_t groups[NGROUPS];
-	register struct group *grp;
-	register int i, ngroups = 0;
+	struct group *grp;
+	int i, ngroups = 0;
 
 	if (agroup >= 0)
 		groups[ngroups++] = agroup;

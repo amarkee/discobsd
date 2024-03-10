@@ -26,7 +26,7 @@ main(argc, argv)
     int argc;
     char *argv[];
 {
-    register char *arg;
+    char *arg;
 
     fflg = !isatty(0);
     iflg = 0;
@@ -252,7 +252,7 @@ void
 append(name)
     char *name;
 {
-    register int n;
+    int n;
 
     n = strlen(name);
     if (path == NULL) {

@@ -44,10 +44,10 @@ tgoto(CM, destcol, destline)
 	static char result[MAXRETURNSIZE];
 	static char added[10];
 	char *cp = CM;
-	register char *dp = result;
-	register int c;
+	char *dp = result;
+	int c;
 	int oncol = 0;
-	register int which = destline;
+	int which = destline;
 
 	if (cp == 0) {
 toohard:

@@ -101,13 +101,13 @@ idlehup (sig)
  */
 void
 rmut(p)
-	register struct tab *p;
+	struct tab *p;
 {
-	register int f;
+	int f;
 	int found = 0;
 	static unsigned utmpsize;
 	static struct utmp *utmp;
-	register struct utmp *u;
+	struct utmp *u;
 	int nutmp;
 	struct stat statbf;
 
@@ -163,8 +163,8 @@ void
 idle (sig)
 	int sig;
 {
-	register struct tab *p;
-	register int pid;
+	struct tab *p;
+	int pid;
 
 	signal (SIGHUP, idlehup);
 	for (;;) {
@@ -189,7 +189,7 @@ idle (sig)
 
 void
 term(p)
-	register struct tab *p;
+	struct tab *p;
 {
 
 	if (p->pid != 0) {
@@ -205,7 +205,7 @@ term(p)
 int
 shutend()
 {
-	register int i, f;
+	int i, f;
 
 	signal(SIGALRM, SIG_DFL);
 	for (i = 0; i < 10; i++)
@@ -242,8 +242,8 @@ shutreset (sig)
 void
 shutdown()
 {
-	register int i;
-	register struct tab *p, *p1;
+	int i;
+	struct tab *p, *p1;
 
 	close(creat(utmpf, 0644));
 	signal(SIGHUP, SIG_IGN);
@@ -269,7 +269,7 @@ shutdown()
 void
 single()
 {
-	register int pid, xpid;
+	int pid, xpid;
 	int	fd;
 
 	/*
@@ -304,7 +304,7 @@ int
 runcom(oldhowto)
 	int oldhowto;
 {
-	register int pid, f;
+	int pid, f;
 	int status;
 
 	pid = fork();
@@ -353,10 +353,10 @@ execit(s, arg)
 	char *arg;	/* last argument on line */
 {
 	char *argv[NARGS], args[ARGLEN], *envp[1];
-	register char *sp = s;
-	register char *ap = args;
-	register char c;
-	register int i;
+	char *sp = s;
+	char *ap = args;
+	char c;
+	int i;
 
 	/*
 	 * First we have to set up the argument vector.
@@ -395,9 +395,9 @@ done:
 
 void
 wstart(p)
-	register struct tab *p;
+	struct tab *p;
 {
-	register int pid;
+	int pid;
 	time_t t;
 	int dowait = 0;
 
@@ -433,7 +433,7 @@ void
 dfork(p)
 	struct tab *p;
 {
-	register int pid;
+	int pid;
 	time_t t;
 	int dowait = 0;
 
@@ -471,8 +471,8 @@ dfork(p)
 void
 multiple()
 {
-	register struct tab *p;
-	register int pid;
+	struct tab *p;
+	int pid;
 	long omask;
         static struct	sigvec	mvec = { merge, sigmask(SIGTERM), 0 };
 
@@ -627,7 +627,7 @@ setsecuritylevel(newlevel)
 
 void
 wterm(p)
-	register struct tab *p;
+	struct tab *p;
 {
 	if (p->wpid != 0) {
 		kill(p->wpid, SIGKILL);
@@ -646,9 +646,9 @@ wterm(p)
 
 void merge(int signum)
 {
-	register struct tab *p;
-	register struct ttyent *t;
-	register struct tab *p1;
+	struct tab *p;
+	struct ttyent *t;
+	struct tab *p1;
 
 	for (p=itab; p; p=p->next)
 		p->xflag = 0;

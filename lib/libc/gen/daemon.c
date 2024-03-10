@@ -39,7 +39,7 @@ int
 daemon(nochdir, noclose)
 	int nochdir, noclose;
 {
-	register int fd;
+	int fd;
 
 	switch (fork()) {
 	case -1:

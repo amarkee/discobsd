@@ -53,11 +53,11 @@
  */
 char *
 flags_to_string (flags, def)
-	register unsigned flags;
+	unsigned flags;
 	char *def;
 {
 	static char string[64];
-	register char *prefix;
+	char *prefix;
 
 	string[0] = '\0';
 	prefix = NULL;
@@ -96,11 +96,11 @@ flags_to_string (flags, def)
 unsigned
 string_to_flags (stringp, setp, clrp)
 	char **stringp;
-	register unsigned *setp, *clrp;
+	unsigned *setp, *clrp;
 {
 	int clear;
 	char *string;
-	register char *p;
+	char *p;
 
 	if (setp)
 		*setp = 0;

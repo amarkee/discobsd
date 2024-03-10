@@ -145,8 +145,8 @@ get_arobj(fd)
 	int fd;
 {
 	struct ar_hdr *hdr;
-	register int len, nr;
-	register char *p;
+	int len, nr;
+	char *p;
 	char buf[20];
 
 	nr = read(fd, hb, sizeof(HDR));
@@ -226,7 +226,7 @@ copy_ar(cfp, size)
 {
 	static char pad = '\n';
 	off_t sz;
-	register int from, nr, nw, off, to;
+	int from, nr, nw, off, to;
 #ifdef	pdp11
 	char buf[2*1024];
 #else
@@ -272,8 +272,8 @@ put_arobj(cfp, sb)
 	CF *cfp;
 	struct stat *sb;
 {
-	register int lname;
-	register char *name;
+	int lname;
+	char *name;
 	struct ar_hdr *hdr;
 	off_t size;
 

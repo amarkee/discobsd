@@ -1,3 +1,5 @@
+#ifndef _SYS_USER_H_
+#define _SYS_USER_H_
 /*
  * Copyright (c) 1986 Regents of the University of California.
  * All rights reserved.  The Berkeley software License Agreement
@@ -109,5 +111,7 @@ extern  struct user u, u0;
  * Increment user profiling counters.
  */
 void addupc (caddr_t pc, struct uprof *pbuf, int ticks);
+
+#endif
 
 #endif

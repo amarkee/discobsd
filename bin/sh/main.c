@@ -47,7 +47,7 @@ BOOL    prof;
 {
 	long    mailtime = 0;   /* Must not be a register variable */
 	long    curtime = 0;
-	register int    userid;
+	int    userid;
 
 	/*
 	 * move input
@@ -155,7 +155,7 @@ int     c;
 char    **v;
 char    **e;
 {
-	register int    rflag = ttyflg;
+	int    rflag = ttyflg;
 	int             rsflag = 1;     /* local restricted flag */
 	struct namnod   *n;
 
@@ -208,7 +208,7 @@ char    **e;
 	{
 		flags |= stdflg;
 		{
-			register char *flagc = flagadr;
+			char *flagc = flagadr;
 
 			while (*flagc)
 				flagc++;
@@ -312,7 +312,7 @@ settmp()
 
 void
 Ldup(fa, fb)
-register int    fa, fb;
+int    fa, fb;
 {
 #if defined(RES) || defined(pdp11)
 
@@ -332,8 +332,8 @@ register int    fa, fb;
 void
 chkmail()
 {
-	register char   *s = mailp;
-	register char   *save;
+	char   *s = mailp;
+	char   *save;
 
 	long    *ptr = mod_time;
 	char    *start;
@@ -397,8 +397,8 @@ void
 setmail(mailpath)
 	char *mailpath;
 {
-	register char   *s = mailpath;
-	register int    cnt = 1;
+	char   *s = mailpath;
+	int    cnt = 1;
 
 	long    *ptr;
 

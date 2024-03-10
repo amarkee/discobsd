@@ -10,9 +10,9 @@
 
 word()
 {
-	register char   c, d;
+	char   c, d;
 	struct argnod   *arg = (struct argnod *)locstak();
-	register char   *argp = arg->argval;
+	char   *argp = arg->argval;
 	int             alpha = 1;
 
 	wdnum = 0;
@@ -124,7 +124,7 @@ word()
 
 skipc()
 {
-	register char c;
+	char c;
 
 	while (c = nextc(0), space(c))
 		;
@@ -134,7 +134,7 @@ skipc()
 nextc(quote)
 char    quote;
 {
-	register char   c, d;
+	char   c, d;
 
 retry:
 	if ((d = readc()) == ESCAPE)
@@ -155,9 +155,9 @@ retry:
 
 readc()
 {
-	register char   c;
-	register int    len;
-	register struct fileblk *f;
+	char   c;
+	int    len;
+	struct fileblk *f;
 
 	if (peekn)
 	{
@@ -213,8 +213,8 @@ retry:
 
 readb()
 {
-	register struct fileblk *f = standin;
-	register int    len;
+	struct fileblk *f = standin;
+	int    len;
 
 	do
 	{

@@ -124,11 +124,11 @@ crc32file(name)
 char *name;
 {
 	register FILE *fin;
-	register unsigned long oldcrc32;
-	register unsigned long crc32;
-	register unsigned long oldcrc;
+	unsigned long oldcrc32;
+	unsigned long crc32;
+	unsigned long oldcrc;
 	register c;
-	register long charcnt;
+	long charcnt;
 
 	oldcrc32 = 0xFFFFFFFF; charcnt = 0;
 #ifdef M_I86SM

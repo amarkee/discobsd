@@ -16,6 +16,11 @@
  * 28 of the di_addr address bytes are used; 7 addresses of 4
  * bytes each: 4 direct (4Kb directly accessible) and 3 indirect.
  */
+#ifndef _SYS_INODE_H_
+#define _SYS_INODE_H_
+
+#include "uio.h"
+
 #define NDADDR      4                   /* direct addresses in inode */
 #define NIADDR      3                   /* indirect addresses in inode */
 #define NADDR       (NDADDR + NIADDR)   /* total addresses in inode */
@@ -181,6 +186,8 @@ void iput (struct inode *ip);
 struct nameidata;
 struct inode *maknode (int mode, struct nameidata *ndp);
 
+struct inode * ifind(dev_t dev, ino_t ino);
+
 /*
  * Open inode: initialize and validate special files.
  */
@@ -196,11 +203,9 @@ int closei (struct inode *ip, int flag);
  */
 struct inode *namei (struct nameidata *ndp);
 
-enum uio_rw;
 int rdwri (enum uio_rw rw, struct inode *ip, caddr_t base, int len,
     off_t offset, int ioflg, int *aresid);
 
-struct uio;
 int rwip (struct inode *ip, struct uio *uio, int ioflag);
 
 /*
@@ -428,3 +433,5 @@ struct vattr {
         (ip)->i_flag &= ~(IACC|IUPD|ICHG); \
     } \
 }
+
+#endif

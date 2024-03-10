@@ -68,7 +68,7 @@ void
 printhdr(sig)
     int sig;
 {
-    register int i;
+    int i;
 
     printf("---tty---");
     for (i = 0; i < dk_ndrive; i++)
@@ -90,7 +90,7 @@ main(argc, argv)
     char *argv[];
 {
     extern char *ctime();
-    register int i;
+    int i;
     int iter;
     double f1, f2;
     long t;
@@ -229,7 +229,7 @@ void
 stat1(o)
     int o;
 {
-    register int i;
+    int i;
     double time;
 
     time = 0;
@@ -244,7 +244,7 @@ void
 read_names()
 {
     char name[2];
-    register int i;
+    int i;
 
     lseek(mf, (long)nl[X_DK_NAME].n_value, L_SET);
     read(mf, dk_name, dk_ndrive * sizeof (char *));

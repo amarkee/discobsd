@@ -24,13 +24,13 @@ char *
 alloc(nbytes)
 	unsigned int nbytes;
 {
-	register unsigned int rbytes = round(nbytes+BYTESPERWORD, BYTESPERWORD);
+	unsigned int rbytes = round(nbytes+BYTESPERWORD, BYTESPERWORD);
 
 	for (;;)
 	{
 		int     c = 0;
-		register struct blk *p = blokp;
-		register struct blk *q;
+		struct blk *p = blokp;
+		struct blk *q;
 
 		do
 		{
@@ -67,8 +67,8 @@ addblok(reqd)
 
 	if (stakbas != staktop)
 	{
-		register char *rndstak;
-		register struct blk *blokstak;
+		char *rndstak;
+		struct blk *blokstak;
 
 		pushstak(0);
 		rndstak = (char *)round(staktop, BYTESPERWORD);
@@ -84,7 +84,7 @@ addblok(reqd)
 	bloktop = bloktop->word = (struct blk *)(Rcheat(bloktop) + reqd);
 	bloktop->word = (struct blk *)(brkbegin + 1);
 	{
-		register char *stakadr = (char *)(bloktop + 2);
+		char *stakadr = (char *)(bloktop + 2);
 
 		if (stakbot != staktop)
 			staktop = movstr(stakbot, stakadr);
@@ -99,7 +99,7 @@ void
 free(ap)
 	struct blk *ap;
 {
-	register struct blk *p;
+	struct blk *p;
 
 	if ((p = ap) && p < bloktop)
 	{
@@ -119,8 +119,8 @@ chkbptr(ptr)
 	struct blk *ptr;
 {
 	int	exf = 0;
-	register struct blk *p = (struct blk *)brkbegin;
-	register struct blk *q;
+	struct blk *p = (struct blk *)brkbegin;
+	struct blk *q;
 	int	us = 0, un = 0;
 
 	for (;;)
@@ -153,8 +153,8 @@ chkbptr(ptr)
 void
 chkmem()
 {
-	register struct blk *p = (struct blk *)brkbegin;
-	register struct blk *q;
+	struct blk *p = (struct blk *)brkbegin;
+	struct blk *q;
 	int	us = 0, un = 0;
 
 	for (;;)

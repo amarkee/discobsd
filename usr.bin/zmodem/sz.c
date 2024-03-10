@@ -253,7 +253,7 @@ char *
 mystrsave(s)
 char *s;
 {
-	register char *p;
+	char *p;
 	char *malloc();
 
 	if (p = malloc(strlen(s)+1) ) {
@@ -265,7 +265,7 @@ char *s;
 
 /* Remove (presumably) terminating CR and/or LF from string */
 uncrlf(s)
-register char *s;
+char *s;
 {
 	for ( ; *s; ++s)
 		switch (*s) {
@@ -317,7 +317,7 @@ char *xargv[XARGSMAX+1];
 main(argc, argv)
 char *argv[];
 {
-	register char *cp;
+	char *cp;
 	register npats;
 	int dm;
 	char **patts;
@@ -601,7 +601,7 @@ wcs(oname)
 char *oname;
 {
 	register c;
-	register char *p, *q;
+	char *p, *q;
 #ifdef STAT
 	struct stat f;
 #endif
@@ -709,7 +709,7 @@ char *oname;
 wctxpn(name)
 char *name;
 {
-	register char *p, *q;
+	char *p, *q;
 	char name2[PATHLEN];
 #ifdef STAT
 	struct stat f;
@@ -839,8 +839,8 @@ getnak()
 wctx(flen)
 long flen;
 {
-	register int thisblklen;
-	register int sectnum, attempts, firstch;
+	int thisblklen;
+	int sectnum, attempts, firstch;
 	long charssent;
 
 	charssent = 0;  firstsec=TRUE;  thisblklen = blklen;
@@ -890,7 +890,7 @@ int sectnum;
 int cseclen;	/* data length of this sector to send */
 {
 	register checksum, wcj;
-	register char *cp;
+	char *cp;
 	unsigned oldcrc;
 	int firstch;
 	int attempts;
@@ -965,7 +965,7 @@ cancan:
 
 /* fill buf with count chars padding with ^Z for CPM */
 filbuf(buf, count)
-register char *buf;
+char *buf;
 {
 	register c, m;
 
@@ -1160,7 +1160,7 @@ alrm(sig)
  */
 readline(timeout)
 {
-	register int c;
+	int c;
 	static char byt[1];
 
 	fflush(stdout);
@@ -1238,9 +1238,9 @@ char *s, *p, *u;
  */
 char *
 substr(s, t)
-register char *s,*t;
+char *s,*t;
 {
-	register char *ss,*tt;
+	char *ss,*tt;
 	/* search for first char of token */
 	for (ss=s; *s; s++)
 		if (*s == *t)
@@ -1589,7 +1589,7 @@ zsendfdata()
 {
 	register c, e, n;
 	register newcnt;
-	register long tcount = 0;
+	long tcount = 0;
 	int junkcount;		/* Counts garbage chars received by TX */
 	static int tleft = 6;	/* Counter for test mode */
 
@@ -1928,7 +1928,7 @@ listen:
 chkinvok(s)
 char *s;
 {
-	register char *p;
+	char *p;
 
 	p = s;
 	while (*p == '-')
@@ -1950,7 +1950,7 @@ char *s;
 
 #ifdef STAT
 countem(argc, argv)
-register char **argv;
+char **argv;
 {
 	register c;
 	struct stat f;
@@ -1976,10 +1976,10 @@ register char **argv;
 }
 #else
 countem(argc, argv)
-register char **argv;
+char **argv;
 {
 	register c;
-	register char *p;
+	char *p;
 	long size;
 
 	for (Totalleft = 0, Filesleft = 0; --argc >=0; ++argv) {

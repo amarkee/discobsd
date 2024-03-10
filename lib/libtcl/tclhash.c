@@ -354,10 +354,10 @@ Tcl_HashStats (Tcl_HashTable *tablePtr)	/* Table for which to produce stats. */
 
 static unsigned int
 HashString(string)
-    register unsigned char *string;	/* String from which to compute hash value. */
+    unsigned char *string;	/* String from which to compute hash value. */
 {
-    register unsigned int result;
-    register int c;
+    unsigned int result;
+    int c;
 
     /*
      * I tried a zillion different hash functions and asked many other
@@ -411,7 +411,7 @@ StringFind(tablePtr, key)
     unsigned char *key;		/* Key to use to find matching entry. */
 {
     register Tcl_HashEntry *hPtr;
-    register unsigned char *p1, *p2;
+    unsigned char *p1, *p2;
     int index;
 
     index = HashString(key) & tablePtr->mask;
@@ -464,7 +464,7 @@ StringCreate(tablePtr, key, newPtr)
 				 * entry was created. */
 {
     register Tcl_HashEntry *hPtr;
-    register unsigned char *p1, *p2;
+    unsigned char *p1, *p2;
     int index;
 
     index = HashString(key) & tablePtr->mask;
@@ -533,7 +533,7 @@ StringCreate(tablePtr, key, newPtr)
 static Tcl_HashEntry *
 OneWordFind(tablePtr, key)
     Tcl_HashTable *tablePtr;		/* Table in which to lookup entry. */
-    register unsigned char *key;	/* Key to use to find matching entry. */
+    unsigned char *key;	/* Key to use to find matching entry. */
 {
     register Tcl_HashEntry *hPtr;
     int index;
@@ -577,7 +577,7 @@ OneWordFind(tablePtr, key)
 static Tcl_HashEntry *
 OneWordCreate(tablePtr, key, newPtr)
     Tcl_HashTable *tablePtr;	/* Table in which to lookup entry. */
-    register unsigned char *key; /* Key to use to find or create matching
+    unsigned char *key; /* Key to use to find or create matching
 				 * entry. */
     int *newPtr;		/* Store info here telling whether a new
 				 * entry was created. */
@@ -649,7 +649,7 @@ ArrayFind(tablePtr, key)
 {
     register Tcl_HashEntry *hPtr;
     int *arrayPtr = (int *) key;
-    register int *iPtr1, *iPtr2;
+    int *iPtr1, *iPtr2;
     int index, count;
 
     for (index = 0, count = tablePtr->keyType, iPtr1 = arrayPtr;
@@ -701,14 +701,14 @@ ArrayFind(tablePtr, key)
 static Tcl_HashEntry *
 ArrayCreate(tablePtr, key, newPtr)
     Tcl_HashTable *tablePtr;	/* Table in which to lookup entry. */
-    register unsigned char *key; /* Key to use to find or create matching
+    unsigned char *key; /* Key to use to find or create matching
 				 * entry. */
     int *newPtr;		/* Store info here telling whether a new
 				 * entry was created. */
 {
     register Tcl_HashEntry *hPtr;
     int *arrayPtr = (int *) key;
-    register int *iPtr1, *iPtr2;
+    int *iPtr1, *iPtr2;
     int index, count;
 
     for (index = 0, count = tablePtr->keyType, iPtr1 = arrayPtr;
@@ -883,7 +883,7 @@ RebuildTable(tablePtr)
 	    } else if (tablePtr->keyType == TCL_ONE_WORD_KEYS) {
 		index = RANDOM_INDEX(tablePtr, hPtr->key.oneWordValue);
 	    } else {
-		register int *iPtr;
+		int *iPtr;
 		int count;
 
 		for (index = 0, count = tablePtr->keyType,

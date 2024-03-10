@@ -14,13 +14,12 @@
 #include <sys/uio.h>
 #include <machine/frame.h>
 
-int
-readp (fp, uio, flag)
-    register struct file *fp;
-    register struct uio *uio;
-    int flag;
+static int
+readp (struct file *fp,
+    struct uio *uio,
+    int flag)
 {
-    register struct inode *ip;
+    struct inode *ip;
     int error;
 
     ip = (struct inode *)fp->f_data;
@@ -69,14 +68,13 @@ loop:
     return (error);
 }
 
-int
-writep (fp, uio, flag)
-    struct file *fp;
-    register struct uio *uio;
-    int flag;
+static int
+writep (struct file *fp,
+    struct uio *uio,
+    int flag)
 {
-    register struct inode *ip;
-    register int c;
+    struct inode *ip;
+    int c;
     int error = 0;
 
     ip = (struct inode *)fp->f_data;
@@ -138,25 +136,23 @@ done:       IUNLOCK(ip);
     goto loop;
 }
 
-int
-pipe_rw (fp, uio, flag)
-    register struct file *fp;
-    register struct uio *uio;
-    int flag;
+static int
+pipe_rw (struct file *fp,
+    struct uio *uio,
+    int flag)
 {
     if (uio->uio_rw == UIO_READ)
         return (readp(fp, uio, flag));
     return (writep(fp, uio, flag));
 }
 
-int
-pipe_select (fp, which)
-    struct file *fp;
-    int which;
+static int
+pipe_select (struct file *fp,
+    int which)
 {
-    register struct inode *ip = (struct inode *)fp->f_data;
-    register struct proc *p;
-    register int retval = 0;
+    struct inode *ip = (struct inode *)fp->f_data;
+    struct proc *p;
+    int retval = 0;
     extern int selwait;
 
     ILOCK(ip);
@@ -200,11 +196,10 @@ pipe_select (fp, which)
  * unlocked prior to calling this routine because an 'ilock' is done prior
  * to the select wakeup processing.
  */
-int
-pipe_close(fp)
-    struct  file *fp;
+static int
+pipe_close(struct  file *fp)
 {
-    register struct inode *ip = (struct inode *)fp->f_data;
+    struct inode *ip = (struct inode *)fp->f_data;
 
     ilock(ip);
 #ifdef  DIAGNOSTIC
@@ -242,10 +237,10 @@ const struct fileops pipeops = {
  * file structures.  Put it all together with flags.
  */
 void
-pipe()
+pipe(void)
 {
-    register struct inode *ip;
-    register struct file *rf, *wf;
+    struct inode *ip;
+    struct file *rf, *wf;
     static struct mount *mp;
     struct inode itmp;
     int r;

@@ -13,7 +13,7 @@
 void
 pass1()
 {
-    register int j;
+    int j;
     register DINODE *dp;
     daddr_t ndb, lj;
     struct inodesc idesc;
@@ -130,7 +130,7 @@ unknown:
 
 int
 pass1check(idesc)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
 {
     int res = KEEPON;
     daddr_t blkno = idesc->id_blkno;

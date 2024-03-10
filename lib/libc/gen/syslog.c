@@ -70,7 +70,7 @@ vsyslog(pri, fmt, ap)
 {
 	int cnt;
 	char ch;
-	register char *p, *t;
+	char *p, *t;
 	time_t now;
 	int fd, saved_errno;
 	char *stdp = 0, tbuf[640], fmt_cpy[512];
@@ -127,7 +127,7 @@ vsyslog(pri, fmt, ap)
 	/* Output to stderr if requested. */
 	if (LogStat & LOG_PERROR) {
 		struct iovec iov[2];
-		register struct iovec *v = iov;
+		struct iovec *v = iov;
 
 		v->iov_base = stdp;
 		v->iov_len = cnt - (stdp - tbuf);
@@ -186,7 +186,7 @@ void
 openlog(ident, logstat, logfac)
 	const char *ident;
 	int logstat;
-	register int logfac;
+	int logfac;
 {
 	if (ident != NULL)
 		LogTag = ident;
@@ -220,9 +220,9 @@ closelog()
 /* setlogmask -- set the log mask level */
 int
 setlogmask(pmask)
-	register int pmask;
+	int pmask;
 {
-	register int omask;
+	int omask;
 
 	omask = LogMask;
 	if (pmask != 0)

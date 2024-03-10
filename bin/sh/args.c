@@ -55,9 +55,9 @@ options(argc,argv)
 	char	**argv;
 	int	argc;
 {
-	register char *cp;
-	register char **argp = argv;
-	register char *flagc;
+	char *cp;
+	char **argp = argv;
+	char *flagc;
 	char	*flagp;
 
 	if (argc > 1 && *argp[1] == '-')
@@ -163,8 +163,8 @@ options(argc,argv)
 setargs(argi)
 	char	*argi[];
 {
-	register char **argp = argi;	/* count args */
-	register int argn = 0;
+	char **argp = argi;	/* count args */
+	int argn = 0;
 
 	while (Rcheat(*argp++) != ENDARGS)
 		argn++;
@@ -180,8 +180,8 @@ setargs(argi)
 static struct dolnod *
 freedolh()
 {
-	register char **argp;
-	register struct dolnod *argblk;
+	char **argp;
+	struct dolnod *argblk;
 
 	if (argblk = dolh)
 	{
@@ -198,9 +198,9 @@ struct dolnod *
 freeargs(blk)
 	struct dolnod *blk;
 {
-	register char **argp;
-	register struct dolnod *argr = NIL;
-	register struct dolnod *argblk;
+	char **argp;
+	struct dolnod *argr = NIL;
+	struct dolnod *argblk;
 	int cnt;
 
 	if (argblk = blk)
@@ -232,9 +232,9 @@ static struct dolnod *
 copyargs(from, n)
 	char	*from[];
 {
-	register struct dolnod *np = (struct dolnod *) alloc(sizeof(char**) * n + 3 * BYTESPERWORD);
-	register char **fp = from;
-	register char **pp;
+	struct dolnod *np = (struct dolnod *) alloc(sizeof(char**) * n + 3 * BYTESPERWORD);
+	char **fp = from;
+	char **pp;
 
 	np->doluse = 1;	/* use count */
 	pp = np->dolarg;
@@ -251,9 +251,9 @@ struct dolnod *
 clean_args(blk)
 	struct dolnod *blk;
 {
-	register char **argp;
-	register struct dolnod *argr = NIL;
-	register struct dolnod *argblk;
+	char **argp;
+	struct dolnod *argr = NIL;
+	struct dolnod *argblk;
 
 	if (argblk = blk)
 	{

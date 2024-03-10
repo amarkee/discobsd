@@ -13,7 +13,7 @@
 void
 ifreechk()
 {
-    register int i;
+    int i;
     ino_t   inum;
 
     for (i=0; i<sblock.fs_ninode; i++) {
@@ -92,7 +92,7 @@ freechk()
 void
 makefree()
 {
-    register int i;
+    int i;
     daddr_t blk;
 
     sblock.fs_nfree = 0;

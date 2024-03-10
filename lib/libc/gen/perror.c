@@ -41,7 +41,7 @@ void
 perror(s)
 	const char *s;
 {
-	register struct iovec *v;
+	struct iovec *v;
 	struct iovec iov[4];
 
 	v = iov;

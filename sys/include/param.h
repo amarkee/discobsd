@@ -3,6 +3,9 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
+#ifndef _SYS_PARAM_H_
+#define _SYS_PARAM_H_
+
 #define BSD     211 /* 2.11 * 100, as cpp doesn't do floats */
 
 #ifndef offsetof
@@ -125,3 +128,5 @@
  * Max length of a user login name.
  */
 #define MAXLOGNAME  16
+
+#endif

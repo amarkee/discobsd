@@ -17,7 +17,7 @@
 //#define TRACE_EXCEPTIONS
 
 #ifdef POWER_ENABLED
-extern void power_switch_check();
+extern void power_switch_check(void);
 #endif
 
 /*
@@ -147,8 +147,7 @@ static const unsigned mask_by_vector[] = {
 };
 
 static void
-dumpregs(frame)
-    struct trapframe *frame;
+dumpregs(struct trapframe *frame)
 {
     unsigned int cause;
     const char *code = 0;
@@ -227,10 +226,9 @@ dumpregs(frame)
  * by the hardware and software during the exception processing.
  */
 void
-exception(frame)
-    struct trapframe *frame;
+exception(struct trapframe *frame)
 {
-    register int psig;
+    int psig;
     time_t syst;
     unsigned c, irq, status, cause, sp;
 
@@ -527,7 +525,7 @@ ret:
     led_control(LED_KERNEL, 0);
 }
 
-void sc_msec()
+void sc_msec(void)
 {
     u.u_rval = ct_ticks * (1000 / HZ);
 }

@@ -22,7 +22,7 @@ main(argc, argv)
     int argc;
     char **argv;
 {
-    register char *id;
+    char *id;
     u_long addr;
     long hostid;
     struct hostent *hp;

@@ -189,11 +189,11 @@ static const struct {
  * various device drivers.
  */
 void
-ucall()
+ucall(void)
 {
-    register struct a {
+    struct a {
         int priority;
-        int (*routine)();
+        int (*routine)(int, int);
         int arg1;
         int arg2;
     } *uap = (struct a *)u.u_arg;
@@ -219,7 +219,7 @@ ucall()
  * the access to flash memory region is not allowed.
  */
 void
-ufetch()
+ufetch(void)
 {
     unsigned addr = *(unsigned*) u.u_arg & ~3;
 
@@ -252,9 +252,9 @@ ufetch()
  * Store the word at addr of i/o port.
  */
 void
-ustore()
+ustore(void)
 {
-    register struct a {
+    struct a {
         unsigned addr;
         unsigned value;
     } *uap = (struct a *)u.u_arg;
@@ -282,13 +282,12 @@ ustore()
  * became (even more) system specific and didn't belong in kern_sysctl.c
  */
 int
-cpu_sysctl (name, namelen, oldp, oldlenp, newp, newlen)
-    int *name;
-    u_int namelen;
-    void *oldp;
-    size_t *oldlenp;
-    void *newp;
-    size_t newlen;
+cpu_sysctl (int *name,
+    u_int namelen,
+    void *oldp,
+    size_t *oldlenp,
+    void *newp,
+    size_t newlen)
 {
     int i, khz;
     dev_t dev;

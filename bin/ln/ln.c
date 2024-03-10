@@ -21,9 +21,9 @@ extern  int errno;
 int
 main(argc, argv)
     int argc;
-    register char **argv;
+    char **argv;
 {
-    register int i, r;
+    int i, r;
 
     argc--, argv++;
 again:

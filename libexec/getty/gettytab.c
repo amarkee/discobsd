@@ -27,9 +27,9 @@ int
 getent(bp, name)
 	char *bp, *name;
 {
-	register char *cp;
-	register int c;
-	register int i = 0, cnt = 0;
+	char *cp;
+	int c;
+	int i = 0, cnt = 0;
 	char ibuf[TABBUFSIZ];
 	char *cp2;
 	int tf;
@@ -86,7 +86,7 @@ getent(bp, name)
 static int
 nchktc()
 {
-	register char *p, *q;
+	char *p, *q;
 	char tcname[16];	/* name of similar terminal */
 	char tcbuf[TABBUFSIZ];
 	char *holdtbuf = tbuf;
@@ -135,7 +135,7 @@ static int
 namatch(np)
 	char *np;
 {
-	register char *Np, *Bp;
+	char *Np, *Bp;
 
 	Bp = tbuf;
 	if (*Bp == '#')
@@ -160,7 +160,7 @@ namatch(np)
  */
 static char *
 skip(bp)
-	register char *bp;
+	char *bp;
 {
 
 	while (*bp && *bp != ':')
@@ -182,8 +182,8 @@ long
 getnum(id)
 	char *id;
 {
-	register long i, base;
-	register char *bp = tbuf;
+	long i, base;
+	char *bp = tbuf;
 
 	for (;;) {
 		bp = skip(bp);
@@ -216,7 +216,7 @@ int
 getflag(id)
 	char *id;
 {
-	register char *bp = tbuf;
+	char *bp = tbuf;
 
 	for (;;) {
 		bp = skip(bp);
@@ -239,12 +239,12 @@ getflag(id)
  */
 static char *
 decode(str, area)
-	register char *str;
+	char *str;
 	char **area;
 {
-	register char *cp;
-	register int c;
-	register char *dp;
+	char *cp;
+	int c;
+	char *dp;
 	int i;
 
 	cp = *area;
@@ -294,7 +294,7 @@ char *
 getstr(id, area)
 	char *id, **area;
 {
-	register char *bp = tbuf;
+	char *bp = tbuf;
 
 	for (;;) {
 		bp = skip(bp);

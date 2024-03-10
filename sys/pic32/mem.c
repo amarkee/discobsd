@@ -9,7 +9,7 @@
 #include <sys/systm.h>
 #include <sys/uio.h>
 
-void kmemdev()
+void kmemdev(void)
 {
     u.u_rval = makedev(MEM_MAJOR, 1);
 }
@@ -18,14 +18,14 @@ void kmemdev()
  * Read/write routine for /dev/mem family.
  */
 int
-mmrw (dev, uio, flag)
-    dev_t dev;
-    register struct uio *uio;
-    int flag;
+mmrw (dev_t dev,
+    struct uio *uio,
+    int flag)
+    
 {
-    register struct iovec *iov;
+    struct iovec *iov;
     int error = 0;
-    register u_int c;
+    u_int c;
     caddr_t addr;
 
     //printf ("mmrw (dev=%u, len=%u, flag=%d)\n", dev, uio->uio_iov->iov_len, flag);

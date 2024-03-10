@@ -14,10 +14,10 @@ extern int _proto_stayopen;
 
 struct protoent *
 getprotobyname(name)
-	register char *name;
+	char *name;
 {
-	register struct protoent *p;
-	register char **cp;
+	struct protoent *p;
+	char **cp;
 
 	setprotoent(_proto_stayopen);
 	while (p = getprotoent()) {

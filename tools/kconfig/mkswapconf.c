@@ -42,7 +42,7 @@
 void
 swapconf(void)
 {
-    register struct file_list *fl;
+    struct file_list *fl;
     struct file_list *do_swap();
 
     fl = conf_list;
@@ -60,7 +60,7 @@ do_swap(struct file_list *fl)
 {
     FILE *fp;
     char  swapname[80];
-    register struct file_list *swap;
+    struct file_list *swap;
 
     if (eq(fl->f_fn, "generic")) {
         fl = fl->f_next;
@@ -127,7 +127,7 @@ initdevtable(void)
 {
     char buf[BUFSIZ], name[BUFSIZ], *p;
     int maj;
-    register struct devdescription **dp = &devtable;
+    struct devdescription **dp = &devtable;
     FILE *fp;
 
     (void) sprintf(buf, "../devices.kconf");
@@ -170,7 +170,7 @@ nametodev(char *name, int defunit)
 {
     char *cp, partition;
     int unit;
-    register struct devdescription *dp;
+    struct devdescription *dp;
 
     cp = name;
     if (cp == 0) {
@@ -213,7 +213,7 @@ char *
 devtoname(dev_t dev)
 {
     char buf[80];
-    register struct devdescription *dp;
+    struct devdescription *dp;
 
     if (devtablenotread)
         initdevtable();

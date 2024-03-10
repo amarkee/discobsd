@@ -66,7 +66,7 @@ struct hostent *
 gethostent()
 {
 	char *p;
-	register char *cp, **q;
+	char *cp, **q;
 
 	if (hostf == NULL && (hostf = fopen(_host_file, "r" )) == NULL)
 		return (NULL);
@@ -118,10 +118,10 @@ sethostfile(file)
 
 static char *
 any(cp, match)
-	register char *cp;
+	char *cp;
 	char *match;
 {
-	register char *mp, c;
+	char *mp, c;
 
 	while (c = *cp) {
 		for (mp = match; *mp; mp++)

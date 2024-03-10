@@ -49,7 +49,7 @@ main(argc, argv)
 {
 	extern int errno, optind;
 	extern char *optarg;
-	register int ch;
+	int ch;
 	int width;
 	char *p;
 
@@ -97,9 +97,9 @@ main(argc, argv)
 
 void
 fold(width)
-	register int width;
+	int width;
 {
-	register int ch, col, new;
+	int ch, col, new;
 
 	for (col = 0;;) {
 		switch (ch = getchar()) {

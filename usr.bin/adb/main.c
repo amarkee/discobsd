@@ -49,7 +49,7 @@ fault(a)
  */
 int
 main(argc, argv)
-    register char   **argv;
+    char   **argv;
     int     argc;
 {
     short   mynamelen;              /* length of program name */

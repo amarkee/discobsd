@@ -12,8 +12,8 @@ fread (vptr, size, count, iop)
 	size_t size, count;
 	register FILE *iop;
 {
-	register char *ptr = vptr;
-	register unsigned s;
+	char *ptr = vptr;
+	unsigned s;
 	int c;
 
 	s = size * count;

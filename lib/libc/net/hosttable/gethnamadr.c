@@ -36,7 +36,7 @@ static struct hostent *
 fetchhost(key)
 	datum key;
 {
-        register char *cp, *tp, **ap;
+        char *cp, *tp, **ap;
 	int naliases, naddrs;
 
         if (key.dptr == 0)
@@ -78,13 +78,13 @@ fetchhost(key)
 
 struct hostent *
 gethostbyname(nam)
-	register char *nam;
+	char *nam;
 {
-	register struct hostent *hp;
-	register char **cp;
+	struct hostent *hp;
+	char **cp;
         datum key;
 	char lowname[128];
-	register char *lp = lowname;
+	char *lp = lowname;
 	
 	while (*nam)
 		if (isupper(*nam))
@@ -123,10 +123,10 @@ gethostbyname(nam)
 struct hostent *
 gethostbyaddr(addr, length, type)
 	char *addr;
-	register int length;
-	register int type;
+	int length;
+	int type;
 {
-	register struct hostent *hp;
+	struct hostent *hp;
         datum key;
 
 	if ((_host_db == (DBM *)NULL)

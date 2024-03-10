@@ -53,8 +53,8 @@ void
 execute(file)
 char *file;
 {
-	register char *p1, *p2;
-	register union reptr	*ipc;
+	char *p1, *p2;
+	union reptr	*ipc;
 	int	c;
 	char	*execp;
 
@@ -175,7 +175,7 @@ match(expbuf, gf)
 char	*expbuf;
 int	 gf;
 {
-	register char	*p1, *p2, c;
+	char	*p1, *p2, c;
 
 	if(gf) {
 		if(*expbuf)	return(0);
@@ -224,7 +224,7 @@ int
 advance(alp, aep)
 char	*alp, *aep;
 {
-	register char *lp, *ep, *curlp;
+	char *lp, *ep, *curlp;
 	char	c;
 	char *bbeg;
 	int	ct;
@@ -375,7 +375,7 @@ void
 dosub(rhsbuf)
 char	*rhsbuf;
 {
-	register char *lp, *sp, *rp;
+	char *lp, *sp, *rp;
 	int c;
 
 	lp = linebuf;
@@ -411,7 +411,7 @@ char *
 place(asp, al1, al2)
 char	*asp, *al1, *al2;
 {
-	register char *sp, *l1, *l2;
+	char *sp, *l1, *l2;
 
 	sp = asp;
 	l1 = al1;
@@ -428,8 +428,8 @@ void
 command(ipc)
 union reptr	*ipc;
 {
-	register int	i;
-	register char	*p1, *p2, *p3;
+	int	i;
+	char	*p1, *p2, *p3;
 	char	*execp;
 
 
@@ -671,8 +671,8 @@ char *
 gline(addr)
 char	*addr;
 {
-	register char	*p1, *p2;
-	register int	c;
+	char	*p1, *p2;
+	int	c;
 	p1 = addr;
 	p2 = cbp;
 	for (;;) {
@@ -720,7 +720,7 @@ int count;
 void
 arout()
 {
-	register char	*p1;
+	char	*p1;
 	FILE	*fi;
 	char	c;
 	int	t;

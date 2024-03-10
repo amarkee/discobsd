@@ -13,7 +13,7 @@
  */
 void
 seekdir(dirp, loc)
-	register DIR *dirp;
+	DIR *dirp;
 	long loc;
 {
 	long curloc, base, offset;

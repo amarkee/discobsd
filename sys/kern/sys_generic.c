@@ -18,14 +18,13 @@
 int selwait;
 
 static void
-rwuio (uio)
-    register struct uio *uio;
+rwuio (struct uio *uio)
 {
     struct a {
         int     fdes;
     };
-    register struct file *fp;
-    register struct iovec *iov;
+    struct file *fp;
+    struct iovec *iov;
     u_int i, count;
     off_t   total;
 
@@ -66,9 +65,9 @@ rwuio (uio)
  * Read system call.
  */
 void
-read()
+read(void)
 {
-    register struct a {
+    struct a {
         int     fdes;
         char    *cbuf;
         unsigned count;
@@ -85,9 +84,9 @@ read()
 }
 
 void
-readv()
+readv(void)
 {
-    register struct a {
+    struct a {
         int     fdes;
         struct  iovec *iovp;
         unsigned iovcnt;
@@ -113,9 +112,9 @@ readv()
  * Write system call
  */
 void
-write()
+write(void)
 {
-    register struct a {
+    struct a {
         int     fdes;
         char    *cbuf;
         unsigned count;
@@ -132,9 +131,9 @@ write()
 }
 
 void
-writev()
+writev(void)
 {
-    register struct a {
+    struct a {
         int     fdes;
         struct  iovec *iovp;
         unsigned iovcnt;
@@ -160,10 +159,10 @@ writev()
  * Ioctl system call
  */
 void
-ioctl()
+ioctl(void)
 {
-    register struct file *fp;
-    register struct a {
+    struct file *fp;
+    struct a {
         int     fdes;
         long    cmd;
         caddr_t cmarg;
@@ -224,11 +223,10 @@ struct pselect_args {
 };
 
 int
-selscan(ibits, obits, nfd, retval)
-    fd_set *ibits, *obits;
-    int nfd, *retval;
+selscan(fd_set *ibits, fd_set *obits,
+    int nfd, int *retval)
 {
-    register int i, j, flag = 0;
+    int i, j, flag = 0;
     fd_mask bits;
     struct file *fp;
     int which, n = 0;
@@ -264,15 +262,14 @@ selscan(ibits, obits, nfd, retval)
  * Select helper function common to both select() and pselect()
  */
 static int
-select1(uap, is_pselect)
-    register struct pselect_args *uap;
-    int is_pselect;
+select1(struct pselect_args *uap,
+    int is_pselect)
 {
     fd_set ibits[3], obits[3];
     struct timeval atv;
     sigset_t sigmsk;
     unsigned int timo = 0;
-    register int error, ni;
+    int error, ni;
     int ncoll, s;
 
     bzero((caddr_t)ibits, sizeof(ibits));
@@ -392,14 +389,14 @@ done:
  * Select system call.
  */
 void
-select()
+select(void)
 {
     struct uap {
         int     nd;
         fd_set  *in, *ou, *ex;
         struct  timeval *tv;
     } *uap = (struct uap *)u.u_arg;
-    register struct pselect_args *pselargs = (struct pselect_args *)uap;
+    struct pselect_args *pselargs = (struct pselect_args *)uap;
 
     /*
      * Fake the 6th parameter of pselect.  See the comment below about the
@@ -416,33 +413,31 @@ select()
  *       at the maximum!  See user.h
  */
 void
-pselect()
+pselect(void)
 {
-    register struct pselect_args *uap = (struct pselect_args *)u.u_arg;
+    struct pselect_args *uap = (struct pselect_args *)u.u_arg;
 
     u.u_error = select1(uap, 1);
 }
 
 /*ARGSUSED*/
 int
-seltrue(dev, flag)
-    dev_t dev;
-    int flag;
+seltrue(dev_t dev,
+    int flag)
 {
     return (1);
 }
 
 void
-selwakeup (p, coll)
-    register struct proc *p;
-    long coll;
+selwakeup (struct proc *p,
+    long coll)
 {
     if (coll) {
         nselcoll++;
         wakeup ((caddr_t)&selwait);
     }
     if (p) {
-        register int s = splhigh();
+        int s = splhigh();
         if (p->p_wchan == (caddr_t)&selwait) {
             if (p->p_stat == SSLEEP)
                 setrun(p);
@@ -455,9 +450,8 @@ selwakeup (p, coll)
 }
 
 int
-sorw(fp, uio)
-    register struct file *fp;
-    register struct uio *uio;
+sorw(struct file *fp,
+    struct uio *uio)
 {
 #ifdef  INET
     if (uio->uio_rw == UIO_READ)
@@ -469,10 +463,9 @@ sorw(fp, uio)
 }
 
 int
-soctl(fp, com, data)
-    struct file *fp;
-    u_int   com;
-    char    *data;
+soctl(struct file *fp,
+    u_int   com,
+    char    *data)
 {
 #ifdef  INET
     return (SOO_IOCTL(fp, com, data));
@@ -482,9 +475,8 @@ soctl(fp, com, data)
 }
 
 int
-sosel(fp, flag)
-    struct file *fp;
-    int     flag;
+sosel(struct file *fp,
+    int     flag)
 {
 #ifdef  INET
     return (SOO_SELECT(fp, flag));
@@ -494,10 +486,9 @@ sosel(fp, flag)
 }
 
 int
-socls(fp)
-    register struct file *fp;
+socls(struct file *fp)
 {
-    register int error = 0;
+    int error = 0;
 
 #ifdef  INET
     if (fp->f_data)
@@ -526,8 +517,7 @@ const struct fileops *const Fops[] = {
  * Routine placed in illegal entries in the bdevsw and cdevsw tables.
  */
 void
-nostrategy (bp)
-    struct buf *bp;
+nostrategy (struct buf *bp)
 {
     /* Empty. */
 }
@@ -537,7 +527,7 @@ nostrategy (bp)
  * socket(2) and socketpair(2) if networking not available.
  */
 void
-nonet()
+nonet(void)
 {
     u.u_error = EPROTONOSUPPORT;
 }

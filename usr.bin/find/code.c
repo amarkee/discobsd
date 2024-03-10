@@ -97,7 +97,7 @@ int
 strindex ( string, pattern )	/* return location of pattern in string or -1 */
 	char *string, *pattern;
 {
-	register char *s, *p, *q;
+	char *s, *p, *q;
 
 	for ( s = string; *s != NULL; s++ )
 		if ( *s == *pattern ) {		/* fast first char check */
@@ -114,7 +114,7 @@ int
 prefix_length ( s1, s2 )	/* return length of longest common prefix */
 	char *s1, *s2;		/* ... of strings s1 and s2 */
 {
-	register char *start;
+	char *start;
 
     	for ( start = s1; *s1 == *s2; s1++, s2++ )
 		if ( *s1 == NULL )

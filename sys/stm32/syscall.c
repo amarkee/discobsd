@@ -138,7 +138,7 @@ __asm volatile (
 void
 syscall(struct trapframe *frame)
 {
-	register int psig;
+	int psig;
 	time_t syst;
 	int code;
 	u_int sp;

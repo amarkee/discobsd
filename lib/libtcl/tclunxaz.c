@@ -904,8 +904,8 @@ Tcl_GetsCmd(notUsed, interp, argc, argv)
     flags = 0;
     f = filePtr->f;
     while (!done) {
-	register int c, count;
-	register char *p;
+	int c, count;
+	char *p;
 
 	for (p = buffer, count = 0; count < BUF_SIZE-1; count++, p++) {
 	    c = getc(f);

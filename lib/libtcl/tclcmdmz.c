@@ -108,7 +108,7 @@ Tcl_RegexpCmd(dummy, interp, argc, argv)
      * the match.
      */
     if (noCase) {
-	register unsigned char *dst, *src;
+	unsigned char *dst, *src;
 
 	string = malloc (strlen(argPtr[1]) + 1);
 	for (src = argPtr[1], dst = string; *src != 0; src++, dst++) {
@@ -205,7 +205,7 @@ Tcl_RegsubCmd(dummy, interp, argc, argv)
     regexp_t *regexpPtr;
     unsigned char *string, *p, *firstChar, *newValue, **argPtr;
     int match, result, flags;
-    register unsigned char *src, c;
+    unsigned char *src, c;
 
     if (argc < 5) {
 	wrongNumArgs:
@@ -241,7 +241,7 @@ Tcl_RegsubCmd(dummy, interp, argc, argv)
      */
 
     if (noCase) {
-	register unsigned char *dst;
+	unsigned char *dst;
 
 	string = malloc (strlen(argPtr[1]) + 1);
 	for (src = argPtr[1], dst = string; *src != 0; src++, dst++) {
@@ -533,7 +533,7 @@ Tcl_ScanCmd(dummy, interp, argc, argv)
 					 * all results combined. */
     unsigned char *results;		/* Where scanned output goes.  */
     int numScanned;			/* sscanf's result. */
-    register unsigned char *fmt;
+    unsigned char *fmt;
     int i, widthSpecified;
 
     if (argc < 3) {
@@ -721,7 +721,7 @@ Tcl_SplitCmd(dummy, interp, argc, argv)
     unsigned char **argv;		/* Argument strings. */
 {
     unsigned char *splitChars;
-    register unsigned char *p, *p2;
+    unsigned char *p, *p2;
     unsigned char *elementStart;
 
     if (argc == 2) {
@@ -797,7 +797,7 @@ Tcl_StringCmd(dummy, interp, argc, argv)
     unsigned char **argv;		/* Argument strings. */
 {
     int length;
-    register unsigned char *p, c;
+    unsigned char *p, c;
     int match;
     int first;
     int left = 0, right = 0;
@@ -937,7 +937,7 @@ Tcl_StringCmd(dummy, interp, argc, argv)
 	return TCL_OK;
     } else if ((c == 't') && (strncmp(argv[1], (unsigned char*) "tolower", length) == 0)
 	    && (length >= 3)) {
-	register unsigned char *p;
+	unsigned char *p;
 
 	if (argc != 3) {
 	    Tcl_AppendResult(interp, "wrong # args: should be \"", argv[0],
@@ -953,7 +953,7 @@ Tcl_StringCmd(dummy, interp, argc, argv)
 	return TCL_OK;
     } else if ((c == 't') && (strncmp(argv[1], (unsigned char*) "toupper", length) == 0)
 	    && (length >= 3)) {
-	register unsigned char *p;
+	unsigned char *p;
 
 	if (argc != 3) {
 	    Tcl_AppendResult(interp, "wrong # args: should be \"", argv[0],
@@ -970,7 +970,7 @@ Tcl_StringCmd(dummy, interp, argc, argv)
     } else if ((c == 't') && (strncmp(argv[1], (unsigned char*) "trim", length) == 0)
 	    && (length == 4)) {
 	unsigned char *trimChars;
-	register unsigned char *p, *checkPtr;
+	unsigned char *p, *checkPtr;
 
 	left = right = 1;
 

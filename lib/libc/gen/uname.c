@@ -36,11 +36,11 @@
 
 int
 uname(name)
-	register struct utsname *name;
+	struct utsname *name;
 {
 	int mib[2], rval;
 	size_t len;
-	register char *p;
+	char *p;
 
 	rval = 0;
 

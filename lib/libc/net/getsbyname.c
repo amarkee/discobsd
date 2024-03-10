@@ -16,8 +16,8 @@ struct servent *
 getservbyname(name, proto)
 	char *name, *proto;
 {
-	register struct servent *p;
-	register char **cp;
+	struct servent *p;
+	char **cp;
 
 	setservent(_serv_stayopen);
 	while (p = getservent()) {

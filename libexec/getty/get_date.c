@@ -22,10 +22,10 @@ void
 get_date(datebuffer)
 	char *datebuffer;
 {
-	register struct tm *tmp;
+	struct tm *tmp;
 	struct timeval tv;
 	int realhour;
-	register char *zone;
+	char *zone;
 
 	gettimeofday(&tv, 0);
 	tmp = localtime(&tv.tv_sec);

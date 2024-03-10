@@ -65,31 +65,30 @@ extern int strcmp(char *s1, char *s2);
  * Null routine; placed in insignificant entries
  * in the bdevsw and cdevsw tables.
  */
-int nulldev()
+static int nulldev()
 {
     return 0;
 }
 
-int noopen(dev, flag, mode)
-    dev_t dev;
-    int flag, mode;
+static int noopen( dev_t dev,
+    int flag, int mode)
 {
     return ENXIO;
 }
 
-int norw(dev, uio, flag)
-    dev_t dev;
-    struct uio *uio;
-    int flag;
+static int norw(dev_t dev,
+    struct uio *uio,
+    int flag)
+    
 {
     return 0;
 }
 
-int noioctl(dev, cmd, data, flag)
-    dev_t dev;
-    u_int cmd;
-    caddr_t data;
-    int flag;
+static int noioctl(dev_t dev,
+    u_int cmd,
+    caddr_t data,
+    int flag)
+    
 {
     return EIO;
 }
@@ -97,8 +96,7 @@ int noioctl(dev, cmd, data, flag)
 /*
  * root attach routine
  */
-daddr_t nosize(dev)
-    dev_t dev;
+static daddr_t nosize(dev_t dev)
 {
     return 0;
 }
@@ -350,8 +348,7 @@ const int nchrdev = sizeof(cdevsw) / sizeof(cdevsw[0]) - 1;
  * A minimal stub routine can always return 0.
  */
 int
-iskmemdev(dev)
-    register dev_t dev;
+iskmemdev(dev_t dev)
 {
     if (major(dev) == 1 && (minor(dev) == 0 || minor(dev) == 1))
         return 1;
@@ -364,9 +361,8 @@ iskmemdev(dev)
  * A minimal stub routine can always return 0.
  */
 int
-isdisk(dev, type)
-    dev_t dev;
-    register int type;
+isdisk(dev_t dev,
+    int type)
 {
     if (type != IFBLK)
         return 0;

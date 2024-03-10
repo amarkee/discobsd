@@ -14,11 +14,12 @@
 #include <sys/buf.h>
 #include <sys/dk.h>
 
-void
-disksort (dp, bp)
-    register struct buf *dp, *bp;
+/* TODO: Is this function used?*/
+#if 0
+static void
+disksort (struct buf *dp, struct buf *bp)
 {
-    register struct buf *ap;
+    struct buf *ap;
     struct buf *tp;
 
     ap = dp->b_actf;
@@ -48,6 +49,7 @@ disksort (dp, bp)
     if (tp == dp->b_actl)
         dp->b_actl = bp;
 }
+#endif
 
 #ifdef UCB_METER
 
@@ -63,14 +65,13 @@ int     dk_n;                   /* number of dk numbers assigned so far */
  * ignore it.
  */
 void
-dk_alloc (dkn, slots, name)
-    int *dkn;   /* pointer to number for iostat */
-    int slots;  /* number of iostat slots requested */
-    char *name; /* name of device */
+dk_alloc (    int *dkn,   /* pointer to number for iostat */
+    int slots,  /* number of iostat slots requested */
+    char *name /* name of device */)
 {
     int i;
-    register char **np;
-    register int *up;
+    char **np;
+    int *up;
 
     if (*dkn < 0 && dk_n + slots <= DK_NDRIVE) {
         /*

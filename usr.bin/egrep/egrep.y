@@ -141,7 +141,7 @@ int
 yylex() {
     extern int yylval;
     int cclcnt, x;
-    register char c, d;
+    char c, d;
     switch(c = nextch()) {
         case '$':
         case '^': c = '\n';
@@ -191,7 +191,7 @@ yylex() {
 
 int
 nextch() {
-    register char c;
+    char c;
     if (fflag) {
         if ((c = getc(exprfile)) == EOF) {
             fclose(exprfile);
@@ -219,7 +219,7 @@ enter(x) int x; {
 
 int
 cclenter(x) int x; {
-    register int linno;
+    int linno;
     linno = enter(x);
     right[linno] = count;
     return (linno);
@@ -254,7 +254,7 @@ overflo() {
 
 void
 cfoll(v) int v; {
-    register int i;
+    int i;
     if (left[v] == 0) {
         count = 0;
         for (i=1; i<=line; i++) tmpstat[i] = 0;
@@ -270,7 +270,7 @@ cfoll(v) int v; {
 
 void
 cgotofn() {
-    register int c, i, k;
+    int c, i, k;
     int n, s;
     char symbol[NCHARS];
     int j, nc, pc, pos;
@@ -365,7 +365,7 @@ cgotofn() {
 
 int
 cstate(v) int v; {
-    register int b;
+    int b;
     if (left[v] == 0) {
         if (tmpstat[v] != 1) {
             tmpstat[v] = 1;
@@ -391,7 +391,7 @@ cstate(v) int v; {
 
 int
 member(symb, set, torf) int symb, set, torf; {
-    register int i, num, pos;
+    int i, num, pos;
     num = chars[set];
     pos = set + 1;
     for (i=0; i<num; i++)
@@ -401,7 +401,7 @@ member(symb, set, torf) int symb, set, torf; {
 
 int
 notin(n) int n; {
-    register int i, j, pos;
+    int i, j, pos;
     for (i=0; i<=n; i++) {
         if (positions[state[i]] == count) {
             pos = state[i] + 1;
@@ -417,7 +417,7 @@ notin(n) int n; {
 
 void
 add(array, n) int *array, n; {
-    register int i;
+    int i;
     if (nxtpos + count > MAXPOS) overflo();
     array[n] = nxtpos;
     positions[nxtpos++] = count;
@@ -543,9 +543,9 @@ void
 execute(file)
 char *file;
 {
-    register char *p;
-    register int cstat;
-    register int ccount;
+    char *p;
+    int cstat;
+    int ccount;
     static char *buf;
     static int blksize;
     struct stat stb;

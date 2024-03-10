@@ -107,7 +107,7 @@ node *p;
 	}
 }
 char *cclenter(p)
-register char *p;
+char *p;
 {
 	register i, c;
 	char *op;
@@ -244,7 +244,7 @@ node *v;		/* collects leaves that can follow v into setvec */
 }
 
 member(c, s)	/* is c in s? */
-register char c, *s;
+char c, *s;
 {
 	while (*s)
 		if (c == *s++)
@@ -289,7 +289,7 @@ int *add(n) {		/* remember setvec */
 struct fa *cgotofn()
 {
 	register i, k;
-	register int *ptr;
+	int *ptr;
 	char c;
 	char *p;
 	node *cp;
@@ -506,8 +506,8 @@ struct fa *cgotofn()
 }
 
 match(pfa, p)
-register struct fa *pfa;
-register char *p;
+struct fa *pfa;
+char *p;
 {
 	register count;
 	char c;

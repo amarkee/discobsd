@@ -69,7 +69,7 @@ entry *
 load_entry(file, error_func, pw, envp)
 	FILE		*file;
 	void		(*error_func)();
-	register struct passwd	*pw;
+	struct passwd	*pw;
 	char		**envp;
 {
 	/* this function reads one crontab entry -- the next -- from a file.
@@ -308,7 +308,7 @@ get_list(bits, low, high, names, ch, file)
 	int		ch;		/* current character being processed */
 	register FILE		*file;		/* file being read */
 {
-	register int	done;
+	int	done;
 
 	/* we know that we point to a non-blank character here;
 	 * must do a Skip_Blanks before we exit, so that the
@@ -353,13 +353,13 @@ get_range(bits, low, high, names, ch, file)
 	bitstr_t	*bits;		/* one bit per flag, default=FALSE */
 	int		low, high;	/* bounds, impl. offset for bitstr */
 	char		*names[];	/* NULL or names of elements */
-	register int	ch;		/* current character being processed */
+	int	ch;		/* current character being processed */
 	FILE		*file;		/* file being read */
 {
 	/* range = number | number "-" number [ "/" number ]
 	 */
 
-	register int	i;
+	int	i;
 	auto int	num1, num2, num3;
 
 	Debug(DPARS|DEXT, ("get_range()...entering, exit won't show\n"))
@@ -438,7 +438,7 @@ get_number(numptr, low, names, ch, file)
 	int	*numptr;	/* where does the result go? */
 	int	low;		/* offset applied to result if symbolic enum used */
 	char	*names[];	/* symbolic names, if any, for enums */
-	register int	ch;	/* current character */
+	int	ch;	/* current character */
 	FILE	*file;		/* source */
 {
 	char	temp[MAX_TEMPSTR], *pc;

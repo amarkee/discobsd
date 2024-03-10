@@ -5,6 +5,9 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
+#ifndef _SYS_CLIST_H_
+#define _SYS_CLIST_H_
+
 struct cblock {
     struct  cblock *c_next;
     char    c_info [CBSIZE];
@@ -14,4 +17,6 @@ struct cblock {
 extern struct cblock cfree[];
 extern struct  cblock *cfreelist;
 extern int cfreecount;
+#endif
+
 #endif

@@ -47,7 +47,7 @@ main(argc, argv) char **argv; {
 }
 
 pr(p)
-register char *p;
+char *p;
 {
 	for (; *p; p++)
 		printf("%s", rdchar(*p));
@@ -61,7 +61,7 @@ char *rdchar(c)
 char c;
 {
 	static char ret[4];
-	register char *p;
+	char *p;
 
 	/*
 	 * Due to a bug in isprint, this prints spaces as ^`, but this is OK

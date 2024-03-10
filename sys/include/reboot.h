@@ -5,7 +5,8 @@
  *
  *  @(#)reboot.h    1.2 (2.11BSD GTE) 1996/5/9
  */
-
+#ifndef _SYS_REBOOT_H_
+#define _SYS_REBOOT_H_
 /*
  * Arguments to reboot system call.
  * These are passed to boot program in r4,
@@ -29,3 +30,5 @@
 
 #define RB_PANIC        0       /* reboot due to panic */
 #define RB_BOOT         1       /* reboot due to boot() */
+
+#endif

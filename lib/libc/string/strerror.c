@@ -36,7 +36,7 @@
 
 char *
 strerror(errnum)
-	register int errnum;
+	int errnum;
 {
         static char msgstr[64];
 	int mib[3];
@@ -50,7 +50,7 @@ strerror(errnum)
 	if (sysctl(mib, 3, msgstr, &size, NULL, 0) == -1) {
                 /* Do this by hand, so we don't include stdio(3). */
                 static const char unknown[] = "Unknown error: ";
-                register char *p, *t;
+                char *p, *t;
                 const char *q;
                 char tmp[20];
 

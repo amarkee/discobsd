@@ -64,8 +64,8 @@ recurse(dir, savedir)
 	char	*dir;
 	int	savedir;
 {
-	register DIR *dirp;
-	register struct direct *dp;
+	DIR *dirp;
+	struct direct *dp;
 	int ecode;
 
 	if (chdir(dir) < 0) {
@@ -124,7 +124,7 @@ main(argc, argv)
 	int	argc;
 	char	*argv[];
 {
-	register char *p;
+	char *p;
 	char	*flags, *ep;
 	int	ch, fcurdir = -1;
 	long	tmp;

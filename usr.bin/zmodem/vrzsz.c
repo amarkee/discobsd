@@ -133,7 +133,7 @@ char *Rxcdq = Rxlbuf;	/* pointer for removing chars from Rxlbuf */
 readline(timeout)
 int timeout;
 {
-	register int c;
+	int c;
 	extern errno;
 
 	if (--Rxleft>=0)
@@ -214,7 +214,7 @@ sendline(c)
 
 flushmoc()
 {
-	register int n;
+	int n;
 
 	n = LSIZE - Txleft;
 	Txcq=Txlbuf;  Txleft = LSIZE;

@@ -12,10 +12,10 @@ void *
 memccpy(vt, vf, c, n)
 	void *vt;
 	const void *vf;
-	register int c;
+	int c;
 	register size_t n;
 {
-	register char *t = vt;
+	char *t = vt;
 	register const char *f = vf;
 
 	while (n-- > 0)

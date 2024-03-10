@@ -18,7 +18,7 @@ inet_ntoa(in)
 	struct in_addr in;
 {
 	static char b[18];
-	register char *p;
+	char *p;
 
 	p = (char *)&in;
 #define	UC(b)	(((int)b)&0xff)

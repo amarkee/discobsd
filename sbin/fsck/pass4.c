@@ -63,7 +63,7 @@ pass4()
 
 int
 pass4check(idesc)
-    register struct inodesc *idesc;
+    struct inodesc *idesc;
 {
     register daddr_t *dlp;
     daddr_t blkno = idesc->id_blkno;

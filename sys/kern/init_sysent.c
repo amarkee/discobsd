@@ -17,7 +17,7 @@
 #   define errnet(narg, name)   0, nonet
 #endif
 
-extern void sc_msec();
+extern void sc_msec(void);
 
 /*
  * Reserved/unimplemented system calls in the range 0-150 inclusive

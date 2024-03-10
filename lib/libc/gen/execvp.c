@@ -18,10 +18,10 @@ execlp(const char *name, const char *argv, ...)
 
 static char *
 execat(s1, s2, si)
-	register char *s1, *s2;
+	char *s1, *s2;
 	char *si;
 {
-	register char *s;
+	char *s;
 
 	s = si;
 	while (*s1 && *s1 != ':')
@@ -40,12 +40,12 @@ execvp(name, argv)
 	char *const *argv;
 {
 	char *pathstr;
-	register char *cp;
+	char *cp;
 	char fname[128];
 	char *newargs[256];
 	int i;
-	register unsigned etxtbsy = 1;
-	register int eacces = 0;
+	unsigned etxtbsy = 1;
+	int eacces = 0;
 
 	pathstr = getenv("PATH");
 	if (! pathstr)

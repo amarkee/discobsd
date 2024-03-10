@@ -23,13 +23,12 @@
  * for use in read-ahead.
  */
 daddr_t
-bmap(ip, bn, rwflg, flags)
-    register struct inode *ip;
-    daddr_t bn;
-    int rwflg, flags;
+bmap(struct inode *ip,
+    daddr_t bn,
+    int rwflg, int flags)
 {
-    register int i;
-    register struct buf *bp;
+    int i;
+    struct buf *bp;
     struct buf *nbp;
     int j, sh;
     daddr_t nb, *bap, ra;

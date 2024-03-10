@@ -152,7 +152,7 @@ Figure 3:  Multiple function C program for stack trace illustration
 int	fcnt,gcnt,hcnt;
 h(x,y)
 {
-	int hi; register int hr;
+	int hi; int hr;
 	hi = x+1;
 	hr = x\(miy+1;
 	hcnt++ ;
@@ -162,7 +162,7 @@ h(x,y)
 
 g(p,q)
 {
-	int gi; register int gr;
+	int gi; int gr;
 	gi = q\(mip;
 	gr = q\(mip+1;
 	gcnt++ ;
@@ -172,7 +172,7 @@ g(p,q)
 
 f(a,b)
 {
-	int fi; register int fr;
+	int fi; int fr;
 	fi = a+2*b;
 	fr = a+b;
 	fcnt++ ;

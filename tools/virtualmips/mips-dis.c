@@ -203,7 +203,7 @@ const char *cp0reg_name (unsigned cp0reg, unsigned sel)
 
 static void
 print_insn_args (const char *d,
-    register unsigned long int l,
+    unsigned long int l,
     unsigned pc, FILE *stream, const struct mips_opcode *opp)
 {
     int op, delta;

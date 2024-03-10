@@ -246,7 +246,7 @@ bibi(n)
 main(argc, argv)
 char *argv[];
 {
-	register char *cp;
+	char *cp;
 	register npats;
 	char *virgin, **patts;
 	char *getenv();
@@ -507,9 +507,9 @@ et_tu:
 
 wcrx()
 {
-	register int sectnum, sectcurr;
-	register char sendchar;
-	register char *p;
+	int sectnum, sectcurr;
+	char sendchar;
+	char *p;
 	int cblklen;			/* bytes to dump this block */
 
 	Firstsec=TRUE;sectnum=0; Eofseen=FALSE;
@@ -564,8 +564,8 @@ char *rxbuf;
 int maxtime;
 {
 	register checksum, wcj, firstch;
-	register unsigned short oldcrc;
-	register char *p;
+	unsigned short oldcrc;
+	char *p;
 	int sectcurr;
 
 	for (Lastrx=errors=0; errors<RETRYMAX; errors++) {
@@ -664,7 +664,7 @@ readline(timeout)
 unsigned int timeout;
 {
 	unsigned int n;
-    register char *p;
+    char *p;
 	static char *cdq;	/* pointer for removing chars from linbuf */
     int c;
 
@@ -742,7 +742,7 @@ purgeline()
 procheader(name)
 char *name;
 {
-	register char *openmode, *p, **pp;
+	char *openmode, *p, **pp;
 
 	/* set default parameters and overrides */
 	openmode = "w";
@@ -854,9 +854,9 @@ char *name;
  * so, create all required dirs.
  */
 make_dirs(pathname)
-register char *pathname;
+char *pathname;
 {
-	register char *p;		/* Points into path */
+	char *p;		/* Points into path */
 	int madeone = 0;		/* Did we do anything yet? */
 	int save_errno = errno;		/* Remember caller's errno */
 	char *strchr();
@@ -952,7 +952,7 @@ putsec(buf, n)
 char *buf;
 register n;
 {
-	register char *p;
+	char *p;
 
 	if (n == 0)
 		return OK;
@@ -998,7 +998,7 @@ flushmo() {}
 
 /* make string s lower case */
 uncaps(s)
-register char *s;
+char *s;
 {
 	for ( ; *s; ++s)
 		if (isupper(*s))
@@ -1008,7 +1008,7 @@ register char *s;
  * IsAnyLower returns TRUE if string s has lower case letters.
  */
 IsAnyLower(s)
-register char *s;
+char *s;
 {
 	for ( ; *s; ++s)
 		if (islower(*s))
@@ -1022,9 +1022,9 @@ register char *s;
  */
 char *
 substr(s, t)
-register char *s,*t;
+char *s,*t;
 {
-	register char *ss,*tt;
+	char *ss,*tt;
 	/* search for first char of token */
 	for (ss=s; *s; s++)
 		if (*s == *t)
@@ -1085,7 +1085,7 @@ int sct;
 chkinvok(s)
 char *s;
 {
-	register char *p;
+	char *p;
 
 	p = s;
 	while (*p == '-')
@@ -1539,7 +1539,7 @@ bttyout(c)
  * Strip leading ! if present, do shell escape.
  */
 sys2(s)
-register char *s;
+char *s;
 {
 	if (*s == '!')
 		++s;
@@ -1549,7 +1549,7 @@ register char *s;
  * Strip leading ! if present, do exec.
  */
 exec2(s)
-register char *s;
+char *s;
 {
 	if (*s == '!')
 		++s;

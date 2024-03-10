@@ -15,8 +15,7 @@ int     adjdelta;
 int     lbolt;              /* awoken once a second */
 
 static void
-setthetime (tv)
-    register struct timeval *tv;
+setthetime (struct timeval *tv)
 {
     int s;
 
@@ -60,15 +59,15 @@ setthetime (tv)
  * the time-of-day.
  */
 void
-gettimeofday()
+gettimeofday(void)
 {
-    register struct a {
+    struct a {
         struct  timeval *tp;
         struct  timezone *tzp;
     } *uap = (struct a *)u.u_arg;
     struct timeval atv;
     int s;
-    register u_int  ms;
+    u_int  ms;
 
     if (uap->tp) {
         /*
@@ -91,9 +90,9 @@ gettimeofday()
 }
 
 void
-settimeofday()
+settimeofday(void)
 {
-    register struct a {
+    struct a {
         struct  timeval *tv;
         struct  timezone *tzp;
     } *uap = (struct a *)u.u_arg;
@@ -118,14 +117,14 @@ settimeofday()
 }
 
 void
-adjtime()
+adjtime(void)
 {
-    register struct a {
+    struct a {
         struct timeval *delta;
         struct timeval *olddelta;
     } *uap = (struct a *)u.u_arg;
     struct timeval atv;
-    register int s;
+    int s;
     long adjust;
 
     if (!suser())
@@ -162,14 +161,14 @@ adjtime()
 }
 
 void
-getitimer()
+getitimer(void)
 {
-    register struct a {
+    struct a {
         u_int   which;
         struct  itimerval *itv;
     } *uap = (struct a *)u.u_arg;
     struct itimerval aitv;
-    register int s;
+    int s;
 
     if (uap->which > ITIMER_PROF) {
         u.u_error = EINVAL;
@@ -179,12 +178,12 @@ getitimer()
     aitv.it_value.tv_usec = 0;
     s = splclock();
     if (uap->which == ITIMER_REAL) {
-        register struct proc *p = u.u_procp;
+        struct proc *p = u.u_procp;
 
         aitv.it_interval.tv_sec = p->p_realtimer.it_interval;
         aitv.it_value.tv_sec = p->p_realtimer.it_value;
     } else {
-        register struct k_itimerval *t = &u.u_timer[uap->which - 1];
+        struct k_itimerval *t = &u.u_timer[uap->which - 1];
 
         aitv.it_interval.tv_sec = t->it_interval / hz;
         aitv.it_value.tv_sec = t->it_value / hz;
@@ -195,14 +194,14 @@ getitimer()
 }
 
 void
-setitimer()
+setitimer(void)
 {
-    register struct a {
+    struct a {
         u_int   which;
         struct  itimerval *itv, *oitv;
     } *uap = (struct a *)u.u_arg;
     struct itimerval aitv;
-    register struct itimerval *aitvp;
+    struct itimerval *aitvp;
     int s;
 
     if (uap->which > ITIMER_PROF) {
@@ -222,7 +221,7 @@ setitimer()
         return;
     s = splclock();
     if (uap->which == ITIMER_REAL) {
-        register struct proc *p = u.u_procp;
+        struct proc *p = u.u_procp;
 
         p->p_realtimer.it_value = aitv.it_value.tv_sec;
         if (aitv.it_value.tv_usec)
@@ -231,7 +230,7 @@ setitimer()
         if (aitv.it_interval.tv_usec)
             ++p->p_realtimer.it_interval;
     } else {
-        register struct k_itimerval *t = &u.u_timer[uap->which - 1];
+        struct k_itimerval *t = &u.u_timer[uap->which - 1];
 
         t->it_value = aitv.it_value.tv_sec * hz;
         if (aitv.it_value.tv_usec)
@@ -250,8 +249,7 @@ setitimer()
  * than the resolution of the clock, round it up.)
  */
 int
-itimerfix(tv)
-    struct timeval *tv;
+itimerfix(struct timeval *tv)
 {
     if (tv->tv_sec < 0 || tv->tv_sec > 100000000L ||
         tv->tv_usec < 0 || tv->tv_usec >= 1000000L)
@@ -272,9 +270,8 @@ itimerfix(tv)
  * that it is called in a context where the timers
  * on which it is operating cannot change in value.
  */
-itimerdecr(itp, usec)
-    register struct itimerval *itp;
-    int usec;
+itimerdecr(struct itimerval *itp,
+    int usec)
 {
 
     if (itp->it_value.tv_usec < usec) {
@@ -306,8 +303,7 @@ expire:
 #endif /* NOT_CURRENTLY_IN_USE */
 
 static void
-tvfix(t1)
-    struct timeval *t1;
+tvfix(struct timeval *t1)
 {
     if (t1->tv_usec < 0) {
         t1->tv_sec--;
@@ -327,8 +323,8 @@ tvfix(t1)
  * Caveat emptor.
  */
 void
-timevaladd(t1, t2)
-    struct timeval *t1, *t2;
+timevaladd(struct timeval *t1, struct timeval *t2)
+    
 {
     t1->tv_sec += t2->tv_sec;
     t1->tv_usec += t2->tv_usec;
@@ -337,8 +333,7 @@ timevaladd(t1, t2)
 
 #ifdef NOT_CURRENTLY_IN_USE
 void
-timevalsub(t1, t2)
-    struct timeval *t1, *t2;
+timevalsub(struct timeval *t1, struct timeval *t2)
 {
     t1->tv_sec -= t2->tv_sec;
     t1->tv_usec -= t2->tv_usec;

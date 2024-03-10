@@ -36,7 +36,7 @@ sendsig (p, sig, mask)
         struct  sigcontext sf_sc;
     };
     struct trapframe *regs = u.u_frame;
-    register struct sigframe *sfp;
+    struct sigframe *sfp;
     int oonstack;
 
 #ifdef DIAGNOSTIC
@@ -124,7 +124,7 @@ void
 sigreturn()
 {
     struct trapframe *regs = u.u_frame;
-    register struct sigcontext *scp =
+    struct sigcontext *scp =
         (struct sigcontext*) (regs->tf_sp + 16);
 
 #ifdef DIAGNOSTIC

@@ -138,8 +138,8 @@ static void
 cron_tick(db)
 	cron_db	*db;
 {
- 	register struct tm	*tm = localtime(&TargetTime);
-	register int		minute, hour, dom, month, dow;
+ 	struct tm	*tm = localtime(&TargetTime);
+	int		minute, hour, dom, month, dow;
 	register user		*u;
 	register entry		*e;
 
@@ -191,7 +191,7 @@ cron_tick(db)
  */
 static void
 cron_sync() {
- 	register struct tm	*tm;
+ 	struct tm	*tm;
 
 	TargetTime = time((time_t*)0);
 	tm = localtime(&TargetTime);
@@ -201,7 +201,7 @@ cron_sync() {
 
 static void
 cron_sleep() {
-	register int	seconds_to_wait;
+	int	seconds_to_wait;
 
 	do {
 		seconds_to_wait = (int) (TargetTime - time((time_t*)0));

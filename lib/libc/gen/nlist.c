@@ -29,13 +29,13 @@ nlist(name, list)
 	char *name;
 	struct nlist *list;
 {
-	register struct nlist *p;
+	struct nlist *p;
 	struct exec ebuf;
 	register FILE *fsym;
 	off_t symbol_offset, symbol_size;
 	int entries, len, maxlen, type;
-	register int c;
-	register unsigned value;
+	int c;
+	unsigned value;
 	char sbuf[128];
 
 	entries = -1;

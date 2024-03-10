@@ -7,7 +7,7 @@
 char *
 strchr (sp, c)
 	register const char *sp;
-	register int c;
+	int c;
 {
 	do {
 		if (*sp == c)

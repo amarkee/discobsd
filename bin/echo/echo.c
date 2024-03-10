@@ -6,7 +6,7 @@ main(argc, argv)
 int argc;
 char *argv[];
 {
-    register int i, nflg;
+    int i, nflg;
 
     nflg = 0;
     if(argc > 1 && argv[1][0] == '-' && argv[1][1] == 'n' && !argv[1][2]) {

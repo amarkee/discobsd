@@ -13,11 +13,11 @@ freefunc(n)
 
 
 freetree(t)
-	register struct trenod *t;
+	struct trenod *t;
 {
 	if (t)
 	{
-		register int type;
+		int type;
 
 		if (t->tretyp & CNTMSK)
 		{
@@ -95,9 +95,9 @@ freetree(t)
 }
 
 free_arg(argp)
-	register struct argnod 	*argp;
+	struct argnod 	*argp;
 {
-	register struct argnod 	*sav;
+	struct argnod 	*sav;
 
 	while (argp)
 	{
@@ -109,9 +109,9 @@ free_arg(argp)
 
 
 freeio(iop)
-	register struct ionod *iop;
+	struct ionod *iop;
 {
-	register struct ionod *sav;
+	struct ionod *sav;
 
 	while (iop)
 	{
@@ -148,9 +148,9 @@ freeio(iop)
 
 
 freereg(regp)
-	register struct regnod 	*regp;
+	struct regnod 	*regp;
 {
-	register struct regnod 	*sav;
+	struct regnod 	*sav;
 
 	while (regp)
 	{
@@ -164,13 +164,13 @@ freereg(regp)
 
 
 prf(t)
-	register struct trenod	*t;
+	struct trenod	*t;
 {
 	sigchk();
 
 	if (t)
 	{
-		register int	type;
+		int	type;
 
 		type = t->tretyp & COMMSK;
 
@@ -178,7 +178,7 @@ prf(t)
 		{
 			case TFND:
 			{
-				register struct fndnod *f = (struct fndnod *)t;
+				struct fndnod *f = (struct fndnod *)t;
 
 				prs_buff(f->fndnam);
 				prs_buff("(){\n");
@@ -234,8 +234,8 @@ prf(t)
 
 			case TFOR:
 				{
-					register struct argnod	*arg;
-					register struct fornod 	*f = (struct fornod *)t;
+					struct argnod	*arg;
+					struct fornod 	*f = (struct fornod *)t;
 
 					prs_buff("for ");
 					prs_buff(f->fornam);
@@ -292,7 +292,7 @@ prf(t)
 
 			case TSW:
 				{
-					register struct regnod 	*swl;
+					struct regnod 	*swl;
 
 					prs_buff("case ");
 					prs_buff(swptr(t)->swarg);
@@ -329,7 +329,7 @@ prf(t)
 }
 
 prarg(argp)
-	register struct argnod	*argp;
+	struct argnod	*argp;
 {
 	while (argp)
 	{
@@ -341,10 +341,10 @@ prarg(argp)
 
 
 prio(iop)
-	register struct ionod	*iop;
+	struct ionod	*iop;
 {
-	register int	iof;
-	register char	*ion;
+	int	iof;
+	char	*ion;
 
 	while (iop)
 	{

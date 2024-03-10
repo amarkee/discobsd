@@ -74,7 +74,7 @@ main(argc, argv)
 int argc;
 char **argv;
 {
-	register char *argp;
+	char *argp;
 	int allflags;
 
 	argc--, argv++;
@@ -173,9 +173,9 @@ usage()
 void
 doinode()
 {
-	register struct inode *ip;
+	struct inode *ip;
 	struct inode *xinode;
-	register int nin;
+	int nin;
 	u_int ainode;
 
 	nin = 0;
@@ -260,8 +260,8 @@ doproc()
 {
 	struct proc *xproc;
 	u_int nproc, aproc;
-	register struct proc *pp;
-	register int loc, np;
+	struct proc *pp;
+	int loc, np;
 
 	nproc = getuint((off_t)nl[SNPROC].n_value);
 	xproc = (struct proc *)calloc(nproc, sizeof (struct proc));
@@ -333,7 +333,7 @@ dottytype(name, type)
 char *name;
 int type;
 {
-	register struct tty *tp;
+	struct tty *tp;
 
 	printf("%s line\n", name);
 	lseek(fc, (long)nl[type].n_value, 0);
@@ -347,7 +347,7 @@ ttyprt(atp, line)
 struct tty *atp;
 int line;
 {
-	register struct tty *tp;
+	struct tty *tp;
 
 	printf("%2d", line);
 	tp = atp;
@@ -377,7 +377,7 @@ dousr()
 {
 	struct user U;
 	long	*ip;
-	register int i, j;
+	int i, j;
 
 	lseek(fm, ubase, 0);
 	read(fm, &U, sizeof(U));
@@ -498,7 +498,7 @@ int
 oatoi(s)
 char *s;
 {
-	register int v;
+	int v;
 
 	v = 0;
 	while (*s)
@@ -510,8 +510,8 @@ void
 dofile()
 {
 	struct file *xfile;
-	register struct file *fp;
-	register int nf;
+	struct file *fp;
+	int nf;
 	u_int loc, afile;
 	static char *dtypes[] = { "???", "inode", "socket", "pipe" };
 

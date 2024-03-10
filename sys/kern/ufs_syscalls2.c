@@ -15,12 +15,12 @@
 #include <sys/proc.h>
 
 static int
-statfs1 (mp, sbp)
-    struct  mount   *mp;
-    struct  statfs  *sbp;
+statfs1 (struct  mount   *mp,
+    struct  statfs  *sbp)
+    
 {
     struct  statfs  sfs;
-    register struct statfs  *sfsp;
+    struct statfs  *sfsp;
     struct  fs  *fs = &mp->m_filsys;
 
     sfsp = &sfs;
@@ -40,15 +40,15 @@ statfs1 (mp, sbp)
 }
 
 void
-statfs()
+statfs(void)
 {
-    register struct a {
+    struct a {
         char    *path;
         struct  statfs  *buf;
     } *uap = (struct a *)u.u_arg;
-    register struct inode   *ip;
+    struct inode   *ip;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     struct  mount   *mp;
 
     NDINIT (ndp, LOOKUP, FOLLOW, uap->path);
@@ -61,13 +61,13 @@ statfs()
 }
 
 void
-fstatfs()
+fstatfs(void)
 {
-    register struct a {
+    struct a {
         int     fd;
         struct  statfs *buf;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
     struct  mount *mp;
 
     ip = getinode(uap->fd);
@@ -78,19 +78,19 @@ fstatfs()
 }
 
 void
-getfsstat()
+getfsstat(void)
 {
-    register struct a {
+    struct a {
         struct  statfs  *buf;
         int     bufsize;
         u_int   flags;
     } *uap = (struct a *)u.u_arg;
-    register struct mount *mp;
-    caddr_t sfsp;
+    struct mount *mp;
+    struct statfs *sfsp;
     int count, maxcount, error;
 
     maxcount = uap->bufsize / sizeof (struct statfs);
-    sfsp = (caddr_t)uap->buf;
+    sfsp = uap->buf;
     count = 0;
     for (mp = mount; mp < &mount[NMOUNT]; mp++) {
         if (mp->m_inodp == NULL)
@@ -117,10 +117,9 @@ getfsstat()
  * which only happens every 30 seconds.
  */
 static void
-syncinodes(fs)
-    struct  fs *fs;
+syncinodes(struct  fs *fs)
 {
-    register struct inode *ip;
+    struct inode *ip;
 
     /*
      * Write back each (modified) inode.
@@ -148,10 +147,9 @@ syncinodes(fs)
  * sync _every_ filesystem when unmounting just one filesystem.
  */
 int
-ufs_sync(mp)
-    register struct mount *mp;
+ufs_sync(struct mount *mp)
 {
-    register struct fs *fs;
+    struct fs *fs;
     struct  buf *bp;
     int error = 0;
 
@@ -182,9 +180,9 @@ ufs_sync(mp)
  * mode mask for creation of files
  */
 void
-umask()
+umask(void)
 {
-    register struct a {
+    struct a {
         int     mask;
     } *uap = (struct a *)u.u_arg;
 
@@ -196,10 +194,10 @@ umask()
  * Seek system call
  */
 void
-lseek()
+lseek(void)
 {
-    register struct file *fp;
-    register struct a {
+    struct file *fp;
+    struct a {
         int     fd;
         off_t   off;
         int     sbase;
@@ -233,12 +231,12 @@ lseek()
  * Synch an open file.
  */
 void
-fsync()
+fsync(void)
 {
-    register struct a {
+    struct a {
         int     fd;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
 
     if ((ip = getinode(uap->fd)) == NULL)
         return;
@@ -248,15 +246,15 @@ fsync()
 }
 
 void
-utimes()
+utimes(void)
 {
-    register struct a {
+    struct a {
         char    *fname;
         struct  timeval *tptr;
     } *uap = (struct a *)u.u_arg;
-    register struct inode *ip;
+    struct inode *ip;
     struct  nameidata nd;
-    register struct nameidata *ndp = &nd;
+    struct nameidata *ndp = &nd;
     struct timeval tv[2];
     struct vattr vattr;
 

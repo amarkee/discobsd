@@ -9,17 +9,17 @@
 
 char *
 movstr(a, b)
-register char   *a, *b;
+char   *a, *b;
 {
 	while (*b++ = *a++);
 	return(--b);
 }
 
 any(c, s)
-register char   c;
+char   c;
 char    *s;
 {
-	register char d;
+	char d;
 
 	while (d = *s++)
 	{
@@ -30,7 +30,7 @@ char    *s;
 }
 
 cf(s1, s2)
-register char *s1, *s2;
+char *s1, *s2;
 {
 	while (*s1++ == *s2)
 		if (*s2++ == '\0')
@@ -41,7 +41,7 @@ register char *s1, *s2;
 length(as)
 char    *as;
 {
-	register char   *s;
+	char   *s;
 
 	if (s = as)
 		while (*s++);
@@ -50,8 +50,8 @@ char    *as;
 
 char *
 movstrn(a, b, n)
-	register char *a, *b;
-	register int n;
+	char *a, *b;
+	int n;
 {
 	while ((n-- > 0) && *a)
 		*b++ = *a++;

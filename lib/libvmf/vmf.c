@@ -61,7 +61,7 @@ int
 vminit(n)
 	int	n;
 	{
-	register struct vseg *s;
+	struct vseg *s;
         static struct vseg *segs;
 
 	segs = (struct vseg *)calloc(n, sizeof (struct vseg));
@@ -94,7 +94,7 @@ vmmapseg(vspace, segno)
 	struct 	vspace *vspace;
 	u_short segno;
 	{
-	register struct vseg *s;
+	struct vseg *s;
 
 	nmapsegs++;
 
@@ -151,7 +151,7 @@ vmmapseg(vspace, segno)
 		}
 #ifdef PERC
 	{       /* percolate just-referenced segment up list */
-	register struct dlink *neighbor, *target;
+	struct dlink *neighbor, *target;
 	int count;
 
 	s->fwd->back = s->back;         /* delete */
@@ -180,11 +180,11 @@ vmmapseg(vspace, segno)
 
 static int
 swap(seg, iofunc)           /* used only from this file */
-	register struct vseg *seg;
+	struct vseg *seg;
 	int (*iofunc)();
 	{
 	off_t file_address;
-	register struct vspace *v;
+	struct vspace *v;
 
 	v = seg->s_vspace;
 	nswaps++;
@@ -211,7 +211,7 @@ swap(seg, iofunc)           /* used only from this file */
 
 void
 vmclrseg(seg)
-	register struct vseg *seg;
+	struct vseg *seg;
 	{
 
 	(void)bzero(seg->s_cinfo, BYTESPERSEG);
@@ -224,7 +224,7 @@ vmclrseg(seg)
 
 void
 vmlock(seg)
-	register struct vseg *seg;
+	struct vseg *seg;
 	{
 
 	seg->s_lock_count++;
@@ -238,7 +238,7 @@ vmlock(seg)
 
 void
 vmunlock(seg)
-	register struct vseg *seg;
+	struct vseg *seg;
 	{
 
         --seg->s_lock_count;
@@ -252,7 +252,7 @@ vmunlock(seg)
 
 void
 vmmodify(seg)
-register struct vseg *seg;
+struct vseg *seg;
 	{
 
 	VMMODIFY(seg);
@@ -266,7 +266,7 @@ register struct vseg *seg;
 void
 vmflush()
 	{
-	register struct vseg *s;
+	struct vseg *s;
 
 	for	(s = (struct vseg *)seghead[0].fwd; s != (struct vseg *)seghead;
 		 s = (struct vseg *)s->s_link.fwd)
@@ -294,10 +294,10 @@ debugseg(s, msg)
 
 int
 vmopen(vs, filename)
-	register struct vspace *vs;
+	struct vspace *vs;
 	char *filename;
 	{
-	register int	fd;
+	int	fd;
 	char	junk[32];
 
 	if	(!filename)
@@ -325,9 +325,9 @@ vmopen(vs, filename)
 
 void
 vmclose(vs)
-	register struct vspace *vs;
+	struct vspace *vs;
 	{
-	register struct vseg *s;
+	struct vseg *s;
 
 	vmflush();
 	/* invalidate all segments associated with that file */
@@ -351,7 +351,7 @@ vmclose(vs)
 
 static void
 promote(s)
-	register struct vseg *s;
+	struct vseg *s;
 	{
 
         s->s_link.fwd->back = s->s_link.back;         /* delete */

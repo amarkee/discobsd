@@ -70,8 +70,8 @@ int
 append(argv)
 	char **argv;
 {
-	register int fd, afd;
-	register char *file;
+	int fd, afd;
+	char *file;
 	struct stat sb;
 	CF cf;
 	int eval;

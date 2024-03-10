@@ -13,7 +13,7 @@
  */
 void
 closedir(dirp)
-	register DIR *dirp;
+	DIR *dirp;
 {
 	close(dirp->dd_fd);
 	dirp->dd_fd = -1;

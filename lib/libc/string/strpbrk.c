@@ -43,7 +43,7 @@ strpbrk(s1, s2)
 	const char *s2;
 {
 	register const char *scanp;
-	register int c;
+	int c;
 	int	sc;
 
 	while ((c = *s1++) != 0) {

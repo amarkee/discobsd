@@ -16,12 +16,12 @@
  * swap I/O
  */
 void
-swap (blkno, coreaddr, count, rdflg)
-    size_t blkno, coreaddr;
-    register int count;
-    int rdflg;
+swap (size_t blkno, size_t coreaddr,
+    int count,
+    int rdflg)
+    
 {
-    register struct buf *bp;
+    struct buf *bp;
     int s;
 
 //printf ("swap (%u, %08x, %d, %s)\n", blkno, coreaddr, count, rdflg ? "R" : "W");
@@ -87,16 +87,15 @@ swap (blkno, coreaddr, count, rdflg)
  * raw read&write routines , systems had been running fine for several
  * months with it ifdef'd out.  9/91-sms
  */
-int
-physio(strat, bp, dev, rw, uio)
-    void (*strat) (struct buf*);
-    register struct buf *bp;
-    dev_t dev;
-    int rw;
-    register struct uio *uio;
+static int
+physio(void (*strat) (struct buf*),
+    struct buf *bp,
+    dev_t dev,
+    int rw,
+    struct uio *uio)
 {
     int error = 0, s, c, allocbuf = 0;
-    register struct iovec *iov;
+    struct iovec *iov;
 
     if (! bp) {
         allocbuf++;
@@ -165,10 +164,10 @@ physio(strat, bp, dev, rw, uio)
 }
 
 int
-rawrw (dev, uio, flag)
-    dev_t dev;
-    register struct uio *uio;
-    int flag;
+rawrw (dev_t dev,
+    struct uio *uio,
+    int flag)
+    
 {
     return (physio(cdevsw[major(dev)].d_strategy, (struct buf *)NULL, dev,
         uio->uio_rw == UIO_READ ? B_READ : B_WRITE, uio));
